@@ -1,0 +1,7017 @@
+[
+  {
+    "id": "ABW",
+    "numericId": "533",
+    "name": "Aruba",
+    "officialName": "Aruba",
+    "aliases": [],
+    "capital": "Oranjestad",
+    "coordinates": [
+      12.5,
+      -69.96666666
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇼",
+    "triviaFact": "Aruba is An island or coastal nation with no land borders, located in Caribbean, with its capital at Oranjestad.",
+    "area": 180,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "AFG",
+    "numericId": "004",
+    "name": "Afghanistan",
+    "officialName": "Islamic Republic of Afghanistan",
+    "aliases": [
+      "Islamic Republic of Afghanistan",
+      "Afġānistān"
+    ],
+    "capital": "Kabul",
+    "coordinates": [
+      33,
+      65
+    ],
+    "borders": [
+      "IRN",
+      "PAK",
+      "TKM",
+      "UZB",
+      "TJK",
+      "CHN"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇫",
+    "triviaFact": "Afghanistan is Shares land borders with 6 countries, located in Southern Asia, with its capital at Kabul.",
+    "area": 652230,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "AGO",
+    "numericId": "024",
+    "name": "Angola",
+    "officialName": "Republic of Angola",
+    "aliases": [
+      "Republic of Angola",
+      "República de Angola",
+      "ʁɛpublika de an'ɡɔla"
+    ],
+    "capital": "Luanda",
+    "coordinates": [
+      -12.5,
+      18.5
+    ],
+    "borders": [
+      "COG",
+      "COD",
+      "ZMB",
+      "NAM"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇴",
+    "triviaFact": "Angola is Shares land borders with 4 countries, located in Middle Africa, with its capital at Luanda.",
+    "area": 1246700,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "AIA",
+    "numericId": "660",
+    "name": "Anguilla",
+    "officialName": "Anguilla",
+    "aliases": [],
+    "capital": "The Valley",
+    "coordinates": [
+      18.25,
+      -63.16666666
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇮",
+    "triviaFact": "Anguilla is An island or coastal nation with no land borders, located in Caribbean, with its capital at The Valley.",
+    "area": 91,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ALA",
+    "numericId": "248",
+    "name": "Åland Islands",
+    "officialName": "Åland Islands",
+    "aliases": [
+      "Aaland",
+      "Aland",
+      "Ahvenanmaa"
+    ],
+    "capital": "Mariehamn",
+    "coordinates": [
+      60.116667,
+      19.9
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇽",
+    "triviaFact": "Åland Islands is An island or coastal nation with no land borders, located in Northern Europe, with its capital at Mariehamn.",
+    "area": 1580,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ALB",
+    "numericId": "008",
+    "name": "Albania",
+    "officialName": "Republic of Albania",
+    "aliases": [
+      "Republic of Albania",
+      "Shqipëri",
+      "Shqipëria",
+      "Shqipnia"
+    ],
+    "capital": "Tirana",
+    "coordinates": [
+      41,
+      20
+    ],
+    "borders": [
+      "MNE",
+      "GRC",
+      "MKD",
+      "UNK"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇱",
+    "triviaFact": "Albania is Shares land borders with 4 countries, located in Southeast Europe, with its capital at Tirana.",
+    "area": 28748,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "AND",
+    "numericId": "020",
+    "name": "Andorra",
+    "officialName": "Principality of Andorra",
+    "aliases": [
+      "Principality of Andorra",
+      "Principat d'Andorra"
+    ],
+    "capital": "Andorra la Vella",
+    "coordinates": [
+      42.5,
+      1.5
+    ],
+    "borders": [
+      "FRA",
+      "ESP"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇩",
+    "triviaFact": "Andorra is Shares land borders with 2 countries, located in Southern Europe, with its capital at Andorra la Vella.",
+    "area": 468,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ARE",
+    "numericId": "784",
+    "name": "United Arab Emirates",
+    "officialName": "United Arab Emirates",
+    "aliases": [
+      "UAE",
+      "Emirates"
+    ],
+    "capital": "Abu Dhabi",
+    "coordinates": [
+      24,
+      54
+    ],
+    "borders": [
+      "OMN",
+      "SAU"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇪",
+    "triviaFact": "United Arab Emirates is Shares land borders with 2 countries, located in Western Asia, with its capital at Abu Dhabi.",
+    "area": 83600,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ARG",
+    "numericId": "032",
+    "name": "Argentina",
+    "officialName": "Argentine Republic",
+    "aliases": [
+      "Argentine Republic",
+      "República Argentina"
+    ],
+    "capital": "Buenos Aires",
+    "coordinates": [
+      -34,
+      -64
+    ],
+    "borders": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "PRY",
+      "URY"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇷",
+    "triviaFact": "Argentina is Shares land borders with 5 countries, located in South America, with its capital at Buenos Aires.",
+    "area": 2780400,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ARM",
+    "numericId": "051",
+    "name": "Armenia",
+    "officialName": "Republic of Armenia",
+    "aliases": [
+      "Republic of Armenia",
+      "Hayastan",
+      "Հայաստանի Հանրապետություն"
+    ],
+    "capital": "Yerevan",
+    "coordinates": [
+      40,
+      45
+    ],
+    "borders": [
+      "AZE",
+      "GEO",
+      "IRN",
+      "TUR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇲",
+    "triviaFact": "Armenia is Shares land borders with 4 countries, located in Western Asia, with its capital at Yerevan.",
+    "area": 29743,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ASM",
+    "numericId": "016",
+    "name": "American Samoa",
+    "officialName": "American Samoa",
+    "aliases": [
+      "Amerika Sāmoa",
+      "Amelika Sāmoa",
+      "Sāmoa Amelika"
+    ],
+    "capital": "Pago Pago",
+    "coordinates": [
+      -14.33333333,
+      -170
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇸",
+    "triviaFact": "American Samoa is An island or coastal nation with no land borders, located in Polynesia, with its capital at Pago Pago.",
+    "area": 199,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ATA",
+    "numericId": "010",
+    "name": "Antarctica",
+    "officialName": "Antarctica",
+    "aliases": [],
+    "capital": "No official capital",
+    "coordinates": [
+      -90,
+      0
+    ],
+    "borders": [],
+    "region": "Antarctic",
+    "subregion": "",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇶",
+    "triviaFact": "Antarctica is An island or coastal nation with no land borders, located in , with its capital at No official capital.",
+    "area": 14000000,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ATF",
+    "numericId": "260",
+    "name": "French Southern and Antarctic Lands",
+    "officialName": "Territory of the French Southern and Antarctic Lands",
+    "aliases": [
+      "Territory of the French Southern and Antarctic Lands",
+      "French Southern Territories"
+    ],
+    "capital": "Port-aux-Français",
+    "coordinates": [
+      -49.25,
+      69.167
+    ],
+    "borders": [],
+    "region": "Antarctic",
+    "subregion": "",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇫",
+    "triviaFact": "French Southern and Antarctic Lands is An island or coastal nation with no land borders, located in , with its capital at Port-aux-Français.",
+    "area": 7747,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ATG",
+    "numericId": "028",
+    "name": "Antigua and Barbuda",
+    "officialName": "Antigua and Barbuda",
+    "aliases": [],
+    "capital": "Saint John's",
+    "coordinates": [
+      17.05,
+      -61.8
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇬",
+    "triviaFact": "Antigua and Barbuda is An island or coastal nation with no land borders, located in Caribbean, with its capital at Saint John's.",
+    "area": 442,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "AUS",
+    "numericId": "036",
+    "name": "Australia",
+    "officialName": "Commonwealth of Australia",
+    "aliases": [
+      "Commonwealth of Australia"
+    ],
+    "capital": "Canberra",
+    "coordinates": [
+      -27,
+      133
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "maritimeNeighbors": [
+      {
+        "id": "PNG",
+        "name": "Papua New Guinea",
+        "distanceKm": 160
+      },
+      {
+        "id": "IDN",
+        "name": "Indonesia",
+        "distanceKm": 500
+      },
+      {
+        "id": "NZL",
+        "name": "New Zealand",
+        "distanceKm": 1900
+      }
+    ],
+    "flagEmoji": "🇦🇺",
+    "triviaFact": "Is both a country and a whole continent, with 90% of its population living on the coast.",
+    "area": 7692024,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "AUT",
+    "numericId": "040",
+    "name": "Austria",
+    "officialName": "Republic of Austria",
+    "aliases": [
+      "Republic of Austria",
+      "Osterreich",
+      "Oesterreich"
+    ],
+    "capital": "Vienna",
+    "coordinates": [
+      47.33333333,
+      13.33333333
+    ],
+    "borders": [
+      "CZE",
+      "DEU",
+      "HUN",
+      "ITA",
+      "LIE",
+      "SVK",
+      "SVN",
+      "CHE"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇹",
+    "triviaFact": "Austria is Shares land borders with 8 countries, located in Central Europe, with its capital at Vienna.",
+    "area": 83871,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "AZE",
+    "numericId": "031",
+    "name": "Azerbaijan",
+    "officialName": "Republic of Azerbaijan",
+    "aliases": [
+      "Republic of Azerbaijan",
+      "Azərbaycan Respublikası"
+    ],
+    "capital": "Baku",
+    "coordinates": [
+      40.5,
+      47.5
+    ],
+    "borders": [
+      "ARM",
+      "GEO",
+      "IRN",
+      "RUS",
+      "TUR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇦🇿",
+    "triviaFact": "Azerbaijan is Shares land borders with 5 countries, located in Western Asia, with its capital at Baku.",
+    "area": 86600,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BDI",
+    "numericId": "108",
+    "name": "Burundi",
+    "officialName": "Republic of Burundi",
+    "aliases": [
+      "Republic of Burundi",
+      "Republika y'Uburundi",
+      "République du Burundi"
+    ],
+    "capital": "Gitega",
+    "coordinates": [
+      -3.5,
+      30
+    ],
+    "borders": [
+      "COD",
+      "RWA",
+      "TZA"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇮",
+    "triviaFact": "Burundi is Shares land borders with 3 countries, located in Eastern Africa, with its capital at Gitega.",
+    "area": 27834,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BEL",
+    "numericId": "056",
+    "name": "Belgium",
+    "officialName": "Kingdom of Belgium",
+    "aliases": [
+      "Kingdom of Belgium",
+      "België",
+      "Belgie",
+      "Belgien",
+      "Belgique"
+    ],
+    "capital": "Brussels",
+    "coordinates": [
+      50.83333333,
+      4
+    ],
+    "borders": [
+      "FRA",
+      "DEU",
+      "LUX",
+      "NLD"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇪",
+    "triviaFact": "Belgium is Shares land borders with 4 countries, located in Western Europe, with its capital at Brussels.",
+    "area": 30528,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BEN",
+    "numericId": "204",
+    "name": "Benin",
+    "officialName": "Republic of Benin",
+    "aliases": [
+      "Republic of Benin",
+      "République du Bénin"
+    ],
+    "capital": "Porto-Novo",
+    "coordinates": [
+      9.5,
+      2.25
+    ],
+    "borders": [
+      "BFA",
+      "NER",
+      "NGA",
+      "TGO"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇯",
+    "triviaFact": "Benin is Shares land borders with 4 countries, located in Western Africa, with its capital at Porto-Novo.",
+    "area": 112622,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BFA",
+    "numericId": "854",
+    "name": "Burkina Faso",
+    "officialName": "Burkina Faso",
+    "aliases": [],
+    "capital": "Ouagadougou",
+    "coordinates": [
+      13,
+      -2
+    ],
+    "borders": [
+      "BEN",
+      "CIV",
+      "GHA",
+      "MLI",
+      "NER",
+      "TGO"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇫",
+    "triviaFact": "Burkina Faso is Shares land borders with 6 countries, located in Western Africa, with its capital at Ouagadougou.",
+    "area": 272967,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BGD",
+    "numericId": "050",
+    "name": "Bangladesh",
+    "officialName": "People's Republic of Bangladesh",
+    "aliases": [
+      "People's Republic of Bangladesh",
+      "Gônôprôjatôntri Bangladesh"
+    ],
+    "capital": "Dhaka",
+    "coordinates": [
+      24,
+      90
+    ],
+    "borders": [
+      "MMR",
+      "IND"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇩",
+    "triviaFact": "Bangladesh is Shares land borders with 2 countries, located in Southern Asia, with its capital at Dhaka.",
+    "area": 147570,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BGR",
+    "numericId": "100",
+    "name": "Bulgaria",
+    "officialName": "Republic of Bulgaria",
+    "aliases": [
+      "Republic of Bulgaria",
+      "Република България"
+    ],
+    "capital": "Sofia",
+    "coordinates": [
+      43,
+      25
+    ],
+    "borders": [
+      "GRC",
+      "MKD",
+      "ROU",
+      "SRB",
+      "TUR"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇬",
+    "triviaFact": "Bulgaria is Shares land borders with 5 countries, located in Southeast Europe, with its capital at Sofia.",
+    "area": 110879,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BHR",
+    "numericId": "048",
+    "name": "Bahrain",
+    "officialName": "Kingdom of Bahrain",
+    "aliases": [
+      "Kingdom of Bahrain",
+      "Mamlakat al-Baḥrayn"
+    ],
+    "capital": "Manama",
+    "coordinates": [
+      26,
+      50.55
+    ],
+    "borders": [],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇭",
+    "triviaFact": "Bahrain is An island or coastal nation with no land borders, located in Western Asia, with its capital at Manama.",
+    "area": 765,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BHS",
+    "numericId": "044",
+    "name": "Bahamas",
+    "officialName": "Commonwealth of the Bahamas",
+    "aliases": [
+      "Commonwealth of the Bahamas"
+    ],
+    "capital": "Nassau",
+    "coordinates": [
+      24.25,
+      -76
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇸",
+    "triviaFact": "Bahamas is An island or coastal nation with no land borders, located in Caribbean, with its capital at Nassau.",
+    "area": 13943,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BIH",
+    "numericId": "070",
+    "name": "Bosnia and Herzegovina",
+    "officialName": "Bosnia and Herzegovina",
+    "aliases": [
+      "Bosnia-Herzegovina",
+      "Босна и Херцеговина"
+    ],
+    "capital": "Sarajevo",
+    "coordinates": [
+      44,
+      18
+    ],
+    "borders": [
+      "HRV",
+      "MNE",
+      "SRB"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇦",
+    "triviaFact": "Bosnia and Herzegovina is Shares land borders with 3 countries, located in Southeast Europe, with its capital at Sarajevo.",
+    "area": 51209,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BLM",
+    "numericId": "652",
+    "name": "Saint Barthélemy",
+    "officialName": "Collectivity of Saint Barthélemy",
+    "aliases": [
+      "Collectivity of Saint Barthélemy",
+      "St. Barthelemy",
+      "Collectivité de Saint-Barthélemy"
+    ],
+    "capital": "Gustavia",
+    "coordinates": [
+      18.5,
+      -63.41666666
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇱",
+    "triviaFact": "Saint Barthélemy is An island or coastal nation with no land borders, located in Caribbean, with its capital at Gustavia.",
+    "area": 21,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SHN",
+    "numericId": "654",
+    "name": "Saint Helena, Ascension and Tristan da Cunha",
+    "officialName": "Saint Helena, Ascension and Tristan da Cunha",
+    "aliases": [
+      "Saint Helena",
+      "St. Helena, Ascension and Tristan da Cunha"
+    ],
+    "capital": "Jamestown",
+    "coordinates": [
+      -15.95,
+      -5.72
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇭",
+    "triviaFact": "Saint Helena, Ascension and Tristan da Cunha is An island or coastal nation with no land borders, located in Western Africa, with its capital at Jamestown.",
+    "area": 394,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BLR",
+    "numericId": "112",
+    "name": "Belarus",
+    "officialName": "Republic of Belarus",
+    "aliases": [
+      "Republic of Belarus",
+      "Bielaruś",
+      "Белоруссия",
+      "Республика Белоруссия"
+    ],
+    "capital": "Minsk",
+    "coordinates": [
+      53,
+      28
+    ],
+    "borders": [
+      "LVA",
+      "LTU",
+      "POL",
+      "RUS",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇾",
+    "triviaFact": "Belarus is Shares land borders with 5 countries, located in Eastern Europe, with its capital at Minsk.",
+    "area": 207600,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BLZ",
+    "numericId": "084",
+    "name": "Belize",
+    "officialName": "Belize",
+    "aliases": [],
+    "capital": "Belmopan",
+    "coordinates": [
+      17.25,
+      -88.75
+    ],
+    "borders": [
+      "GTM",
+      "MEX"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇿",
+    "triviaFact": "Belize is Shares land borders with 2 countries, located in Central America, with its capital at Belmopan.",
+    "area": 22966,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BMU",
+    "numericId": "060",
+    "name": "Bermuda",
+    "officialName": "Bermuda",
+    "aliases": [
+      "The Islands of Bermuda",
+      "The Bermudas",
+      "Somers Isles"
+    ],
+    "capital": "Hamilton",
+    "coordinates": [
+      32.33333333,
+      -64.75
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇲",
+    "triviaFact": "Bermuda is An island or coastal nation with no land borders, located in North America, with its capital at Hamilton.",
+    "area": 54,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BOL",
+    "numericId": "068",
+    "name": "Bolivia",
+    "officialName": "Plurinational State of Bolivia",
+    "aliases": [
+      "Plurinational State of Bolivia",
+      "Buliwya",
+      "Wuliwya",
+      "Bolivia, Plurinational State of",
+      "Estado Plurinacional de Bolivia"
+    ],
+    "capital": "Sucre",
+    "coordinates": [
+      -17,
+      -65
+    ],
+    "borders": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "PRY",
+      "PER"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇴",
+    "triviaFact": "Has two capital cities: Sucre (constitutional) and La Paz (seat of government).",
+    "area": 1098581,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BES",
+    "numericId": "535",
+    "name": "Caribbean Netherlands",
+    "officialName": "Bonaire, Sint Eustatius and Saba",
+    "aliases": [
+      "Bonaire, Sint Eustatius and Saba",
+      "BES islands",
+      "Bonaire Sint Eustatius and Saba"
+    ],
+    "capital": "Kralendijk / Oranjestad / The Bottom",
+    "coordinates": [
+      12.18,
+      -68.25
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "",
+    "triviaFact": "Caribbean Netherlands is An island or coastal nation with no land borders, located in Caribbean, with its capital at Kralendijk / Oranjestad / The Bottom.",
+    "area": 328,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BRA",
+    "numericId": "076",
+    "name": "Brazil",
+    "officialName": "Federative Republic of Brazil",
+    "aliases": [
+      "Federative Republic of Brazil",
+      "Brasil",
+      "República Federativa do Brasil"
+    ],
+    "capital": "Brasília",
+    "coordinates": [
+      -10,
+      -55
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "COL",
+      "GUF",
+      "GUY",
+      "PRY",
+      "PER",
+      "SUR",
+      "URY",
+      "VEN"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇷",
+    "triviaFact": "Home to the Amazon Rainforest, which produces roughly 20% of the world's oxygen.",
+    "area": 8515767,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BRB",
+    "numericId": "052",
+    "name": "Barbados",
+    "officialName": "Barbados",
+    "aliases": [],
+    "capital": "Bridgetown",
+    "coordinates": [
+      13.16666666,
+      -59.53333333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇧",
+    "triviaFact": "Barbados is An island or coastal nation with no land borders, located in Caribbean, with its capital at Bridgetown.",
+    "area": 430,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BRN",
+    "numericId": "096",
+    "name": "Brunei",
+    "officialName": "Nation of Brunei, Abode of Peace",
+    "aliases": [
+      "Nation of Brunei, Abode of Peace",
+      "Brunei Darussalam",
+      "Nation of Brunei",
+      "the Abode of Peace"
+    ],
+    "capital": "Bandar Seri Begawan",
+    "coordinates": [
+      4.5,
+      114.66666666
+    ],
+    "borders": [
+      "MYS"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇳",
+    "triviaFact": "Brunei is Shares land borders with 1 countries, located in South-Eastern Asia, with its capital at Bandar Seri Begawan.",
+    "area": 5765,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BTN",
+    "numericId": "064",
+    "name": "Bhutan",
+    "officialName": "Kingdom of Bhutan",
+    "aliases": [
+      "Kingdom of Bhutan"
+    ],
+    "capital": "Thimphu",
+    "coordinates": [
+      27.5,
+      90.5
+    ],
+    "borders": [
+      "CHN",
+      "IND"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇹",
+    "triviaFact": "Bhutan is Shares land borders with 2 countries, located in Southern Asia, with its capital at Thimphu.",
+    "area": 38394,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "BVT",
+    "numericId": "074",
+    "name": "Bouvet Island",
+    "officialName": "Bouvet Island",
+    "aliases": [
+      "Bouvetøya",
+      "Bouvet-øya"
+    ],
+    "capital": "No official capital",
+    "coordinates": [
+      -54.43333333,
+      3.4
+    ],
+    "borders": [],
+    "region": "Antarctic",
+    "subregion": "",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇻",
+    "triviaFact": "Bouvet Island is An island or coastal nation with no land borders, located in , with its capital at No official capital.",
+    "area": 49,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "BWA",
+    "numericId": "072",
+    "name": "Botswana",
+    "officialName": "Republic of Botswana",
+    "aliases": [
+      "Republic of Botswana",
+      "Lefatshe la Botswana"
+    ],
+    "capital": "Gaborone",
+    "coordinates": [
+      -22,
+      24
+    ],
+    "borders": [
+      "NAM",
+      "ZAF",
+      "ZMB",
+      "ZWE"
+    ],
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇧🇼",
+    "triviaFact": "Botswana is Shares land borders with 4 countries, located in Southern Africa, with its capital at Gaborone.",
+    "area": 582000,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CAF",
+    "numericId": "140",
+    "name": "Central African Republic",
+    "officialName": "Central African Republic",
+    "aliases": [
+      "République centrafricaine"
+    ],
+    "capital": "Bangui",
+    "coordinates": [
+      7,
+      21
+    ],
+    "borders": [
+      "CMR",
+      "TCD",
+      "COD",
+      "COG",
+      "SSD",
+      "SDN"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇫",
+    "triviaFact": "Central African Republic is Shares land borders with 6 countries, located in Middle Africa, with its capital at Bangui.",
+    "area": 622984,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CAN",
+    "numericId": "124",
+    "name": "Canada",
+    "officialName": "Canada",
+    "aliases": [],
+    "capital": "Ottawa",
+    "coordinates": [
+      60,
+      -95
+    ],
+    "borders": [
+      "USA"
+    ],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇦",
+    "triviaFact": "Contains over 60% of all natural lakes on Earth, more than the rest of the world combined.",
+    "area": 9984670,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CCK",
+    "numericId": "166",
+    "name": "Cocos (Keeling) Islands",
+    "officialName": "Territory of the Cocos (Keeling) Islands",
+    "aliases": [
+      "Territory of the Cocos (Keeling) Islands",
+      "Keeling Islands",
+      "Cocos Islands"
+    ],
+    "capital": "West Island",
+    "coordinates": [
+      -12.5,
+      96.83333333
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇨",
+    "triviaFact": "Cocos (Keeling) Islands is An island or coastal nation with no land borders, located in Australia and New Zealand, with its capital at West Island.",
+    "area": 14,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CHE",
+    "numericId": "756",
+    "name": "Switzerland",
+    "officialName": "Swiss Confederation",
+    "aliases": [
+      "Swiss Confederation",
+      "Schweiz",
+      "Suisse",
+      "Svizzera",
+      "Svizra"
+    ],
+    "capital": "Bern",
+    "coordinates": [
+      47,
+      8
+    ],
+    "borders": [
+      "AUT",
+      "FRA",
+      "ITA",
+      "LIE",
+      "DEU"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇭",
+    "triviaFact": "Switzerland is Shares land borders with 5 countries, located in Western Europe, with its capital at Bern.",
+    "area": 41284,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CHL",
+    "numericId": "152",
+    "name": "Chile",
+    "officialName": "Republic of Chile",
+    "aliases": [
+      "Republic of Chile",
+      "República de Chile"
+    ],
+    "capital": "Santiago",
+    "coordinates": [
+      -30,
+      -71
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "PER"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇱",
+    "triviaFact": "The longest north-to-south country in the world, spanning over 4,300 km from desert to Antarctic ice.",
+    "area": 756102,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CHN",
+    "numericId": "156",
+    "name": "China",
+    "officialName": "People's Republic of China",
+    "aliases": [
+      "People's Republic of China",
+      "Zhōngguó",
+      "Zhongguo",
+      "Zhonghua",
+      "中华人民共和国"
+    ],
+    "capital": "Beijing",
+    "coordinates": [
+      35,
+      105
+    ],
+    "borders": [
+      "AFG",
+      "BTN",
+      "MMR",
+      "HKG",
+      "IND",
+      "KAZ",
+      "NPL",
+      "PRK",
+      "KGZ",
+      "LAO",
+      "MAC",
+      "MNG",
+      "PAK",
+      "RUS",
+      "TJK",
+      "VNM"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇳",
+    "triviaFact": "Borders 14 different countries by land and uses a single unified time zone (UTC+8) across 5 geographic zones.",
+    "area": 9706961,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CIV",
+    "numericId": "384",
+    "name": "Ivory Coast",
+    "officialName": "Republic of Côte d'Ivoire",
+    "aliases": [
+      "Republic of Côte d'Ivoire",
+      "Côte d'Ivoire",
+      "Cote d'Ivoire",
+      "République de Côte d'Ivoire"
+    ],
+    "capital": "Yamoussoukro",
+    "coordinates": [
+      8,
+      -5
+    ],
+    "borders": [
+      "BFA",
+      "GHA",
+      "GIN",
+      "LBR",
+      "MLI"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇮",
+    "triviaFact": "Ivory Coast is Shares land borders with 5 countries, located in Western Africa, with its capital at Yamoussoukro.",
+    "area": 322463,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CMR",
+    "numericId": "120",
+    "name": "Cameroon",
+    "officialName": "Republic of Cameroon",
+    "aliases": [
+      "Republic of Cameroon",
+      "République du Cameroun"
+    ],
+    "capital": "Yaoundé",
+    "coordinates": [
+      6,
+      12
+    ],
+    "borders": [
+      "CAF",
+      "TCD",
+      "COG",
+      "GNQ",
+      "GAB",
+      "NGA"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇲",
+    "triviaFact": "Cameroon is Shares land borders with 6 countries, located in Middle Africa, with its capital at Yaoundé.",
+    "area": 475442,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "COD",
+    "numericId": "180",
+    "name": "DR Congo",
+    "officialName": "Democratic Republic of the Congo",
+    "aliases": [
+      "Democratic Republic of the Congo",
+      "Congo-Kinshasa",
+      "Congo, the Democratic Republic of the",
+      "Democratic Republic of Congo",
+      "DRC"
+    ],
+    "capital": "Kinshasa",
+    "coordinates": [
+      0,
+      25
+    ],
+    "borders": [
+      "AGO",
+      "BDI",
+      "CAF",
+      "COG",
+      "RWA",
+      "SSD",
+      "TZA",
+      "UGA",
+      "ZMB"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇩",
+    "triviaFact": "DR Congo is Shares land borders with 9 countries, located in Middle Africa, with its capital at Kinshasa.",
+    "area": 2344858,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "COG",
+    "numericId": "178",
+    "name": "Congo",
+    "officialName": "Republic of the Congo",
+    "aliases": [
+      "Republic of the Congo",
+      "Congo-Brazzaville"
+    ],
+    "capital": "Brazzaville",
+    "coordinates": [
+      -1,
+      15
+    ],
+    "borders": [
+      "AGO",
+      "CMR",
+      "CAF",
+      "COD",
+      "GAB"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇬",
+    "triviaFact": "Congo is Shares land borders with 5 countries, located in Middle Africa, with its capital at Brazzaville.",
+    "area": 342000,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "COK",
+    "numericId": "184",
+    "name": "Cook Islands",
+    "officialName": "Cook Islands",
+    "aliases": [
+      "Kūki 'Āirani"
+    ],
+    "capital": "Avarua",
+    "coordinates": [
+      -21.23333333,
+      -159.76666666
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇰",
+    "triviaFact": "Cook Islands is An island or coastal nation with no land borders, located in Polynesia, with its capital at Avarua.",
+    "area": 236,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "COL",
+    "numericId": "170",
+    "name": "Colombia",
+    "officialName": "Republic of Colombia",
+    "aliases": [
+      "Republic of Colombia",
+      "República de Colombia"
+    ],
+    "capital": "Bogotá",
+    "coordinates": [
+      4,
+      -72
+    ],
+    "borders": [
+      "BRA",
+      "ECU",
+      "PAN",
+      "PER",
+      "VEN"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇴",
+    "triviaFact": "Colombia is Shares land borders with 5 countries, located in South America, with its capital at Bogotá.",
+    "area": 1141748,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "COM",
+    "numericId": "174",
+    "name": "Comoros",
+    "officialName": "Union of the Comoros",
+    "aliases": [
+      "Union of the Comoros",
+      "Union des Comores",
+      "Udzima wa Komori",
+      "al-Ittiḥād al-Qumurī"
+    ],
+    "capital": "Moroni",
+    "coordinates": [
+      -12.16666666,
+      44.25
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇲",
+    "triviaFact": "Comoros is An island or coastal nation with no land borders, located in Eastern Africa, with its capital at Moroni.",
+    "area": 1862,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CPV",
+    "numericId": "132",
+    "name": "Cape Verde",
+    "officialName": "Republic of Cabo Verde",
+    "aliases": [
+      "Republic of Cabo Verde",
+      "República de Cabo Verde"
+    ],
+    "capital": "Praia",
+    "coordinates": [
+      16,
+      -24
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇻",
+    "triviaFact": "Cape Verde is An island or coastal nation with no land borders, located in Western Africa, with its capital at Praia.",
+    "area": 4033,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CRI",
+    "numericId": "188",
+    "name": "Costa Rica",
+    "officialName": "Republic of Costa Rica",
+    "aliases": [
+      "Republic of Costa Rica",
+      "República de Costa Rica"
+    ],
+    "capital": "San José",
+    "coordinates": [
+      10,
+      -84
+    ],
+    "borders": [
+      "NIC",
+      "PAN"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇷",
+    "triviaFact": "Costa Rica is Shares land borders with 2 countries, located in Central America, with its capital at San José.",
+    "area": 51100,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "CUB",
+    "numericId": "192",
+    "name": "Cuba",
+    "officialName": "Republic of Cuba",
+    "aliases": [
+      "Republic of Cuba",
+      "República de Cuba"
+    ],
+    "capital": "Havana",
+    "coordinates": [
+      21.5,
+      -80
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [
+      {
+        "id": "USA",
+        "name": "United States",
+        "distanceKm": 150
+      },
+      {
+        "id": "BHS",
+        "name": "Bahamas",
+        "distanceKm": 350
+      },
+      {
+        "id": "JAM",
+        "name": "Jamaica",
+        "distanceKm": 140
+      }
+    ],
+    "flagEmoji": "🇨🇺",
+    "triviaFact": "Cuba is An island or coastal nation with no land borders, located in Caribbean, with its capital at Havana.",
+    "area": 109884,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CUW",
+    "numericId": "531",
+    "name": "Curaçao",
+    "officialName": "Country of Curaçao",
+    "aliases": [
+      "Country of Curaçao",
+      "Curacao",
+      "Kòrsou",
+      "Land Curaçao",
+      "Pais Kòrsou"
+    ],
+    "capital": "Willemstad",
+    "coordinates": [
+      12.116667,
+      -68.933333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇼",
+    "triviaFact": "Curaçao is An island or coastal nation with no land borders, located in Caribbean, with its capital at Willemstad.",
+    "area": 444,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CXR",
+    "numericId": "162",
+    "name": "Christmas Island",
+    "officialName": "Territory of Christmas Island",
+    "aliases": [
+      "Territory of Christmas Island"
+    ],
+    "capital": "Flying Fish Cove",
+    "coordinates": [
+      -10.5,
+      105.66666666
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇽",
+    "triviaFact": "Christmas Island is An island or coastal nation with no land borders, located in Australia and New Zealand, with its capital at Flying Fish Cove.",
+    "area": 135,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CYM",
+    "numericId": "136",
+    "name": "Cayman Islands",
+    "officialName": "Cayman Islands",
+    "aliases": [],
+    "capital": "George Town",
+    "coordinates": [
+      19.5,
+      -80.5
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇾",
+    "triviaFact": "Cayman Islands is An island or coastal nation with no land borders, located in Caribbean, with its capital at George Town.",
+    "area": 264,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CYP",
+    "numericId": "196",
+    "name": "Cyprus",
+    "officialName": "Republic of Cyprus",
+    "aliases": [
+      "Republic of Cyprus",
+      "Kýpros",
+      "Kıbrıs",
+      "Κυπριακή Δημοκρατία",
+      "Kıbrıs Cumhuriyeti"
+    ],
+    "capital": "Nicosia",
+    "coordinates": [
+      35,
+      33
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [
+      {
+        "id": "TUR",
+        "name": "Turkey",
+        "distanceKm": 75
+      },
+      {
+        "id": "SYR",
+        "name": "Syria",
+        "distanceKm": 105
+      },
+      {
+        "id": "LBN",
+        "name": "Lebanon",
+        "distanceKm": 160
+      }
+    ],
+    "flagEmoji": "🇨🇾",
+    "triviaFact": "Cyprus is An island or coastal nation with no land borders, located in Southern Europe, with its capital at Nicosia.",
+    "area": 9251,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "CZE",
+    "numericId": "203",
+    "name": "Czechia",
+    "officialName": "Czech Republic",
+    "aliases": [
+      "Czech Republic",
+      "Česká republika",
+      "Česko"
+    ],
+    "capital": "Prague",
+    "coordinates": [
+      49.75,
+      15.5
+    ],
+    "borders": [
+      "AUT",
+      "DEU",
+      "POL",
+      "SVK"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇨🇿",
+    "triviaFact": "Czechia is Shares land borders with 4 countries, located in Central Europe, with its capital at Prague.",
+    "area": 78865,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "DEU",
+    "numericId": "276",
+    "name": "Germany",
+    "officialName": "Federal Republic of Germany",
+    "aliases": [
+      "Federal Republic of Germany",
+      "Bundesrepublik Deutschland"
+    ],
+    "capital": "Berlin",
+    "coordinates": [
+      51,
+      9
+    ],
+    "borders": [
+      "AUT",
+      "BEL",
+      "CZE",
+      "DNK",
+      "FRA",
+      "LUX",
+      "NLD",
+      "POL",
+      "CHE"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇩🇪",
+    "triviaFact": "Germany is Shares land borders with 9 countries, located in Western Europe, with its capital at Berlin.",
+    "area": 357114,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "DJI",
+    "numericId": "262",
+    "name": "Djibouti",
+    "officialName": "Republic of Djibouti",
+    "aliases": [
+      "Republic of Djibouti",
+      "Jabuuti",
+      "Gabuuti",
+      "République de Djibouti",
+      "Gabuutih Ummuuno"
+    ],
+    "capital": "Djibouti",
+    "coordinates": [
+      11.5,
+      43
+    ],
+    "borders": [
+      "ERI",
+      "ETH",
+      "SOM"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇩🇯",
+    "triviaFact": "Djibouti is Shares land borders with 3 countries, located in Eastern Africa, with its capital at Djibouti.",
+    "area": 23200,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "DMA",
+    "numericId": "212",
+    "name": "Dominica",
+    "officialName": "Commonwealth of Dominica",
+    "aliases": [
+      "Commonwealth of Dominica",
+      "Dominique",
+      "Wai‘tu kubuli"
+    ],
+    "capital": "Roseau",
+    "coordinates": [
+      15.41666666,
+      -61.33333333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇩🇲",
+    "triviaFact": "Dominica is An island or coastal nation with no land borders, located in Caribbean, with its capital at Roseau.",
+    "area": 751,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "DNK",
+    "numericId": "208",
+    "name": "Denmark",
+    "officialName": "Kingdom of Denmark",
+    "aliases": [
+      "Kingdom of Denmark",
+      "Danmark",
+      "Kongeriget Danmark"
+    ],
+    "capital": "Copenhagen",
+    "coordinates": [
+      56,
+      10
+    ],
+    "borders": [
+      "DEU"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇩🇰",
+    "triviaFact": "Denmark is Shares land borders with 1 countries, located in Northern Europe, with its capital at Copenhagen.",
+    "area": 43094,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "DOM",
+    "numericId": "214",
+    "name": "Dominican Republic",
+    "officialName": "Dominican Republic",
+    "aliases": [],
+    "capital": "Santo Domingo",
+    "coordinates": [
+      19,
+      -70.66666666
+    ],
+    "borders": [
+      "HTI"
+    ],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇩🇴",
+    "triviaFact": "Dominican Republic is Shares land borders with 1 countries, located in Caribbean, with its capital at Santo Domingo.",
+    "area": 48671,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "DZA",
+    "numericId": "012",
+    "name": "Algeria",
+    "officialName": "People's Democratic Republic of Algeria",
+    "aliases": [
+      "People's Democratic Republic of Algeria",
+      "Dzayer",
+      "Algérie"
+    ],
+    "capital": "Algiers",
+    "coordinates": [
+      28,
+      3
+    ],
+    "borders": [
+      "TUN",
+      "LBY",
+      "NER",
+      "ESH",
+      "MRT",
+      "MLI",
+      "MAR"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇩🇿",
+    "triviaFact": "Algeria is Shares land borders with 7 countries, located in Northern Africa, with its capital at Algiers.",
+    "area": 2381741,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ECU",
+    "numericId": "218",
+    "name": "Ecuador",
+    "officialName": "Republic of Ecuador",
+    "aliases": [
+      "Republic of Ecuador",
+      "República del Ecuador"
+    ],
+    "capital": "Quito",
+    "coordinates": [
+      -2,
+      -77.5
+    ],
+    "borders": [
+      "COL",
+      "PER"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇨",
+    "triviaFact": "Ecuador is Shares land borders with 2 countries, located in South America, with its capital at Quito.",
+    "area": 276841,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "EGY",
+    "numericId": "818",
+    "name": "Egypt",
+    "officialName": "Arab Republic of Egypt",
+    "aliases": [
+      "Arab Republic of Egypt"
+    ],
+    "capital": "Cairo",
+    "coordinates": [
+      27,
+      30
+    ],
+    "borders": [
+      "ISR",
+      "LBY",
+      "PSE",
+      "SDN"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇬",
+    "triviaFact": "Home to the Pyramids of Giza, the only surviving ancient wonder of the world.",
+    "area": 1002450,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ERI",
+    "numericId": "232",
+    "name": "Eritrea",
+    "officialName": "State of Eritrea",
+    "aliases": [
+      "State of Eritrea",
+      "ሃገረ ኤርትራ",
+      "Dawlat Iritriyá",
+      "ʾErtrā",
+      "Iritriyā"
+    ],
+    "capital": "Asmara",
+    "coordinates": [
+      15,
+      39
+    ],
+    "borders": [
+      "DJI",
+      "ETH",
+      "SDN"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇷",
+    "triviaFact": "Eritrea is Shares land borders with 3 countries, located in Eastern Africa, with its capital at Asmara.",
+    "area": 117600,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ESH",
+    "numericId": "732",
+    "name": "Western Sahara",
+    "officialName": "Sahrawi Arab Democratic Republic",
+    "aliases": [
+      "Sahrawi Arab Democratic Republic",
+      "Taneẓroft Tutrimt"
+    ],
+    "capital": "El Aaiún",
+    "coordinates": [
+      24.5,
+      -13
+    ],
+    "borders": [
+      "DZA",
+      "MRT",
+      "MAR"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇭",
+    "triviaFact": "Western Sahara is Shares land borders with 3 countries, located in Northern Africa, with its capital at El Aaiún.",
+    "area": 266000,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ESP",
+    "numericId": "724",
+    "name": "Spain",
+    "officialName": "Kingdom of Spain",
+    "aliases": [
+      "Kingdom of Spain",
+      "Reino de España"
+    ],
+    "capital": "Madrid",
+    "coordinates": [
+      40,
+      -4
+    ],
+    "borders": [
+      "AND",
+      "FRA",
+      "GIB",
+      "PRT",
+      "MAR"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇸",
+    "triviaFact": "Spain is Shares land borders with 5 countries, located in Southern Europe, with its capital at Madrid.",
+    "area": 505992,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "EST",
+    "numericId": "233",
+    "name": "Estonia",
+    "officialName": "Republic of Estonia",
+    "aliases": [
+      "Republic of Estonia",
+      "Eesti",
+      "Eesti Vabariik"
+    ],
+    "capital": "Tallinn",
+    "coordinates": [
+      59,
+      26
+    ],
+    "borders": [
+      "LVA",
+      "RUS"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇪",
+    "triviaFact": "Estonia is Shares land borders with 2 countries, located in Northern Europe, with its capital at Tallinn.",
+    "area": 45227,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ETH",
+    "numericId": "231",
+    "name": "Ethiopia",
+    "officialName": "Federal Democratic Republic of Ethiopia",
+    "aliases": [
+      "Federal Democratic Republic of Ethiopia",
+      "ʾĪtyōṗṗyā",
+      "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ"
+    ],
+    "capital": "Addis Ababa",
+    "coordinates": [
+      8,
+      38
+    ],
+    "borders": [
+      "DJI",
+      "ERI",
+      "KEN",
+      "SOM",
+      "SSD",
+      "SDN"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇪🇹",
+    "triviaFact": "Ethiopia is Shares land borders with 6 countries, located in Eastern Africa, with its capital at Addis Ababa.",
+    "area": 1104300,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "FIN",
+    "numericId": "246",
+    "name": "Finland",
+    "officialName": "Republic of Finland",
+    "aliases": [
+      "Republic of Finland",
+      "Suomi",
+      "Suomen tasavalta",
+      "Republiken Finland"
+    ],
+    "capital": "Helsinki",
+    "coordinates": [
+      64,
+      26
+    ],
+    "borders": [
+      "NOR",
+      "SWE",
+      "RUS"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇫🇮",
+    "triviaFact": "Finland is Shares land borders with 3 countries, located in Northern Europe, with its capital at Helsinki.",
+    "area": 338424,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "FJI",
+    "numericId": "242",
+    "name": "Fiji",
+    "officialName": "Republic of Fiji",
+    "aliases": [
+      "Republic of Fiji",
+      "Viti",
+      "Matanitu ko Viti",
+      "Fijī Gaṇarājya"
+    ],
+    "capital": "Suva",
+    "coordinates": [
+      -18,
+      175
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "maritimeNeighbors": [
+      {
+        "id": "VUT",
+        "name": "Vanuatu",
+        "distanceKm": 800
+      },
+      {
+        "id": "TON",
+        "name": "Tonga",
+        "distanceKm": 750
+      }
+    ],
+    "flagEmoji": "🇫🇯",
+    "triviaFact": "Fiji is An island or coastal nation with no land borders, located in Melanesia, with its capital at Suva.",
+    "area": 18272,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "FLK",
+    "numericId": "238",
+    "name": "Falkland Islands",
+    "officialName": "Falkland Islands",
+    "aliases": [
+      "Islas Malvinas",
+      "Falkland Islands (Malvinas)"
+    ],
+    "capital": "Stanley",
+    "coordinates": [
+      -51.75,
+      -59
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇫🇰",
+    "triviaFact": "Falkland Islands is An island or coastal nation with no land borders, located in South America, with its capital at Stanley.",
+    "area": 12173,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "FRA",
+    "numericId": "250",
+    "name": "France",
+    "officialName": "French Republic",
+    "aliases": [
+      "French Republic",
+      "République française"
+    ],
+    "capital": "Paris",
+    "coordinates": [
+      46,
+      2
+    ],
+    "borders": [
+      "AND",
+      "BEL",
+      "DEU",
+      "ITA",
+      "LUX",
+      "MCO",
+      "ESP",
+      "CHE"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇫🇷",
+    "triviaFact": "Has the most time zones of any country in the world (12 time zones counting overseas territories).",
+    "area": 551695,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "FRO",
+    "numericId": "234",
+    "name": "Faroe Islands",
+    "officialName": "Faroe Islands",
+    "aliases": [
+      "Føroyar",
+      "Færøerne",
+      "Faeroe Islands"
+    ],
+    "capital": "Tórshavn",
+    "coordinates": [
+      62,
+      -7
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇫🇴",
+    "triviaFact": "Faroe Islands is An island or coastal nation with no land borders, located in Northern Europe, with its capital at Tórshavn.",
+    "area": 1393,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "FSM",
+    "numericId": "583",
+    "name": "Micronesia",
+    "officialName": "Federated States of Micronesia",
+    "aliases": [
+      "Federated States of Micronesia",
+      "Micronesia, Federated States of"
+    ],
+    "capital": "Palikir",
+    "coordinates": [
+      6.91666666,
+      158.25
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇫🇲",
+    "triviaFact": "Micronesia is An island or coastal nation with no land borders, located in Micronesia, with its capital at Palikir.",
+    "area": 702,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "GAB",
+    "numericId": "266",
+    "name": "Gabon",
+    "officialName": "Gabonese Republic",
+    "aliases": [
+      "Gabonese Republic",
+      "République Gabonaise"
+    ],
+    "capital": "Libreville",
+    "coordinates": [
+      -1,
+      11.75
+    ],
+    "borders": [
+      "CMR",
+      "COG",
+      "GNQ"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇦",
+    "triviaFact": "Gabon is Shares land borders with 3 countries, located in Middle Africa, with its capital at Libreville.",
+    "area": 267668,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GBR",
+    "numericId": "826",
+    "name": "United Kingdom",
+    "officialName": "United Kingdom of Great Britain and Northern Ireland",
+    "aliases": [
+      "United Kingdom of Great Britain and Northern Ireland",
+      "Great Britain"
+    ],
+    "capital": "London",
+    "coordinates": [
+      54,
+      -2
+    ],
+    "borders": [
+      "IRL"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇧",
+    "triviaFact": "United Kingdom is Shares land borders with 1 countries, located in Northern Europe, with its capital at London.",
+    "area": 242900,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GEO",
+    "numericId": "268",
+    "name": "Georgia",
+    "officialName": "Georgia",
+    "aliases": [
+      "Sakartvelo"
+    ],
+    "capital": "Tbilisi",
+    "coordinates": [
+      42,
+      43.5
+    ],
+    "borders": [
+      "ARM",
+      "AZE",
+      "RUS",
+      "TUR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇪",
+    "triviaFact": "Georgia is Shares land borders with 4 countries, located in Western Asia, with its capital at Tbilisi.",
+    "area": 69700,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GGY",
+    "numericId": "831",
+    "name": "Guernsey",
+    "officialName": "Bailiwick of Guernsey",
+    "aliases": [
+      "Bailiwick of Guernsey",
+      "Bailliage de Guernesey"
+    ],
+    "capital": "St. Peter Port",
+    "coordinates": [
+      49.46666666,
+      -2.58333333
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇬",
+    "triviaFact": "Guernsey is An island or coastal nation with no land borders, located in Northern Europe, with its capital at St. Peter Port.",
+    "area": 78,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "GHA",
+    "numericId": "288",
+    "name": "Ghana",
+    "officialName": "Republic of Ghana",
+    "aliases": [
+      "Republic of Ghana"
+    ],
+    "capital": "Accra",
+    "coordinates": [
+      8,
+      -2
+    ],
+    "borders": [
+      "BFA",
+      "CIV",
+      "TGO"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇭",
+    "triviaFact": "Ghana is Shares land borders with 3 countries, located in Western Africa, with its capital at Accra.",
+    "area": 238533,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GIB",
+    "numericId": "292",
+    "name": "Gibraltar",
+    "officialName": "Gibraltar",
+    "aliases": [],
+    "capital": "Gibraltar",
+    "coordinates": [
+      36.13333333,
+      -5.35
+    ],
+    "borders": [
+      "ESP"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇮",
+    "triviaFact": "Gibraltar is Shares land borders with 1 countries, located in Southern Europe, with its capital at Gibraltar.",
+    "area": 6,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GIN",
+    "numericId": "324",
+    "name": "Guinea",
+    "officialName": "Republic of Guinea",
+    "aliases": [
+      "Republic of Guinea",
+      "République de Guinée"
+    ],
+    "capital": "Conakry",
+    "coordinates": [
+      11,
+      -10
+    ],
+    "borders": [
+      "CIV",
+      "GNB",
+      "LBR",
+      "MLI",
+      "SEN",
+      "SLE"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇳",
+    "triviaFact": "Guinea is Shares land borders with 6 countries, located in Western Africa, with its capital at Conakry.",
+    "area": 245857,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GLP",
+    "numericId": "312",
+    "name": "Guadeloupe",
+    "officialName": "Guadeloupe",
+    "aliases": [
+      "Gwadloup"
+    ],
+    "capital": "Basse-Terre",
+    "coordinates": [
+      16.25,
+      -61.583333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇵",
+    "triviaFact": "Guadeloupe is An island or coastal nation with no land borders, located in Caribbean, with its capital at Basse-Terre.",
+    "area": 1628,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "GMB",
+    "numericId": "270",
+    "name": "Gambia",
+    "officialName": "Republic of the Gambia",
+    "aliases": [
+      "Republic of the Gambia"
+    ],
+    "capital": "Banjul",
+    "coordinates": [
+      13.46666666,
+      -16.56666666
+    ],
+    "borders": [
+      "SEN"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇲",
+    "triviaFact": "Gambia is Shares land borders with 1 countries, located in Western Africa, with its capital at Banjul.",
+    "area": 10689,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GNB",
+    "numericId": "624",
+    "name": "Guinea-Bissau",
+    "officialName": "Republic of Guinea-Bissau",
+    "aliases": [
+      "Republic of Guinea-Bissau",
+      "República da Guiné-Bissau"
+    ],
+    "capital": "Bissau",
+    "coordinates": [
+      12,
+      -15
+    ],
+    "borders": [
+      "GIN",
+      "SEN"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇼",
+    "triviaFact": "Guinea-Bissau is Shares land borders with 2 countries, located in Western Africa, with its capital at Bissau.",
+    "area": 36125,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GNQ",
+    "numericId": "226",
+    "name": "Equatorial Guinea",
+    "officialName": "Republic of Equatorial Guinea",
+    "aliases": [
+      "Republic of Equatorial Guinea",
+      "República de Guinea Ecuatorial",
+      "République de Guinée équatoriale",
+      "República da Guiné Equatorial"
+    ],
+    "capital": "Malabo",
+    "coordinates": [
+      2,
+      10
+    ],
+    "borders": [
+      "CMR",
+      "GAB"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇶",
+    "triviaFact": "Equatorial Guinea is Shares land borders with 2 countries, located in Middle Africa, with its capital at Malabo.",
+    "area": 28051,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GRC",
+    "numericId": "300",
+    "name": "Greece",
+    "officialName": "Hellenic Republic",
+    "aliases": [
+      "Hellenic Republic",
+      "Elláda",
+      "Ελληνική Δημοκρατία"
+    ],
+    "capital": "Athens",
+    "coordinates": [
+      39,
+      22
+    ],
+    "borders": [
+      "ALB",
+      "BGR",
+      "TUR",
+      "MKD"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇷",
+    "triviaFact": "Greece is Shares land borders with 4 countries, located in Southern Europe, with its capital at Athens.",
+    "area": 131990,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GRD",
+    "numericId": "308",
+    "name": "Grenada",
+    "officialName": "Grenada",
+    "aliases": [],
+    "capital": "St. George's",
+    "coordinates": [
+      12.11666666,
+      -61.66666666
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇩",
+    "triviaFact": "Grenada is An island or coastal nation with no land borders, located in Caribbean, with its capital at St. George's.",
+    "area": 344,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "GRL",
+    "numericId": "304",
+    "name": "Greenland",
+    "officialName": "Greenland",
+    "aliases": [
+      "Grønland"
+    ],
+    "capital": "Nuuk",
+    "coordinates": [
+      72,
+      -40
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇱",
+    "triviaFact": "The world's largest island that is not a continent, covered mostly by an ice sheet up to 3 km thick.",
+    "area": 2166086,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "GTM",
+    "numericId": "320",
+    "name": "Guatemala",
+    "officialName": "Republic of Guatemala",
+    "aliases": [
+      "Republic of Guatemala"
+    ],
+    "capital": "Guatemala City",
+    "coordinates": [
+      15.5,
+      -90.25
+    ],
+    "borders": [
+      "BLZ",
+      "SLV",
+      "HND",
+      "MEX"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇹",
+    "triviaFact": "Guatemala is Shares land borders with 4 countries, located in Central America, with its capital at Guatemala City.",
+    "area": 108889,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GUF",
+    "numericId": "254",
+    "name": "French Guiana",
+    "officialName": "Guiana",
+    "aliases": [
+      "Guiana",
+      "Guyane"
+    ],
+    "capital": "Cayenne",
+    "coordinates": [
+      4,
+      -53
+    ],
+    "borders": [
+      "BRA",
+      "SUR"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇫",
+    "triviaFact": "French Guiana is Shares land borders with 2 countries, located in South America, with its capital at Cayenne.",
+    "area": 83534,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "GUM",
+    "numericId": "316",
+    "name": "Guam",
+    "officialName": "Guam",
+    "aliases": [
+      "Guåhån"
+    ],
+    "capital": "Hagåtña",
+    "coordinates": [
+      13.46666666,
+      144.78333333
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇺",
+    "triviaFact": "Guam is An island or coastal nation with no land borders, located in Micronesia, with its capital at Hagåtña.",
+    "area": 549,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "GUY",
+    "numericId": "328",
+    "name": "Guyana",
+    "officialName": "Co-operative Republic of Guyana",
+    "aliases": [
+      "Co-operative Republic of Guyana"
+    ],
+    "capital": "Georgetown",
+    "coordinates": [
+      5,
+      -59
+    ],
+    "borders": [
+      "BRA",
+      "SUR",
+      "VEN"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇾",
+    "triviaFact": "Guyana is Shares land borders with 3 countries, located in South America, with its capital at Georgetown.",
+    "area": 214969,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "HKG",
+    "numericId": "344",
+    "name": "Hong Kong",
+    "officialName": "Hong Kong Special Administrative Region of the People's Republic of China",
+    "aliases": [
+      "Hong Kong Special Administrative Region of the People's Republic of China"
+    ],
+    "capital": "City of Victoria",
+    "coordinates": [
+      22.267,
+      114.188
+    ],
+    "borders": [
+      "CHN"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇭🇰",
+    "triviaFact": "Hong Kong is Shares land borders with 1 countries, located in Eastern Asia, with its capital at City of Victoria.",
+    "area": 1104,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "HMD",
+    "numericId": "334",
+    "name": "Heard Island and McDonald Islands",
+    "officialName": "Heard Island and McDonald Islands",
+    "aliases": [],
+    "capital": "No official capital",
+    "coordinates": [
+      -53.1,
+      72.51666666
+    ],
+    "borders": [],
+    "region": "Antarctic",
+    "subregion": "",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇭🇲",
+    "triviaFact": "Heard Island and McDonald Islands is An island or coastal nation with no land borders, located in , with its capital at No official capital.",
+    "area": 412,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "HND",
+    "numericId": "340",
+    "name": "Honduras",
+    "officialName": "Republic of Honduras",
+    "aliases": [
+      "Republic of Honduras",
+      "República de Honduras"
+    ],
+    "capital": "Tegucigalpa",
+    "coordinates": [
+      15,
+      -86.5
+    ],
+    "borders": [
+      "GTM",
+      "SLV",
+      "NIC"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇭🇳",
+    "triviaFact": "Honduras is Shares land borders with 3 countries, located in Central America, with its capital at Tegucigalpa.",
+    "area": 112492,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "HRV",
+    "numericId": "191",
+    "name": "Croatia",
+    "officialName": "Republic of Croatia",
+    "aliases": [
+      "Republic of Croatia",
+      "Hrvatska",
+      "Republika Hrvatska"
+    ],
+    "capital": "Zagreb",
+    "coordinates": [
+      45.16666666,
+      15.5
+    ],
+    "borders": [
+      "BIH",
+      "HUN",
+      "MNE",
+      "SRB",
+      "SVN"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇭🇷",
+    "triviaFact": "Croatia is Shares land borders with 5 countries, located in Southeast Europe, with its capital at Zagreb.",
+    "area": 56594,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "HTI",
+    "numericId": "332",
+    "name": "Haiti",
+    "officialName": "Republic of Haiti",
+    "aliases": [
+      "Republic of Haiti",
+      "République d'Haïti",
+      "Repiblik Ayiti"
+    ],
+    "capital": "Port-au-Prince",
+    "coordinates": [
+      19,
+      -72.41666666
+    ],
+    "borders": [
+      "DOM"
+    ],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇭🇹",
+    "triviaFact": "Haiti is Shares land borders with 1 countries, located in Caribbean, with its capital at Port-au-Prince.",
+    "area": 27750,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "HUN",
+    "numericId": "348",
+    "name": "Hungary",
+    "officialName": "Hungary",
+    "aliases": [],
+    "capital": "Budapest",
+    "coordinates": [
+      47,
+      20
+    ],
+    "borders": [
+      "AUT",
+      "HRV",
+      "ROU",
+      "SRB",
+      "SVK",
+      "SVN",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇭🇺",
+    "triviaFact": "Hungary is Shares land borders with 7 countries, located in Central Europe, with its capital at Budapest.",
+    "area": 93028,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "IDN",
+    "numericId": "360",
+    "name": "Indonesia",
+    "officialName": "Republic of Indonesia",
+    "aliases": [
+      "Republic of Indonesia",
+      "Republik Indonesia"
+    ],
+    "capital": "Jakarta",
+    "coordinates": [
+      -5,
+      120
+    ],
+    "borders": [
+      "TLS",
+      "MYS",
+      "PNG"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇩",
+    "triviaFact": "Indonesia is Shares land borders with 3 countries, located in South-Eastern Asia, with its capital at Jakarta.",
+    "area": 1904569,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "IMN",
+    "numericId": "833",
+    "name": "Isle of Man",
+    "officialName": "Isle of Man",
+    "aliases": [
+      "Ellan Vannin",
+      "Mann",
+      "Mannin"
+    ],
+    "capital": "Douglas",
+    "coordinates": [
+      54.25,
+      -4.5
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇲",
+    "triviaFact": "Isle of Man is An island or coastal nation with no land borders, located in Northern Europe, with its capital at Douglas.",
+    "area": 572,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "IND",
+    "numericId": "356",
+    "name": "India",
+    "officialName": "Republic of India",
+    "aliases": [
+      "Republic of India",
+      "Bhārat",
+      "Bharat Ganrajya",
+      "இந்தியா"
+    ],
+    "capital": "New Delhi",
+    "coordinates": [
+      20,
+      77
+    ],
+    "borders": [
+      "BGD",
+      "BTN",
+      "MMR",
+      "CHN",
+      "NPL",
+      "PAK"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇳",
+    "triviaFact": "India is Shares land borders with 6 countries, located in Southern Asia, with its capital at New Delhi.",
+    "area": 3287590,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "IOT",
+    "numericId": "086",
+    "name": "British Indian Ocean Territory",
+    "officialName": "British Indian Ocean Territory",
+    "aliases": [],
+    "capital": "Diego Garcia",
+    "coordinates": [
+      -6,
+      71.5
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇴",
+    "triviaFact": "British Indian Ocean Territory is An island or coastal nation with no land borders, located in Eastern Africa, with its capital at Diego Garcia.",
+    "area": 60,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "IRL",
+    "numericId": "372",
+    "name": "Ireland",
+    "officialName": "Republic of Ireland",
+    "aliases": [
+      "Republic of Ireland",
+      "Éire",
+      "Poblacht na hÉireann"
+    ],
+    "capital": "Dublin",
+    "coordinates": [
+      53,
+      -8
+    ],
+    "borders": [
+      "GBR"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [
+      {
+        "id": "GBR",
+        "name": "United Kingdom",
+        "distanceKm": 100
+      }
+    ],
+    "flagEmoji": "🇮🇪",
+    "triviaFact": "Ireland is Shares land borders with 1 countries, located in Northern Europe, with its capital at Dublin.",
+    "area": 70273,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "IRN",
+    "numericId": "364",
+    "name": "Iran",
+    "officialName": "Islamic Republic of Iran",
+    "aliases": [
+      "Islamic Republic of Iran",
+      "Iran, Islamic Republic of",
+      "Jomhuri-ye Eslāmi-ye Irān"
+    ],
+    "capital": "Tehran",
+    "coordinates": [
+      32,
+      53
+    ],
+    "borders": [
+      "AFG",
+      "ARM",
+      "AZE",
+      "IRQ",
+      "PAK",
+      "TUR",
+      "TKM"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇷",
+    "triviaFact": "Iran is Shares land borders with 7 countries, located in Southern Asia, with its capital at Tehran.",
+    "area": 1648195,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "IRQ",
+    "numericId": "368",
+    "name": "Iraq",
+    "officialName": "Republic of Iraq",
+    "aliases": [
+      "Republic of Iraq",
+      "Jumhūriyyat al-‘Irāq"
+    ],
+    "capital": "Baghdad",
+    "coordinates": [
+      33,
+      44
+    ],
+    "borders": [
+      "IRN",
+      "JOR",
+      "KWT",
+      "SAU",
+      "SYR",
+      "TUR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇶",
+    "triviaFact": "Iraq is Shares land borders with 6 countries, located in Western Asia, with its capital at Baghdad.",
+    "area": 438317,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ISL",
+    "numericId": "352",
+    "name": "Iceland",
+    "officialName": "Iceland",
+    "aliases": [
+      "Island",
+      "Republic of Iceland",
+      "Lýðveldið Ísland"
+    ],
+    "capital": "Reykjavik",
+    "coordinates": [
+      65,
+      -18
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [
+      {
+        "id": "NOR",
+        "name": "Norway",
+        "distanceKm": 970
+      },
+      {
+        "id": "GBR",
+        "name": "United Kingdom",
+        "distanceKm": 1100
+      },
+      {
+        "id": "GRL",
+        "name": "Greenland",
+        "distanceKm": 300
+      }
+    ],
+    "flagEmoji": "🇮🇸",
+    "triviaFact": "Has no active military forces, no mosquitoes, and heats ~90% of homes with geothermal energy.",
+    "area": 103000,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ISR",
+    "numericId": "376",
+    "name": "Israel",
+    "officialName": "State of Israel",
+    "aliases": [
+      "State of Israel",
+      "Medīnat Yisrā'el"
+    ],
+    "capital": "Jerusalem",
+    "coordinates": [
+      31.47,
+      35.13
+    ],
+    "borders": [
+      "EGY",
+      "JOR",
+      "LBN",
+      "PSE",
+      "SYR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇱",
+    "triviaFact": "Israel is Shares land borders with 5 countries, located in Western Asia, with its capital at Jerusalem.",
+    "area": 20770,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ITA",
+    "numericId": "380",
+    "name": "Italy",
+    "officialName": "Italian Republic",
+    "aliases": [
+      "Italian Republic",
+      "Repubblica italiana"
+    ],
+    "capital": "Rome",
+    "coordinates": [
+      42.83333333,
+      12.83333333
+    ],
+    "borders": [
+      "AUT",
+      "FRA",
+      "SMR",
+      "SVN",
+      "CHE",
+      "VAT"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇮🇹",
+    "triviaFact": "Italy is Shares land borders with 6 countries, located in Southern Europe, with its capital at Rome.",
+    "area": 301336,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "JAM",
+    "numericId": "388",
+    "name": "Jamaica",
+    "officialName": "Jamaica",
+    "aliases": [],
+    "capital": "Kingston",
+    "coordinates": [
+      18.25,
+      -77.5
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇯🇲",
+    "triviaFact": "Jamaica is An island or coastal nation with no land borders, located in Caribbean, with its capital at Kingston.",
+    "area": 10991,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "JEY",
+    "numericId": "832",
+    "name": "Jersey",
+    "officialName": "Bailiwick of Jersey",
+    "aliases": [
+      "Bailiwick of Jersey",
+      "Bailliage de Jersey",
+      "Bailliage dé Jèrri"
+    ],
+    "capital": "Saint Helier",
+    "coordinates": [
+      49.25,
+      -2.16666666
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇯🇪",
+    "triviaFact": "Jersey is An island or coastal nation with no land borders, located in Northern Europe, with its capital at Saint Helier.",
+    "area": 116,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "JOR",
+    "numericId": "400",
+    "name": "Jordan",
+    "officialName": "Hashemite Kingdom of Jordan",
+    "aliases": [
+      "Hashemite Kingdom of Jordan",
+      "al-Mamlakah al-Urdunīyah al-Hāshimīyah"
+    ],
+    "capital": "Amman",
+    "coordinates": [
+      31,
+      36
+    ],
+    "borders": [
+      "IRQ",
+      "ISR",
+      "PSE",
+      "SAU",
+      "SYR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇯🇴",
+    "triviaFact": "Jordan is Shares land borders with 5 countries, located in Western Asia, with its capital at Amman.",
+    "area": 89342,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "JPN",
+    "numericId": "392",
+    "name": "Japan",
+    "officialName": "Japan",
+    "aliases": [
+      "Nippon",
+      "Nihon"
+    ],
+    "capital": "Tokyo",
+    "coordinates": [
+      36,
+      138
+    ],
+    "borders": [],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [
+      {
+        "id": "KOR",
+        "name": "South Korea",
+        "distanceKm": 210
+      },
+      {
+        "id": "RUS",
+        "name": "Russia",
+        "distanceKm": 300
+      },
+      {
+        "id": "CHN",
+        "name": "China",
+        "distanceKm": 800
+      }
+    ],
+    "flagEmoji": "🇯🇵",
+    "triviaFact": "Consists of 6,852 islands, with over 70% of its landmass being mountainous.",
+    "area": 377930,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "KAZ",
+    "numericId": "398",
+    "name": "Kazakhstan",
+    "officialName": "Republic of Kazakhstan",
+    "aliases": [
+      "Republic of Kazakhstan",
+      "Qazaqstan",
+      "Казахстан",
+      "Қазақстан Республикасы",
+      "Qazaqstan Respublïkası"
+    ],
+    "capital": "Astana",
+    "coordinates": [
+      48,
+      68
+    ],
+    "borders": [
+      "CHN",
+      "KGZ",
+      "RUS",
+      "TKM",
+      "UZB"
+    ],
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇿",
+    "triviaFact": "Kazakhstan is Shares land borders with 5 countries, located in Central Asia, with its capital at Astana.",
+    "area": 2724900,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "KEN",
+    "numericId": "404",
+    "name": "Kenya",
+    "officialName": "Republic of Kenya",
+    "aliases": [
+      "Republic of Kenya",
+      "Jamhuri ya Kenya"
+    ],
+    "capital": "Nairobi",
+    "coordinates": [
+      1,
+      38
+    ],
+    "borders": [
+      "ETH",
+      "SOM",
+      "SSD",
+      "TZA",
+      "UGA"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇪",
+    "triviaFact": "Kenya is Shares land borders with 5 countries, located in Eastern Africa, with its capital at Nairobi.",
+    "area": 580367,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "KGZ",
+    "numericId": "417",
+    "name": "Kyrgyzstan",
+    "officialName": "Kyrgyz Republic",
+    "aliases": [
+      "Kyrgyz Republic",
+      "Киргизия",
+      "Кыргыз Республикасы",
+      "Kyrgyz Respublikasy"
+    ],
+    "capital": "Bishkek",
+    "coordinates": [
+      41,
+      75
+    ],
+    "borders": [
+      "CHN",
+      "KAZ",
+      "TJK",
+      "UZB"
+    ],
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇬",
+    "triviaFact": "Kyrgyzstan is Shares land borders with 4 countries, located in Central Asia, with its capital at Bishkek.",
+    "area": 199951,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "KHM",
+    "numericId": "116",
+    "name": "Cambodia",
+    "officialName": "Kingdom of Cambodia",
+    "aliases": [
+      "Kingdom of Cambodia"
+    ],
+    "capital": "Phnom Penh",
+    "coordinates": [
+      13,
+      105
+    ],
+    "borders": [
+      "LAO",
+      "THA",
+      "VNM"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇭",
+    "triviaFact": "Cambodia is Shares land borders with 3 countries, located in South-Eastern Asia, with its capital at Phnom Penh.",
+    "area": 181035,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "KIR",
+    "numericId": "296",
+    "name": "Kiribati",
+    "officialName": "Independent and Sovereign Republic of Kiribati",
+    "aliases": [
+      "Independent and Sovereign Republic of Kiribati",
+      "Republic of Kiribati",
+      "Ribaberiki Kiribati"
+    ],
+    "capital": "South Tarawa",
+    "coordinates": [
+      1.41666666,
+      173
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇮",
+    "triviaFact": "Kiribati is An island or coastal nation with no land borders, located in Micronesia, with its capital at South Tarawa.",
+    "area": 811,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "KNA",
+    "numericId": "659",
+    "name": "Saint Kitts and Nevis",
+    "officialName": "Federation of Saint Christopher and Nevis",
+    "aliases": [
+      "Federation of Saint Christopher and Nevis"
+    ],
+    "capital": "Basseterre",
+    "coordinates": [
+      17.33333333,
+      -62.75
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇳",
+    "triviaFact": "Saint Kitts and Nevis is An island or coastal nation with no land borders, located in Caribbean, with its capital at Basseterre.",
+    "area": 261,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "KOR",
+    "numericId": "410",
+    "name": "South Korea",
+    "officialName": "Republic of Korea",
+    "aliases": [
+      "Republic of Korea",
+      "Korea, Republic of",
+      "남조선"
+    ],
+    "capital": "Seoul",
+    "coordinates": [
+      37,
+      127.5
+    ],
+    "borders": [
+      "PRK"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇷",
+    "triviaFact": "South Korea is Shares land borders with 1 countries, located in Eastern Asia, with its capital at Seoul.",
+    "area": 100210,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "UNK",
+    "numericId": "",
+    "name": "Kosovo",
+    "officialName": "Republic of Kosovo",
+    "aliases": [
+      "Republic of Kosovo",
+      "Република Косово"
+    ],
+    "capital": "Pristina",
+    "coordinates": [
+      42.666667,
+      21.166667
+    ],
+    "borders": [
+      "ALB",
+      "MKD",
+      "MNE",
+      "SRB"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇽🇰",
+    "triviaFact": "Kosovo is Shares land borders with 4 countries, located in Southeast Europe, with its capital at Pristina.",
+    "area": 10908,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "KWT",
+    "numericId": "414",
+    "name": "Kuwait",
+    "officialName": "State of Kuwait",
+    "aliases": [
+      "State of Kuwait",
+      "Dawlat al-Kuwait"
+    ],
+    "capital": "Kuwait City",
+    "coordinates": [
+      29.5,
+      45.75
+    ],
+    "borders": [
+      "IRQ",
+      "SAU"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇼",
+    "triviaFact": "Kuwait is Shares land borders with 2 countries, located in Western Asia, with its capital at Kuwait City.",
+    "area": 17818,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LAO",
+    "numericId": "418",
+    "name": "Laos",
+    "officialName": "Lao People's Democratic Republic",
+    "aliases": [
+      "Lao People's Democratic Republic",
+      "Lao",
+      "Sathalanalat Paxathipatai Paxaxon Lao"
+    ],
+    "capital": "Vientiane",
+    "coordinates": [
+      18,
+      105
+    ],
+    "borders": [
+      "MMR",
+      "KHM",
+      "CHN",
+      "THA",
+      "VNM"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇦",
+    "triviaFact": "Laos is Shares land borders with 5 countries, located in South-Eastern Asia, with its capital at Vientiane.",
+    "area": 236800,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LBN",
+    "numericId": "422",
+    "name": "Lebanon",
+    "officialName": "Lebanese Republic",
+    "aliases": [
+      "Lebanese Republic",
+      "Al-Jumhūrīyah Al-Libnānīyah"
+    ],
+    "capital": "Beirut",
+    "coordinates": [
+      33.83333333,
+      35.83333333
+    ],
+    "borders": [
+      "ISR",
+      "SYR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇧",
+    "triviaFact": "Lebanon is Shares land borders with 2 countries, located in Western Asia, with its capital at Beirut.",
+    "area": 10452,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LBR",
+    "numericId": "430",
+    "name": "Liberia",
+    "officialName": "Republic of Liberia",
+    "aliases": [
+      "Republic of Liberia"
+    ],
+    "capital": "Monrovia",
+    "coordinates": [
+      6.5,
+      -9.5
+    ],
+    "borders": [
+      "GIN",
+      "CIV",
+      "SLE"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇷",
+    "triviaFact": "Liberia is Shares land borders with 3 countries, located in Western Africa, with its capital at Monrovia.",
+    "area": 111369,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LBY",
+    "numericId": "434",
+    "name": "Libya",
+    "officialName": "State of Libya",
+    "aliases": [
+      "State of Libya",
+      "Dawlat Libya"
+    ],
+    "capital": "Tripoli",
+    "coordinates": [
+      25,
+      17
+    ],
+    "borders": [
+      "DZA",
+      "TCD",
+      "EGY",
+      "NER",
+      "SDN",
+      "TUN"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇾",
+    "triviaFact": "Libya is Shares land borders with 6 countries, located in Northern Africa, with its capital at Tripoli.",
+    "area": 1759540,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LCA",
+    "numericId": "662",
+    "name": "Saint Lucia",
+    "officialName": "Saint Lucia",
+    "aliases": [],
+    "capital": "Castries",
+    "coordinates": [
+      13.88333333,
+      -60.96666666
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇨",
+    "triviaFact": "Saint Lucia is An island or coastal nation with no land borders, located in Caribbean, with its capital at Castries.",
+    "area": 616,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "LIE",
+    "numericId": "438",
+    "name": "Liechtenstein",
+    "officialName": "Principality of Liechtenstein",
+    "aliases": [
+      "Principality of Liechtenstein",
+      "Fürstentum Liechtenstein"
+    ],
+    "capital": "Vaduz",
+    "coordinates": [
+      47.26666666,
+      9.53333333
+    ],
+    "borders": [
+      "AUT",
+      "CHE"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇮",
+    "triviaFact": "Liechtenstein is Shares land borders with 2 countries, located in Western Europe, with its capital at Vaduz.",
+    "area": 160,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LKA",
+    "numericId": "144",
+    "name": "Sri Lanka",
+    "officialName": "Democratic Socialist Republic of Sri Lanka",
+    "aliases": [
+      "Democratic Socialist Republic of Sri Lanka",
+      "ilaṅkai"
+    ],
+    "capital": "Colombo",
+    "coordinates": [
+      7,
+      81
+    ],
+    "borders": [
+      "IND"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [
+      {
+        "id": "IND",
+        "name": "India",
+        "distanceKm": 55
+      },
+      {
+        "id": "MDV",
+        "name": "Maldives",
+        "distanceKm": 750
+      }
+    ],
+    "flagEmoji": "🇱🇰",
+    "triviaFact": "Sri Lanka is Shares land borders with 1 countries, located in Southern Asia, with its capital at Colombo.",
+    "area": 65610,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LSO",
+    "numericId": "426",
+    "name": "Lesotho",
+    "officialName": "Kingdom of Lesotho",
+    "aliases": [
+      "Kingdom of Lesotho",
+      "Muso oa Lesotho"
+    ],
+    "capital": "Maseru",
+    "coordinates": [
+      -29.5,
+      28.5
+    ],
+    "borders": [
+      "ZAF"
+    ],
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇸",
+    "triviaFact": "The only sovereign state entirely situated above 1,000 metres (3,281 ft) in elevation.",
+    "area": 30355,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LTU",
+    "numericId": "440",
+    "name": "Lithuania",
+    "officialName": "Republic of Lithuania",
+    "aliases": [
+      "Republic of Lithuania",
+      "Lietuvos Respublika"
+    ],
+    "capital": "Vilnius",
+    "coordinates": [
+      56,
+      24
+    ],
+    "borders": [
+      "BLR",
+      "LVA",
+      "POL",
+      "RUS"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇹",
+    "triviaFact": "Lithuania is Shares land borders with 4 countries, located in Northern Europe, with its capital at Vilnius.",
+    "area": 65300,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LUX",
+    "numericId": "442",
+    "name": "Luxembourg",
+    "officialName": "Grand Duchy of Luxembourg",
+    "aliases": [
+      "Grand Duchy of Luxembourg",
+      "Grand-Duché de Luxembourg",
+      "Großherzogtum Luxemburg",
+      "Groussherzogtum Lëtzebuerg"
+    ],
+    "capital": "Luxembourg",
+    "coordinates": [
+      49.75,
+      6.16666666
+    ],
+    "borders": [
+      "BEL",
+      "FRA",
+      "DEU"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇺",
+    "triviaFact": "Luxembourg is Shares land borders with 3 countries, located in Western Europe, with its capital at Luxembourg.",
+    "area": 2586,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "LVA",
+    "numericId": "428",
+    "name": "Latvia",
+    "officialName": "Republic of Latvia",
+    "aliases": [
+      "Republic of Latvia",
+      "Latvijas Republika"
+    ],
+    "capital": "Riga",
+    "coordinates": [
+      57,
+      25
+    ],
+    "borders": [
+      "BLR",
+      "EST",
+      "LTU",
+      "RUS"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇱🇻",
+    "triviaFact": "Latvia is Shares land borders with 4 countries, located in Northern Europe, with its capital at Riga.",
+    "area": 64559,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MAC",
+    "numericId": "446",
+    "name": "Macau",
+    "officialName": "Macao Special Administrative Region of the People's Republic of China",
+    "aliases": [
+      "Macao Special Administrative Region of the People's Republic of China",
+      "Macao",
+      "中華人民共和國澳門特別行政區",
+      "Região Administrativa Especial de Macau da República Popular da China"
+    ],
+    "capital": "No official capital",
+    "coordinates": [
+      22.16666666,
+      113.55
+    ],
+    "borders": [
+      "CHN"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇴",
+    "triviaFact": "Macau is Shares land borders with 1 countries, located in Eastern Asia, with its capital at No official capital.",
+    "area": 30,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MAF",
+    "numericId": "663",
+    "name": "Saint Martin",
+    "officialName": "Saint Martin",
+    "aliases": [
+      "Collectivity of Saint Martin",
+      "Collectivité de Saint-Martin",
+      "Saint Martin (French part)"
+    ],
+    "capital": "Marigot",
+    "coordinates": [
+      18.08333333,
+      -63.95
+    ],
+    "borders": [
+      "SXM"
+    ],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇫",
+    "triviaFact": "Saint Martin is Shares land borders with 1 countries, located in Caribbean, with its capital at Marigot.",
+    "area": 53,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MAR",
+    "numericId": "504",
+    "name": "Morocco",
+    "officialName": "Kingdom of Morocco",
+    "aliases": [
+      "Kingdom of Morocco",
+      "Al-Mamlakah al-Maġribiyah"
+    ],
+    "capital": "Rabat",
+    "coordinates": [
+      32,
+      -5
+    ],
+    "borders": [
+      "DZA",
+      "ESH",
+      "ESP"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇦",
+    "triviaFact": "Morocco is Shares land borders with 3 countries, located in Northern Africa, with its capital at Rabat.",
+    "area": 446550,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MCO",
+    "numericId": "492",
+    "name": "Monaco",
+    "officialName": "Principality of Monaco",
+    "aliases": [
+      "Principality of Monaco",
+      "Principauté de Monaco"
+    ],
+    "capital": "Monaco",
+    "coordinates": [
+      43.73333333,
+      7.4
+    ],
+    "borders": [
+      "FRA"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇨",
+    "triviaFact": "The most densely populated sovereign state in the world with over 19,000 residents per square kilometer.",
+    "area": 2.02,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MDA",
+    "numericId": "498",
+    "name": "Moldova",
+    "officialName": "Republic of Moldova",
+    "aliases": [
+      "Republic of Moldova",
+      "Moldova, Republic of",
+      "Republica Moldova"
+    ],
+    "capital": "Chișinău",
+    "coordinates": [
+      47,
+      29
+    ],
+    "borders": [
+      "ROU",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇩",
+    "triviaFact": "Moldova is Shares land borders with 2 countries, located in Eastern Europe, with its capital at Chișinău.",
+    "area": 33846,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MDG",
+    "numericId": "450",
+    "name": "Madagascar",
+    "officialName": "Republic of Madagascar",
+    "aliases": [
+      "Republic of Madagascar",
+      "Repoblikan'i Madagasikara",
+      "République de Madagascar"
+    ],
+    "capital": "Antananarivo",
+    "coordinates": [
+      -20,
+      47
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [
+      {
+        "id": "MOZ",
+        "name": "Mozambique",
+        "distanceKm": 420
+      },
+      {
+        "id": "TZA",
+        "name": "Tanzania",
+        "distanceKm": 850
+      },
+      {
+        "id": "COM",
+        "name": "Comoros",
+        "distanceKm": 310
+      }
+    ],
+    "flagEmoji": "🇲🇬",
+    "triviaFact": "Over 90% of all plant and animal species found here are endemic and exist nowhere else.",
+    "area": 587041,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MDV",
+    "numericId": "462",
+    "name": "Maldives",
+    "officialName": "Republic of the Maldives",
+    "aliases": [
+      "Republic of the Maldives",
+      "Maldive Islands",
+      "Dhivehi Raajjeyge Jumhooriyya"
+    ],
+    "capital": "Malé",
+    "coordinates": [
+      3.25,
+      73
+    ],
+    "borders": [],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇻",
+    "triviaFact": "Maldives is An island or coastal nation with no land borders, located in Southern Asia, with its capital at Malé.",
+    "area": 300,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MEX",
+    "numericId": "484",
+    "name": "Mexico",
+    "officialName": "United Mexican States",
+    "aliases": [
+      "United Mexican States",
+      "Mexicanos",
+      "Estados Unidos Mexicanos"
+    ],
+    "capital": "Mexico City",
+    "coordinates": [
+      23,
+      -102
+    ],
+    "borders": [
+      "BLZ",
+      "GTM",
+      "USA"
+    ],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇽",
+    "triviaFact": "Mexico is Shares land borders with 3 countries, located in North America, with its capital at Mexico City.",
+    "area": 1964375,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MHL",
+    "numericId": "584",
+    "name": "Marshall Islands",
+    "officialName": "Republic of the Marshall Islands",
+    "aliases": [
+      "Republic of the Marshall Islands",
+      "Aolepān Aorōkin M̧ajeļ"
+    ],
+    "capital": "Majuro",
+    "coordinates": [
+      9,
+      168
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇭",
+    "triviaFact": "Marshall Islands is An island or coastal nation with no land borders, located in Micronesia, with its capital at Majuro.",
+    "area": 181,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MKD",
+    "numericId": "807",
+    "name": "North Macedonia",
+    "officialName": "Republic of North Macedonia",
+    "aliases": [
+      "Republic of North Macedonia",
+      "The former Yugoslav Republic of Macedonia",
+      "Macedonia, The Former Yugoslav Republic of",
+      "Република Северна Македонија",
+      "Macedonia"
+    ],
+    "capital": "Skopje",
+    "coordinates": [
+      41.83333333,
+      22
+    ],
+    "borders": [
+      "ALB",
+      "BGR",
+      "GRC",
+      "UNK",
+      "SRB"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇰",
+    "triviaFact": "North Macedonia is Shares land borders with 5 countries, located in Southeast Europe, with its capital at Skopje.",
+    "area": 25713,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MLI",
+    "numericId": "466",
+    "name": "Mali",
+    "officialName": "Republic of Mali",
+    "aliases": [
+      "Republic of Mali",
+      "République du Mali"
+    ],
+    "capital": "Bamako",
+    "coordinates": [
+      17,
+      -4
+    ],
+    "borders": [
+      "DZA",
+      "BFA",
+      "GIN",
+      "CIV",
+      "MRT",
+      "NER",
+      "SEN"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇱",
+    "triviaFact": "Mali is Shares land borders with 7 countries, located in Western Africa, with its capital at Bamako.",
+    "area": 1240192,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MLT",
+    "numericId": "470",
+    "name": "Malta",
+    "officialName": "Republic of Malta",
+    "aliases": [
+      "Republic of Malta",
+      "Repubblika ta' Malta"
+    ],
+    "capital": "Valletta",
+    "coordinates": [
+      35.83333333,
+      14.58333333
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇹",
+    "triviaFact": "Malta is An island or coastal nation with no land borders, located in Southern Europe, with its capital at Valletta.",
+    "area": 316,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MMR",
+    "numericId": "104",
+    "name": "Myanmar",
+    "officialName": "Republic of the Union of Myanmar",
+    "aliases": [
+      "Republic of the Union of Myanmar",
+      "Burma",
+      "Pyidaunzu Thanmăda Myăma Nainngandaw"
+    ],
+    "capital": "Naypyidaw",
+    "coordinates": [
+      22,
+      98
+    ],
+    "borders": [
+      "BGD",
+      "CHN",
+      "IND",
+      "LAO",
+      "THA"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇲",
+    "triviaFact": "Myanmar is Shares land borders with 5 countries, located in South-Eastern Asia, with its capital at Naypyidaw.",
+    "area": 676578,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MNE",
+    "numericId": "499",
+    "name": "Montenegro",
+    "officialName": "Montenegro",
+    "aliases": [
+      "Crna Gora"
+    ],
+    "capital": "Podgorica",
+    "coordinates": [
+      42.5,
+      19.3
+    ],
+    "borders": [
+      "ALB",
+      "BIH",
+      "HRV",
+      "UNK",
+      "SRB"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇪",
+    "triviaFact": "Montenegro is Shares land borders with 5 countries, located in Southeast Europe, with its capital at Podgorica.",
+    "area": 13812,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MNG",
+    "numericId": "496",
+    "name": "Mongolia",
+    "officialName": "Mongolia",
+    "aliases": [],
+    "capital": "Ulan Bator",
+    "coordinates": [
+      46,
+      105
+    ],
+    "borders": [
+      "CHN",
+      "RUS"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇳",
+    "triviaFact": "Mongolia is Shares land borders with 2 countries, located in Eastern Asia, with its capital at Ulan Bator.",
+    "area": 1564110,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MNP",
+    "numericId": "580",
+    "name": "Northern Mariana Islands",
+    "officialName": "Commonwealth of the Northern Mariana Islands",
+    "aliases": [
+      "Commonwealth of the Northern Mariana Islands",
+      "Sankattan Siha Na Islas Mariånas"
+    ],
+    "capital": "Saipan",
+    "coordinates": [
+      15.2,
+      145.75
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇵",
+    "triviaFact": "Northern Mariana Islands is An island or coastal nation with no land borders, located in Micronesia, with its capital at Saipan.",
+    "area": 464,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MOZ",
+    "numericId": "508",
+    "name": "Mozambique",
+    "officialName": "Republic of Mozambique",
+    "aliases": [
+      "Republic of Mozambique",
+      "República de Moçambique"
+    ],
+    "capital": "Maputo",
+    "coordinates": [
+      -18.25,
+      35
+    ],
+    "borders": [
+      "MWI",
+      "ZAF",
+      "SWZ",
+      "TZA",
+      "ZMB",
+      "ZWE"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇿",
+    "triviaFact": "Mozambique is Shares land borders with 6 countries, located in Eastern Africa, with its capital at Maputo.",
+    "area": 801590,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MRT",
+    "numericId": "478",
+    "name": "Mauritania",
+    "officialName": "Islamic Republic of Mauritania",
+    "aliases": [
+      "Islamic Republic of Mauritania",
+      "al-Jumhūriyyah al-ʾIslāmiyyah al-Mūrītāniyyah"
+    ],
+    "capital": "Nouakchott",
+    "coordinates": [
+      20,
+      -12
+    ],
+    "borders": [
+      "DZA",
+      "MLI",
+      "SEN",
+      "ESH"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇷",
+    "triviaFact": "Mauritania is Shares land borders with 4 countries, located in Western Africa, with its capital at Nouakchott.",
+    "area": 1030700,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MSR",
+    "numericId": "500",
+    "name": "Montserrat",
+    "officialName": "Montserrat",
+    "aliases": [],
+    "capital": "Plymouth",
+    "coordinates": [
+      16.75,
+      -62.2
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇸",
+    "triviaFact": "Montserrat is An island or coastal nation with no land borders, located in Caribbean, with its capital at Plymouth.",
+    "area": 102,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MTQ",
+    "numericId": "474",
+    "name": "Martinique",
+    "officialName": "Martinique",
+    "aliases": [],
+    "capital": "Fort-de-France",
+    "coordinates": [
+      14.666667,
+      -61
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇶",
+    "triviaFact": "Martinique is An island or coastal nation with no land borders, located in Caribbean, with its capital at Fort-de-France.",
+    "area": 1128,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MUS",
+    "numericId": "480",
+    "name": "Mauritius",
+    "officialName": "Republic of Mauritius",
+    "aliases": [
+      "Republic of Mauritius",
+      "République de Maurice"
+    ],
+    "capital": "Port Louis",
+    "coordinates": [
+      -20.28333333,
+      57.55
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇺",
+    "triviaFact": "Mauritius is An island or coastal nation with no land borders, located in Eastern Africa, with its capital at Port Louis.",
+    "area": 2040,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "MWI",
+    "numericId": "454",
+    "name": "Malawi",
+    "officialName": "Republic of Malawi",
+    "aliases": [
+      "Republic of Malawi"
+    ],
+    "capital": "Lilongwe",
+    "coordinates": [
+      -13.5,
+      34
+    ],
+    "borders": [
+      "MOZ",
+      "TZA",
+      "ZMB"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇼",
+    "triviaFact": "Malawi is Shares land borders with 3 countries, located in Eastern Africa, with its capital at Lilongwe.",
+    "area": 118484,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MYS",
+    "numericId": "458",
+    "name": "Malaysia",
+    "officialName": "Malaysia",
+    "aliases": [],
+    "capital": "Kuala Lumpur",
+    "coordinates": [
+      2.5,
+      112.5
+    ],
+    "borders": [
+      "BRN",
+      "IDN",
+      "THA"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇲🇾",
+    "triviaFact": "Malaysia is Shares land borders with 3 countries, located in South-Eastern Asia, with its capital at Kuala Lumpur.",
+    "area": 330803,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "MYT",
+    "numericId": "175",
+    "name": "Mayotte",
+    "officialName": "Department of Mayotte",
+    "aliases": [
+      "Department of Mayotte",
+      "Département de Mayotte"
+    ],
+    "capital": "Mamoudzou",
+    "coordinates": [
+      -12.83333333,
+      45.16666666
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇾🇹",
+    "triviaFact": "Mayotte is An island or coastal nation with no land borders, located in Eastern Africa, with its capital at Mamoudzou.",
+    "area": 374,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "NAM",
+    "numericId": "516",
+    "name": "Namibia",
+    "officialName": "Republic of Namibia",
+    "aliases": [
+      "Republic of Namibia",
+      "Namibië"
+    ],
+    "capital": "Windhoek",
+    "coordinates": [
+      -22,
+      17
+    ],
+    "borders": [
+      "AGO",
+      "BWA",
+      "ZAF",
+      "ZMB"
+    ],
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇦",
+    "triviaFact": "Namibia is Shares land borders with 4 countries, located in Southern Africa, with its capital at Windhoek.",
+    "area": 825615,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NCL",
+    "numericId": "540",
+    "name": "New Caledonia",
+    "officialName": "New Caledonia",
+    "aliases": [],
+    "capital": "Nouméa",
+    "coordinates": [
+      -21.5,
+      165.5
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇨",
+    "triviaFact": "New Caledonia is An island or coastal nation with no land borders, located in Melanesia, with its capital at Nouméa.",
+    "area": 18575,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "NER",
+    "numericId": "562",
+    "name": "Niger",
+    "officialName": "Republic of Niger",
+    "aliases": [
+      "Republic of Niger",
+      "Nijar"
+    ],
+    "capital": "Niamey",
+    "coordinates": [
+      16,
+      8
+    ],
+    "borders": [
+      "DZA",
+      "BEN",
+      "BFA",
+      "TCD",
+      "LBY",
+      "MLI",
+      "NGA"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇪",
+    "triviaFact": "Niger is Shares land borders with 7 countries, located in Western Africa, with its capital at Niamey.",
+    "area": 1267000,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NFK",
+    "numericId": "574",
+    "name": "Norfolk Island",
+    "officialName": "Territory of Norfolk Island",
+    "aliases": [
+      "Territory of Norfolk Island",
+      "Teratri of Norf'k Ailen"
+    ],
+    "capital": "Kingston",
+    "coordinates": [
+      -29.03333333,
+      167.95
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇫",
+    "triviaFact": "Norfolk Island is An island or coastal nation with no land borders, located in Australia and New Zealand, with its capital at Kingston.",
+    "area": 36,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "NGA",
+    "numericId": "566",
+    "name": "Nigeria",
+    "officialName": "Federal Republic of Nigeria",
+    "aliases": [
+      "Federal Republic of Nigeria",
+      "Nijeriya",
+      "Naíjíríà"
+    ],
+    "capital": "Abuja",
+    "coordinates": [
+      10,
+      8
+    ],
+    "borders": [
+      "BEN",
+      "CMR",
+      "TCD",
+      "NER"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇬",
+    "triviaFact": "Nigeria is Shares land borders with 4 countries, located in Western Africa, with its capital at Abuja.",
+    "area": 923768,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NIC",
+    "numericId": "558",
+    "name": "Nicaragua",
+    "officialName": "Republic of Nicaragua",
+    "aliases": [
+      "Republic of Nicaragua",
+      "República de Nicaragua"
+    ],
+    "capital": "Managua",
+    "coordinates": [
+      13,
+      -85
+    ],
+    "borders": [
+      "CRI",
+      "HND"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇮",
+    "triviaFact": "Nicaragua is Shares land borders with 2 countries, located in Central America, with its capital at Managua.",
+    "area": 130373,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NIU",
+    "numericId": "570",
+    "name": "Niue",
+    "officialName": "Niue",
+    "aliases": [],
+    "capital": "Alofi",
+    "coordinates": [
+      -19.03333333,
+      -169.86666666
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇺",
+    "triviaFact": "Niue is An island or coastal nation with no land borders, located in Polynesia, with its capital at Alofi.",
+    "area": 260,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "NLD",
+    "numericId": "528",
+    "name": "Netherlands",
+    "officialName": "Kingdom of the Netherlands",
+    "aliases": [
+      "Kingdom of the Netherlands",
+      "Holland",
+      "Nederland",
+      "The Netherlands"
+    ],
+    "capital": "Amsterdam",
+    "coordinates": [
+      52.5,
+      5.75
+    ],
+    "borders": [
+      "BEL",
+      "DEU"
+    ],
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇱",
+    "triviaFact": "Netherlands is Shares land borders with 2 countries, located in Western Europe, with its capital at Amsterdam.",
+    "area": 41850,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NOR",
+    "numericId": "578",
+    "name": "Norway",
+    "officialName": "Kingdom of Norway",
+    "aliases": [
+      "Kingdom of Norway",
+      "Norge",
+      "Noreg",
+      "Kongeriket Norge",
+      "Kongeriket Noreg"
+    ],
+    "capital": "Oslo",
+    "coordinates": [
+      62,
+      10
+    ],
+    "borders": [
+      "FIN",
+      "SWE",
+      "RUS"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇴",
+    "triviaFact": "Known as the Land of the Midnight Sun, with Svalbard seeing no sunset from late April to late August.",
+    "area": 323802,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NPL",
+    "numericId": "524",
+    "name": "Nepal",
+    "officialName": "Federal Democratic Republic of Nepal",
+    "aliases": [
+      "Federal Democratic Republic of Nepal",
+      "Loktāntrik Ganatantra Nepāl"
+    ],
+    "capital": "Kathmandu",
+    "coordinates": [
+      28,
+      84
+    ],
+    "borders": [
+      "CHN",
+      "IND"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇵",
+    "triviaFact": "Home to Mount Everest, the highest peak above sea level, and has the only non-rectangular national flag.",
+    "area": 147181,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "NRU",
+    "numericId": "520",
+    "name": "Nauru",
+    "officialName": "Republic of Nauru",
+    "aliases": [
+      "Republic of Nauru",
+      "Naoero",
+      "Pleasant Island",
+      "Ripublik Naoero"
+    ],
+    "capital": "Yaren",
+    "coordinates": [
+      -0.53333333,
+      166.91666666
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇳🇷",
+    "triviaFact": "Nauru is An island or coastal nation with no land borders, located in Micronesia, with its capital at Yaren.",
+    "area": 21,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "NZL",
+    "numericId": "554",
+    "name": "New Zealand",
+    "officialName": "New Zealand",
+    "aliases": [
+      "Aotearoa"
+    ],
+    "capital": "Wellington",
+    "coordinates": [
+      -41,
+      174
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Australia and New Zealand",
+    "maritimeNeighbors": [
+      {
+        "id": "AUS",
+        "name": "Australia",
+        "distanceKm": 1900
+      },
+      {
+        "id": "FJI",
+        "name": "Fiji",
+        "distanceKm": 2100
+      },
+      {
+        "id": "TON",
+        "name": "Tonga",
+        "distanceKm": 2300
+      }
+    ],
+    "flagEmoji": "🇳🇿",
+    "triviaFact": "Has no native land mammals except for bats, and was the first country to grant women the right to vote.",
+    "area": 270467,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "OMN",
+    "numericId": "512",
+    "name": "Oman",
+    "officialName": "Sultanate of Oman",
+    "aliases": [
+      "Sultanate of Oman",
+      "Salṭanat ʻUmān"
+    ],
+    "capital": "Muscat",
+    "coordinates": [
+      21,
+      57
+    ],
+    "borders": [
+      "SAU",
+      "ARE",
+      "YEM"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇴🇲",
+    "triviaFact": "Oman is Shares land borders with 3 countries, located in Western Asia, with its capital at Muscat.",
+    "area": 309500,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PAK",
+    "numericId": "586",
+    "name": "Pakistan",
+    "officialName": "Islamic Republic of Pakistan",
+    "aliases": [
+      "Islamic Republic of Pakistan",
+      "Pākistān",
+      "Islāmī Jumhūriya'eh Pākistān"
+    ],
+    "capital": "Islamabad",
+    "coordinates": [
+      30,
+      70
+    ],
+    "borders": [
+      "AFG",
+      "CHN",
+      "IND",
+      "IRN"
+    ],
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇰",
+    "triviaFact": "Pakistan is Shares land borders with 4 countries, located in Southern Asia, with its capital at Islamabad.",
+    "area": 881912,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PAN",
+    "numericId": "591",
+    "name": "Panama",
+    "officialName": "Republic of Panama",
+    "aliases": [
+      "Republic of Panama",
+      "República de Panamá"
+    ],
+    "capital": "Panama City",
+    "coordinates": [
+      9,
+      -80
+    ],
+    "borders": [
+      "COL",
+      "CRI"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇦",
+    "triviaFact": "Panama is Shares land borders with 2 countries, located in Central America, with its capital at Panama City.",
+    "area": 75417,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PCN",
+    "numericId": "612",
+    "name": "Pitcairn Islands",
+    "officialName": "Pitcairn Group of Islands",
+    "aliases": [
+      "Pitcairn Group of Islands",
+      "Pitcairn",
+      "Pitcairn Henderson Ducie and Oeno Islands"
+    ],
+    "capital": "Adamstown",
+    "coordinates": [
+      -25.06666666,
+      -130.1
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇳",
+    "triviaFact": "Pitcairn Islands is An island or coastal nation with no land borders, located in Polynesia, with its capital at Adamstown.",
+    "area": 47,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "PER",
+    "numericId": "604",
+    "name": "Peru",
+    "officialName": "Republic of Peru",
+    "aliases": [
+      "Republic of Peru",
+      "República del Perú"
+    ],
+    "capital": "Lima",
+    "coordinates": [
+      -10,
+      -76
+    ],
+    "borders": [
+      "BOL",
+      "BRA",
+      "CHL",
+      "COL",
+      "ECU"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇪",
+    "triviaFact": "Peru is Shares land borders with 5 countries, located in South America, with its capital at Lima.",
+    "area": 1285216,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PHL",
+    "numericId": "608",
+    "name": "Philippines",
+    "officialName": "Republic of the Philippines",
+    "aliases": [
+      "Republic of the Philippines",
+      "Repúblika ng Pilipinas"
+    ],
+    "capital": "Manila",
+    "coordinates": [
+      13,
+      122
+    ],
+    "borders": [],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [
+      {
+        "id": "TWN",
+        "name": "Taiwan",
+        "distanceKm": 360
+      },
+      {
+        "id": "MYS",
+        "name": "Malaysia",
+        "distanceKm": 600
+      },
+      {
+        "id": "VNM",
+        "name": "Vietnam",
+        "distanceKm": 1000
+      }
+    ],
+    "flagEmoji": "🇵🇭",
+    "triviaFact": "Philippines is An island or coastal nation with no land borders, located in South-Eastern Asia, with its capital at Manila.",
+    "area": 342353,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "PLW",
+    "numericId": "585",
+    "name": "Palau",
+    "officialName": "Republic of Palau",
+    "aliases": [
+      "Republic of Palau",
+      "Beluu er a Belau"
+    ],
+    "capital": "Ngerulmud",
+    "coordinates": [
+      7.5,
+      134.5
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Micronesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇼",
+    "triviaFact": "Palau is An island or coastal nation with no land borders, located in Micronesia, with its capital at Ngerulmud.",
+    "area": 459,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "PNG",
+    "numericId": "598",
+    "name": "Papua New Guinea",
+    "officialName": "Independent State of Papua New Guinea",
+    "aliases": [
+      "Independent State of Papua New Guinea",
+      "Independen Stet bilong Papua Niugini"
+    ],
+    "capital": "Port Moresby",
+    "coordinates": [
+      -6,
+      147
+    ],
+    "borders": [
+      "IDN"
+    ],
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇬",
+    "triviaFact": "Papua New Guinea is Shares land borders with 1 countries, located in Melanesia, with its capital at Port Moresby.",
+    "area": 462840,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "POL",
+    "numericId": "616",
+    "name": "Poland",
+    "officialName": "Republic of Poland",
+    "aliases": [
+      "Republic of Poland",
+      "Rzeczpospolita Polska"
+    ],
+    "capital": "Warsaw",
+    "coordinates": [
+      52,
+      20
+    ],
+    "borders": [
+      "BLR",
+      "CZE",
+      "DEU",
+      "LTU",
+      "RUS",
+      "SVK",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇱",
+    "triviaFact": "Poland is Shares land borders with 7 countries, located in Central Europe, with its capital at Warsaw.",
+    "area": 312679,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PRI",
+    "numericId": "630",
+    "name": "Puerto Rico",
+    "officialName": "Commonwealth of Puerto Rico",
+    "aliases": [
+      "Commonwealth of Puerto Rico",
+      "Estado Libre Asociado de Puerto Rico"
+    ],
+    "capital": "San Juan",
+    "coordinates": [
+      18.25,
+      -66.5
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇷",
+    "triviaFact": "Puerto Rico is An island or coastal nation with no land borders, located in Caribbean, with its capital at San Juan.",
+    "area": 8870,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "PRK",
+    "numericId": "408",
+    "name": "North Korea",
+    "officialName": "Democratic People's Republic of Korea",
+    "aliases": [
+      "Democratic People's Republic of Korea",
+      "DPRK",
+      "조선민주주의인민공화국",
+      "Chosŏn Minjujuŭi Inmin Konghwaguk",
+      "Korea, Democratic People's Republic of"
+    ],
+    "capital": "Pyongyang",
+    "coordinates": [
+      40,
+      127
+    ],
+    "borders": [
+      "CHN",
+      "KOR",
+      "RUS"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇰🇵",
+    "triviaFact": "North Korea is Shares land borders with 3 countries, located in Eastern Asia, with its capital at Pyongyang.",
+    "area": 120538,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PRT",
+    "numericId": "620",
+    "name": "Portugal",
+    "officialName": "Portuguese Republic",
+    "aliases": [
+      "Portuguese Republic",
+      "Portuguesa",
+      "República Portuguesa"
+    ],
+    "capital": "Lisbon",
+    "coordinates": [
+      39.5,
+      -8
+    ],
+    "borders": [
+      "ESP"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇹",
+    "triviaFact": "Portugal is Shares land borders with 1 countries, located in Southern Europe, with its capital at Lisbon.",
+    "area": 92090,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PRY",
+    "numericId": "600",
+    "name": "Paraguay",
+    "officialName": "Republic of Paraguay",
+    "aliases": [
+      "Republic of Paraguay",
+      "República del Paraguay",
+      "Tetã Paraguái"
+    ],
+    "capital": "Asunción",
+    "coordinates": [
+      -23,
+      -58
+    ],
+    "borders": [
+      "ARG",
+      "BOL",
+      "BRA"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇾",
+    "triviaFact": "Paraguay is Shares land borders with 3 countries, located in South America, with its capital at Asunción.",
+    "area": 406752,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PSE",
+    "numericId": "275",
+    "name": "Palestine",
+    "officialName": "State of Palestine",
+    "aliases": [
+      "State of Palestine",
+      "Palestine, State of",
+      "Dawlat Filasṭin"
+    ],
+    "capital": "Ramallah",
+    "coordinates": [
+      31.9,
+      35.2
+    ],
+    "borders": [
+      "ISR",
+      "EGY",
+      "JOR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇸",
+    "triviaFact": "Palestine is Shares land borders with 3 countries, located in Western Asia, with its capital at Ramallah.",
+    "area": 6220,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "PYF",
+    "numericId": "258",
+    "name": "French Polynesia",
+    "officialName": "French Polynesia",
+    "aliases": [
+      "Polynésie française",
+      "Pōrīnetia Farāni"
+    ],
+    "capital": "Papeetē",
+    "coordinates": [
+      -15,
+      -140
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇫",
+    "triviaFact": "French Polynesia is An island or coastal nation with no land borders, located in Polynesia, with its capital at Papeetē.",
+    "area": 4167,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "QAT",
+    "numericId": "634",
+    "name": "Qatar",
+    "officialName": "State of Qatar",
+    "aliases": [
+      "State of Qatar",
+      "Dawlat Qaṭar"
+    ],
+    "capital": "Doha",
+    "coordinates": [
+      25.5,
+      51.25
+    ],
+    "borders": [
+      "SAU"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇶🇦",
+    "triviaFact": "Qatar is Shares land borders with 1 countries, located in Western Asia, with its capital at Doha.",
+    "area": 11586,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "REU",
+    "numericId": "638",
+    "name": "Réunion",
+    "officialName": "Réunion Island",
+    "aliases": [
+      "Réunion Island",
+      "Reunion"
+    ],
+    "capital": "Saint-Denis",
+    "coordinates": [
+      -21.15,
+      55.5
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇷🇪",
+    "triviaFact": "Réunion is An island or coastal nation with no land borders, located in Eastern Africa, with its capital at Saint-Denis.",
+    "area": 2511,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "ROU",
+    "numericId": "642",
+    "name": "Romania",
+    "officialName": "Romania",
+    "aliases": [
+      "Rumania",
+      "Roumania",
+      "România"
+    ],
+    "capital": "Bucharest",
+    "coordinates": [
+      46,
+      25
+    ],
+    "borders": [
+      "BGR",
+      "HUN",
+      "MDA",
+      "SRB",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇷🇴",
+    "triviaFact": "Romania is Shares land borders with 5 countries, located in Southeast Europe, with its capital at Bucharest.",
+    "area": 238391,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "RUS",
+    "numericId": "643",
+    "name": "Russia",
+    "officialName": "Russian Federation",
+    "aliases": [
+      "Russian Federation",
+      "Российская Федерация"
+    ],
+    "capital": "Moscow",
+    "coordinates": [
+      60,
+      100
+    ],
+    "borders": [
+      "AZE",
+      "BLR",
+      "CHN",
+      "EST",
+      "FIN",
+      "GEO",
+      "KAZ",
+      "PRK",
+      "LVA",
+      "LTU",
+      "MNG",
+      "NOR",
+      "POL",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇷🇺",
+    "triviaFact": "Spans 11 time zones and borders 14 sovereign states by land.",
+    "area": 17098242,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "RWA",
+    "numericId": "646",
+    "name": "Rwanda",
+    "officialName": "Republic of Rwanda",
+    "aliases": [
+      "Republic of Rwanda",
+      "Repubulika y'u Rwanda",
+      "République du Rwanda"
+    ],
+    "capital": "Kigali",
+    "coordinates": [
+      -2,
+      30
+    ],
+    "borders": [
+      "BDI",
+      "COD",
+      "TZA",
+      "UGA"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇷🇼",
+    "triviaFact": "Rwanda is Shares land borders with 4 countries, located in Eastern Africa, with its capital at Kigali.",
+    "area": 26338,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SAU",
+    "numericId": "682",
+    "name": "Saudi Arabia",
+    "officialName": "Kingdom of Saudi Arabia",
+    "aliases": [
+      "Kingdom of Saudi Arabia",
+      "Saudi",
+      "Al-Mamlakah al-‘Arabiyyah as-Su‘ūdiyyah"
+    ],
+    "capital": "Riyadh",
+    "coordinates": [
+      25,
+      45
+    ],
+    "borders": [
+      "IRQ",
+      "JOR",
+      "KWT",
+      "OMN",
+      "QAT",
+      "ARE",
+      "YEM"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇦",
+    "triviaFact": "Saudi Arabia is Shares land borders with 7 countries, located in Western Asia, with its capital at Riyadh.",
+    "area": 2149690,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SDN",
+    "numericId": "729",
+    "name": "Sudan",
+    "officialName": "Republic of the Sudan",
+    "aliases": [
+      "Republic of the Sudan",
+      "Jumhūrīyat as-Sūdān"
+    ],
+    "capital": "Khartoum",
+    "coordinates": [
+      15,
+      30
+    ],
+    "borders": [
+      "CAF",
+      "TCD",
+      "EGY",
+      "ERI",
+      "ETH",
+      "LBY",
+      "SSD"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇩",
+    "triviaFact": "Sudan is Shares land borders with 7 countries, located in Northern Africa, with its capital at Khartoum.",
+    "area": 1886068,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SEN",
+    "numericId": "686",
+    "name": "Senegal",
+    "officialName": "Republic of Senegal",
+    "aliases": [
+      "Republic of Senegal",
+      "République du Sénégal"
+    ],
+    "capital": "Dakar",
+    "coordinates": [
+      14,
+      -14
+    ],
+    "borders": [
+      "GMB",
+      "GIN",
+      "GNB",
+      "MLI",
+      "MRT"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇳",
+    "triviaFact": "Senegal is Shares land borders with 5 countries, located in Western Africa, with its capital at Dakar.",
+    "area": 196722,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SGP",
+    "numericId": "702",
+    "name": "Singapore",
+    "officialName": "Republic of Singapore",
+    "aliases": [
+      "Republic of Singapore",
+      "Singapura",
+      "Republik Singapura",
+      "新加坡共和国"
+    ],
+    "capital": "Singapore",
+    "coordinates": [
+      1.36666666,
+      103.8
+    ],
+    "borders": [],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇬",
+    "triviaFact": "Singapore is An island or coastal nation with no land borders, located in South-Eastern Asia, with its capital at Singapore.",
+    "area": 710,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SGS",
+    "numericId": "239",
+    "name": "South Georgia",
+    "officialName": "South Georgia and the South Sandwich Islands",
+    "aliases": [
+      "South Georgia and the South Sandwich Islands"
+    ],
+    "capital": "King Edward Point",
+    "coordinates": [
+      -54.5,
+      -37
+    ],
+    "borders": [],
+    "region": "Antarctic",
+    "subregion": "",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇬🇸",
+    "triviaFact": "South Georgia is An island or coastal nation with no land borders, located in , with its capital at King Edward Point.",
+    "area": 3903,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SJM",
+    "numericId": "744",
+    "name": "Svalbard and Jan Mayen",
+    "officialName": "Svalbard og Jan Mayen",
+    "aliases": [
+      "Svalbard og Jan Mayen",
+      "Svalbard and Jan Mayen Islands"
+    ],
+    "capital": "Longyearbyen",
+    "coordinates": [
+      78,
+      20
+    ],
+    "borders": [],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇯",
+    "triviaFact": "Svalbard and Jan Mayen is An island or coastal nation with no land borders, located in Northern Europe, with its capital at Longyearbyen.",
+    "area": -1,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SLB",
+    "numericId": "090",
+    "name": "Solomon Islands",
+    "officialName": "Solomon Islands",
+    "aliases": [],
+    "capital": "Honiara",
+    "coordinates": [
+      -8,
+      159
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇧",
+    "triviaFact": "Solomon Islands is An island or coastal nation with no land borders, located in Melanesia, with its capital at Honiara.",
+    "area": 28896,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SLE",
+    "numericId": "694",
+    "name": "Sierra Leone",
+    "officialName": "Republic of Sierra Leone",
+    "aliases": [
+      "Republic of Sierra Leone"
+    ],
+    "capital": "Freetown",
+    "coordinates": [
+      8.5,
+      -11.5
+    ],
+    "borders": [
+      "GIN",
+      "LBR"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇱",
+    "triviaFact": "Sierra Leone is Shares land borders with 2 countries, located in Western Africa, with its capital at Freetown.",
+    "area": 71740,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SLV",
+    "numericId": "222",
+    "name": "El Salvador",
+    "officialName": "Republic of El Salvador",
+    "aliases": [
+      "Republic of El Salvador",
+      "República de El Salvador"
+    ],
+    "capital": "San Salvador",
+    "coordinates": [
+      13.83333333,
+      -88.91666666
+    ],
+    "borders": [
+      "GTM",
+      "HND"
+    ],
+    "region": "Americas",
+    "subregion": "Central America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇻",
+    "triviaFact": "El Salvador is Shares land borders with 2 countries, located in Central America, with its capital at San Salvador.",
+    "area": 21041,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SMR",
+    "numericId": "674",
+    "name": "San Marino",
+    "officialName": "Most Serene Republic of San Marino",
+    "aliases": [
+      "Most Serene Republic of San Marino",
+      "Republic of San Marino",
+      "Repubblica di San Marino"
+    ],
+    "capital": "City of San Marino",
+    "coordinates": [
+      43.76666666,
+      12.41666666
+    ],
+    "borders": [
+      "ITA"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇲",
+    "triviaFact": "The world's oldest surviving sovereign state and constitutional republic, founded in 301 AD.",
+    "area": 61,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SOM",
+    "numericId": "706",
+    "name": "Somalia",
+    "officialName": "Federal Republic of Somalia",
+    "aliases": [
+      "Federal Republic of Somalia",
+      "aṣ-Ṣūmāl",
+      "Jamhuuriyadda Federaalka Soomaaliya",
+      "Jumhūriyyat aṣ-Ṣūmāl al-Fiderāliyya"
+    ],
+    "capital": "Mogadishu",
+    "coordinates": [
+      10,
+      49
+    ],
+    "borders": [
+      "DJI",
+      "ETH",
+      "KEN"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇴",
+    "triviaFact": "Somalia is Shares land borders with 3 countries, located in Eastern Africa, with its capital at Mogadishu.",
+    "area": 637657,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SPM",
+    "numericId": "666",
+    "name": "Saint Pierre and Miquelon",
+    "officialName": "Saint Pierre and Miquelon",
+    "aliases": [
+      "Collectivité territoriale de Saint-Pierre-et-Miquelon"
+    ],
+    "capital": "Saint-Pierre",
+    "coordinates": [
+      46.83333333,
+      -56.33333333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇵🇲",
+    "triviaFact": "Saint Pierre and Miquelon is An island or coastal nation with no land borders, located in North America, with its capital at Saint-Pierre.",
+    "area": 242,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SRB",
+    "numericId": "688",
+    "name": "Serbia",
+    "officialName": "Republic of Serbia",
+    "aliases": [
+      "Republic of Serbia",
+      "Srbija",
+      "Republika Srbija",
+      "Србија",
+      "Република Србија"
+    ],
+    "capital": "Belgrade",
+    "coordinates": [
+      44,
+      21
+    ],
+    "borders": [
+      "BIH",
+      "BGR",
+      "HRV",
+      "HUN",
+      "UNK",
+      "MKD",
+      "MNE",
+      "ROU"
+    ],
+    "region": "Europe",
+    "subregion": "Southeast Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇷🇸",
+    "triviaFact": "Serbia is Shares land borders with 8 countries, located in Southeast Europe, with its capital at Belgrade.",
+    "area": 88361,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SSD",
+    "numericId": "728",
+    "name": "South Sudan",
+    "officialName": "Republic of South Sudan",
+    "aliases": [
+      "Republic of South Sudan"
+    ],
+    "capital": "Juba",
+    "coordinates": [
+      7,
+      30
+    ],
+    "borders": [
+      "CAF",
+      "COD",
+      "ETH",
+      "KEN",
+      "SDN",
+      "UGA"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇸",
+    "triviaFact": "South Sudan is Shares land borders with 6 countries, located in Middle Africa, with its capital at Juba.",
+    "area": 619745,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "STP",
+    "numericId": "678",
+    "name": "São Tomé and Príncipe",
+    "officialName": "Democratic Republic of São Tomé and Príncipe",
+    "aliases": [
+      "Democratic Republic of São Tomé and Príncipe",
+      "Sao Tome and Principe",
+      "República Democrática de São Tomé e Príncipe"
+    ],
+    "capital": "São Tomé",
+    "coordinates": [
+      1,
+      7
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇹",
+    "triviaFact": "São Tomé and Príncipe is An island or coastal nation with no land borders, located in Middle Africa, with its capital at São Tomé.",
+    "area": 964,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SUR",
+    "numericId": "740",
+    "name": "Suriname",
+    "officialName": "Republic of Suriname",
+    "aliases": [
+      "Republic of Suriname",
+      "Sarnam",
+      "Sranangron",
+      "Republiek Suriname"
+    ],
+    "capital": "Paramaribo",
+    "coordinates": [
+      4,
+      -56
+    ],
+    "borders": [
+      "BRA",
+      "GUF",
+      "GUY"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇷",
+    "triviaFact": "Suriname is Shares land borders with 3 countries, located in South America, with its capital at Paramaribo.",
+    "area": 163820,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SVK",
+    "numericId": "703",
+    "name": "Slovakia",
+    "officialName": "Slovak Republic",
+    "aliases": [
+      "Slovak Republic",
+      "Slovenská republika"
+    ],
+    "capital": "Bratislava",
+    "coordinates": [
+      48.66666666,
+      19.5
+    ],
+    "borders": [
+      "AUT",
+      "CZE",
+      "HUN",
+      "POL",
+      "UKR"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇰",
+    "triviaFact": "Slovakia is Shares land borders with 5 countries, located in Central Europe, with its capital at Bratislava.",
+    "area": 49037,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SVN",
+    "numericId": "705",
+    "name": "Slovenia",
+    "officialName": "Republic of Slovenia",
+    "aliases": [
+      "Republic of Slovenia",
+      "Republika Slovenija"
+    ],
+    "capital": "Ljubljana",
+    "coordinates": [
+      46.11666666,
+      14.81666666
+    ],
+    "borders": [
+      "AUT",
+      "HRV",
+      "ITA",
+      "HUN"
+    ],
+    "region": "Europe",
+    "subregion": "Central Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇮",
+    "triviaFact": "Slovenia is Shares land borders with 4 countries, located in Central Europe, with its capital at Ljubljana.",
+    "area": 20273,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SWE",
+    "numericId": "752",
+    "name": "Sweden",
+    "officialName": "Kingdom of Sweden",
+    "aliases": [
+      "Kingdom of Sweden",
+      "Konungariket Sverige"
+    ],
+    "capital": "Stockholm",
+    "coordinates": [
+      62,
+      15
+    ],
+    "borders": [
+      "FIN",
+      "NOR"
+    ],
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇪",
+    "triviaFact": "Sweden is Shares land borders with 2 countries, located in Northern Europe, with its capital at Stockholm.",
+    "area": 450295,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SWZ",
+    "numericId": "748",
+    "name": "Eswatini",
+    "officialName": "Kingdom of Eswatini",
+    "aliases": [
+      "Kingdom of Eswatini",
+      "Swaziland",
+      "weSwatini",
+      "Swatini",
+      "Ngwane"
+    ],
+    "capital": "Lobamba",
+    "coordinates": [
+      -26.5,
+      31.5
+    ],
+    "borders": [
+      "MOZ",
+      "ZAF"
+    ],
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇿",
+    "triviaFact": "Eswatini is Shares land borders with 2 countries, located in Southern Africa, with its capital at Lobamba.",
+    "area": 17364,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SXM",
+    "numericId": "534",
+    "name": "Sint Maarten",
+    "officialName": "Sint Maarten",
+    "aliases": [
+      "Sint Maarten (Dutch part)"
+    ],
+    "capital": "Philipsburg",
+    "coordinates": [
+      18.033333,
+      -63.05
+    ],
+    "borders": [
+      "MAF"
+    ],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇽",
+    "triviaFact": "Sint Maarten is Shares land borders with 1 countries, located in Caribbean, with its capital at Philipsburg.",
+    "area": 34,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "SYC",
+    "numericId": "690",
+    "name": "Seychelles",
+    "officialName": "Republic of Seychelles",
+    "aliases": [
+      "Republic of Seychelles",
+      "Repiblik Sesel",
+      "République des Seychelles"
+    ],
+    "capital": "Victoria",
+    "coordinates": [
+      -4.58333333,
+      55.66666666
+    ],
+    "borders": [],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇨",
+    "triviaFact": "Seychelles is An island or coastal nation with no land borders, located in Eastern Africa, with its capital at Victoria.",
+    "area": 452,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "SYR",
+    "numericId": "760",
+    "name": "Syria",
+    "officialName": "Syrian Arab Republic",
+    "aliases": [
+      "Syrian Arab Republic",
+      "Al-Jumhūrīyah Al-ʻArabīyah As-Sūrīyah"
+    ],
+    "capital": "Damascus",
+    "coordinates": [
+      35,
+      38
+    ],
+    "borders": [
+      "IRQ",
+      "ISR",
+      "JOR",
+      "LBN",
+      "TUR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇸🇾",
+    "triviaFact": "Syria is Shares land borders with 5 countries, located in Western Asia, with its capital at Damascus.",
+    "area": 185180,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TCA",
+    "numericId": "796",
+    "name": "Turks and Caicos Islands",
+    "officialName": "Turks and Caicos Islands",
+    "aliases": [],
+    "capital": "Cockburn Town",
+    "coordinates": [
+      21.75,
+      -71.58333333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇨",
+    "triviaFact": "Turks and Caicos Islands is An island or coastal nation with no land borders, located in Caribbean, with its capital at Cockburn Town.",
+    "area": 948,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "TCD",
+    "numericId": "148",
+    "name": "Chad",
+    "officialName": "Republic of Chad",
+    "aliases": [
+      "Republic of Chad",
+      "Tchad",
+      "République du Tchad"
+    ],
+    "capital": "N'Djamena",
+    "coordinates": [
+      15,
+      19
+    ],
+    "borders": [
+      "CMR",
+      "CAF",
+      "LBY",
+      "NER",
+      "NGA",
+      "SDN"
+    ],
+    "region": "Africa",
+    "subregion": "Middle Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇩",
+    "triviaFact": "Chad is Shares land borders with 6 countries, located in Middle Africa, with its capital at N'Djamena.",
+    "area": 1284000,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TGO",
+    "numericId": "768",
+    "name": "Togo",
+    "officialName": "Togolese Republic",
+    "aliases": [
+      "Togolese Republic",
+      "Togolese",
+      "République Togolaise"
+    ],
+    "capital": "Lomé",
+    "coordinates": [
+      8,
+      1.16666666
+    ],
+    "borders": [
+      "BEN",
+      "BFA",
+      "GHA"
+    ],
+    "region": "Africa",
+    "subregion": "Western Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇬",
+    "triviaFact": "Togo is Shares land borders with 3 countries, located in Western Africa, with its capital at Lomé.",
+    "area": 56785,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "THA",
+    "numericId": "764",
+    "name": "Thailand",
+    "officialName": "Kingdom of Thailand",
+    "aliases": [
+      "Kingdom of Thailand",
+      "Prathet",
+      "Thai",
+      "ราชอาณาจักรไทย",
+      "Ratcha Anachak Thai"
+    ],
+    "capital": "Bangkok",
+    "coordinates": [
+      15,
+      100
+    ],
+    "borders": [
+      "MMR",
+      "KHM",
+      "LAO",
+      "MYS"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇭",
+    "triviaFact": "Thailand is Shares land borders with 4 countries, located in South-Eastern Asia, with its capital at Bangkok.",
+    "area": 513120,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TJK",
+    "numericId": "762",
+    "name": "Tajikistan",
+    "officialName": "Republic of Tajikistan",
+    "aliases": [
+      "Republic of Tajikistan",
+      "Toçikiston",
+      "Ҷумҳурии Тоҷикистон",
+      "Çumhuriyi Toçikiston"
+    ],
+    "capital": "Dushanbe",
+    "coordinates": [
+      39,
+      71
+    ],
+    "borders": [
+      "AFG",
+      "CHN",
+      "KGZ",
+      "UZB"
+    ],
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇯",
+    "triviaFact": "Tajikistan is Shares land borders with 4 countries, located in Central Asia, with its capital at Dushanbe.",
+    "area": 143100,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TKL",
+    "numericId": "772",
+    "name": "Tokelau",
+    "officialName": "Tokelau",
+    "aliases": [],
+    "capital": "Fakaofo",
+    "coordinates": [
+      -9,
+      -172
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇰",
+    "triviaFact": "Tokelau is An island or coastal nation with no land borders, located in Polynesia, with its capital at Fakaofo.",
+    "area": 12,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "TKM",
+    "numericId": "795",
+    "name": "Turkmenistan",
+    "officialName": "Turkmenistan",
+    "aliases": [],
+    "capital": "Ashgabat",
+    "coordinates": [
+      40,
+      60
+    ],
+    "borders": [
+      "AFG",
+      "IRN",
+      "KAZ",
+      "UZB"
+    ],
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇲",
+    "triviaFact": "Turkmenistan is Shares land borders with 4 countries, located in Central Asia, with its capital at Ashgabat.",
+    "area": 488100,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TLS",
+    "numericId": "626",
+    "name": "Timor-Leste",
+    "officialName": "Democratic Republic of Timor-Leste",
+    "aliases": [
+      "Democratic Republic of Timor-Leste",
+      "East Timor",
+      "Timor",
+      "República Democrática de Timor-Leste",
+      "Repúblika Demokrátika Timór-Leste"
+    ],
+    "capital": "Dili",
+    "coordinates": [
+      -8.83333333,
+      125.91666666
+    ],
+    "borders": [
+      "IDN"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇱",
+    "triviaFact": "Timor-Leste is Shares land borders with 1 countries, located in South-Eastern Asia, with its capital at Dili.",
+    "area": 14874,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TON",
+    "numericId": "776",
+    "name": "Tonga",
+    "officialName": "Kingdom of Tonga",
+    "aliases": [
+      "Kingdom of Tonga"
+    ],
+    "capital": "Nuku'alofa",
+    "coordinates": [
+      -20,
+      -175
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇴",
+    "triviaFact": "Tonga is An island or coastal nation with no land borders, located in Polynesia, with its capital at Nuku'alofa.",
+    "area": 747,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "TTO",
+    "numericId": "780",
+    "name": "Trinidad and Tobago",
+    "officialName": "Republic of Trinidad and Tobago",
+    "aliases": [
+      "Republic of Trinidad and Tobago"
+    ],
+    "capital": "Port of Spain",
+    "coordinates": [
+      11,
+      -61
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇹",
+    "triviaFact": "Trinidad and Tobago is An island or coastal nation with no land borders, located in Caribbean, with its capital at Port of Spain.",
+    "area": 5130,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "TUN",
+    "numericId": "788",
+    "name": "Tunisia",
+    "officialName": "Tunisian Republic",
+    "aliases": [
+      "Tunisian Republic",
+      "Republic of Tunisia",
+      "al-Jumhūriyyah at-Tūnisiyyah"
+    ],
+    "capital": "Tunis",
+    "coordinates": [
+      34,
+      9
+    ],
+    "borders": [
+      "DZA",
+      "LBY"
+    ],
+    "region": "Africa",
+    "subregion": "Northern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇳",
+    "triviaFact": "Tunisia is Shares land borders with 2 countries, located in Northern Africa, with its capital at Tunis.",
+    "area": 163610,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TUR",
+    "numericId": "792",
+    "name": "Türkiye",
+    "officialName": "Republic of Türkiye",
+    "aliases": [
+      "Republic of Türkiye",
+      "Turkiye",
+      "Republic of Turkey",
+      "Türkiye Cumhuriyeti"
+    ],
+    "capital": "Ankara",
+    "coordinates": [
+      39,
+      35
+    ],
+    "borders": [
+      "ARM",
+      "AZE",
+      "BGR",
+      "GEO",
+      "GRC",
+      "IRN",
+      "IRQ",
+      "SYR"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇷",
+    "triviaFact": "Türkiye is Shares land borders with 8 countries, located in Western Asia, with its capital at Ankara.",
+    "area": 783562,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "TUV",
+    "numericId": "798",
+    "name": "Tuvalu",
+    "officialName": "Tuvalu",
+    "aliases": [],
+    "capital": "Funafuti",
+    "coordinates": [
+      -8,
+      178
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇻",
+    "triviaFact": "Tuvalu is An island or coastal nation with no land borders, located in Polynesia, with its capital at Funafuti.",
+    "area": 26,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "TWN",
+    "numericId": "158",
+    "name": "Taiwan",
+    "officialName": "Republic of China (Taiwan)",
+    "aliases": [
+      "Republic of China (Taiwan)",
+      "Táiwān",
+      "Republic of China",
+      "中華民國",
+      "Zhōnghuá Mínguó"
+    ],
+    "capital": "Taipei",
+    "coordinates": [
+      23.5,
+      121
+    ],
+    "borders": [],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "maritimeNeighbors": [
+      {
+        "id": "CHN",
+        "name": "China",
+        "distanceKm": 160
+      },
+      {
+        "id": "PHL",
+        "name": "Philippines",
+        "distanceKm": 360
+      },
+      {
+        "id": "JPN",
+        "name": "Japan",
+        "distanceKm": 600
+      }
+    ],
+    "flagEmoji": "🇹🇼",
+    "triviaFact": "Taiwan is An island or coastal nation with no land borders, located in Eastern Asia, with its capital at Taipei.",
+    "area": 36193,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "TZA",
+    "numericId": "834",
+    "name": "Tanzania",
+    "officialName": "United Republic of Tanzania",
+    "aliases": [
+      "United Republic of Tanzania",
+      "Tanzania, United Republic of",
+      "Jamhuri ya Muungano wa Tanzania"
+    ],
+    "capital": "Dodoma",
+    "coordinates": [
+      -6,
+      35
+    ],
+    "borders": [
+      "BDI",
+      "COD",
+      "KEN",
+      "MWI",
+      "MOZ",
+      "RWA",
+      "UGA",
+      "ZMB"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇹🇿",
+    "triviaFact": "Tanzania is Shares land borders with 8 countries, located in Eastern Africa, with its capital at Dodoma.",
+    "area": 945087,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "UGA",
+    "numericId": "800",
+    "name": "Uganda",
+    "officialName": "Republic of Uganda",
+    "aliases": [
+      "Republic of Uganda",
+      "Jamhuri ya Uganda"
+    ],
+    "capital": "Kampala",
+    "coordinates": [
+      1,
+      32
+    ],
+    "borders": [
+      "COD",
+      "KEN",
+      "RWA",
+      "SSD",
+      "TZA"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇺🇬",
+    "triviaFact": "Uganda is Shares land borders with 5 countries, located in Eastern Africa, with its capital at Kampala.",
+    "area": 241550,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "UKR",
+    "numericId": "804",
+    "name": "Ukraine",
+    "officialName": "Ukraine",
+    "aliases": [
+      "Ukrayina"
+    ],
+    "capital": "Kyiv",
+    "coordinates": [
+      49,
+      32
+    ],
+    "borders": [
+      "BLR",
+      "HUN",
+      "MDA",
+      "POL",
+      "ROU",
+      "RUS",
+      "SVK"
+    ],
+    "region": "Europe",
+    "subregion": "Eastern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇺🇦",
+    "triviaFact": "Ukraine is Shares land borders with 7 countries, located in Eastern Europe, with its capital at Kyiv.",
+    "area": 603500,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "UMI",
+    "numericId": "581",
+    "name": "United States Minor Outlying Islands",
+    "officialName": "United States Minor Outlying Islands",
+    "aliases": [],
+    "capital": "No official capital",
+    "coordinates": [
+      19.3,
+      166.633333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇺🇲",
+    "triviaFact": "United States Minor Outlying Islands is An island or coastal nation with no land borders, located in North America, with its capital at No official capital.",
+    "area": 34.2,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "URY",
+    "numericId": "858",
+    "name": "Uruguay",
+    "officialName": "Oriental Republic of Uruguay",
+    "aliases": [
+      "Oriental Republic of Uruguay",
+      "República Oriental del Uruguay"
+    ],
+    "capital": "Montevideo",
+    "coordinates": [
+      -33,
+      -56
+    ],
+    "borders": [
+      "ARG",
+      "BRA"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇺🇾",
+    "triviaFact": "Uruguay is Shares land borders with 2 countries, located in South America, with its capital at Montevideo.",
+    "area": 181034,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "USA",
+    "numericId": "840",
+    "name": "United States",
+    "officialName": "United States of America",
+    "aliases": [
+      "United States of America",
+      "USA"
+    ],
+    "capital": "Washington D.C.",
+    "coordinates": [
+      38,
+      -97
+    ],
+    "borders": [
+      "CAN",
+      "MEX"
+    ],
+    "region": "Americas",
+    "subregion": "North America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇺🇸",
+    "triviaFact": "United States is Shares land borders with 2 countries, located in North America, with its capital at Washington D.C..",
+    "area": 9372610,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "UZB",
+    "numericId": "860",
+    "name": "Uzbekistan",
+    "officialName": "Republic of Uzbekistan",
+    "aliases": [
+      "Republic of Uzbekistan",
+      "O‘zbekiston Respublikasi",
+      "Ўзбекистон Республикаси"
+    ],
+    "capital": "Tashkent",
+    "coordinates": [
+      41,
+      64
+    ],
+    "borders": [
+      "AFG",
+      "KAZ",
+      "KGZ",
+      "TJK",
+      "TKM"
+    ],
+    "region": "Asia",
+    "subregion": "Central Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇺🇿",
+    "triviaFact": "Uzbekistan is Shares land borders with 5 countries, located in Central Asia, with its capital at Tashkent.",
+    "area": 447400,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "VAT",
+    "numericId": "336",
+    "name": "Vatican City",
+    "officialName": "Vatican City State",
+    "aliases": [
+      "Vatican City State",
+      "Holy See (Vatican City State)",
+      "Vatican",
+      "Stato della Città del Vaticano"
+    ],
+    "capital": "Vatican City",
+    "coordinates": [
+      41.9,
+      12.45
+    ],
+    "borders": [
+      "ITA"
+    ],
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇦",
+    "triviaFact": "The smallest independent state in the world by both area (0.49 sq km) and population.",
+    "area": 0.44,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "VCT",
+    "numericId": "670",
+    "name": "Saint Vincent and the Grenadines",
+    "officialName": "Saint Vincent and the Grenadines",
+    "aliases": [],
+    "capital": "Kingstown",
+    "coordinates": [
+      13.25,
+      -61.2
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇨",
+    "triviaFact": "Saint Vincent and the Grenadines is An island or coastal nation with no land borders, located in Caribbean, with its capital at Kingstown.",
+    "area": 389,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "VEN",
+    "numericId": "862",
+    "name": "Venezuela",
+    "officialName": "Bolivarian Republic of Venezuela",
+    "aliases": [
+      "Bolivarian Republic of Venezuela",
+      "Venezuela, Bolivarian Republic of",
+      "República Bolivariana de Venezuela"
+    ],
+    "capital": "Caracas",
+    "coordinates": [
+      8,
+      -66
+    ],
+    "borders": [
+      "BRA",
+      "COL",
+      "GUY"
+    ],
+    "region": "Americas",
+    "subregion": "South America",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇪",
+    "triviaFact": "Venezuela is Shares land borders with 3 countries, located in South America, with its capital at Caracas.",
+    "area": 916445,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "VGB",
+    "numericId": "092",
+    "name": "British Virgin Islands",
+    "officialName": "Virgin Islands",
+    "aliases": [
+      "Virgin Islands",
+      "Virgin Islands, British"
+    ],
+    "capital": "Road Town",
+    "coordinates": [
+      18.431383,
+      -64.62305
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇬",
+    "triviaFact": "British Virgin Islands is An island or coastal nation with no land borders, located in Caribbean, with its capital at Road Town.",
+    "area": 151,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "VIR",
+    "numericId": "850",
+    "name": "United States Virgin Islands",
+    "officialName": "Virgin Islands of the United States",
+    "aliases": [
+      "Virgin Islands of the United States",
+      "Virgin Islands, U.S."
+    ],
+    "capital": "Charlotte Amalie",
+    "coordinates": [
+      18.35,
+      -64.933333
+    ],
+    "borders": [],
+    "region": "Americas",
+    "subregion": "Caribbean",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇮",
+    "triviaFact": "United States Virgin Islands is An island or coastal nation with no land borders, located in Caribbean, with its capital at Charlotte Amalie.",
+    "area": 347,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "VNM",
+    "numericId": "704",
+    "name": "Vietnam",
+    "officialName": "Socialist Republic of Vietnam",
+    "aliases": [
+      "Socialist Republic of Vietnam",
+      "Cộng hòa Xã hội chủ nghĩa Việt Nam",
+      "Viet Nam"
+    ],
+    "capital": "Hanoi",
+    "coordinates": [
+      16.16666666,
+      107.83333333
+    ],
+    "borders": [
+      "KHM",
+      "CHN",
+      "LAO"
+    ],
+    "region": "Asia",
+    "subregion": "South-Eastern Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇳",
+    "triviaFact": "Vietnam is Shares land borders with 3 countries, located in South-Eastern Asia, with its capital at Hanoi.",
+    "area": 331212,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "VUT",
+    "numericId": "548",
+    "name": "Vanuatu",
+    "officialName": "Republic of Vanuatu",
+    "aliases": [
+      "Republic of Vanuatu",
+      "Ripablik blong Vanuatu",
+      "République de Vanuatu"
+    ],
+    "capital": "Port Vila",
+    "coordinates": [
+      -16,
+      167
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Melanesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇻🇺",
+    "triviaFact": "Vanuatu is An island or coastal nation with no land borders, located in Melanesia, with its capital at Port Vila.",
+    "area": 12189,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "WLF",
+    "numericId": "876",
+    "name": "Wallis and Futuna",
+    "officialName": "Territory of the Wallis and Futuna Islands",
+    "aliases": [
+      "Territory of the Wallis and Futuna Islands",
+      "Territoire des îles Wallis et Futuna"
+    ],
+    "capital": "Mata-Utu",
+    "coordinates": [
+      -13.3,
+      -176.2
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇼🇫",
+    "triviaFact": "Wallis and Futuna is An island or coastal nation with no land borders, located in Polynesia, with its capital at Mata-Utu.",
+    "area": 142,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "WSM",
+    "numericId": "882",
+    "name": "Samoa",
+    "officialName": "Independent State of Samoa",
+    "aliases": [
+      "Independent State of Samoa",
+      "Malo Saʻoloto Tutoʻatasi o Sāmoa"
+    ],
+    "capital": "Apia",
+    "coordinates": [
+      -13.58333333,
+      -172.33333333
+    ],
+    "borders": [],
+    "region": "Oceania",
+    "subregion": "Polynesia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇼🇸",
+    "triviaFact": "Samoa is An island or coastal nation with no land borders, located in Polynesia, with its capital at Apia.",
+    "area": 2842,
+    "population": 0,
+    "isIsland": true
+  },
+  {
+    "id": "YEM",
+    "numericId": "887",
+    "name": "Yemen",
+    "officialName": "Republic of Yemen",
+    "aliases": [
+      "Republic of Yemen",
+      "Yemeni Republic",
+      "al-Jumhūriyyah al-Yamaniyyah"
+    ],
+    "capital": "Sana'a",
+    "coordinates": [
+      15,
+      48
+    ],
+    "borders": [
+      "OMN",
+      "SAU"
+    ],
+    "region": "Asia",
+    "subregion": "Western Asia",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇾🇪",
+    "triviaFact": "Yemen is Shares land borders with 2 countries, located in Western Asia, with its capital at Sana'a.",
+    "area": 527968,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ZAF",
+    "numericId": "710",
+    "name": "South Africa",
+    "officialName": "Republic of South Africa",
+    "aliases": [
+      "Republic of South Africa",
+      "RSA",
+      "Suid-Afrika"
+    ],
+    "capital": "Pretoria / Bloemfontein / Cape Town",
+    "coordinates": [
+      -29,
+      24
+    ],
+    "borders": [
+      "BWA",
+      "LSO",
+      "MOZ",
+      "NAM",
+      "SWZ",
+      "ZWE"
+    ],
+    "region": "Africa",
+    "subregion": "Southern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇿🇦",
+    "triviaFact": "Has three official capitals: Pretoria (executive), Bloemfontein (judicial), and Cape Town (legislative).",
+    "area": 1221037,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ZMB",
+    "numericId": "894",
+    "name": "Zambia",
+    "officialName": "Republic of Zambia",
+    "aliases": [
+      "Republic of Zambia"
+    ],
+    "capital": "Lusaka",
+    "coordinates": [
+      -15,
+      30
+    ],
+    "borders": [
+      "AGO",
+      "BWA",
+      "COD",
+      "MWI",
+      "MOZ",
+      "NAM",
+      "TZA",
+      "ZWE"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇿🇲",
+    "triviaFact": "Zambia is Shares land borders with 8 countries, located in Eastern Africa, with its capital at Lusaka.",
+    "area": 752612,
+    "population": 0,
+    "isIsland": false
+  },
+  {
+    "id": "ZWE",
+    "numericId": "716",
+    "name": "Zimbabwe",
+    "officialName": "Republic of Zimbabwe",
+    "aliases": [
+      "Republic of Zimbabwe"
+    ],
+    "capital": "Harare",
+    "coordinates": [
+      -20,
+      30
+    ],
+    "borders": [
+      "BWA",
+      "MOZ",
+      "ZAF",
+      "ZMB"
+    ],
+    "region": "Africa",
+    "subregion": "Eastern Africa",
+    "maritimeNeighbors": [],
+    "flagEmoji": "🇿🇼",
+    "triviaFact": "Zimbabwe is Shares land borders with 4 countries, located in Eastern Africa, with its capital at Harare.",
+    "area": 390757,
+    "population": 0,
+    "isIsland": false
+  }
+]

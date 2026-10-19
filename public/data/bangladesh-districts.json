@@ -1,0 +1,1319 @@
+[
+  {
+    "id": "Bagerhat",
+    "shapeId": "16705992B77600989823530",
+    "name": "Bagerhat",
+    "division": "Khulna",
+    "coordinates": [
+      22.1555,
+      89.7109
+    ],
+    "borders": [
+      "Khulna",
+      "Barguna",
+      "Pirojpur",
+      "Satkhira",
+      "Jhalokati"
+    ],
+    "triviaFact": "UNESCO World Heritage site home to the 15th-century Sixty Dome Mosque (Shat Gombuj Masjid).",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Bandarban",
+    "shapeId": "16705992B23463827258150",
+    "name": "Bandarban",
+    "division": "Chittagong",
+    "coordinates": [
+      21.7101,
+      92.2521
+    ],
+    "borders": [
+      "Cox's Bazar",
+      "Chittagong",
+      "Rangamati",
+      "Noakhali"
+    ],
+    "triviaFact": "Renowned for towering peaks, lush green tribal hills, Golden Temple, and Nilgiri.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Barguna",
+    "shapeId": "16705992B13795829103768",
+    "name": "Barguna",
+    "division": "Barisal",
+    "coordinates": [
+      22.1593,
+      90.1364
+    ],
+    "borders": [
+      "Patuakhali",
+      "Pirojpur",
+      "Jhalokati",
+      "Bagerhat",
+      "Bhola"
+    ],
+    "triviaFact": "Barguna is a vibrant district in Barisal Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Barisal",
+    "shapeId": "16705992B66943755852345",
+    "name": "Barisal",
+    "division": "Barisal",
+    "coordinates": [
+      22.8135,
+      90.4358
+    ],
+    "borders": [
+      "Jhalokati",
+      "Shariatpur",
+      "Lakshmipur",
+      "Madaripur",
+      "Pirojpur",
+      "Chandpur",
+      "Bhola",
+      "Gopalganj"
+    ],
+    "triviaFact": "Often hailed as the Venice of Bengal for its vast network of rivers, canals, and floating guava markets.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Bhola",
+    "shapeId": "16705992B37732832620169",
+    "name": "Bhola",
+    "division": "Barisal",
+    "coordinates": [
+      22.3538,
+      90.7395
+    ],
+    "borders": [
+      "Patuakhali",
+      "Noakhali",
+      "Barisal",
+      "Lakshmipur",
+      "Jhalokati",
+      "Barguna"
+    ],
+    "triviaFact": "The only island district in Bangladesh, located in the mouth of the Meghna River.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Bogra",
+    "shapeId": "16705992B87441692505107",
+    "name": "Bogra",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.7959,
+      89.2852
+    ],
+    "borders": [
+      "Joypurhat",
+      "Natore",
+      "Sirajganj",
+      "Naogaon",
+      "Gaibandha",
+      "Jamalpur",
+      "Rajshahi"
+    ],
+    "triviaFact": "Home to Mahasthangarh, the oldest archaeological urban site discovered in Bangladesh.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Brahamanbaria",
+    "shapeId": "16705992B2831557138260",
+    "name": "Brahamanbaria",
+    "division": "Chittagong",
+    "coordinates": [
+      23.9271,
+      91.1258
+    ],
+    "borders": [
+      "Narsingdi",
+      "Comilla",
+      "Habiganj",
+      "Kishoreganj",
+      "Narayanganj"
+    ],
+    "triviaFact": "Brahamanbaria is a vibrant district in Chittagong Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Chandpur",
+    "shapeId": "16705992B70711841490613",
+    "name": "Chandpur",
+    "division": "Chittagong",
+    "coordinates": [
+      23.2324,
+      90.7136
+    ],
+    "borders": [
+      "Shariatpur",
+      "Lakshmipur",
+      "Comilla",
+      "Munshiganj",
+      "Barisal",
+      "Narayanganj",
+      "Madaripur"
+    ],
+    "triviaFact": "Chandpur is a vibrant district in Chittagong Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Chittagong",
+    "shapeId": "16705992B94200136889214",
+    "name": "Chittagong",
+    "division": "Chittagong",
+    "coordinates": [
+      22.4199,
+      91.8399
+    ],
+    "borders": [
+      "Rangamati",
+      "Feni",
+      "Noakhali",
+      "Khagrachhari"
+    ],
+    "triviaFact": "Largest sea port and commercial powerhouse, home to scenic Patenga Beach and Karnaphuli River.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Chuadanga",
+    "shapeId": "16705992B19758630986204",
+    "name": "Chuadanga",
+    "division": "Khulna",
+    "coordinates": [
+      23.5494,
+      88.8246
+    ],
+    "borders": [
+      "Jhenaidah",
+      "Meherpur",
+      "Kushtia",
+      "Jessore",
+      "Magura"
+    ],
+    "triviaFact": "Chuadanga is a vibrant district in Khulna Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Comilla",
+    "shapeId": "16705992B59490572634285",
+    "name": "Comilla",
+    "division": "Chittagong",
+    "coordinates": [
+      23.4458,
+      91.0208
+    ],
+    "borders": [
+      "Chandpur",
+      "Brahamanbaria",
+      "Lakshmipur",
+      "Narayanganj",
+      "Munshiganj",
+      "Feni",
+      "Narsingdi",
+      "Shariatpur"
+    ],
+    "triviaFact": "Historic district famous for Shalban Vihara, archaeological ruins of Mainamati, and sweet Roshomalai.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Cox's Bazar",
+    "shapeId": "16705992B34517682786426",
+    "name": "Cox's Bazar",
+    "division": "Chittagong",
+    "coordinates": [
+      21.5318,
+      92.0699
+    ],
+    "borders": [
+      "Bandarban",
+      "Chittagong",
+      "Rangamati",
+      "Noakhali"
+    ],
+    "triviaFact": "Boasts the world's longest unbroken natural sea sand beach, stretching over 120 kilometers.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Dhaka",
+    "shapeId": "16705992B90744549146712",
+    "name": "Dhaka",
+    "division": "Dhaka",
+    "coordinates": [
+      23.8299,
+      90.2123
+    ],
+    "borders": [
+      "Manikganj",
+      "Gazipur",
+      "Narayanganj",
+      "Munshiganj",
+      "Narsingdi",
+      "Faridpur",
+      "Tangail",
+      "Madaripur",
+      "Shariatpur"
+    ],
+    "triviaFact": "Capital district of Bangladesh and historic seat of the Mughal Subahdar and Nawab of Bengal.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Dinajpur",
+    "shapeId": "16705992B66423446659680",
+    "name": "Dinajpur",
+    "division": "Rangpur",
+    "coordinates": [
+      25.5824,
+      88.842
+    ],
+    "borders": [
+      "Rangpur",
+      "Nilphamari",
+      "Joypurhat",
+      "Thakurgaon"
+    ],
+    "triviaFact": "Dinajpur is a vibrant district in Rangpur Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Faridpur",
+    "shapeId": "16705992B67131385183639",
+    "name": "Faridpur",
+    "division": "Dhaka",
+    "coordinates": [
+      23.456,
+      89.8017
+    ],
+    "borders": [
+      "Gopalganj",
+      "Rajbari",
+      "Narail",
+      "Magura",
+      "Madaripur",
+      "Manikganj",
+      "Dhaka"
+    ],
+    "triviaFact": "Faridpur is a vibrant district in Dhaka Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Feni",
+    "shapeId": "16705992B83268326466345",
+    "name": "Feni",
+    "division": "Chittagong",
+    "coordinates": [
+      22.9813,
+      91.3969
+    ],
+    "borders": [
+      "Noakhali",
+      "Khagrachhari",
+      "Lakshmipur",
+      "Comilla"
+    ],
+    "triviaFact": "Feni is a vibrant district in Chittagong Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Gaibandha",
+    "shapeId": "16705992B74857221285320",
+    "name": "Gaibandha",
+    "division": "Rangpur",
+    "coordinates": [
+      25.3148,
+      89.4468
+    ],
+    "borders": [
+      "Rangpur",
+      "Joypurhat",
+      "Bogra",
+      "Jamalpur"
+    ],
+    "triviaFact": "Gaibandha is a vibrant district in Rangpur Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Gazipur",
+    "shapeId": "16705992B50862305652789",
+    "name": "Gazipur",
+    "division": "Dhaka",
+    "coordinates": [
+      24.0684,
+      90.405
+    ],
+    "borders": [
+      "Dhaka",
+      "Narsingdi",
+      "Narayanganj",
+      "Manikganj",
+      "Tangail",
+      "Munshiganj",
+      "Kishoreganj"
+    ],
+    "triviaFact": "Gazipur is a vibrant district in Dhaka Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Gopalganj",
+    "shapeId": "16705992B87804307332289",
+    "name": "Gopalganj",
+    "division": "Dhaka",
+    "coordinates": [
+      23.1469,
+      89.9155
+    ],
+    "borders": [
+      "Madaripur",
+      "Faridpur",
+      "Narail",
+      "Shariatpur",
+      "Magura",
+      "Pirojpur",
+      "Barisal",
+      "Jhalokati",
+      "Rajbari"
+    ],
+    "triviaFact": "Gopalganj is a vibrant district in Dhaka Division bordered by 9 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Habiganj",
+    "shapeId": "16705992B7772300815487",
+    "name": "Habiganj",
+    "division": "Sylhet",
+    "coordinates": [
+      24.343,
+      91.4214
+    ],
+    "borders": [
+      "Kishoreganj",
+      "Brahamanbaria",
+      "Maulvibazar",
+      "Sunamganj"
+    ],
+    "triviaFact": "Habiganj is a vibrant district in Sylhet Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Jamalpur",
+    "shapeId": "16705992B65705561019803",
+    "name": "Jamalpur",
+    "division": "Mymensingh",
+    "coordinates": [
+      24.9339,
+      89.8967
+    ],
+    "borders": [
+      "Sherpur",
+      "Gaibandha",
+      "Tangail",
+      "Mymensingh",
+      "Sirajganj",
+      "Bogra"
+    ],
+    "triviaFact": "Jamalpur is a vibrant district in Mymensingh Division bordered by 6 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Jessore",
+    "shapeId": "16705992B28022870637862",
+    "name": "Jessore",
+    "division": "Khulna",
+    "coordinates": [
+      23.1153,
+      89.1399
+    ],
+    "borders": [
+      "Jhenaidah",
+      "Magura",
+      "Narail",
+      "Chuadanga"
+    ],
+    "triviaFact": "Jessore is a vibrant district in Khulna Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Jhalokati",
+    "shapeId": "16705992B14602656752780",
+    "name": "Jhalokati",
+    "division": "Barisal",
+    "coordinates": [
+      22.5699,
+      90.1718
+    ],
+    "borders": [
+      "Pirojpur",
+      "Barisal",
+      "Barguna",
+      "Patuakhali",
+      "Bhola",
+      "Bagerhat",
+      "Gopalganj",
+      "Madaripur"
+    ],
+    "triviaFact": "Jhalokati is a vibrant district in Barisal Division bordered by 8 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Jhenaidah",
+    "shapeId": "16705992B77509092527129",
+    "name": "Jhenaidah",
+    "division": "Khulna",
+    "coordinates": [
+      23.4433,
+      89.0273
+    ],
+    "borders": [
+      "Chuadanga",
+      "Jessore",
+      "Magura",
+      "Kushtia",
+      "Meherpur",
+      "Rajbari",
+      "Narail"
+    ],
+    "triviaFact": "Jhenaidah is a vibrant district in Khulna Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Joypurhat",
+    "shapeId": "16705992B2288856744536",
+    "name": "Joypurhat",
+    "division": "Rajshahi",
+    "coordinates": [
+      25.079,
+      89.0796
+    ],
+    "borders": [
+      "Bogra",
+      "Naogaon",
+      "Gaibandha",
+      "Rangpur",
+      "Dinajpur",
+      "Natore"
+    ],
+    "triviaFact": "Joypurhat is a vibrant district in Rajshahi Division bordered by 6 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Khagrachhari",
+    "shapeId": "16705992B35326431749719",
+    "name": "Khagrachhari",
+    "division": "Chittagong",
+    "coordinates": [
+      23.1997,
+      91.8739
+    ],
+    "borders": [
+      "Feni",
+      "Rangamati",
+      "Chittagong",
+      "Comilla"
+    ],
+    "triviaFact": "Khagrachhari is a vibrant district in Chittagong Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Khulna",
+    "shapeId": "16705992B21968895988188",
+    "name": "Khulna",
+    "division": "Khulna",
+    "coordinates": [
+      22.264,
+      89.4297
+    ],
+    "borders": [
+      "Satkhira",
+      "Bagerhat",
+      "Pirojpur",
+      "Barguna"
+    ],
+    "triviaFact": "Gateway to the Sundarbans, the world's largest contiguous mangrove forest and home of the Royal Bengal Tiger.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Kishoreganj",
+    "shapeId": "16705992B82604838368079",
+    "name": "Kishoreganj",
+    "division": "Dhaka",
+    "coordinates": [
+      24.4282,
+      90.9363
+    ],
+    "borders": [
+      "Netrakona",
+      "Habiganj",
+      "Narsingdi",
+      "Brahamanbaria",
+      "Mymensingh",
+      "Sunamganj",
+      "Gazipur"
+    ],
+    "triviaFact": "Kishoreganj is a vibrant district in Dhaka Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Kurigram",
+    "shapeId": "16705992B97164497642406",
+    "name": "Kurigram",
+    "division": "Rangpur",
+    "coordinates": [
+      25.9491,
+      89.6423
+    ],
+    "borders": [
+      "Lalmonirhat",
+      "Rangpur",
+      "Gaibandha",
+      "Nilphamari"
+    ],
+    "triviaFact": "Kurigram is a vibrant district in Rangpur Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Kushtia",
+    "shapeId": "16705992B21124734124900",
+    "name": "Kushtia",
+    "division": "Khulna",
+    "coordinates": [
+      23.8912,
+      89.0304
+    ],
+    "borders": [
+      "Meherpur",
+      "Chuadanga",
+      "Pabna",
+      "Jhenaidah",
+      "Natore",
+      "Rajbari",
+      "Magura"
+    ],
+    "triviaFact": "Kushtia is a vibrant district in Khulna Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Lakshmipur",
+    "shapeId": "16705992B31973889793084",
+    "name": "Lakshmipur",
+    "division": "Chittagong",
+    "coordinates": [
+      22.9496,
+      90.85
+    ],
+    "borders": [
+      "Chandpur",
+      "Noakhali",
+      "Barisal",
+      "Shariatpur",
+      "Comilla",
+      "Feni",
+      "Bhola"
+    ],
+    "triviaFact": "Lakshmipur is a vibrant district in Chittagong Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Lalmonirhat",
+    "shapeId": "16705992B84214314165922",
+    "name": "Lalmonirhat",
+    "division": "Rangpur",
+    "coordinates": [
+      26.1816,
+      89.1626
+    ],
+    "borders": [
+      "Nilphamari",
+      "Kurigram",
+      "Rangpur",
+      "Panchagarh"
+    ],
+    "triviaFact": "Lalmonirhat is a vibrant district in Rangpur Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Madaripur",
+    "shapeId": "16705992B87985099055959",
+    "name": "Madaripur",
+    "division": "Dhaka",
+    "coordinates": [
+      23.2055,
+      90.1594
+    ],
+    "borders": [
+      "Gopalganj",
+      "Shariatpur",
+      "Faridpur",
+      "Munshiganj",
+      "Barisal",
+      "Chandpur",
+      "Narail",
+      "Dhaka",
+      "Jhalokati"
+    ],
+    "triviaFact": "Madaripur is a vibrant district in Dhaka Division bordered by 9 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Magura",
+    "shapeId": "16705992B78415132034426",
+    "name": "Magura",
+    "division": "Khulna",
+    "coordinates": [
+      23.4246,
+      89.4026
+    ],
+    "borders": [
+      "Rajbari",
+      "Narail",
+      "Jhenaidah",
+      "Faridpur",
+      "Jessore",
+      "Gopalganj",
+      "Chuadanga",
+      "Kushtia"
+    ],
+    "triviaFact": "Magura is a vibrant district in Khulna Division bordered by 8 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Manikganj",
+    "shapeId": "16705992B79131283702140",
+    "name": "Manikganj",
+    "division": "Dhaka",
+    "coordinates": [
+      23.8807,
+      89.9834
+    ],
+    "borders": [
+      "Dhaka",
+      "Tangail",
+      "Rajbari",
+      "Gazipur",
+      "Faridpur",
+      "Munshiganj",
+      "Narayanganj"
+    ],
+    "triviaFact": "Manikganj is a vibrant district in Dhaka Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Maulvibazar",
+    "shapeId": "16705992B62450131352427",
+    "name": "Maulvibazar",
+    "division": "Dhaka",
+    "coordinates": [
+      24.4407,
+      91.924
+    ],
+    "borders": [
+      "Sylhet",
+      "Habiganj",
+      "Sunamganj",
+      "Brahamanbaria"
+    ],
+    "triviaFact": "Maulvibazar is a vibrant district in Dhaka Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Meherpur",
+    "shapeId": "16705992B11914188004823",
+    "name": "Meherpur",
+    "division": "Khulna",
+    "coordinates": [
+      23.7926,
+      88.6799
+    ],
+    "borders": [
+      "Chuadanga",
+      "Kushtia",
+      "Jhenaidah"
+    ],
+    "triviaFact": "Meherpur is a vibrant district in Khulna Division bordered by 3 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Munshiganj",
+    "shapeId": "16705992B99884694518333",
+    "name": "Munshiganj",
+    "division": "Dhaka",
+    "coordinates": [
+      23.5337,
+      90.4514
+    ],
+    "borders": [
+      "Narayanganj",
+      "Shariatpur",
+      "Dhaka",
+      "Chandpur",
+      "Madaripur",
+      "Narsingdi",
+      "Gazipur",
+      "Comilla",
+      "Manikganj"
+    ],
+    "triviaFact": "Munshiganj is a vibrant district in Dhaka Division bordered by 9 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Mymensingh",
+    "shapeId": "16705992B54511139091050",
+    "name": "Mymensingh",
+    "division": "Mymensingh",
+    "coordinates": [
+      24.7456,
+      90.4722
+    ],
+    "borders": [
+      "Netrakona",
+      "Sherpur",
+      "Kishoreganj",
+      "Jamalpur",
+      "Tangail"
+    ],
+    "triviaFact": "Mymensingh is a vibrant district in Mymensingh Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Naogaon",
+    "shapeId": "16705992B34203284467157",
+    "name": "Naogaon",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.865,
+      88.7668
+    ],
+    "borders": [
+      "Rajshahi",
+      "Joypurhat",
+      "Nawabganj",
+      "Bogra",
+      "Natore"
+    ],
+    "triviaFact": "Naogaon is a vibrant district in Rajshahi Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Narail",
+    "shapeId": "16705992B56503274196630",
+    "name": "Narail",
+    "division": "Khulna",
+    "coordinates": [
+      23.13,
+      89.5701
+    ],
+    "borders": [
+      "Magura",
+      "Gopalganj",
+      "Faridpur",
+      "Jessore",
+      "Rajbari",
+      "Madaripur",
+      "Jhenaidah"
+    ],
+    "triviaFact": "Narail is a vibrant district in Khulna Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Narayanganj",
+    "shapeId": "16705992B28796010313895",
+    "name": "Narayanganj",
+    "division": "Dhaka",
+    "coordinates": [
+      23.7656,
+      90.5798
+    ],
+    "borders": [
+      "Narsingdi",
+      "Munshiganj",
+      "Gazipur",
+      "Dhaka",
+      "Comilla",
+      "Chandpur",
+      "Shariatpur",
+      "Brahamanbaria",
+      "Manikganj"
+    ],
+    "triviaFact": "Narayanganj is a vibrant district in Dhaka Division bordered by 9 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Narsingdi",
+    "shapeId": "16705992B95243043657125",
+    "name": "Narsingdi",
+    "division": "Dhaka",
+    "coordinates": [
+      23.9726,
+      90.7314
+    ],
+    "borders": [
+      "Narayanganj",
+      "Gazipur",
+      "Brahamanbaria",
+      "Kishoreganj",
+      "Munshiganj",
+      "Dhaka",
+      "Comilla"
+    ],
+    "triviaFact": "Narsingdi is a vibrant district in Dhaka Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Natore",
+    "shapeId": "16705992B43065208682222",
+    "name": "Natore",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.4294,
+      89.089
+    ],
+    "borders": [
+      "Rajshahi",
+      "Bogra",
+      "Pabna",
+      "Sirajganj",
+      "Kushtia",
+      "Naogaon",
+      "Joypurhat"
+    ],
+    "triviaFact": "Natore is a vibrant district in Rajshahi Division bordered by 7 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Nawabganj",
+    "shapeId": "16705992B76725860359822",
+    "name": "Nawabganj",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.7929,
+      88.3412
+    ],
+    "borders": [
+      "Naogaon",
+      "Rajshahi",
+      "Joypurhat",
+      "Natore"
+    ],
+    "triviaFact": "Nawabganj is a vibrant district in Rajshahi Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Netrakona",
+    "shapeId": "16705992B47191620994273",
+    "name": "Netrakona",
+    "division": "Mymensingh",
+    "coordinates": [
+      24.8969,
+      90.8424
+    ],
+    "borders": [
+      "Mymensingh",
+      "Kishoreganj",
+      "Sunamganj"
+    ],
+    "triviaFact": "Netrakona is a vibrant district in Mymensingh Division bordered by 3 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Nilphamari",
+    "shapeId": "16705992B74406959438199",
+    "name": "Nilphamari",
+    "division": "Rangpur",
+    "coordinates": [
+      25.9982,
+      88.9309
+    ],
+    "borders": [
+      "Lalmonirhat",
+      "Dinajpur",
+      "Rangpur",
+      "Panchagarh",
+      "Thakurgaon"
+    ],
+    "triviaFact": "Nilphamari is a vibrant district in Rangpur Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Noakhali",
+    "shapeId": "16705992B96773862439533",
+    "name": "Noakhali",
+    "division": "Chittagong",
+    "coordinates": [
+      22.6702,
+      91.1272
+    ],
+    "borders": [
+      "Lakshmipur",
+      "Feni",
+      "Bhola"
+    ],
+    "triviaFact": "Noakhali is a vibrant district in Chittagong Division bordered by 3 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Pabna",
+    "shapeId": "16705992B46384724638491",
+    "name": "Pabna",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.1189,
+      89.3771
+    ],
+    "borders": [
+      "Sirajganj",
+      "Kushtia",
+      "Natore",
+      "Rajbari"
+    ],
+    "triviaFact": "Pabna is a vibrant district in Rajshahi Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Panchagarh",
+    "shapeId": "16705992B66536058617583",
+    "name": "Panchagarh",
+    "division": "Rangpur",
+    "coordinates": [
+      26.313,
+      88.5602
+    ],
+    "borders": [
+      "Thakurgaon",
+      "Nilphamari",
+      "Lalmonirhat"
+    ],
+    "triviaFact": "Northernmost district where on clear days the snow-capped peak of Kanchenjunga is visible.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Patuakhali",
+    "shapeId": "16705992B49808088196813",
+    "name": "Patuakhali",
+    "division": "Barisal",
+    "coordinates": [
+      22.1079,
+      90.397
+    ],
+    "borders": [
+      "Barguna",
+      "Bhola",
+      "Jhalokati",
+      "Pirojpur"
+    ],
+    "triviaFact": "Patuakhali is a vibrant district in Barisal Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Pirojpur",
+    "shapeId": "16705992B46028667424095",
+    "name": "Pirojpur",
+    "division": "Barisal",
+    "coordinates": [
+      22.5499,
+      90.0159
+    ],
+    "borders": [
+      "Jhalokati",
+      "Barguna",
+      "Barisal",
+      "Bagerhat",
+      "Patuakhali",
+      "Gopalganj"
+    ],
+    "triviaFact": "Pirojpur is a vibrant district in Barisal Division bordered by 6 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Rajbari",
+    "shapeId": "16705992B48875454234518",
+    "name": "Rajbari",
+    "division": "Dhaka",
+    "coordinates": [
+      23.6918,
+      89.563
+    ],
+    "borders": [
+      "Magura",
+      "Faridpur",
+      "Manikganj",
+      "Pabna",
+      "Narail",
+      "Kushtia",
+      "Jhenaidah",
+      "Gopalganj"
+    ],
+    "triviaFact": "Rajbari is a vibrant district in Dhaka Division bordered by 8 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Rajshahi",
+    "shapeId": "16705992B51815672792645",
+    "name": "Rajshahi",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.4953,
+      88.71
+    ],
+    "borders": [
+      "Naogaon",
+      "Natore",
+      "Nawabganj",
+      "Bogra"
+    ],
+    "triviaFact": "The Silk City of Bangladesh, celebrated along the banks of the Padma River for its world-class sweet mangoes.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Rangamati",
+    "shapeId": "16705992B35610473312733",
+    "name": "Rangamati",
+    "division": "Chittagong",
+    "coordinates": [
+      22.8242,
+      92.3426
+    ],
+    "borders": [
+      "Khagrachhari",
+      "Chittagong",
+      "Feni",
+      "Bandarban"
+    ],
+    "triviaFact": "Picturesque hill district surrounding the sprawling turquoise waters of Kaptai Lake.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Rangpur",
+    "shapeId": "16705992B34260815515495",
+    "name": "Rangpur",
+    "division": "Rangpur",
+    "coordinates": [
+      25.6114,
+      89.2193
+    ],
+    "borders": [
+      "Gaibandha",
+      "Dinajpur",
+      "Nilphamari",
+      "Kurigram",
+      "Joypurhat",
+      "Lalmonirhat"
+    ],
+    "triviaFact": "Rangpur is a vibrant district in Rangpur Division bordered by 6 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Satkhira",
+    "shapeId": "16705992B60176987344662",
+    "name": "Satkhira",
+    "division": "Khulna",
+    "coordinates": [
+      22.1915,
+      89.1632
+    ],
+    "borders": [
+      "Khulna",
+      "Bagerhat",
+      "Jessore",
+      "Pirojpur"
+    ],
+    "triviaFact": "Satkhira is a vibrant district in Khulna Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": true
+  },
+  {
+    "id": "Shariatpur",
+    "shapeId": "16705992B92388810566131",
+    "name": "Shariatpur",
+    "division": "Dhaka",
+    "coordinates": [
+      23.2285,
+      90.4327
+    ],
+    "borders": [
+      "Madaripur",
+      "Chandpur",
+      "Munshiganj",
+      "Barisal",
+      "Lakshmipur",
+      "Gopalganj",
+      "Narayanganj",
+      "Comilla",
+      "Dhaka"
+    ],
+    "triviaFact": "Shariatpur is a vibrant district in Dhaka Division bordered by 9 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Sherpur",
+    "shapeId": "16705992B90842308963557",
+    "name": "Sherpur",
+    "division": "Mymensingh",
+    "coordinates": [
+      25.0712,
+      90.0882
+    ],
+    "borders": [
+      "Jamalpur",
+      "Mymensingh",
+      "Gaibandha",
+      "Tangail"
+    ],
+    "triviaFact": "Sherpur is a vibrant district in Mymensingh Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Sirajganj",
+    "shapeId": "16705992B55394931042500",
+    "name": "Sirajganj",
+    "division": "Rajshahi",
+    "coordinates": [
+      24.4226,
+      89.5449
+    ],
+    "borders": [
+      "Pabna",
+      "Tangail",
+      "Bogra",
+      "Natore",
+      "Jamalpur"
+    ],
+    "triviaFact": "Sirajganj is a vibrant district in Rajshahi Division bordered by 5 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Sunamganj",
+    "shapeId": "16705992B61059366245275",
+    "name": "Sunamganj",
+    "division": "Sylhet",
+    "coordinates": [
+      24.8965,
+      91.3729
+    ],
+    "borders": [
+      "Netrakona",
+      "Habiganj",
+      "Sylhet",
+      "Kishoreganj"
+    ],
+    "triviaFact": "Sunamganj is a vibrant district in Sylhet Division bordered by 4 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Sylhet",
+    "shapeId": "16705992B47932115867008",
+    "name": "Sylhet",
+    "division": "Sylhet",
+    "coordinates": [
+      24.9119,
+      91.977
+    ],
+    "borders": [
+      "Maulvibazar",
+      "Sunamganj",
+      "Habiganj",
+      "Netrakona"
+    ],
+    "triviaFact": "Known as the Land of Two Leaves and a Bud, famous for verdant tea gardens and the shrine of Hazrat Shah Jalal.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Tangail",
+    "shapeId": "16705992B55867939933107",
+    "name": "Tangail",
+    "division": "Dhaka",
+    "coordinates": [
+      24.3414,
+      89.9904
+    ],
+    "borders": [
+      "Sirajganj",
+      "Manikganj",
+      "Gazipur",
+      "Dhaka",
+      "Jamalpur",
+      "Mymensingh"
+    ],
+    "triviaFact": "Tangail is a vibrant district in Dhaka Division bordered by 6 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  },
+  {
+    "id": "Thakurgaon",
+    "shapeId": "16705992B44482388014877",
+    "name": "Thakurgaon",
+    "division": "Rangpur",
+    "coordinates": [
+      25.9699,
+      88.3616
+    ],
+    "borders": [
+      "Panchagarh",
+      "Nilphamari",
+      "Dinajpur"
+    ],
+    "triviaFact": "Thakurgaon is a vibrant district in Rangpur Division bordered by 3 neighboring districts.",
+    "flagEmoji": "🇧🇩",
+    "isCoastal": false
+  }
+]
