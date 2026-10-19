@@ -507,7 +507,12 @@ export const useGameStore = create<GameState>()(
       }) => {
         const state = get();
         let updatedStats = state.stats;
-        if (state.guesses.length > 0 || (state.mode === "blitz" && state.blitzTimeLeft < 90)) {
+        if (
+          state.gameStatus === "playing" &&
+          (state.guesses.length > 0 ||
+            state.unlockedHints > 0 ||
+            (state.mode === "blitz" && state.blitzTimeLeft < 90))
+        ) {
           updatedStats = {
             ...state.stats,
             played: state.stats.played + 1,
@@ -589,7 +594,15 @@ export const useGameStore = create<GameState>()(
     }),
     {
       name: "borderline-game-storage",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() =>
+        typeof window !== "undefined"
+          ? window.localStorage
+          : {
+              getItem: () => null,
+              setItem: () => {},
+              removeItem: () => {},
+            },
+      ),
       version: 3,
       migrate: (persistedState: unknown, version: number) => {
         const state = (persistedState || {}) as Record<string, unknown>;

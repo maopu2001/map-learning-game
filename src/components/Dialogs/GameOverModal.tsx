@@ -23,7 +23,12 @@ import {
   Flame,
 } from "lucide-react";
 
-export function GameOverModal() {
+interface GameOverModalProps {
+  onPlayAgain?: () => void;
+  onChangeMode?: () => void;
+}
+
+export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps = {}) {
   const scope = useGameStore((s) => s.scope);
   const gameStatus = useGameStore((s) => s.gameStatus);
   const targetCountry = useGameStore((s) => s.targetCountry);
@@ -84,6 +89,7 @@ export function GameOverModal() {
       nextStreakRound();
     } else {
       resetGame();
+      if (onPlayAgain) onPlayAgain();
     }
   };
 
@@ -190,6 +196,20 @@ export function GameOverModal() {
             )}
           </Button>
         </DialogFooter>
+
+        {onChangeMode && (
+          <div className="pt-2 text-center">
+            <button
+              onClick={() => {
+                setOpen(false);
+                onChangeMode();
+              }}
+              className="text-2xs text-slate-400 hover:text-white underline underline-offset-4 cursor-pointer font-mono"
+            >
+              Change Mode or Threat Level ↗
+            </button>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

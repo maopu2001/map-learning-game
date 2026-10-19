@@ -162,7 +162,7 @@ export function BangladeshMap() {
     <div
       ref={mapContainerRef}
       onMouseLeave={() => setInspectedDistrict(null)}
-      className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-125px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+      className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-80px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
     >
       <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
