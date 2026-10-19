@@ -27,6 +27,8 @@ import {
   ShieldAlert,
   Menu,
   X,
+  Lock,
+  AlertTriangle,
 } from "lucide-react";
 
 export function Header() {
@@ -39,12 +41,53 @@ export function Header() {
   const stats = useGameStore((s) => s.stats);
   const resetGame = useGameStore((s) => s.resetGame);
   const blitzTimeLeft = useGameStore((s) => s.blitzTimeLeft);
+  const guesses = useGameStore((s) => s.guesses);
+  const gameStatus = useGameStore((s) => s.gameStatus);
+  const unlockedHints = useGameStore((s) => s.unlockedHints);
+  const forfeitAndSwitch = useGameStore((s) => s.forfeitAndSwitch);
 
   const [statsOpen, setStatsOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [abandonPending, setAbandonPending] = useState<{
+    type: "difficulty" | "mode" | "reset";
+    value?: string;
+  } | null>(null);
 
   const isGameRoute = pathname === "/bangladesh" || pathname === "/world";
+
+  const isMissionActive =
+    isGameRoute &&
+    gameStatus === "playing" &&
+    (guesses.length > 0 ||
+      unlockedHints > 0 ||
+      (mode === "blitz" && blitzTimeLeft < 90));
+
+  const handleDifficultyClick = (val: string) => {
+    if (val === difficulty) return;
+    if (isMissionActive) {
+      setAbandonPending({ type: "difficulty", value: val });
+    } else {
+      setDifficulty(val as GameDifficulty);
+    }
+  };
+
+  const handleModeClick = (val: string) => {
+    if (val === mode) return;
+    if (isMissionActive) {
+      setAbandonPending({ type: "mode", value: val });
+    } else {
+      setMode(val as GameMode);
+    }
+  };
+
+  const handleResetClick = () => {
+    if (isMissionActive) {
+      setAbandonPending({ type: "reset" });
+    } else {
+      resetGame();
+    }
+  };
 
   return (
     <>
@@ -129,30 +172,50 @@ export function Header() {
 
           {/* Controls: Difficulty + Game Mode + Actions */}
           <div className="flex flex-wrap items-center justify-between w-full md:w-auto gap-2">
+            {/* Active Mission Lock Badge */}
+            {isMissionActive && (
+              <div
+                title="Active mission in progress. Changing parameters counts as a forfeit."
+                className="hidden xl:flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-mono tracking-tight"
+              >
+                <Lock className="size-2.5 animate-pulse" />
+                <span>IN MISSION</span>
+              </div>
+            )}
+
             {/* Difficulty Pills */}
             <Tabs
               value={difficulty}
-              onValueChange={(val) => setDifficulty(val as GameDifficulty)}
+              onValueChange={handleDifficultyClick}
               className="w-auto"
             >
               <TabsList className="bg-black/40 border border-white/[0.06] h-7 p-0.5 rounded-lg">
                 <TabsTrigger
                   value="easy"
-                  className="text-[10px] px-2 py-0.5 rounded-md data-[state=active]:bg-emerald-600 data-[state=active]:text-white font-medium"
+                  className="text-[10px] px-2 py-0.5 rounded-md data-[state=active]:bg-emerald-600 data-[state=active]:text-white font-medium flex items-center gap-1"
                 >
-                  Easy
+                  {isMissionActive && difficulty !== "easy" && (
+                    <Lock className="size-2 text-slate-400" />
+                  )}
+                  <span>Easy</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="normal"
-                  className="text-[10px] px-2 py-0.5 rounded-md data-[state=active]:bg-amber-600 data-[state=active]:text-white font-medium"
+                  className="text-[10px] px-2 py-0.5 rounded-md data-[state=active]:bg-amber-600 data-[state=active]:text-white font-medium flex items-center gap-1"
                 >
-                  Normal
+                  {isMissionActive && difficulty !== "normal" && (
+                    <Lock className="size-2 text-slate-400" />
+                  )}
+                  <span>Normal</span>
                 </TabsTrigger>
                 <TabsTrigger
                   value="hard"
-                  className="text-[10px] px-2 py-0.5 rounded-md data-[state=active]:bg-rose-600 data-[state=active]:text-white font-medium"
+                  className="text-[10px] px-2 py-0.5 rounded-md data-[state=active]:bg-rose-600 data-[state=active]:text-white font-medium flex items-center gap-1"
                 >
-                  Hard
+                  {isMissionActive && difficulty !== "hard" && (
+                    <Lock className="size-2 text-slate-400" />
+                  )}
+                  <span>Hard</span>
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -161,18 +224,36 @@ export function Header() {
             {isGameRoute && (
               <Tabs
                 value={mode}
-                onValueChange={(val) => setMode(val as GameMode)}
+                onValueChange={handleModeClick}
                 className="w-auto"
               >
                 <TabsList className="bg-black/40 border border-white/[0.06] h-7 p-0.5 rounded-lg">
-                  <TabsTrigger value="daily" className="text-[10px] px-2 py-0.5 rounded-md">
-                    Daily
+                  <TabsTrigger
+                    value="daily"
+                    className="text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1"
+                  >
+                    {isMissionActive && mode !== "daily" && (
+                      <Lock className="size-2 text-slate-400" />
+                    )}
+                    <span>Daily</span>
                   </TabsTrigger>
-                  <TabsTrigger value="streak" className="text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1">
+                  <TabsTrigger
+                    value="streak"
+                    className="text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1"
+                  >
+                    {isMissionActive && mode !== "streak" && (
+                      <Lock className="size-2 text-slate-400" />
+                    )}
                     <Flame className="size-2.5 text-amber-500" />
                     <span>{scope === "bangladesh" ? "Hop" : "Border"}</span>
                   </TabsTrigger>
-                  <TabsTrigger value="blitz" className="text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1">
+                  <TabsTrigger
+                    value="blitz"
+                    className="text-[10px] px-2 py-0.5 rounded-md flex items-center gap-1"
+                  >
+                    {isMissionActive && mode !== "blitz" && (
+                      <Lock className="size-2 text-slate-400" />
+                    )}
                     <Timer className="size-2.5 text-sky-400" />
                     <span>Blitz</span>
                   </TabsTrigger>
@@ -224,9 +305,9 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={resetGame}
-                  title="New Recon Round"
-                  aria-label="New Recon Round"
+                  onClick={handleResetClick}
+                  title={isMissionActive ? "Abandon & Restart Mission" : "New Recon Round"}
+                  aria-label={isMissionActive ? "Abandon & Restart Mission" : "New Recon Round"}
                   className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06]"
                 >
                   <RotateCcw className="size-3.5" />
@@ -292,6 +373,101 @@ export function Header() {
           </div>
         )}
       </header>
+
+      {/* Abandon Mission Confirmation Dialog */}
+      <Dialog
+        open={Boolean(abandonPending)}
+        onOpenChange={(open) => {
+          if (!open) setAbandonPending(null);
+        }}
+      >
+        <DialogContent className="sm:max-w-md bg-[#0a0f1d] border border-amber-500/30 text-white rounded-2xl shadow-2xl backdrop-blur-xl">
+          <DialogHeader className="space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="size-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                <AlertTriangle className="size-4" />
+              </div>
+              <DialogTitle className="text-base font-bold text-white">
+                Abandon Active Mission?
+              </DialogTitle>
+            </div>
+            <DialogDescription className="text-xs text-slate-400 leading-relaxed">
+              You are currently engaged in an active mission. Changing game parameters or resetting mid-round counts as an immediate forfeit to preserve fair records.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="rounded-xl bg-black/40 border border-white/[0.06] p-3 text-xs space-y-2 my-2">
+            <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.06]">
+              <span className="text-slate-400">Current Progress:</span>
+              <span className="font-semibold text-slate-200">
+                {guesses.length} {guesses.length === 1 ? "guess" : "guesses"} logged
+              </span>
+            </div>
+
+            {mode === "streak" && stats.streak > 0 && (
+              <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.06]">
+                <span className="text-amber-400 flex items-center gap-1">
+                  <Flame className="size-3" /> Streak at Risk:
+                </span>
+                <span className="font-bold text-amber-300">
+                  {stats.streak} {stats.streak === 1 ? "win" : "wins"} (resets to 0)
+                </span>
+              </div>
+            )}
+
+            {mode === "blitz" && blitzTimeLeft < 90 && (
+              <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.06]">
+                <span className="text-sky-400 flex items-center gap-1">
+                  <Timer className="size-3" /> Blitz Timer:
+                </span>
+                <span className="font-bold text-sky-300">
+                  {blitzTimeLeft}s remaining
+                </span>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between pt-0.5 text-[11px]">
+              <span className="text-slate-400">Requested Action:</span>
+              <span className="font-medium text-sky-400">
+                {abandonPending?.type === "difficulty" &&
+                  `Switch to ${abandonPending.value?.toUpperCase()} Difficulty`}
+                {abandonPending?.type === "mode" &&
+                  `Switch to ${abandonPending.value?.toUpperCase()} Mode`}
+                {abandonPending?.type === "reset" && "Forfeit & Restart Mission"}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end gap-2 pt-1">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setAbandonPending(null)}
+              className="text-xs h-8 border-slate-700 hover:bg-slate-800 text-slate-200"
+            >
+              Keep Playing
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => {
+                if (!abandonPending) return;
+                if (abandonPending.type === "difficulty") {
+                  forfeitAndSwitch({ difficulty: abandonPending.value as GameDifficulty });
+                } else if (abandonPending.type === "mode") {
+                  forfeitAndSwitch({ mode: abandonPending.value as GameMode });
+                } else if (abandonPending.type === "reset") {
+                  forfeitAndSwitch({ reset: true });
+                }
+                setAbandonPending(null);
+              }}
+              className="text-xs h-8 bg-rose-600 hover:bg-rose-500 text-white font-medium shadow-md shadow-rose-950/40"
+            >
+              Forfeit & Switch
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Career Record Modal */}
       <Dialog open={statsOpen} onOpenChange={setStatsOpen}>
@@ -365,7 +541,7 @@ export function Header() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
                 <div className="p-2 rounded-lg bg-black/50 border border-emerald-500/20">
                   <strong className="text-emerald-400">🟢 Easy (8 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Full territory inspection. Opening division/continent hint active.</p>
+                  <p className="text-slate-400 mt-1">Full territory inspection. 8 guesses allowed. Clues available on demand.</p>
                 </div>
                 <div className="p-2 rounded-lg bg-black/50 border border-amber-500/20">
                   <strong className="text-amber-400">🟡 Normal (6 Guesses)</strong>

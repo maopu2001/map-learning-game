@@ -293,7 +293,13 @@ export function WorldMap() {
                 </div>
                 {targetCountry && (
                   <div className="text-[10px] text-sky-400 font-semibold pt-1 border-t border-slate-800">
-                    Hint 1: Continent: {targetCountry.region}
+                    {difficulty === "easy" || unlockedHints >= 1 ? (
+                      `Hint 1: Continent: ${targetCountry.region}`
+                    ) : (
+                      <span className="text-slate-500 font-normal">
+                        Hint 1: 🔒 Locked (Unlock in Clues drawer)
+                      </span>
+                    )}
                   </div>
                 )}
               </div>

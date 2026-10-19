@@ -90,6 +90,11 @@ export interface GameState {
   revealExtraNeighbor: () => void;
   nextStreakRound: () => void;
   resetGame: () => void;
+  forfeitAndSwitch: (target: {
+    difficulty?: GameDifficulty;
+    mode?: GameMode;
+    reset?: boolean;
+  }) => void;
   tickBlitzTimer: () => void;
 }
 
@@ -216,7 +221,7 @@ export const useGameStore = create<GameState>()(
           targetDistrict: nextTargetDistrict,
           recentTargetIds: nextRecent,
           guesses: [],
-          unlockedHints: state.difficulty === "easy" ? 1 : 0,
+          unlockedHints: 0,
           extraNeighborsRevealed: 0,
           gameStatus: "playing",
           blitzTimeLeft: 90,
@@ -226,10 +231,54 @@ export const useGameStore = create<GameState>()(
       setDifficulty: (difficulty: GameDifficulty) => {
         const state = get();
         if (state.difficulty === difficulty) return;
+
+        let nextTargetCountry = state.targetCountry;
+        let nextTargetDistrict = state.targetDistrict;
+        let nextRecent = state.recentTargetIds;
+
+        if (state.scope === "bangladesh") {
+          if (state.mode === "daily") {
+            nextTargetDistrict = getDailyDistrict(
+              BANGLADESH_DISTRICTS,
+              getTodayDateStr(),
+            );
+          } else {
+            nextTargetDistrict = pickNextInDistanceRange(
+              state.targetDistrict,
+              BANGLADESH_DISTRICTS,
+              BD_DIST_MIN_KM,
+              BD_DIST_MAX_KM,
+              state.recentTargetIds,
+            );
+          }
+          nextRecent = [...state.recentTargetIds, nextTargetDistrict.id].slice(
+            -15,
+          );
+        } else {
+          if (state.mode === "daily") {
+            nextTargetCountry = getDailyCountry(COUNTRIES, getTodayDateStr());
+          } else {
+            const eligible = COUNTRIES.filter((c) => c.area > 5000);
+            nextTargetCountry = pickNextInDistanceRange(
+              state.targetCountry,
+              eligible,
+              WORLD_DIST_MIN_KM,
+              WORLD_DIST_MAX_KM,
+              state.recentTargetIds,
+            );
+          }
+          nextRecent = [...state.recentTargetIds, nextTargetCountry.id].slice(
+            -15,
+          );
+        }
+
         set({
           difficulty,
+          targetCountry: nextTargetCountry,
+          targetDistrict: nextTargetDistrict,
+          recentTargetIds: nextRecent,
           guesses: [],
-          unlockedHints: difficulty === "easy" ? 1 : 0,
+          unlockedHints: 0,
           extraNeighborsRevealed: 0,
           gameStatus: "playing",
           blitzTimeLeft: 90,
@@ -354,7 +403,6 @@ export const useGameStore = create<GameState>()(
 
       nextStreakRound: () => {
         const state = get();
-        const initialHints = state.difficulty === "easy" ? 1 : 0;
         if (state.scope === "bangladesh") {
           const nextDistrict = pickNextInDistanceRange(
             state.targetDistrict,
@@ -369,7 +417,7 @@ export const useGameStore = create<GameState>()(
               -15,
             ),
             guesses: [],
-            unlockedHints: initialHints,
+            unlockedHints: 0,
             extraNeighborsRevealed: 0,
             gameStatus: "playing",
           });
@@ -388,7 +436,7 @@ export const useGameStore = create<GameState>()(
               -15,
             ),
             guesses: [],
-            unlockedHints: initialHints,
+            unlockedHints: 0,
             extraNeighborsRevealed: 0,
             gameStatus: "playing",
           });
@@ -397,7 +445,6 @@ export const useGameStore = create<GameState>()(
 
       resetGame: () => {
         const state = get();
-        const initialHints = state.difficulty === "easy" ? 1 : 0;
         if (state.scope === "bangladesh") {
           let nextTarget = state.targetDistrict;
           let nextRecent = state.recentTargetIds;
@@ -420,7 +467,7 @@ export const useGameStore = create<GameState>()(
             targetDistrict: nextTarget,
             recentTargetIds: nextRecent,
             guesses: [],
-            unlockedHints: initialHints,
+            unlockedHints: 0,
             extraNeighborsRevealed: 0,
             gameStatus: "playing",
             blitzTimeLeft: 90,
@@ -445,12 +492,81 @@ export const useGameStore = create<GameState>()(
             targetCountry: nextTarget,
             recentTargetIds: nextRecent,
             guesses: [],
-            unlockedHints: initialHints,
+            unlockedHints: 0,
             extraNeighborsRevealed: 0,
             gameStatus: "playing",
             blitzTimeLeft: 90,
           });
         }
+      },
+
+      forfeitAndSwitch: (target: {
+        difficulty?: GameDifficulty;
+        mode?: GameMode;
+        reset?: boolean;
+      }) => {
+        const state = get();
+        let updatedStats = state.stats;
+        if (state.guesses.length > 0 || (state.mode === "blitz" && state.blitzTimeLeft < 90)) {
+          updatedStats = {
+            ...state.stats,
+            played: state.stats.played + 1,
+            streak: 0,
+          };
+        }
+
+        const nextDifficulty = target.difficulty ?? state.difficulty;
+        const nextMode = target.mode ?? state.mode;
+
+        let nextTargetCountry = state.targetCountry;
+        let nextTargetDistrict = state.targetDistrict;
+        let nextRecent = state.recentTargetIds;
+
+        if (state.scope === "bangladesh") {
+          if (nextMode === "daily") {
+            nextTargetDistrict = getDailyDistrict(
+              BANGLADESH_DISTRICTS,
+              getTodayDateStr(),
+            );
+          } else {
+            nextTargetDistrict = pickNextInDistanceRange(
+              state.targetDistrict,
+              BANGLADESH_DISTRICTS,
+              BD_DIST_MIN_KM,
+              BD_DIST_MAX_KM,
+              state.recentTargetIds,
+            );
+          }
+          nextRecent = [...state.recentTargetIds, nextTargetDistrict.id].slice(-15);
+        } else {
+          if (nextMode === "daily") {
+            nextTargetCountry = getDailyCountry(COUNTRIES, getTodayDateStr());
+          } else {
+            const eligible = COUNTRIES.filter((c) => c.area > 5000);
+            nextTargetCountry = pickNextInDistanceRange(
+              state.targetCountry,
+              eligible,
+              WORLD_DIST_MIN_KM,
+              WORLD_DIST_MAX_KM,
+              state.recentTargetIds,
+            );
+          }
+          nextRecent = [...state.recentTargetIds, nextTargetCountry.id].slice(-15);
+        }
+
+        set({
+          difficulty: nextDifficulty,
+          mode: nextMode,
+          targetCountry: nextTargetCountry,
+          targetDistrict: nextTargetDistrict,
+          recentTargetIds: nextRecent,
+          guesses: [],
+          unlockedHints: 0,
+          extraNeighborsRevealed: 0,
+          gameStatus: "playing",
+          blitzTimeLeft: 90,
+          stats: updatedStats,
+        });
       },
 
       tickBlitzTimer: () => {
