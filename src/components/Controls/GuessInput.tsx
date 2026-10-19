@@ -102,7 +102,7 @@ export function GuessInput() {
             className="text-sm font-medium"
           />
           {query.length > 0 && (
-            <div className="absolute right-3 top-2.5 flex items-center gap-1 text-[11px] font-mono text-slate-300 bg-white/[0.06] border border-white/[0.08] px-2 py-0.5 rounded-md pointer-events-none">
+            <div className="absolute right-3 top-2.5 flex items-center gap-1 text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md pointer-events-none">
               <span>Submit</span>
               <CornerDownLeft className="size-3 text-sky-400" />
             </div>
@@ -126,14 +126,14 @@ export function GuessInput() {
                         key={d.id}
                         value={d.name}
                         onSelect={() => handleSelectDistrict(d)}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-white/[0.06] hover:text-white cursor-pointer transition-colors"
+                        className="flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
                           <span className="text-lg">{d.flagEmoji}</span>
                           <span className="font-semibold text-xs sm:text-sm text-white">
                             {d.name}
                           </span>
-                          <span className="text-[11px] text-slate-400 font-mono">
+                          <span className="text-xs text-slate-400 font-mono">
                             ({d.division} Div)
                           </span>
                         </div>
@@ -166,17 +166,17 @@ export function GuessInput() {
                         key={c.id}
                         value={c.name}
                         onSelect={() => handleSelectCountry(c)}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-white/[0.06] hover:text-white cursor-pointer transition-colors"
+                        className="flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
                           <span className="text-lg">{c.flagEmoji}</span>
                           <span className="font-semibold text-xs sm:text-sm text-white">
                             {c.name}
                           </span>
-                          <span className="text-[11px] text-slate-400 font-mono">
+                          <span className="text-xs text-slate-400 font-mono">
                             ({c.id})
                           </span>
-                          <span className="text-[11px] text-slate-500 hidden sm:inline font-mono">
+                          <span className="text-xs text-slate-500 hidden sm:inline font-mono">
                             {c.region}
                           </span>
                         </div>

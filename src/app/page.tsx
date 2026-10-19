@@ -76,10 +76,10 @@ function TaglineReveal() {
   return (
     <section
       ref={containerRef}
-      className="py-16 sm:py-24 border-y border-white/[0.06] bg-[#0c101c]/40"
+      className="py-16 sm:py-24 border-y border-white/5 bg-[#0c101c]/40"
     >
       <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
-        <span className="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold">
+        <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
           Pedagogical Philosophy
         </span>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-snug sm:leading-tight">
@@ -88,7 +88,7 @@ function TaglineReveal() {
             return (
               <span
                 key={idx}
-                className="inline-block mx-1 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
+                className="inline-block mx-1 transition-all duration-700 ease-spring"
                 style={{
                   color: isRevealed ? "#ffffff" : "rgba(255, 255, 255, 0.25)",
                   transform: isRevealed ? "translateY(0)" : "translateY(2px)",
@@ -125,19 +125,19 @@ function TriangulationDemo() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto rounded-2xl border border-white/[0.08] bg-[#0c101c] p-4 sm:p-5 shadow-2xl space-y-4">
-      <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+    <div className="w-full max-w-xl mx-auto rounded-2xl border border-white/10 bg-[#0c101c] p-4 sm:p-5 shadow-2xl space-y-4">
+      <div className="flex items-center justify-between border-b border-white/5 pb-3">
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
           <h3 className="text-xs font-bold uppercase tracking-wider text-white">
             Live Triangulation Radar Demo
           </h3>
         </div>
-        <span className="text-[10px] text-slate-400">Click a test launch site</span>
+        <span className="text-2xs text-slate-400">Click a test launch site</span>
       </div>
 
       {/* Mini Radar Screen */}
-      <div className="relative w-full h-44 rounded-xl border border-white/[0.06] bg-[#070a12] overflow-hidden flex items-center justify-center">
+      <div className="relative w-full h-44 rounded-xl border border-white/5 bg-[#070a12] overflow-hidden flex items-center justify-center">
         {/* Radar Rings */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="size-32 rounded-full border border-sky-500/10" />
@@ -152,7 +152,7 @@ function TriangulationDemo() {
         >
           <div className="size-6 rounded-full border border-amber-400/80 animate-ping" />
           <div className="size-3 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50" />
-          <span className="absolute top-4 text-[9px] font-mono text-amber-300 font-bold whitespace-nowrap">
+          <span className="absolute top-4 text-3xs font-mono text-amber-300 font-bold whitespace-nowrap">
             Secret Target
           </span>
         </div>
@@ -179,7 +179,7 @@ function TriangulationDemo() {
             style={{ left: `${guess.x}%`, top: `${guess.y}%` }}
           >
             <div className="size-3.5 rounded-full bg-sky-500 ring-2 ring-white" />
-            <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] font-bold text-white whitespace-nowrap bg-black/80 px-1 rounded">
+            <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-3xs font-bold text-white whitespace-nowrap bg-black/80 px-1 rounded">
               {guess.name}
             </span>
           </div>
@@ -197,7 +197,7 @@ function TriangulationDemo() {
               className={`p-2 rounded-xl text-xs font-semibold border transition-all ${
                 isSelected
                   ? "bg-sky-600 border-sky-400 text-white shadow-md shadow-sky-950/60"
-                  : "bg-white/[0.03] border-white/[0.06] text-slate-300 hover:bg-white/[0.08] hover:text-white"
+                  : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
               }`}
             >
               {pt.name}
@@ -208,7 +208,7 @@ function TriangulationDemo() {
 
       {/* Telemetry Output */}
       {distanceKm !== null ? (
-        <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs font-mono">
+        <div className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs font-mono">
           <span className="text-slate-400">Telemetry Vector:</span>
           <span className="font-bold text-sky-300 flex items-center gap-1.5">
             <span>{distanceKm} km away</span>
@@ -216,7 +216,7 @@ function TriangulationDemo() {
           </span>
         </div>
       ) : (
-        <div className="text-center text-[11px] text-slate-500 py-1 font-mono">
+        <div className="text-center text-xs text-slate-500 py-1 font-mono">
           Select any district above to calculate vector coordinates
         </div>
       )}
@@ -258,7 +258,7 @@ function FAQSection() {
   return (
     <section className="space-y-4 max-w-3xl mx-auto">
       <div className="text-center space-y-1">
-        <span className="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold">
+        <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
           Frequently Answered
         </span>
         <h2 className="text-2xl sm:text-3xl font-black text-white">Tactical FAQ</h2>
@@ -270,7 +270,7 @@ function FAQSection() {
           return (
             <div
               key={idx}
-              className="rounded-xl border border-white/[0.08] bg-[#0c101c] overflow-hidden transition-all duration-200"
+              className="rounded-xl border border-white/10 bg-[#0c101c] overflow-hidden transition-all duration-200"
             >
               <button
                 onClick={() => setOpenIdx(isOpen ? null : idx)}
@@ -284,7 +284,7 @@ function FAQSection() {
                 />
               </button>
               {isOpen && (
-                <div className="px-4 pb-4 text-xs text-slate-400 leading-relaxed border-t border-white/[0.04] pt-3">
+                <div className="px-4 pb-4 text-xs text-slate-400 leading-relaxed border-t border-white/5 pt-3">
                   {faq.a}
                 </div>
               )}
@@ -308,14 +308,14 @@ export default function HomePage() {
         <section className="text-center space-y-6 pt-4 sm:pt-8">
           <Badge
             variant="outline"
-            className="border-sky-500/30 bg-sky-500/10 text-sky-400 px-3 py-1 text-[11px] rounded-full inline-flex items-center gap-1.5 font-mono"
+            className="border-sky-500/30 bg-sky-500/10 text-sky-400 px-3 py-1 text-xs rounded-full inline-flex items-center gap-1.5 font-mono"
           >
             <Sparkles className="size-3.5" /> Client-Side Cartography Arena v2.0
           </Badge>
 
-          {/* Heading with left-to-right #FFFFFF -> #9B9B9B gradient, max 680px */}
-          <div className="max-w-[680px] mx-auto">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] bg-gradient-to-r from-white to-[#9B9B9B] bg-clip-text text-transparent">
+          {/* Heading with left-to-right #FFFFFF -> #9B9B9B gradient */}
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
               Deduce any territory through spatial triangulation
             </h1>
           </div>
@@ -336,7 +336,7 @@ export default function HomePage() {
             <Link href="/world">
               <Button
                 variant="outline"
-                className="bg-white/[0.04] hover:bg-white/[0.08] text-white font-semibold text-sm sm:text-base px-5 py-2.5 h-auto rounded-xl gap-2 border-white/10"
+                className="bg-white/5 hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-5 py-2.5 h-auto rounded-xl gap-2 border-white/10"
               >
                 <Globe2 className="size-4 text-sky-400" />
                 <span>Explore World Map 🌍</span>
@@ -378,7 +378,7 @@ export default function HomePage() {
         {/* ================================================================= */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold">
+            <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
               Tactical Workflow
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">How Deduction Works</h2>
@@ -388,7 +388,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-5 rounded-2xl border border-white/[0.08] bg-[#0c101c] space-y-3">
+            <div className="p-5 rounded-2xl border border-white/10 bg-[#0c101c] space-y-3">
               <div className="size-9 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center font-bold font-mono text-sm">
                 01
               </div>
@@ -398,7 +398,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl border border-white/[0.08] bg-[#0c101c] space-y-3">
+            <div className="p-5 rounded-2xl border border-white/10 bg-[#0c101c] space-y-3">
               <div className="size-9 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-bold font-mono text-sm">
                 02
               </div>
@@ -408,7 +408,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl border border-white/[0.08] bg-[#0c101c] space-y-3">
+            <div className="p-5 rounded-2xl border border-white/10 bg-[#0c101c] space-y-3">
               <div className="size-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm">
                 03
               </div>
@@ -425,7 +425,7 @@ export default function HomePage() {
         {/* ================================================================= */}
         <section className="space-y-6">
           <div className="text-center space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-semibold">
+            <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
               Cartographic Arenas
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">Choose Your Operational Realm</h2>
@@ -433,11 +433,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {/* Bangladesh Card */}
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0c101c] p-5 flex flex-col justify-between hover:border-emerald-500/40 transition-colors shadow-xl">
+            <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-5 flex flex-col justify-between hover:border-emerald-500/40 transition-colors shadow-xl">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-3xl">🇧🇩</span>
-                  <Badge variant="outline" className="text-[10px] border-emerald-500/30 text-emerald-300 bg-emerald-500/10">
+                  <Badge variant="outline" className="text-2xs border-emerald-500/30 text-emerald-300 bg-emerald-500/10">
                     National Hub
                   </Badge>
                 </div>
@@ -445,7 +445,7 @@ export default function HomePage() {
                 <p className="text-xs text-slate-400 leading-relaxed">
                   All 64 districts across 8 divisions. Master riverine networks, district headquarter borders, and regional layout.
                 </p>
-                <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/[0.06]">
+                <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
                     <span>Daily Mystery District</span>
@@ -472,11 +472,11 @@ export default function HomePage() {
             </div>
 
             {/* World Card */}
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0c101c] p-5 flex flex-col justify-between hover:border-sky-500/40 transition-colors shadow-xl">
+            <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-5 flex flex-col justify-between hover:border-sky-500/40 transition-colors shadow-xl">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <Globe2 className="size-8 text-sky-400" />
-                  <Badge variant="outline" className="text-[10px] border-sky-500/30 text-sky-300 bg-sky-500/10">
+                  <Badge variant="outline" className="text-2xs border-sky-500/30 text-sky-300 bg-sky-500/10">
                     Global Hub
                   </Badge>
                 </div>
@@ -484,7 +484,7 @@ export default function HomePage() {
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Every sovereign nation on Earth. Microstate zoom auto-magnification, continent clues, and nearest neighbor tethers.
                 </p>
-                <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/[0.06]">
+                <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-sky-400 shrink-0" />
                     <span>Global Daily Puzzle</span>
@@ -511,11 +511,11 @@ export default function HomePage() {
             </div>
 
             {/* Free Atlas Card */}
-            <div className="rounded-2xl border border-white/[0.08] bg-[#0c101c] p-5 flex flex-col justify-between hover:border-purple-500/40 transition-colors shadow-xl">
+            <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-5 flex flex-col justify-between hover:border-purple-500/40 transition-colors shadow-xl">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <BookOpen className="size-8 text-purple-400" />
-                  <Badge variant="outline" className="text-[10px] border-purple-500/30 text-purple-300 bg-purple-500/10">
+                  <Badge variant="outline" className="text-2xs border-purple-500/30 text-purple-300 bg-purple-500/10">
                     Study Desk
                   </Badge>
                 </div>
@@ -523,7 +523,7 @@ export default function HomePage() {
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Zero time limits or guess caps. Click any territory to open full demographic dossiers with interactive pan-to-border buttons.
                 </p>
-                <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/[0.06]">
+                <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-purple-400 shrink-0" />
                     <span>Territorial Dossier Cards</span>
@@ -556,7 +556,7 @@ export default function HomePage() {
         {/* ================================================================= */}
         <section className="space-y-4">
           <div className="text-center space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-amber-400 font-semibold">
+            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold">
               Gameplay Tiers
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">Three Calibrated Difficulties</h2>
@@ -594,7 +594,7 @@ export default function HomePage() {
         {/* ================================================================= */}
         {/* SECTION 7: RISK REVERSAL & FINAL CTA BANNER                       */}
         {/* ================================================================= */}
-        <section className="p-8 sm:p-12 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#0c101c] to-[#070a12] text-center space-y-5 shadow-2xl">
+        <section className="p-8 sm:p-12 rounded-3xl border border-white/10 bg-gradient-to-b from-[#0c101c] to-[#070a12] text-center space-y-5 shadow-2xl">
           <div className="space-y-2 max-w-lg mx-auto">
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
               Ready to test your spatial perception?
@@ -616,7 +616,7 @@ export default function HomePage() {
       </main>
 
       {/* Semantic Footer */}
-      <footer className="border-t border-white/[0.06] py-8 text-center text-xs text-slate-500 space-y-2 mt-16 bg-[#070a12]">
+      <footer className="border-t border-white/5 py-8 text-center text-xs text-slate-500 space-y-2 mt-16 bg-[#070a12]">
         <p>Borderline • Tactical Cartography Arena & Educational Geography Platform</p>
         <p className="text-slate-600">Built with Next.js 16, React 19, Tailwind CSS & TopoJSON Cartography</p>
       </footer>

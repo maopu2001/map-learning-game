@@ -162,9 +162,9 @@ export function BangladeshMap() {
     <div
       ref={mapContainerRef}
       onMouseLeave={() => setInspectedDistrict(null)}
-      className="relative w-full h-[450px] sm:h-[540px] lg:h-[calc(100vh-125px)] min-h-[480px] rounded-2xl overflow-hidden border border-white/[0.08] bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+      className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-125px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
       {/* Floating Zoom Controls (Top Right) */}
       <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 backdrop-blur-md shadow-lg">
@@ -206,31 +206,31 @@ export function BangladeshMap() {
           <MapPin className="size-3.5 text-emerald-400" />
           <span>Bangladesh • 64 Districts</span>
         </div>
-        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] px-2.5 py-1 rounded-full backdrop-blur-md">
+        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs px-2.5 py-1 rounded-full backdrop-blur-md">
           <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
           <span>Target Border Highlighted</span>
         </div>
       </div>
 
       {/* Floating Reconnaissance Window (Top Right next to zoom controls) */}
-      <div className="absolute top-4 right-16 z-20 w-64 max-w-[calc(100%-80px)] rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
+      <div className="absolute top-4 right-16 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
         {difficulty === "hard" &&
         (!inspectedDistrict ||
           (!activeNeighbors.includes(inspectedDistrict.name) &&
             !guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()))) ? (
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between pb-1 border-b border-rose-500/30 text-[11px]">
+            <div className="flex items-center justify-between pb-1 border-b border-rose-500/30 text-xs">
               <span className="font-semibold text-rose-400 flex items-center gap-1.5">
                 <ShieldAlert className="size-3.5" /> Hard Mode
               </span>
-              <span className="text-[10px] text-slate-400">Blind Recon</span>
+              <span className="text-2xs text-slate-400">Blind Recon</span>
             </div>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-400 leading-relaxed">
               No territory info is shown on hover or click. Unlock Hint 2 & 3 to
               reveal adjacent border districts!
             </p>
             {lastGuess && (
-              <div className="text-[11px] flex items-center justify-between pt-1 border-t border-slate-800">
+              <div className="text-xs flex items-center justify-between pt-1 border-t border-slate-800">
                 <span className="text-slate-400">Last Guess:</span>
                 <span className="font-semibold text-white">
                   {lastGuess.country.name} ({lastGuess.distanceKm}km)
@@ -247,16 +247,16 @@ export function BangladeshMap() {
                   <span className="font-bold text-amber-400 text-sm flex items-center gap-1.5">
                     <Target className="size-4" /> Mystery Target
                   </span>
-                  <span className="text-[10px] text-amber-300 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-500/30">
+                  <span className="text-2xs text-amber-300 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-500/30">
                     Active Target
                   </span>
                 </div>
-                <div className="text-[11px] text-slate-300 leading-relaxed">
+                <div className="text-xs text-slate-300 leading-relaxed">
                   Highlighted amber border. Deduce this mystery district using
                   distance clues!
                 </div>
                 {targetDistrict && (
-                  <div className="text-[10px] text-emerald-400 font-semibold pt-1 border-t border-slate-800">
+                  <div className="text-2xs text-emerald-400 font-semibold pt-1 border-t border-slate-800">
                     {difficulty === "easy" || unlockedHints >= 1 ? (
                       `Hint 1: Division: ${targetDistrict.division}`
                     ) : (
@@ -273,15 +273,15 @@ export function BangladeshMap() {
               gameStatus === "playing" ? (
               /* Normal mode: only highlighted adjacent borders show info! */
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-[11px]">
+                <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
                   <span className="font-semibold text-slate-400">
                     Unrevealed District
                   </span>
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-2xs text-slate-500">
                     Normal Mode
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Only highlighted adjacent borders and guesses show info.
                   Unlock neighbor clues or make guesses to reveal!
                 </p>
@@ -293,7 +293,7 @@ export function BangladeshMap() {
                   <span className="font-bold text-white text-sm flex items-center gap-1.5">
                     {inspectedDistrict.name}
                   </span>
-                  <span className="text-[10px] text-slate-400">
+                  <span className="text-2xs text-slate-400">
                     {inspectedDistrict.division} Division
                   </span>
                 </div>
@@ -302,7 +302,7 @@ export function BangladeshMap() {
                 {guessedDistrictsMap.has(
                   inspectedDistrict.name.toLowerCase(),
                 ) ? (
-                  <div className="text-[11px] pt-1.5 space-y-1">
+                  <div className="text-xs pt-1.5 space-y-1">
                     {guessedDistrictsMap.get(
                       inspectedDistrict.name.toLowerCase(),
                     )?.isCorrect ? (
@@ -338,11 +338,11 @@ export function BangladeshMap() {
                     )}
                   </div>
                 ) : activeNeighbors.includes(inspectedDistrict.name) ? (
-                  <div className="text-[11px] text-sky-300 font-semibold pt-1">
+                  <div className="text-xs text-sky-300 font-semibold pt-1">
                     Adjacent Border to Secret Target
                   </div>
                 ) : (
-                  <div className="text-[10px] text-slate-400 pt-1 flex items-center justify-between">
+                  <div className="text-2xs text-slate-400 pt-1 flex items-center justify-between">
                     <span>Unexplored Territory</span>
                     <span className="text-slate-500">Type below to guess</span>
                   </div>
@@ -352,7 +352,7 @@ export function BangladeshMap() {
           </div>
         ) : (
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-[11px]">
+            <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
               <span className="text-slate-400 font-medium flex items-center gap-1">
                 <Target className="size-3 text-amber-400" /> Target Territory
               </span>
@@ -360,7 +360,7 @@ export function BangladeshMap() {
             </div>
 
             {lastGuess ? (
-              <div className="text-[11px] flex items-center justify-between">
+              <div className="text-xs flex items-center justify-between">
                 <span className="text-slate-400">Last:</span>
                 <span className="font-semibold text-white">
                   {lastGuess.country.name} ({lastGuess.distanceKm}km{" "}
@@ -368,13 +368,13 @@ export function BangladeshMap() {
                 </span>
               </div>
             ) : (
-              <div className="text-[11px] text-slate-400">
+              <div className="text-xs text-slate-400">
                 Click or hover any district to inspect info
               </div>
             )}
 
             {/* Helper status */}
-            <div className="text-[10px] text-slate-500 pt-1 border-t border-slate-800/80 flex items-center justify-between">
+            <div className="text-2xs text-slate-500 pt-1 border-t border-slate-800/80 flex items-center justify-between">
               <span>Map Mode:</span>
               <span className="text-slate-400">
                 Clean Cartography (Dots Only)
@@ -401,7 +401,7 @@ export function BangladeshMap() {
                 }`}
               />
             ))}
-            <span className="text-[10px] text-slate-500 ml-auto">
+            <span className="text-2xs text-slate-500 ml-auto">
               {guesses.length}/6
             </span>
           </div>
@@ -694,7 +694,7 @@ export function BangladeshMap() {
       </ComposableMap>
 
       {/* Map Legend Footer */}
-      <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-900/85 px-3 py-1.5 rounded-xl border border-slate-800 text-[11px] text-slate-300 backdrop-blur-md shadow-lg">
+      <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-900/85 px-3 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300 backdrop-blur-md shadow-lg">
         <div className="flex items-center gap-1.5">
           <span className="size-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
           <span>Target Border</span>

@@ -41,13 +41,13 @@ export function ClueDrawer() {
       : null;
 
   return (
-    <div className="w-full rounded-2xl border border-white/[0.08] bg-[#0c101c] p-4 sm:p-4.5 shadow-xl space-y-3.5">
+    <div className="w-full rounded-2xl border border-white/10 bg-[#0c101c] p-4 sm:p-5 shadow-xl space-y-3.5">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/[0.06] pb-2.5">
+      <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
         <div className="flex items-center gap-2">
           <Lightbulb className="size-4 text-amber-400" />
           <h3 className="text-sm font-semibold text-white">Hints & Clues</h3>
-          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-mono">
+          <span className="text-2xs text-slate-400 uppercase tracking-wider font-mono">
             ({isBD ? "Bangladesh" : "World"} • {difficulty})
           </span>
         </div>
@@ -68,7 +68,7 @@ export function ClueDrawer() {
         {/* BD: Division name (e.g. "Division: Dhaka") */}
         {/* World: Continent name (e.g. "Continent: Asia") */}
         {/* ============================================================ */}
-        <div className="flex flex-col justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40 min-h-[120px]">
+        <div className="flex flex-col justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40 min-h-28">
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
               {isBD ? (
@@ -104,12 +104,12 @@ export function ClueDrawer() {
               size="sm"
               onClick={unlockNextHint}
               disabled={gameStatus !== "playing"}
-              className="mt-3 text-[11px] h-7 w-full border-slate-700 hover:bg-slate-800 text-sky-300"
+              className="mt-3 text-xs h-7 w-full border-slate-700 hover:bg-slate-800 text-sky-300"
             >
               Reveal
             </Button>
           ) : (
-            <div className="text-[10px] text-emerald-400 font-medium mt-2">
+            <div className="text-2xs text-emerald-400 font-medium mt-2">
               ✓ Unlocked
             </div>
           )}
@@ -122,7 +122,7 @@ export function ClueDrawer() {
         {/* World Easy/Normal: National flag */}
         {/* World Hard: 1st neighboring border country name (Highlighted on map) */}
         {/* ============================================================ */}
-        <div className="flex flex-col justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40 min-h-[120px]">
+        <div className="flex flex-col justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40 min-h-28">
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
               {difficulty === "hard" ? (
@@ -154,7 +154,7 @@ export function ClueDrawer() {
                       <span className="text-amber-300 font-bold">
                         1st Border: {targetDistrict.borders[0] || "None"}
                       </span>
-                      <p className="text-[10px] text-sky-400 font-normal">
+                      <p className="text-2xs text-sky-400 font-normal">
                         Highlighted on map
                       </p>
                     </div>
@@ -165,7 +165,7 @@ export function ClueDrawer() {
                         {hasLandBorders ? "1st Border" : "Nearest Country"}:{" "}
                         {neighbor1Country?.name || "None"}
                       </span>
-                      <p className="text-[10px] text-sky-400 font-normal">
+                      <p className="text-2xs text-sky-400 font-normal">
                         Highlighted on map
                       </p>
                     </div>
@@ -196,16 +196,16 @@ export function ClueDrawer() {
               size="sm"
               onClick={unlockNextHint}
               disabled={gameStatus !== "playing"}
-              className="mt-3 text-[11px] h-7 w-full border-slate-700 hover:bg-slate-800 text-amber-300"
+              className="mt-3 text-xs h-7 w-full border-slate-700 hover:bg-slate-800 text-amber-300"
             >
               Reveal
             </Button>
           ) : unlockedHints >= 2 ? (
-            <div className="text-[10px] text-emerald-400 font-medium mt-2">
+            <div className="text-2xs text-emerald-400 font-medium mt-2">
               ✓ Unlocked
             </div>
           ) : (
-            <span className="text-[10px] text-slate-500 mt-2 text-center">
+            <span className="text-2xs text-slate-500 mt-2 text-center">
               Locked (Unlock Hint 1)
             </span>
           )}
@@ -218,7 +218,7 @@ export function ClueDrawer() {
         {/* World Easy/Normal: Starting letter (e.g. "Starts with: J") */}
         {/* World Hard: 2nd neighboring border country name (Highlighted on map) */}
         {/* ============================================================ */}
-        <div className="flex flex-col justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40 min-h-[120px]">
+        <div className="flex flex-col justify-between p-3 rounded-xl border border-slate-800/80 bg-slate-950/40 min-h-28">
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
               {difficulty === "hard" ? (
@@ -253,7 +253,7 @@ export function ClueDrawer() {
                           targetDistrict.borders[0] ||
                           "None"}
                       </span>
-                      <p className="text-[10px] text-sky-400 font-normal">
+                      <p className="text-2xs text-sky-400 font-normal">
                         Highlighted on map
                       </p>
                     </div>
@@ -264,7 +264,7 @@ export function ClueDrawer() {
                         {hasLandBorders ? "2nd Border" : "2nd Nearest Country"}:{" "}
                         {neighbor2Country?.name || "None"}
                       </span>
-                      <p className="text-[10px] text-sky-400 font-normal">
+                      <p className="text-2xs text-sky-400 font-normal">
                         Highlighted on map
                       </p>
                     </div>
@@ -293,16 +293,16 @@ export function ClueDrawer() {
               size="sm"
               onClick={unlockNextHint}
               disabled={gameStatus !== "playing"}
-              className="mt-3 text-[11px] h-7 w-full border-slate-700 hover:bg-slate-800 text-emerald-300"
+              className="mt-3 text-xs h-7 w-full border-slate-700 hover:bg-slate-800 text-emerald-300"
             >
               Reveal
             </Button>
           ) : unlockedHints >= 3 ? (
-            <div className="text-[10px] text-emerald-400 font-medium mt-2">
+            <div className="text-2xs text-emerald-400 font-medium mt-2">
               ✓ Unlocked
             </div>
           ) : (
-            <span className="text-[10px] text-slate-500 mt-2 text-center">
+            <span className="text-2xs text-slate-500 mt-2 text-center">
               Locked (Unlock Hint 2)
             </span>
           )}

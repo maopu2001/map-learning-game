@@ -192,7 +192,7 @@ export default function ExplorePage() {
 
       <main className="flex-1 w-full px-2 sm:px-3 py-2 sm:py-2.5 space-y-2.5">
         {/* Banner */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl border border-white/[0.08] bg-[#0c101c] shadow-lg">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl border border-white/10 bg-[#0c101c] shadow-lg">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="p-1.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
@@ -215,7 +215,7 @@ export default function ExplorePage() {
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-2 border transition-all ${
                 realm === "bangladesh"
                   ? "bg-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-950/50"
-                  : "bg-black/40 border-white/[0.06] text-slate-400 hover:text-white"
+                  : "bg-black/40 border-white/5 text-slate-400 hover:text-white"
               }`}
             >
               <span>🇧🇩</span> Bangladesh (64)
@@ -225,7 +225,7 @@ export default function ExplorePage() {
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-2 border transition-all ${
                 realm === "world"
                   ? "bg-sky-600 border-sky-500 text-white shadow-lg shadow-sky-950/50"
-                  : "bg-black/40 border-white/[0.06] text-slate-400 hover:text-white"
+                  : "bg-black/40 border-white/5 text-slate-400 hover:text-white"
               }`}
             >
               <Globe2 className="size-3.5 text-sky-400" /> World (195)
@@ -240,17 +240,17 @@ export default function ExplorePage() {
             {/* Division Filters (Bangladesh) */}
             {realm === "bangladesh" && (
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-                <span className="text-[11px] font-mono text-slate-400 font-medium shrink-0 flex items-center gap-1 mr-1">
+                <span className="text-xs font-mono text-slate-400 font-medium shrink-0 flex items-center gap-1 mr-1">
                   <Layers className="size-3 text-emerald-400" /> Division:
                 </span>
                 {BD_DIVISIONS.map((div) => (
                   <button
                     key={div}
                     onClick={() => setDivisionFilter(div)}
-                    className={`px-2.5 py-1 rounded-lg shrink-0 text-[11px] font-medium border transition-colors ${
+                    className={`px-2.5 py-1 rounded-lg shrink-0 text-xs font-medium border transition-colors ${
                       divisionFilter === div
                         ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                        : "bg-black/40 text-slate-400 border-white/[0.06] hover:text-white"
+                        : "bg-black/40 text-slate-400 border-white/5 hover:text-white"
                     }`}
                   >
                     {div}
@@ -262,9 +262,9 @@ export default function ExplorePage() {
             {/* Map Box */}
             <div
               ref={mapContainerRef}
-              className="relative w-full h-[450px] sm:h-[540px] lg:h-[calc(100vh-140px)] min-h-[480px] rounded-2xl overflow-hidden border border-white/[0.08] bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-140px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+              <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
               {/* Floating Controls */}
               <div className="absolute top-4 right-4 z-10 flex flex-col gap-1.5 bg-[#0c101c]/90 p-1.5 rounded-xl border border-white/10 backdrop-blur-md shadow-lg">
@@ -274,7 +274,7 @@ export default function ExplorePage() {
                   onClick={handleZoomIn}
                   title="Zoom In"
                   aria-label="Zoom In"
-                  className="size-8 rounded-lg hover:bg-white/[0.06] text-slate-300"
+                  className="size-8 rounded-lg hover:bg-white/10 text-slate-300"
                 >
                   <ZoomIn className="size-4" />
                 </Button>
@@ -284,7 +284,7 @@ export default function ExplorePage() {
                   onClick={handleZoomOut}
                   title="Zoom Out"
                   aria-label="Zoom Out"
-                  className="size-8 rounded-lg hover:bg-white/[0.06] text-slate-300"
+                  className="size-8 rounded-lg hover:bg-white/10 text-slate-300"
                 >
                   <ZoomOut className="size-4" />
                 </Button>
@@ -294,7 +294,7 @@ export default function ExplorePage() {
                   onClick={handleResetZoom}
                   title="Recenter"
                   aria-label="Recenter"
-                  className="size-8 rounded-lg hover:bg-white/[0.06] text-slate-300"
+                  className="size-8 rounded-lg hover:bg-white/10 text-slate-300"
                 >
                   <RotateCcw className="size-4" />
                 </Button>
@@ -312,7 +312,7 @@ export default function ExplorePage() {
                     ? selectedBD?.name
                     : selectedWorld?.name}
                 </span>
-                <span className="text-slate-400 text-[10px] hidden sm:inline">
+                <span className="text-slate-400 text-2xs hidden sm:inline">
                   (Click any shape to inspect)
                 </span>
               </div>
@@ -676,7 +676,7 @@ export default function ExplorePage() {
               )}
 
               {/* Legend */}
-              <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-[11px] text-slate-300 backdrop-blur-md">
+              <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-300 backdrop-blur-md">
                 <div className="flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
                   <span>Selected</span>
@@ -709,8 +709,8 @@ export default function ExplorePage() {
 
             {/* Dossier Card */}
             {realm === "bangladesh" && selectedBD ? (
-              <div className="rounded-2xl border border-white/[0.08] bg-[#0c101c] p-5 shadow-2xl space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+              <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-5 shadow-2xl space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-white/5">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{selectedBD.flagEmoji}</span>
                     <div>
@@ -724,7 +724,7 @@ export default function ExplorePage() {
                   </div>
                   <Badge
                     variant="outline"
-                    className="border-emerald-500/30 text-emerald-300 font-mono text-[10px]"
+                    className="border-emerald-500/30 text-emerald-300 font-mono text-2xs"
                   >
                     {selectedBD.isCoastal
                       ? "Coastal District"
@@ -734,8 +734,8 @@ export default function ExplorePage() {
 
                 {/* Spatial Specs */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-3 rounded-xl bg-black/40 border border-white/[0.06] space-y-1">
-                    <span className="text-slate-400 text-[11px] flex items-center gap-1">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                    <span className="text-slate-400 text-xs flex items-center gap-1">
                       <Compass className="size-3 text-sky-400" /> Centroid
                       Coordinates
                     </span>
@@ -744,8 +744,8 @@ export default function ExplorePage() {
                       {selectedBD.coordinates[1].toFixed(2)}°E
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-black/40 border border-white/[0.06] space-y-1">
-                    <span className="text-slate-400 text-[11px] flex items-center gap-1">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                    <span className="text-slate-400 text-xs flex items-center gap-1">
                       <Layers className="size-3 text-emerald-400" /> Bordering
                       Count
                     </span>
@@ -756,7 +756,7 @@ export default function ExplorePage() {
                 </div>
 
                 {/* Trivia Fact */}
-                <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] space-y-1 text-xs leading-relaxed">
+                <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
                   <span className="text-amber-400 font-semibold flex items-center gap-1.5">
                     <Sparkles className="size-3.5" /> Cultural & Cartographic
                     Fact
@@ -766,7 +766,7 @@ export default function ExplorePage() {
 
                 {/* Bordering Neighbors Interactive List */}
                 <div className="space-y-2">
-                  <h4 className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                  <h4 className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider">
                     Bordering Districts (Click to Pan):
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
@@ -790,8 +790,8 @@ export default function ExplorePage() {
                 </div>
               </div>
             ) : selectedWorld ? (
-              <div className="rounded-2xl border border-white/[0.08] bg-[#0c101c] p-5 shadow-2xl space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+              <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-5 shadow-2xl space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-white/5">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{selectedWorld.flagEmoji}</span>
                     <div>
@@ -805,7 +805,7 @@ export default function ExplorePage() {
                   </div>
                   <Badge
                     variant="outline"
-                    className="border-sky-500/30 text-sky-300 font-mono text-[10px]"
+                    className="border-sky-500/30 text-sky-300 font-mono text-2xs"
                   >
                     {selectedWorld.id}
                   </Badge>
@@ -813,8 +813,8 @@ export default function ExplorePage() {
 
                 {/* Specs */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-3 rounded-xl bg-black/40 border border-white/[0.06] space-y-1">
-                    <span className="text-slate-400 text-[11px] flex items-center gap-1">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                    <span className="text-slate-400 text-xs flex items-center gap-1">
                       <MapPin className="size-3 text-emerald-400" /> Capital
                       City
                     </span>
@@ -822,8 +822,8 @@ export default function ExplorePage() {
                       {selectedWorld.capital}
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-black/40 border border-white/[0.06] space-y-1">
-                    <span className="text-slate-400 text-[11px] flex items-center gap-1">
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                    <span className="text-slate-400 text-xs flex items-center gap-1">
                       <Users className="size-3 text-sky-400" /> Population
                     </span>
                     <span className="font-semibold font-mono text-white">
@@ -833,7 +833,7 @@ export default function ExplorePage() {
                 </div>
 
                 {/* Trivia */}
-                <div className="p-3.5 rounded-xl bg-black/40 border border-white/[0.06] space-y-1 text-xs leading-relaxed">
+                <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
                   <span className="text-amber-400 font-semibold flex items-center gap-1.5">
                     <Sparkles className="size-3.5" /> Cartographic Dossier
                   </span>
@@ -842,7 +842,7 @@ export default function ExplorePage() {
 
                 {/* Neighbors */}
                 <div className="space-y-2">
-                  <h4 className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+                  <h4 className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider">
                     {selectedWorld.borders.length === 0
                       ? "Nearest Neighbor Nations (Click to Pan):"
                       : "Land Borders (Click to Pan):"}
@@ -878,10 +878,10 @@ export default function ExplorePage() {
                       <button
                         key={d.id}
                         onClick={() => selectDistrict(d)}
-                        className="w-full text-left px-3 py-1.5 rounded-lg text-xs hover:bg-white/[0.06] flex items-center justify-between text-slate-300 hover:text-white"
+                        className="w-full text-left px-3 py-1.5 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
                       >
                         <span className="font-semibold">{d.name}</span>
-                        <span className="text-[11px] font-mono text-slate-500">
+                        <span className="text-xs font-mono text-slate-500">
                           {d.division}
                         </span>
                       </button>
@@ -890,12 +890,12 @@ export default function ExplorePage() {
                       <button
                         key={c.id}
                         onClick={() => selectCountry(c)}
-                        className="w-full text-left px-3 py-1.5 rounded-lg text-xs hover:bg-white/[0.06] flex items-center justify-between text-slate-300 hover:text-white"
+                        className="w-full text-left px-3 py-1.5 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
                       >
                         <span className="font-semibold">
                           {c.flagEmoji} {c.name}
                         </span>
-                        <span className="text-[11px] font-mono text-slate-500">
+                        <span className="text-xs font-mono text-slate-500">
                           {c.capital}
                         </span>
                       </button>
@@ -907,7 +907,7 @@ export default function ExplorePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.06] py-6 text-center text-xs text-slate-500 mt-12 bg-[#070a12]">
+      <footer className="border-t border-white/5 py-6 text-center text-xs text-slate-500 mt-12 bg-[#070a12]">
         <p>Borderline • Free-Roam Atlas & Geography Explorer</p>
       </footer>
     </div>

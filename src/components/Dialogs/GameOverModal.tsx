@@ -93,7 +93,7 @@ export function GameOverModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white p-6 rounded-2xl shadow-2xl">
         <DialogHeader className="text-center sm:text-center space-y-3">
-          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-black/40 border border-white/[0.08]">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-black/40 border border-white/10">
             {isWon ? (
               <Trophy className="size-8 text-amber-400 animate-bounce" />
             ) : (
@@ -115,7 +115,7 @@ export function GameOverModal() {
         </DialogHeader>
 
         {/* Target Country or District Reveal Card */}
-        <div className="rounded-xl border border-white/[0.08] bg-black/40 p-4 space-y-3">
+        <div className="rounded-xl border border-white/10 bg-black/40 p-4 space-y-3">
           <div className="flex items-center gap-3">
             <span className="text-4xl">{currentTarget.flagEmoji}</span>
             <div>
@@ -133,7 +133,7 @@ export function GameOverModal() {
             </div>
           </div>
 
-          <div className="p-3 rounded-lg bg-[#070a12] border border-white/[0.06] text-xs text-slate-300 leading-relaxed">
+          <div className="p-3 rounded-lg bg-[#070a12] border border-white/5 text-xs text-slate-300 leading-relaxed">
             <span className="font-semibold text-amber-400">Trivia Fact: </span>
             {currentTarget.triviaFact}
           </div>
@@ -141,21 +141,21 @@ export function GameOverModal() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-3 gap-2 text-center">
-          <div className="p-2.5 rounded-xl border border-white/[0.08] bg-black/40">
+          <div className="p-2.5 rounded-xl border border-white/10 bg-black/40">
             <div className="text-xl font-bold font-mono text-white">{stats.streak}</div>
-            <div className="text-[10px] text-slate-400 flex items-center justify-center gap-1 font-mono uppercase tracking-wider mt-0.5">
+            <div className="text-2xs text-slate-400 flex items-center justify-center gap-1 font-mono uppercase tracking-wider mt-0.5">
               <Flame className="size-3 text-amber-500" /> Streak
             </div>
           </div>
-          <div className="p-2.5 rounded-xl border border-white/[0.08] bg-black/40">
+          <div className="p-2.5 rounded-xl border border-white/10 bg-black/40">
             <div className="text-xl font-bold font-mono text-emerald-400">
               {stats.played > 0 ? Math.round((stats.won / stats.played) * 100) : 0}%
             </div>
-            <div className="text-[10px] text-slate-400 uppercase font-mono tracking-wider mt-0.5">Win Rate</div>
+            <div className="text-2xs text-slate-400 uppercase font-mono tracking-wider mt-0.5">Win Rate</div>
           </div>
-          <div className="p-2.5 rounded-xl border border-white/[0.08] bg-black/40">
+          <div className="p-2.5 rounded-xl border border-white/10 bg-black/40">
             <div className="text-xl font-bold font-mono text-sky-400">{stats.maxStreak}</div>
-            <div className="text-[10px] text-slate-400 uppercase font-mono tracking-wider mt-0.5">Best Streak</div>
+            <div className="text-2xs text-slate-400 uppercase font-mono tracking-wider mt-0.5">Best Streak</div>
           </div>
         </div>
 
@@ -163,7 +163,7 @@ export function GameOverModal() {
           <Button
             variant="outline"
             onClick={handleShare}
-            className="w-full sm:w-1/2 border-white/10 bg-white/[0.03] hover:bg-white/[0.08] text-slate-200"
+            className="w-full sm:w-1/2 border-white/10 bg-white/5 hover:bg-white/10 text-slate-200"
           >
             {copied ? (
               <>

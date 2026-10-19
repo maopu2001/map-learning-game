@@ -20,7 +20,7 @@ export function GuessHistory() {
 
   if (guesses.length === 0) {
     return (
-      <div className="w-full rounded-2xl border border-white/[0.08] bg-[#0c101c] p-5 text-center text-slate-500 shadow-xl">
+      <div className="w-full rounded-2xl border border-white/10 bg-[#0c101c] p-5 text-center text-slate-500 shadow-xl">
         <Target className="size-8 mx-auto mb-2 text-slate-600 opacity-80" />
         <p className="text-sm font-semibold text-slate-300">
           No reconnaissance guesses yet
@@ -35,7 +35,7 @@ export function GuessHistory() {
               } to the secret nation.`}
         </p>
         {difficulty === "hard" && (
-          <p className="text-[11px] text-rose-400 mt-2 font-mono bg-rose-950/30 border border-rose-500/20 py-1 px-2.5 rounded-lg inline-block">
+          <p className="text-xs text-rose-400 mt-2 font-mono bg-rose-950/30 border border-rose-500/20 py-1 px-2.5 rounded-lg inline-block">
             Hard Mode: Compass bearing disabled — calculate target via distance
             triangulation!
           </p>
@@ -46,7 +46,7 @@ export function GuessHistory() {
 
   return (
     <div className="w-full space-y-2.5">
-      <div className="flex items-center justify-between text-[11px] font-mono font-semibold text-slate-400 px-2 uppercase tracking-wider">
+      <div className="flex items-center justify-between text-xs font-mono font-semibold text-slate-400 px-2 uppercase tracking-wider">
         <span>
           Reconnaissance Log ({guesses.length}/{maxGuesses})
         </span>
@@ -81,7 +81,7 @@ export function GuessHistory() {
                       ? "bg-orange-950/30 border-orange-500/30"
                       : isClose
                         ? "bg-purple-950/30 border-purple-500/30"
-                        : "bg-[#0c101c] border-white/[0.08]"
+                        : "bg-[#0c101c] border-white/10"
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -95,7 +95,7 @@ export function GuessHistory() {
                         {isWinner && (
                           <Badge
                             variant="success"
-                            className="text-[10px] px-2 py-0"
+                            className="text-2xs px-2 py-0"
                           >
                             TARGET FOUND
                           </Badge>
@@ -103,7 +103,7 @@ export function GuessHistory() {
                         {!isWinner && isVeryClose && (
                           <Badge
                             variant="amber"
-                            className="text-[10px] px-2 py-0"
+                            className="text-2xs px-2 py-0"
                           >
                             HOT 🔥
                           </Badge>
@@ -129,7 +129,7 @@ export function GuessHistory() {
                           <span className="text-xs text-slate-500">📏</span>
                         )}
                       </span>
-                      <span className="text-[10px] text-slate-400 font-mono">
+                      <span className="text-2xs text-slate-400 font-mono">
                         {g.isCorrect
                           ? "Direct Hit"
                           : showDirection
@@ -154,7 +154,7 @@ export function GuessHistory() {
                             : "[&>[data-slot=progress-indicator]]:bg-slate-700"
                     }`}
                   />
-                  <span className="text-[11px] font-mono text-slate-400 shrink-0 w-8 text-right">
+                  <span className="text-xs font-mono text-slate-400 shrink-0 w-8 text-right">
                     {g.proximityScore}%
                   </span>
                 </div>
