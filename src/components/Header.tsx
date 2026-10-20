@@ -56,14 +56,32 @@ export function Header() {
               </div>
             </Link>
 
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden size-8 rounded-lg border border-white/10 bg-white/5 text-slate-300 flex items-center justify-center hover:text-white"
-              aria-label="Toggle Navigation Menu"
-            >
-              {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-            </button>
+            {/* Mobile Actions: Stats, Help, Menu */}
+            <div className="flex items-center gap-1.5 md:hidden">
+              <button
+                onClick={() => setStatsOpen(true)}
+                className="size-9 rounded-xl border border-white/10 bg-white/5 text-amber-400 flex items-center justify-center hover:bg-white/10 transition-colors"
+                aria-label="Career Dossier"
+                title="Career Record Dossier"
+              >
+                <Trophy className="size-4" />
+              </button>
+              <button
+                onClick={() => setHelpOpen(true)}
+                className="size-9 rounded-xl border border-white/10 bg-white/5 text-sky-400 flex items-center justify-center hover:bg-white/10 transition-colors"
+                aria-label="Mission Directives"
+                title="Mission Directives"
+              >
+                <HelpCircle className="size-4" />
+              </button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="size-9 rounded-xl border border-white/10 bg-white/5 text-slate-300 flex items-center justify-center hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Toggle Navigation Menu"
+              >
+                {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+              </button>
+            </div>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -88,7 +106,7 @@ export function Header() {
               }`}
             >
               <span>🇧🇩</span>
-              <span>Bangladesh 64</span>
+              <span>Bangladesh</span>
             </Link>
             <Link
               href="/world"
@@ -99,7 +117,7 @@ export function Header() {
               }`}
             >
               <Globe2 className="size-3.5 text-sky-400" />
-              <span>World Nations</span>
+              <span>World</span>
             </Link>
             <Link
               href="/explore"
@@ -142,56 +160,79 @@ export function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pointer-events-auto mt-2 w-full rounded-2xl border border-white/10 bg-[#070a12]/95 backdrop-blur-2xl p-3 shadow-2xl space-y-2">
-            <div className="grid grid-cols-2 gap-1.5">
+          <div className="md:hidden pointer-events-auto mt-2 w-full rounded-2xl border border-white/10 bg-[#070a12]/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3">
+            <div className="grid grid-cols-2 gap-2">
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`p-2.5 rounded-xl text-xs font-medium flex items-center gap-2 ${
+                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
                   pathname === "/"
-                    ? "bg-sky-600 text-white"
-                    : "bg-white/5 text-slate-300 hover:bg-white/10"
+                    ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
+                    : "bg-white/5 text-slate-200 hover:bg-white/10"
                 }`}
               >
-                <Home className="size-4" />
+                <Home className="size-4 shrink-0" />
                 <span>Home Hub</span>
               </Link>
               <Link
                 href="/bangladesh"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`p-2.5 rounded-xl text-xs font-medium flex items-center gap-2 ${
+                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
                   pathname === "/bangladesh"
-                    ? "bg-emerald-600 text-white"
-                    : "bg-white/5 text-slate-300 hover:bg-white/10"
+                    ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/50"
+                    : "bg-white/5 text-slate-200 hover:bg-white/10"
                 }`}
               >
-                <span>🇧🇩</span>
-                <span>Bangladesh 64</span>
+                <span className="text-base shrink-0">🇧🇩</span>
+                <span>Bangladesh</span>
               </Link>
               <Link
                 href="/world"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`p-2.5 rounded-xl text-xs font-medium flex items-center gap-2 ${
+                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
                   pathname === "/world"
-                    ? "bg-sky-600 text-white"
-                    : "bg-white/5 text-slate-300 hover:bg-white/10"
+                    ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
+                    : "bg-white/5 text-slate-200 hover:bg-white/10"
                 }`}
               >
-                <Globe2 className="size-4 text-sky-400" />
-                <span>World Nations</span>
+                <Globe2 className="size-4 text-sky-400 shrink-0" />
+                <span>World</span>
               </Link>
               <Link
                 href="/explore"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`p-2.5 rounded-xl text-xs font-medium flex items-center gap-2 ${
+                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
                   pathname === "/explore"
-                    ? "bg-purple-600 text-white"
-                    : "bg-white/5 text-slate-300 hover:bg-white/10"
+                    ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
+                    : "bg-white/5 text-slate-200 hover:bg-white/10"
                 }`}
               >
-                <BookOpen className="size-4 text-purple-400" />
+                <BookOpen className="size-4 text-purple-400 shrink-0" />
                 <span>Free Atlas</span>
               </Link>
+            </div>
+
+            <div className="pt-2 border-t border-white/5 grid grid-cols-2 gap-2 text-xs">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setStatsOpen(true);
+                }}
+                className="p-2.5 min-h-[40px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium"
+              >
+                <Trophy className="size-3.5 text-amber-400" />
+                <span>Career Record</span>
+              </button>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setHelpOpen(true);
+                }}
+                className="p-2.5 min-h-[40px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium"
+              >
+                <HelpCircle className="size-3.5 text-sky-400" />
+                <span>Directives & FAQ</span>
+              </button>
             </div>
           </div>
         )}
@@ -199,7 +240,7 @@ export function Header() {
 
       {/* Career Record Modal */}
       <Dialog open={statsOpen} onOpenChange={setStatsOpen}>
-        <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl">
+        <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <Trophy className="size-5 text-amber-400" />
@@ -235,7 +276,7 @@ export function Header() {
 
       {/* Mission Directives Modal */}
       <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
-        <DialogContent className="sm:max-w-lg bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-screen overflow-y-auto">
+        <DialogContent className="sm:max-w-lg bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <MapPin className="size-5 text-sky-400" />

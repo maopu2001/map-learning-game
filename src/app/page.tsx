@@ -58,7 +58,10 @@ function TaglineReveal() {
         // Progress from top 80% to top 30% of window
         const start = windowHeight * 0.85;
         const end = windowHeight * 0.35;
-        const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+        const progress = Math.min(
+          1,
+          Math.max(0, (start - rect.top) / (start - end)),
+        );
         const targetRevealed = Math.floor(progress * taglineWords.length);
         setRevealedCount(targetRevealed);
       });
@@ -107,7 +110,11 @@ function TaglineReveal() {
 // Interactive Live Triangulation Simulator Widget
 function TriangulationDemo() {
   const [target] = useState({ name: "Sylhet", x: 74, y: 32 });
-  const [guess, setGuess] = useState<{ name: string; x: number; y: number } | null>(null);
+  const [guess, setGuess] = useState<{
+    name: string;
+    x: number;
+    y: number;
+  } | null>(null);
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [bearingDir, setBearingDir] = useState<string | null>(null);
 
@@ -133,7 +140,9 @@ function TriangulationDemo() {
             Live Triangulation Radar Demo
           </h3>
         </div>
-        <span className="text-2xs text-slate-400">Click a test launch site</span>
+        <span className="text-2xs text-slate-400">
+          Click a test launch site
+        </span>
       </div>
 
       {/* Mini Radar Screen */}
@@ -187,14 +196,14 @@ function TriangulationDemo() {
       </div>
 
       {/* Test Launch Buttons */}
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {samplePoints.map((pt) => {
           const isSelected = guess?.name === pt.name;
           return (
             <button
               key={pt.name}
               onClick={() => handleSelectSample(pt)}
-              className={`p-2 rounded-xl text-xs font-semibold border transition-all ${
+              className={`p-2.5 sm:p-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                 isSelected
                   ? "bg-sky-600 border-sky-400 text-white shadow-md shadow-sky-950/60"
                   : "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
@@ -261,7 +270,9 @@ function FAQSection() {
         <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
           Frequently Answered
         </span>
-        <h2 className="text-2xl sm:text-3xl font-black text-white">Tactical FAQ</h2>
+        <h2 className="text-2xl sm:text-3xl font-black text-white">
+          Tactical FAQ
+        </h2>
       </div>
 
       <div className="space-y-2 pt-2">
@@ -321,22 +332,24 @@ export default function HomePage() {
           </div>
 
           <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Pinpoint mystery Bangladesh districts or sovereign nations in 6 guesses using true geodesic distance, 8-point compass vectors, and contiguous border intelligence.
+            Pinpoint mystery Bangladesh districts or sovereign nations in 6
+            guesses using true geodesic distance, 8-point compass vectors, and
+            contiguous border intelligence.
           </p>
 
           {/* Primary Action Button Pair */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/bangladesh">
-              <Button className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base px-6 py-2.5 h-auto rounded-xl gap-2 shadow-xl shadow-emerald-950/60 border border-emerald-400/30">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md mx-auto sm:max-w-none">
+            <Link href="/bangladesh" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base px-6 py-3 sm:py-2.5 h-auto rounded-xl gap-2 shadow-xl shadow-emerald-950/60 border border-emerald-400/30">
                 <Play className="size-4 fill-white" />
                 <span>Launch Bangladesh Mission 🇧🇩</span>
               </Button>
             </Link>
 
-            <Link href="/world">
+            <Link href="/world" className="w-full sm:w-auto">
               <Button
                 variant="outline"
-                className="bg-white/5 hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-5 py-2.5 h-auto rounded-xl gap-2 border-white/10"
+                className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-5 py-3 sm:py-2.5 h-auto rounded-xl gap-2 border-white/10"
               >
                 <Globe2 className="size-4 text-sky-400" />
                 <span>Explore World Map 🌍</span>
@@ -381,9 +394,12 @@ export default function HomePage() {
             <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
               Tactical Workflow
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">How Deduction Works</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-white">
+              How Deduction Works
+            </h2>
             <p className="text-xs text-slate-400 max-w-md mx-auto">
-              Three sensory feedback layers turn dry facts into permanent mental maps.
+              Three sensory feedback layers turn dry facts into permanent mental
+              maps.
             </p>
           </div>
 
@@ -392,9 +408,13 @@ export default function HomePage() {
               <div className="size-9 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center font-bold font-mono text-sm">
                 01
               </div>
-              <h3 className="font-bold text-white text-base">Geodesic Triangulation</h3>
+              <h3 className="font-bold text-white text-base">
+                Geodesic Triangulation
+              </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Each guess calculates exact great-circle distance in kilometers and 8-point compass bearing from your guess centroid to the secret target.
+                Each guess calculates exact great-circle distance in kilometers
+                and 8-point compass bearing from your guess centroid to the
+                secret target.
               </p>
             </div>
 
@@ -402,9 +422,13 @@ export default function HomePage() {
               <div className="size-9 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-bold font-mono text-sm">
                 02
               </div>
-              <h3 className="font-bold text-white text-base">Proximity Radar Heatmap</h3>
+              <h3 className="font-bold text-white text-base">
+                Proximity Radar Heatmap
+              </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Polygons glow Hot Orange (&lt;60km BD / &lt;1500km World), Warm Purple, or Cold Navy directly on the map canvas. Clean shapes with zero label overlap.
+                Polygons glow Hot Orange (&lt;60km BD / &lt;1500km World), Warm
+                Purple, or Cold Navy directly on the map canvas. Clean shapes
+                with zero label overlap.
               </p>
             </div>
 
@@ -412,9 +436,12 @@ export default function HomePage() {
               <div className="size-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm">
                 03
               </div>
-              <h3 className="font-bold text-white text-base">Contiguous Border Intel</h3>
+              <h3 className="font-bold text-white text-base">
+                Contiguous Border Intel
+              </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Progressive clues illuminate adjacent neighboring borders on the map in vibrant cyan, enabling tactical contiguity elimination.
+                Progressive clues illuminate adjacent neighboring borders on the
+                map in vibrant cyan, enabling tactical contiguity elimination.
               </p>
             </div>
           </div>
@@ -428,7 +455,9 @@ export default function HomePage() {
             <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
               Cartographic Arenas
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">Choose Your Operational Realm</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-white">
+              Choose Your Operational Realm
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -437,13 +466,19 @@ export default function HomePage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-3xl">🇧🇩</span>
-                  <Badge variant="outline" className="text-2xs border-emerald-500/30 text-emerald-300 bg-emerald-500/10">
+                  <Badge
+                    variant="outline"
+                    className="text-2xs border-emerald-500/30 text-emerald-300 bg-emerald-500/10"
+                  >
                     National Hub
                   </Badge>
                 </div>
-                <h3 className="text-lg font-bold text-white">Bangladesh 64 Districts</h3>
+                <h3 className="text-lg font-bold text-white">
+                  Bangladesh's 64 Districts
+                </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  All 64 districts across 8 divisions. Master riverine networks, district headquarter borders, and regional layout.
+                  All 64 districts across 8 divisions. Master riverine networks,
+                  district headquarter borders, and regional layout.
                 </p>
                 <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
@@ -476,13 +511,20 @@ export default function HomePage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <Globe2 className="size-8 text-sky-400" />
-                  <Badge variant="outline" className="text-2xs border-sky-500/30 text-sky-300 bg-sky-500/10">
+                  <Badge
+                    variant="outline"
+                    className="text-2xs border-sky-500/30 text-sky-300 bg-sky-500/10"
+                  >
                     Global Hub
                   </Badge>
                 </div>
-                <h3 className="text-lg font-bold text-white">World 195 Nations</h3>
+                <h3 className="text-lg font-bold text-white">
+                  World 195 Nations
+                </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Every sovereign nation on Earth. Microstate zoom auto-magnification, continent clues, and nearest neighbor tethers.
+                  Every sovereign nation on Earth. Microstate zoom
+                  auto-magnification, continent clues, and nearest neighbor
+                  tethers.
                 </p>
                 <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
@@ -515,13 +557,20 @@ export default function HomePage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <BookOpen className="size-8 text-purple-400" />
-                  <Badge variant="outline" className="text-2xs border-purple-500/30 text-purple-300 bg-purple-500/10">
+                  <Badge
+                    variant="outline"
+                    className="text-2xs border-purple-500/30 text-purple-300 bg-purple-500/10"
+                  >
                     Study Desk
                   </Badge>
                 </div>
-                <h3 className="text-lg font-bold text-white">Free-Roam Atlas</h3>
+                <h3 className="text-lg font-bold text-white">
+                  Free-Roam Atlas
+                </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Zero time limits or guess caps. Click any territory to open full demographic dossiers with interactive pan-to-border buttons.
+                  Zero time limits or guess caps. Click any territory to open
+                  full demographic dossiers with interactive pan-to-border
+                  buttons.
                 </p>
                 <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
@@ -559,28 +608,40 @@ export default function HomePage() {
             <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold">
               Gameplay Tiers
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">Three Calibrated Difficulties</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-white">
+              Three Calibrated Difficulties
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
             <div className="p-4 rounded-2xl border border-emerald-500/30 bg-[#0c101c] space-y-2">
-              <div className="font-bold text-emerald-400 text-sm">🟢 Easy Mode (8 Guesses)</div>
+              <div className="font-bold text-emerald-400 text-sm">
+                🟢 Easy Mode (8 Guesses)
+              </div>
               <p className="text-slate-400 leading-relaxed">
-                Target division or continent revealed immediately. Full territory inspection on hover and click (except the secret target).
+                Target division or continent revealed immediately. Full
+                territory inspection on hover and click (except the secret
+                target).
               </p>
             </div>
 
             <div className="p-4 rounded-2xl border border-amber-500/30 bg-[#0c101c] space-y-2">
-              <div className="font-bold text-amber-400 text-sm">🟡 Normal Mode (6 Guesses)</div>
+              <div className="font-bold text-amber-400 text-sm">
+                🟡 Normal Mode (6 Guesses)
+              </div>
               <p className="text-slate-400 leading-relaxed">
-                Standard tactical challenge. 8-point compass arrows active. Only highlighted adjacent borders and guesses show info.
+                Standard tactical challenge. 8-point compass arrows active. Only
+                highlighted adjacent borders and guesses show info.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl border border-rose-500/30 bg-[#0c101c] space-y-2">
-              <div className="font-bold text-rose-400 text-sm">🔴 Hard Mode (5 Guesses)</div>
+              <div className="font-bold text-rose-400 text-sm">
+                🔴 Hard Mode (5 Guesses)
+              </div>
               <p className="text-slate-400 leading-relaxed">
-                Compass disabled! Pure distance triangulation. Unrevealed territories remain completely blinded.
+                Compass disabled! Pure distance triangulation. Unrevealed
+                territories remain completely blinded.
               </p>
             </div>
           </div>
@@ -600,7 +661,8 @@ export default function HomePage() {
               Ready to test your spatial perception?
             </h2>
             <p className="text-xs sm:text-sm text-slate-400">
-              100% free · Zero registration required · Instant client-side play in your browser.
+              100% free · Zero registration required · Instant client-side play
+              in your browser.
             </p>
           </div>
 
@@ -617,8 +679,13 @@ export default function HomePage() {
 
       {/* Semantic Footer */}
       <footer className="border-t border-white/5 py-8 text-center text-xs text-slate-500 space-y-2 mt-16 bg-[#070a12]">
-        <p>Borderline • Tactical Cartography Arena & Educational Geography Platform</p>
-        <p className="text-slate-600">Built with Next.js 16, React 19, Tailwind CSS & TopoJSON Cartography</p>
+        <p>
+          Borderline • Tactical Cartography Arena & Educational Geography
+          Platform
+        </p>
+        <p className="text-slate-600">
+          Built with Next.js 16, React 19, Tailwind CSS & TopoJSON Cartography
+        </p>
       </footer>
     </div>
   );

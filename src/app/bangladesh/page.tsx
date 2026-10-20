@@ -8,7 +8,8 @@ import { GuessInput } from "@/components/Controls/GuessInput";
 import { GuessHistory } from "@/components/Controls/GuessHistory";
 import { ClueDrawer } from "@/components/Clues/ClueDrawer";
 import { GameOverModal } from "@/components/Dialogs/GameOverModal";
-import { useGameStore } from "@/lib/store";
+import { useGameStore, getMaxGuesses } from "@/lib/store";
+import { Map, Crosshair, ArrowRight } from "lucide-react";
 
 const BangladeshMap = dynamic(
   () => import("@/components/Map/BangladeshMap").then((mod) => mod.BangladeshMap),
@@ -33,7 +34,13 @@ export default function BangladeshPage() {
   const guesses = useGameStore((s) => s.guesses);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
 
+  const difficulty = useGameStore((s) => s.difficulty);
+  const maxGuesses = getMaxGuesses(difficulty);
+
   const [briefingOpen, setBriefingOpen] = useState(false);
+  const [mobileTab, setMobileTab] = useState<"map" | "intel">("map");
+
+  const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : null;
 
   useEffect(() => {
     initRouteScope("bangladesh");
@@ -57,24 +64,96 @@ export default function BangladeshPage() {
   }, [mode, gameStatus, tickBlitzTimer]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white p-2 sm:p-3 gap-2.5">
+    <div className="flex flex-col min-h-screen bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white p-2 sm:p-3 gap-2 sm:gap-2.5">
       {/* Sleek In-Game HUD (Replaces bloated header) */}
       <GameHUD
         scope="bangladesh"
         onOpenBriefing={() => setBriefingOpen(true)}
       />
 
+      {/* Mobile-only Segmented Control Bar (Map vs Tactical Intel) */}
+      <div className="lg:hidden flex items-center gap-1.5 p-1 rounded-2xl bg-black/40 border border-white/10 text-xs font-semibold">
+        <button
+          onClick={() => setMobileTab("map")}
+          className={`flex-1 py-2 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+            mobileTab === "map"
+              ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/60"
+              : "text-slate-400 hover:text-white"
+          }`}
+        >
+          <Map className="size-3.5" />
+          <span>Map Arena</span>
+        </button>
+        <button
+          onClick={() => setMobileTab("intel")}
+          className={`flex-1 py-2 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+            mobileTab === "intel"
+              ? "bg-sky-600 text-white shadow-md shadow-sky-950/60"
+              : "text-slate-400 hover:text-white"
+          }`}
+        >
+          <Crosshair className="size-3.5" />
+          <span>
+            Tactical Intel ({guesses.length}/{maxGuesses})
+          </span>
+          {unlockedHints > 0 && (
+            <span className="size-1.5 rounded-full bg-amber-400" />
+          )}
+        </button>
+      </div>
+
+      {/* Search Input always pinned above on mobile for immediate access */}
+      <div className="lg:hidden w-full">
+        <GuessInput />
+      </div>
+
       {/* Main Arena: Map (Left 7-8 cols) & Tactical Controls (Right 4-5 cols) */}
       <main className="flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-3 items-start">
         {/* Left Column: Interactive Map Canvas */}
-        <section className="lg:col-span-7 xl:col-span-8 w-full">
+        <section
+          className={`w-full lg:col-span-7 xl:col-span-8 flex flex-col gap-2 ${
+            mobileTab === "map" ? "block" : "hidden lg:block"
+          }`}
+        >
           <BangladeshMap />
+
+          {/* On Mobile Map View: Latest Guess Telemetry Banner */}
+          {lastGuess && (
+            <div className="lg:hidden p-3 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl">{lastGuess.country.flagEmoji}</span>
+                <div>
+                  <div className="font-bold text-white flex items-center gap-1.5">
+                    <span>{lastGuess.country.name}</span>
+                    <span className="font-mono text-sky-300">
+                      {lastGuess.distanceKm} km {lastGuess.directionEmoji}
+                    </span>
+                  </div>
+                  <span className="text-2xs text-slate-400 font-mono">
+                    Proximity Score: {lastGuess.proximityScore}%
+                  </span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setMobileTab("intel")}
+                className="px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-sky-400 flex items-center gap-1 cursor-pointer shrink-0"
+              >
+                <span>All Intel</span>
+                <ArrowRight className="size-3" />
+              </button>
+            </div>
+          )}
         </section>
 
         {/* Right Column: Searchbox & Controls Panel */}
-        <aside className="lg:col-span-5 xl:col-span-4 w-full flex flex-col gap-2.5 lg:h-[calc(100vh-80px)] lg:overflow-y-auto pr-0 lg:pr-1">
-          {/* Search Input on Top */}
-          <section className="w-full">
+        <aside
+          className={`w-full lg:col-span-5 xl:col-span-4 flex flex-col gap-2.5 lg:h-[calc(100vh-80px)] lg:overflow-y-auto pr-0 lg:pr-1 ${
+            mobileTab === "intel" ? "block" : "hidden lg:flex"
+          }`}
+        >
+          {/* Search Input on Desktop (on mobile rendered above) */}
+          <section className="hidden lg:block w-full">
             <GuessInput />
           </section>
 

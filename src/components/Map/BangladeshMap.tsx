@@ -18,6 +18,7 @@ import {
   Target,
   ShieldCheck,
   ShieldAlert,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -162,19 +163,19 @@ export function BangladeshMap() {
     <div
       ref={mapContainerRef}
       onMouseLeave={() => setInspectedDistrict(null)}
-      className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-80px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+      className="relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-80px)] min-h-[360px] sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
     >
       <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
       {/* Floating Zoom Controls (Top Right) */}
-      <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 backdrop-blur-md shadow-lg">
+      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex flex-col gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 backdrop-blur-md shadow-lg">
         <Button
           variant="ghost"
           size="icon"
           onClick={handleZoomIn}
           title="Zoom In"
           aria-label="Zoom In"
-          className="size-8 rounded-lg hover:bg-slate-800 text-slate-300"
+          className="size-8 sm:size-8 rounded-lg hover:bg-slate-800 text-slate-300"
         >
           <ZoomIn className="size-4" />
         </Button>
@@ -184,7 +185,7 @@ export function BangladeshMap() {
           onClick={handleZoomOut}
           title="Zoom Out"
           aria-label="Zoom Out"
-          className="size-8 rounded-lg hover:bg-slate-800 text-slate-300"
+          className="size-8 sm:size-8 rounded-lg hover:bg-slate-800 text-slate-300"
         >
           <ZoomOut className="size-4" />
         </Button>
@@ -194,26 +195,26 @@ export function BangladeshMap() {
           onClick={handleResetZoom}
           title="Recenter Bangladesh"
           aria-label="Recenter Bangladesh"
-          className="size-8 rounded-lg hover:bg-slate-800 text-slate-300"
+          className="size-8 sm:size-8 rounded-lg hover:bg-slate-800 text-slate-300"
         >
           <RotateCcw className="size-4" />
         </Button>
       </div>
 
       {/* Scope Badge & Target Highlight Pill (Top Left) */}
-      <div className="absolute top-4 left-4 z-20 flex flex-col gap-1.5 pointer-events-none">
-        <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs px-3 py-1.5 rounded-full backdrop-blur-md">
-          <MapPin className="size-3.5 text-emerald-400" />
+      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex flex-col gap-1 sm:gap-1.5 pointer-events-none">
+        <div className="flex items-center gap-1.5 sm:gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-2xs sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
+          <MapPin className="size-3 sm:size-3.5 text-emerald-400 shrink-0" />
           <span>Bangladesh • 64 Districts</span>
         </div>
-        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs px-2.5 py-1 rounded-full backdrop-blur-md">
-          <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
+        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-2xs sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full backdrop-blur-md">
+          <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
           <span>Target Border Highlighted</span>
         </div>
       </div>
 
-      {/* Floating Reconnaissance Window (Top Right next to zoom controls) */}
-      <div className="absolute top-4 right-16 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
+      {/* Desktop Floating Reconnaissance Window (Hidden on mobile to preserve touch map area) */}
+      <div className="hidden md:block absolute top-4 right-16 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
         {difficulty === "hard" &&
         (!inspectedDistrict ||
           (!activeNeighbors.includes(inspectedDistrict.name) &&
@@ -693,23 +694,80 @@ export function BangladeshMap() {
         </ZoomableGroup>
       </ComposableMap>
 
+      {/* Mobile Bottom Reconnaissance Sheet */}
+      {inspectedDistrict && (
+        <div className="md:hidden absolute bottom-2 left-2 right-2 z-30 rounded-2xl border border-slate-700/90 bg-slate-900/98 p-3 shadow-2xl backdrop-blur-xl text-xs text-slate-200 space-y-2 animate-in fade-in zoom-in-95">
+          <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="text-xl leading-none">{inspectedDistrict.flagEmoji}</span>
+              <div>
+                <h4 className="font-bold text-white text-sm leading-tight">
+                  {isTargetInspected && gameStatus === "playing"
+                    ? "Mystery Target"
+                    : inspectedDistrict.name}
+                </h4>
+                <p className="text-2xs text-emerald-400">
+                  {inspectedDistrict.division} Division
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setInspectedDistrict(null)}
+              className="size-7 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
+              aria-label="Close Inspector"
+            >
+              <X className="size-3.5" />
+            </button>
+          </div>
+
+          {isTargetInspected && gameStatus === "playing" ? (
+            <p className="text-xs text-amber-300 leading-snug">
+              Highlighted amber border. Deduce this mystery district using distance clues!
+            </p>
+          ) : guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()) ? (
+            <div className="flex items-center justify-between text-xs pt-0.5">
+              <span>
+                Distance:{" "}
+                <strong className="text-amber-400">
+                  {guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())?.distanceKm} km
+                </strong>
+              </span>
+              <span className="font-mono text-xs text-sky-300">
+                {guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())?.directionEmoji}{" "}
+                {guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())?.direction}
+              </span>
+            </div>
+          ) : activeNeighbors.includes(inspectedDistrict.name) ? (
+            <p className="text-xs text-sky-300 font-semibold">
+              Adjacent Border to Secret Target
+            </p>
+          ) : (
+            <p className="text-2xs text-slate-400">
+              {difficulty === "normal"
+                ? "Unrevealed territory in Normal Mode."
+                : "Unexplored territory. Type in searchbox to guess!"}
+            </p>
+          )}
+        </div>
+      )}
+
       {/* Map Legend Footer */}
-      <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-900/85 px-3 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300 backdrop-blur-md shadow-lg">
+      <div className="absolute bottom-2 left-2 right-2 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-1.5 sm:gap-3 bg-slate-900/85 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-800 text-2xs sm:text-xs text-slate-300 backdrop-blur-md shadow-lg">
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
-          <span>Target Border</span>
+          <span className="size-2 sm:size-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
+          <span>Target</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-orange-500 ring-2 ring-orange-500/20" />
+          <span className="size-2 sm:size-2.5 rounded-full bg-orange-500 ring-2 ring-orange-500/20" />
           <span>Hot (&lt;60km)</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-purple-500 ring-2 ring-purple-500/20" />
+          <span className="size-2 sm:size-2.5 rounded-full bg-purple-500 ring-2 ring-purple-500/20" />
           <span>Warm (60-130km)</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
-          <span>Neighbor Clue</span>
+          <span className="size-2 sm:size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
+          <span>Neighbor</span>
         </div>
       </div>
     </div>

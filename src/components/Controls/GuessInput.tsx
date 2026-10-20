@@ -44,13 +44,40 @@ export function GuessInput() {
     setOpen(false);
   };
 
+  const submitQuery = (rawQuery: string) => {
+    const q = rawQuery.trim().toLowerCase();
+    if (!q) return;
+
+    if (isBD) {
+      const exact = availableDistricts.find((d) => d.name.toLowerCase() === q);
+      const first =
+        exact ||
+        availableDistricts.find(
+          (d) =>
+            d.name.toLowerCase().includes(q) ||
+            d.division.toLowerCase().includes(q),
+        );
+      if (first) handleSelectDistrict(first);
+    } else {
+      const exact = availableCountries.find((c) => c.name.toLowerCase() === q);
+      const first =
+        exact ||
+        availableCountries.find(
+          (c) =>
+            c.name.toLowerCase().includes(q) ||
+            c.id.toLowerCase() === q,
+        );
+      if (first) handleSelectCountry(first);
+    }
+  };
+
   if (gameStatus !== "playing") {
     return null;
   }
 
   const placeholder = isBD
-    ? "Type a district name (e.g. Dhaka, Bogura, Sylhet)..."
-    : "Type a country name (e.g. Japan, Bolivia, France)...";
+    ? "Type district name (Dhaka, Sylhet)..."
+    : "Type country name (Japan, France)...";
 
   return (
     <div className="relative w-full z-20">
@@ -69,49 +96,27 @@ export function GuessInput() {
             onKeyDown={(e) => {
               if (e.key === "Enter" && query.trim().length > 0) {
                 e.preventDefault();
-                if (isBD) {
-                  const q = query.trim().toLowerCase();
-                  const exact = availableDistricts.find(
-                    (d) => d.name.toLowerCase() === q,
-                  );
-                  const first =
-                    exact ||
-                    availableDistricts.find(
-                      (d) =>
-                        d.name.toLowerCase().includes(q) ||
-                        d.division.toLowerCase().includes(q),
-                    );
-                  if (first) handleSelectDistrict(first);
-                } else {
-                  const q = query.trim().toLowerCase();
-                  const exact = availableCountries.find(
-                    (c) => c.name.toLowerCase() === q,
-                  );
-                  const first =
-                    exact ||
-                    availableCountries.find(
-                      (c) =>
-                        c.name.toLowerCase().includes(q) ||
-                        c.id.toLowerCase() === q,
-                    );
-                  if (first) handleSelectCountry(first);
-                }
+                submitQuery(query);
               }
             }}
             placeholder={placeholder}
-            className="text-sm font-medium"
+            className="text-base sm:text-sm font-medium"
           />
           {query.length > 0 && (
-            <div className="absolute right-3 top-2.5 flex items-center gap-1 text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md pointer-events-none">
+            <button
+              type="button"
+              onClick={() => submitQuery(query)}
+              className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-slate-200 bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
+            >
               <span>Submit</span>
               <CornerDownLeft className="size-3 text-sky-400" />
-            </div>
+            </button>
           )}
         </div>
 
         {open && query.trim().length > 0 && (
           <div className="absolute top-full left-0 right-0 mt-2 z-50">
-            <CommandList className="max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/95 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
+            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
               {isBD ? (
                 <>
                   {availableDistricts
@@ -126,7 +131,7 @@ export function GuessInput() {
                         key={d.id}
                         value={d.name}
                         onSelect={() => handleSelectDistrict(d)}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                        className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
                           <span className="text-lg">{d.flagEmoji}</span>
@@ -166,7 +171,7 @@ export function GuessInput() {
                         key={c.id}
                         value={c.name}
                         onSelect={() => handleSelectCountry(c)}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                        className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
                           <span className="text-lg">{c.flagEmoji}</span>

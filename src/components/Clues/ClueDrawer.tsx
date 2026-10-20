@@ -43,9 +43,9 @@ export function ClueDrawer() {
   return (
     <div className="w-full rounded-2xl border border-white/10 bg-[#0c101c] p-4 sm:p-5 shadow-xl space-y-3.5">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+      <div className="flex flex-wrap items-center justify-between border-b border-white/5 pb-2.5 gap-2">
         <div className="flex items-center gap-2">
-          <Lightbulb className="size-4 text-amber-400" />
+          <Lightbulb className="size-4 text-amber-400 shrink-0" />
           <h3 className="text-sm font-semibold text-white">Hints & Clues</h3>
           <span className="text-2xs text-slate-400 uppercase tracking-wider font-mono">
             ({isBD ? "Bangladesh" : "World"} • {difficulty})
@@ -54,7 +54,7 @@ export function ClueDrawer() {
         <div className="flex items-center gap-2">
           <Badge
             variant="outline"
-            className="text-xs text-slate-300 border-slate-700"
+            className="text-xs text-slate-300 border-slate-700 font-mono"
           >
             Hints Unlocked: {unlockedHints}/3
           </Badge>
@@ -104,7 +104,7 @@ export function ClueDrawer() {
               size="sm"
               onClick={unlockNextHint}
               disabled={gameStatus !== "playing"}
-              className="mt-3 text-xs h-7 w-full border-slate-700 hover:bg-slate-800 text-sky-300"
+              className="mt-3 text-xs h-8 sm:h-7 w-full border-slate-700 hover:bg-slate-800 text-sky-300"
             >
               Reveal
             </Button>
@@ -196,7 +196,7 @@ export function ClueDrawer() {
               size="sm"
               onClick={unlockNextHint}
               disabled={gameStatus !== "playing"}
-              className="mt-3 text-xs h-7 w-full border-slate-700 hover:bg-slate-800 text-amber-300"
+              className="mt-3 text-xs h-8 sm:h-7 w-full border-slate-700 hover:bg-slate-800 text-amber-300"
             >
               Reveal
             </Button>
@@ -293,7 +293,7 @@ export function ClueDrawer() {
               size="sm"
               onClick={unlockNextHint}
               disabled={gameStatus !== "playing"}
-              className="mt-3 text-xs h-7 w-full border-slate-700 hover:bg-slate-800 text-emerald-300"
+              className="mt-3 text-xs h-8 sm:h-7 w-full border-slate-700 hover:bg-slate-800 text-emerald-300"
             >
               Reveal
             </Button>

@@ -56,7 +56,7 @@ export function MissionBriefingModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl bg-[#090d18] border border-white/10 text-white rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-2xl">
+      <DialogContent className="sm:max-w-xl bg-[#090d18] border border-white/10 text-white rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-2xl max-h-[90dvh] overflow-y-auto">
         <DialogHeader className="space-y-1 text-left">
           <div className="flex items-center gap-2">
             <span className="p-1.5 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400">
@@ -68,8 +68,8 @@ export function MissionBriefingModal({
           </div>
           <DialogDescription className="text-xs text-slate-400">
             {isBD
-              ? "Reconnaissance theatre: Bangladesh 64 Districts"
-              : "Reconnaissance theatre: World 195 Sovereign Nations"}
+              ? "Reconnaissance theatre: Bangladesh's 64 Districts"
+              : "Reconnaissance theatre: World's 195 Sovereign Nations"}
           </DialogDescription>
         </DialogHeader>
 

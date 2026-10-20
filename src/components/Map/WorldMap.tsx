@@ -24,6 +24,7 @@ import {
   Target,
   ShieldCheck,
   ShieldAlert,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -172,7 +173,7 @@ export function WorldMap() {
   }, [targetCountry, activeNeighbors]);
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 15) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 18) }));
   };
 
   const handleZoomOut = () => {
@@ -196,13 +197,13 @@ export function WorldMap() {
     <div
       ref={mapContainerRef}
       onMouseLeave={() => setInspectedCountry(null)}
-      className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-80px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+      className="relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-80px)] min-h-90 sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
     >
       {/* Background Grid */}
       <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
       {/* Floating Zoom Controls (Top Right) */}
-      <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 backdrop-blur-md shadow-lg">
+      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex flex-col gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 backdrop-blur-md shadow-lg">
         <Button
           variant="ghost"
           size="icon"
@@ -236,19 +237,19 @@ export function WorldMap() {
       </div>
 
       {/* Scope Badge & Target Highlight Badge (Top Left) */}
-      <div className="absolute top-4 left-4 z-20 flex flex-col gap-1.5 pointer-events-none">
-        <div className="flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 text-sky-300 text-xs px-3 py-1.5 rounded-full backdrop-blur-md">
-          <Globe2 className="size-3.5 text-sky-400" />
+      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex flex-col gap-1 sm:gap-1.5 pointer-events-none">
+        <div className="flex items-center gap-1.5 sm:gap-2 bg-sky-500/10 border border-sky-500/30 text-sky-300 text-2xs sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
+          <Globe2 className="size-3 sm:size-3.5 text-sky-400 shrink-0" />
           <span>World • 190+ Sovereign Nations</span>
         </div>
-        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs px-2.5 py-1 rounded-full backdrop-blur-md">
-          <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
+        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-2xs sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full backdrop-blur-md">
+          <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
           <span>Target Border Highlighted</span>
         </div>
       </div>
 
-      {/* Floating Reconnaissance Window (Top Right next to zoom controls) */}
-      <div className="absolute top-4 right-16 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
+      {/* Desktop Floating Reconnaissance Window (Hidden on mobile to preserve touch map area) */}
+      <div className="hidden md:block absolute top-4 right-16 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
         {difficulty === "hard" &&
         (!inspectedCountry ||
           (!activeNeighbors.includes(inspectedCountry.id) &&
@@ -313,9 +314,7 @@ export function WorldMap() {
                   <span className="font-semibold text-slate-400">
                     Unrevealed Nation
                   </span>
-                  <span className="text-2xs text-slate-500">
-                    Normal Mode
-                  </span>
+                  <span className="text-2xs text-slate-500">Normal Mode</span>
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Only highlighted adjacent borders and guesses show info.
@@ -456,7 +455,7 @@ export function WorldMap() {
           center={position.coordinates}
           filterZoomEvent={filterZoomEvent}
           onMoveEnd={(pos) => setPosition(pos)}
-          maxZoom={15}
+          maxZoom={18}
           minZoom={1}
         >
           <Geographies geography={GEO_URL}>
@@ -758,23 +757,88 @@ export function WorldMap() {
         </ZoomableGroup>
       </ComposableMap>
 
+      {/* Mobile Bottom Reconnaissance Sheet */}
+      {inspectedCountry && (
+        <div className="md:hidden absolute bottom-2 left-2 right-2 z-30 rounded-2xl border border-slate-700/90 bg-slate-900/98 p-3 shadow-2xl backdrop-blur-xl text-xs text-slate-200 space-y-2 animate-in fade-in zoom-in-95">
+          <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="text-xl leading-none">
+                {inspectedCountry.flagEmoji}
+              </span>
+              <div>
+                <h4 className="font-bold text-white text-sm leading-tight">
+                  {isTargetInspected && gameStatus === "playing"
+                    ? "Mystery Target"
+                    : inspectedCountry.name}
+                </h4>
+                <p className="text-2xs text-sky-400">
+                  {inspectedCountry.region}
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setInspectedCountry(null)}
+              className="size-7 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
+              aria-label="Close Inspector"
+            >
+              <X className="size-3.5" />
+            </button>
+          </div>
+
+          {isTargetInspected && gameStatus === "playing" ? (
+            <p className="text-xs text-amber-300 leading-snug">
+              Highlighted amber border. Deduce this mystery nation using
+              distance clues!
+            </p>
+          ) : guessedCountriesMap.has(inspectedCountry.id) ? (
+            <div className="flex items-center justify-between text-xs pt-0.5">
+              <span>
+                Distance:{" "}
+                <strong className="text-amber-400">
+                  {guessedCountriesMap
+                    .get(inspectedCountry.id)
+                    ?.distanceKm.toLocaleString()}{" "}
+                  km
+                </strong>
+              </span>
+              <span className="font-mono text-xs text-sky-300">
+                {guessedCountriesMap.get(inspectedCountry.id)?.directionEmoji}{" "}
+                {guessedCountriesMap.get(inspectedCountry.id)?.direction}
+              </span>
+            </div>
+          ) : activeNeighbors.includes(inspectedCountry.id) ? (
+            <p className="text-xs text-sky-300 font-semibold">
+              {targetCountry.borders.length === 0
+                ? "Nearest Neighbor Country to Secret Target"
+                : "Adjacent Border to Secret Target"}
+            </p>
+          ) : (
+            <p className="text-2xs text-slate-400">
+              {difficulty === "normal"
+                ? "Unrevealed territory in Normal Mode."
+                : "Unexplored territory. Type in searchbox to guess!"}
+            </p>
+          )}
+        </div>
+      )}
+
       {/* Map Legend Footer */}
-      <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-900/85 px-3 py-1.5 rounded-xl border border-slate-800 text-xs text-slate-300 backdrop-blur-md shadow-lg">
+      <div className="absolute bottom-2 left-2 right-2 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-1.5 sm:gap-3 bg-slate-900/85 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-800 text-2xs sm:text-xs text-slate-300 backdrop-blur-md shadow-lg">
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
-          <span>Target Border</span>
+          <span className="size-2 sm:size-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
+          <span>Target</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-orange-500 ring-2 ring-orange-500/20" />
+          <span className="size-2 sm:size-2.5 rounded-full bg-orange-500 ring-2 ring-orange-500/20" />
           <span>Hot (&lt;1500km)</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-purple-500 ring-2 ring-purple-500/20" />
+          <span className="size-2 sm:size-2.5 rounded-full bg-purple-500 ring-2 ring-purple-500/20" />
           <span>Warm (1500-4000km)</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
-          <span>Neighbor Clue</span>
+          <span className="size-2 sm:size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
+          <span>Neighbor</span>
         </div>
       </div>
     </div>

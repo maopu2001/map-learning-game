@@ -33,6 +33,8 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
+  Map,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -60,6 +62,7 @@ export default function ExplorePage() {
   const [selectedWorld, setSelectedWorld] = useState<CountryData>(COUNTRIES[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [divisionFilter, setDivisionFilter] = useState("All");
+  const [mobileTab, setMobileTab] = useState<"map" | "dossier">("map");
 
   const [position, setPosition] = useState<{
     coordinates: [number, number];
@@ -233,10 +236,44 @@ export default function ExplorePage() {
           </div>
         </div>
 
+        {/* Mobile Tab Toggle Bar */}
+        <div className="lg:hidden flex items-center gap-1.5 p-1 rounded-2xl bg-black/40 border border-white/10 text-xs font-semibold">
+          <button
+            onClick={() => setMobileTab("map")}
+            className={`flex-1 py-2 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              mobileTab === "map"
+                ? realm === "bangladesh"
+                  ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/60"
+                  : "bg-sky-600 text-white shadow-md shadow-sky-950/60"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <Map className="size-3.5" />
+            <span>Map View</span>
+          </button>
+          <button
+            onClick={() => setMobileTab("dossier")}
+            className={`flex-1 py-2 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              mobileTab === "dossier"
+                ? "bg-purple-600 text-white shadow-md shadow-purple-950/60"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <BookOpen className="size-3.5" />
+            <span className="truncate">
+              {realm === "bangladesh" ? selectedBD?.name : selectedWorld?.name} Dossier
+            </span>
+          </button>
+        </div>
+
         {/* 2-Column Command Desk: Map (7) + Dossier (5) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-start">
           {/* Map Column (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-3">
+          <div
+            className={`lg:col-span-7 flex flex-col gap-3 ${
+              mobileTab === "map" ? "block" : "hidden lg:flex"
+            }`}
+          >
             {/* Division Filters (Bangladesh) */}
             {realm === "bangladesh" && (
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
@@ -262,12 +299,12 @@ export default function ExplorePage() {
             {/* Map Box */}
             <div
               ref={mapContainerRef}
-              className="relative w-full h-112 sm:h-136 lg:h-[calc(100vh-140px)] min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-140px)] min-h-[360px] sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
               {/* Floating Controls */}
-              <div className="absolute top-4 right-4 z-10 flex flex-col gap-1.5 bg-[#0c101c]/90 p-1.5 rounded-xl border border-white/10 backdrop-blur-md shadow-lg">
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 flex flex-col gap-1.5 bg-[#0c101c]/90 p-1.5 rounded-xl border border-white/10 backdrop-blur-md shadow-lg">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -301,13 +338,13 @@ export default function ExplorePage() {
               </div>
 
               {/* Active Selection Callout */}
-              <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-white/10 text-slate-200 text-xs px-3 py-1.5 rounded-full backdrop-blur-md">
-                <span className="text-base">
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-white/10 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
+                <span className="text-sm sm:text-base">
                   {realm === "bangladesh"
                     ? selectedBD?.flagEmoji
                     : selectedWorld?.flagEmoji}
                 </span>
-                <span className="font-bold">
+                <span className="font-bold text-2xs sm:text-xs">
                   {realm === "bangladesh"
                     ? selectedBD?.name
                     : selectedWorld?.name}
@@ -675,8 +712,39 @@ export default function ExplorePage() {
                 </ComposableMap>
               )}
 
-              {/* Legend */}
-              <div className="absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-300 backdrop-blur-md">
+              {/* Mobile Bottom Inspection Sheet */}
+              <div className="lg:hidden absolute bottom-2 left-2 right-2 z-20 flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-[#0c101c]/95 backdrop-blur-xl shadow-2xl">
+                <div className="flex items-center gap-2.5 overflow-hidden mr-2">
+                  <span className="text-2xl shrink-0">
+                    {realm === "bangladesh"
+                      ? selectedBD?.flagEmoji
+                      : selectedWorld?.flagEmoji}
+                  </span>
+                  <div className="truncate">
+                    <h4 className="font-bold text-white text-xs sm:text-sm truncate">
+                      {realm === "bangladesh"
+                        ? selectedBD?.name
+                        : selectedWorld?.name}
+                    </h4>
+                    <p className="text-2xs text-slate-400 truncate">
+                      {realm === "bangladesh"
+                        ? `${selectedBD?.division} Division • ${selectedBD?.borders.length} Borders`
+                        : `${selectedWorld?.capital} • ${selectedWorld?.region}`}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setMobileTab("dossier")}
+                  className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold flex items-center gap-1 shadow-md shadow-purple-950/50 cursor-pointer shrink-0"
+                >
+                  <span>Dossier</span>
+                  <ArrowRight className="size-3" />
+                </button>
+              </div>
+
+              {/* Legend (desktop) */}
+              <div className="hidden lg:flex absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-300 backdrop-blur-md">
                 <div className="flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
                   <span>Selected</span>
@@ -690,7 +758,19 @@ export default function ExplorePage() {
           </div>
 
           {/* Dossier & Quick Search Column (5 cols) */}
-          <div className="lg:col-span-5 space-y-3 lg:h-[calc(100vh-140px)] lg:overflow-y-auto pr-0 lg:pr-1">
+          <div
+            className={`lg:col-span-5 space-y-3 lg:h-[calc(100vh-140px)] lg:overflow-y-auto pr-0 lg:pr-1 ${
+              mobileTab === "dossier" ? "block" : "hidden lg:block"
+            }`}
+          >
+            {/* Mobile Back-to-Map button */}
+            <button
+              onClick={() => setMobileTab("map")}
+              className="lg:hidden w-full py-2.5 px-3 rounded-xl bg-white/5 border border-white/10 text-sky-400 hover:text-white flex items-center justify-center gap-2 text-xs font-semibold"
+            >
+              <Map className="size-3.5" />
+              <span>Back to Map View</span>
+            </button>
             {/* Search Input */}
             <div className="relative">
               <Search className="size-4 text-slate-500 absolute left-3 top-3" />
@@ -703,7 +783,7 @@ export default function ExplorePage() {
                 }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
               />
             </div>
 
@@ -778,9 +858,12 @@ export default function ExplorePage() {
                         <button
                           key={neighborName}
                           onClick={() => {
-                            if (neighborData) selectDistrict(neighborData);
+                            if (neighborData) {
+                              selectDistrict(neighborData);
+                              setMobileTab("map");
+                            }
                           }}
-                          className="px-2.5 py-1 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors"
+                          className="px-2.5 py-1.5 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors"
                         >
                           {neighborName} ↗
                         </button>
@@ -854,9 +937,12 @@ export default function ExplorePage() {
                         <button
                           key={iso}
                           onClick={() => {
-                            if (neighbor) selectCountry(neighbor);
+                            if (neighbor) {
+                              selectCountry(neighbor);
+                              setMobileTab("map");
+                            }
                           }}
-                          className="px-2.5 py-1 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors"
+                          className="px-2.5 py-1.5 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors"
                         >
                           {neighbor
                             ? `${neighbor.flagEmoji} ${neighbor.name}`
@@ -877,8 +963,11 @@ export default function ExplorePage() {
                   ? filteredDistricts.map((d) => (
                       <button
                         key={d.id}
-                        onClick={() => selectDistrict(d)}
-                        className="w-full text-left px-3 py-1.5 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
+                        onClick={() => {
+                          selectDistrict(d);
+                          setMobileTab("map");
+                        }}
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
                       >
                         <span className="font-semibold">{d.name}</span>
                         <span className="text-xs font-mono text-slate-500">
@@ -889,8 +978,11 @@ export default function ExplorePage() {
                   : filteredCountries.slice(0, 20).map((c) => (
                       <button
                         key={c.id}
-                        onClick={() => selectCountry(c)}
-                        className="w-full text-left px-3 py-1.5 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
+                        onClick={() => {
+                          selectCountry(c);
+                          setMobileTab("map");
+                        }}
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
                       >
                         <span className="font-semibold">
                           {c.flagEmoji} {c.name}

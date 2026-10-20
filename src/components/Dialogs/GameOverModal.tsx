@@ -97,7 +97,7 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white p-6 rounded-2xl shadow-2xl">
+      <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white p-5 sm:p-6 rounded-2xl shadow-2xl max-h-[90dvh] overflow-y-auto">
         <DialogHeader className="text-center sm:text-center space-y-3">
           <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-black/40 border border-white/10">
             {isWon ? (

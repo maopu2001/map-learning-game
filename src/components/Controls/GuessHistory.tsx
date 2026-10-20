@@ -84,32 +84,32 @@ export function GuessHistory() {
                         : "bg-[#0c101c] border-white/10"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{g.country.flagEmoji}</span>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm text-white">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-2xl shrink-0">{g.country.flagEmoji}</span>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="font-bold text-xs sm:text-sm text-white truncate">
                           {g.country.name}
                         </span>
                         {isWinner && (
                           <Badge
                             variant="success"
-                            className="text-2xs px-2 py-0"
+                            className="text-2xs px-1.5 py-0 shrink-0"
                           >
-                            TARGET FOUND
+                            FOUND
                           </Badge>
                         )}
                         {!isWinner && isVeryClose && (
                           <Badge
                             variant="amber"
-                            className="text-2xs px-2 py-0"
+                            className="text-2xs px-1.5 py-0 shrink-0"
                           >
                             HOT 🔥
                           </Badge>
                         )}
                       </div>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-2xs sm:text-xs text-slate-400 block truncate">
                         {districtItem
                           ? `${districtItem.division} Division`
                           : `${countryItem?.capital} • ${countryItem?.region}`}
@@ -117,24 +117,24 @@ export function GuessHistory() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 text-right">
+                  <div className="flex items-center gap-2 text-right shrink-0">
                     <div className="flex flex-col items-end">
-                      <span className="font-bold font-mono text-sm text-white flex items-center gap-1.5">
+                      <span className="font-bold font-mono text-xs sm:text-sm text-white flex items-center gap-1">
                         {g.isCorrect
                           ? "0 km"
                           : `${g.distanceKm.toLocaleString()} km`}
                         {showDirection ? (
-                          <span className="text-base">{g.directionEmoji}</span>
+                          <span className="text-sm sm:text-base">{g.directionEmoji}</span>
                         ) : (
                           <span className="text-xs text-slate-500">📏</span>
                         )}
                       </span>
-                      <span className="text-2xs text-slate-400 font-mono">
+                      <span className="text-3xs sm:text-2xs text-slate-400 font-mono">
                         {g.isCorrect
                           ? "Direct Hit"
                           : showDirection
-                            ? `Bearing: ${g.bearing}° ${g.direction}`
-                            : "Distance triangulated"}
+                            ? `${g.bearing}° ${g.direction}`
+                            : "Triangulated"}
                       </span>
                     </div>
                   </div>

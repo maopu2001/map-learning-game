@@ -81,129 +81,174 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
   return (
     <>
-      <header className="w-full flex items-center justify-between px-3 py-2 rounded-2xl border border-white/10 bg-[#070a12]/95 backdrop-blur-xl shadow-lg gap-2 text-xs">
-        {/* Left: Exit + Mission Details */}
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleExitClick}
-            className="h-8 px-2.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl flex items-center gap-1.5 cursor-pointer"
-            title="Exit to Hub"
-          >
-            <ArrowLeft className="size-3.5" />
-            <span className="hidden sm:inline text-xs font-semibold">Exit</span>
-          </Button>
+      <header className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between px-3 py-2 rounded-2xl border border-white/10 bg-[#070a12]/95 backdrop-blur-xl shadow-lg gap-2 text-xs">
+        {/* Row 1 on mobile, Left on desktop: Exit + Mission Details */}
+        <div className="flex items-center justify-between sm:justify-start gap-2 w-full sm:w-auto">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleExitClick}
+              className="h-8 px-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl flex items-center gap-1 cursor-pointer shrink-0"
+              title="Exit to Hub"
+            >
+              <ArrowLeft className="size-3.5" />
+              <span className="hidden sm:inline text-xs font-semibold">Exit</span>
+            </Button>
 
-          <div className="h-4 w-px bg-white/10" />
+            <div className="h-4 w-px bg-white/10 shrink-0" />
 
-          {/* Current Mission Badges */}
-          <div className="flex items-center gap-1.5">
-            <span className="text-base leading-none">{isBD ? "🇧🇩" : "🌍"}</span>
-            <span className="font-bold text-white tracking-wide text-xs">
-              {isBD ? "Bangladesh 64" : "World Nations"}
-            </span>
+            {/* Current Mission Badges */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-base leading-none shrink-0">{isBD ? "🇧🇩" : "🌍"}</span>
+              <span className="font-bold text-white tracking-wide text-xs whitespace-nowrap">
+                {isBD ? "Bangladesh" : "World"}
+              </span>
 
-            <Badge
-              variant="outline"
-              className={`text-2xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
-                mode === "daily"
-                  ? "border-sky-500/40 text-sky-300 bg-sky-500/10"
+              <Badge
+                variant="outline"
+                className={`text-2xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
+                  mode === "daily"
+                    ? "border-sky-500/40 text-sky-300 bg-sky-500/10"
+                    : mode === "streak"
+                      ? "border-amber-500/40 text-amber-300 bg-amber-500/10"
+                      : "border-rose-500/40 text-rose-300 bg-rose-500/10"
+                }`}
+              >
+                {mode === "daily"
+                  ? "Daily"
                   : mode === "streak"
-                    ? "border-amber-500/40 text-amber-300 bg-amber-500/10"
-                    : "border-rose-500/40 text-rose-300 bg-rose-500/10"
-              }`}
-            >
-              {mode === "daily"
-                ? "Daily"
-                : mode === "streak"
-                  ? isBD
-                    ? "Hop Streak"
-                    : "Border Streak"
-                  : "Blitz"}
-            </Badge>
+                    ? isBD
+                      ? "Hop Streak"
+                      : "Border Streak"
+                    : "Blitz"}
+              </Badge>
 
-            <Badge
+              <Badge
+                variant="outline"
+                className={`text-2xs font-mono uppercase px-2 py-0.5 rounded-lg border hidden md:inline-flex ${
+                  difficulty === "easy"
+                    ? "border-emerald-500/30 text-emerald-300 bg-emerald-500/10"
+                    : difficulty === "normal"
+                      ? "border-amber-500/30 text-amber-300 bg-amber-500/10"
+                      : "border-rose-500/30 text-rose-300 bg-rose-500/10"
+                }`}
+              >
+                {difficulty}
+              </Badge>
+            </div>
+          </div>
+
+          {/* Quick Actions (Mode & Reset) on mobile top right */}
+          <div className="flex sm:hidden items-center gap-1">
+            <Button
               variant="outline"
-              className={`text-2xs font-mono uppercase px-2 py-0.5 rounded-lg border hidden md:inline-flex ${
-                difficulty === "easy"
-                  ? "border-emerald-500/30 text-emerald-300 bg-emerald-500/10"
-                  : difficulty === "normal"
-                    ? "border-amber-500/30 text-amber-300 bg-amber-500/10"
-                    : "border-rose-500/30 text-rose-300 bg-rose-500/10"
-              }`}
+              size="sm"
+              onClick={onOpenBriefing}
+              className="h-8 text-2xs border-white/10 bg-white/5 hover:bg-white/10 text-slate-200 px-2 rounded-xl flex items-center gap-1 cursor-pointer"
+              title="Change Mode"
             >
-              {difficulty}
-            </Badge>
+              <SlidersHorizontal className="size-3 text-sky-400" />
+              <span className="font-semibold">Mode</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setStatsOpen(true)}
+              title="Career Dossier"
+              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+            >
+              <Trophy className="size-3.5 text-amber-400" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setHelpOpen(true)}
+              title="Directives"
+              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+            >
+              <HelpCircle className="size-3.5 text-sky-400" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleResetClick}
+              title={isMissionActive ? "Abandon & Restart" : "New Round"}
+              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+            >
+              <RotateCcw className="size-3.5" />
+            </Button>
           </div>
         </div>
 
-        {/* Center: Live Mission Telemetry */}
-        <div className="flex items-center gap-2 font-mono">
-          {mode === "blitz" && (
-            <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 font-bold text-xs">
-              <Timer className="size-3.5 animate-pulse text-rose-400" />
-              <span>{blitzTimeLeft}s</span>
-            </div>
-          )}
+        {/* Row 2 on mobile, Center + Right on desktop: Telemetry & Actions */}
+        <div className="flex items-center justify-between sm:justify-end gap-2 font-mono w-full sm:w-auto pt-1 sm:pt-0 border-t border-white/5 sm:border-t-0">
+          <div className="flex items-center gap-2">
+            {mode === "blitz" && (
+              <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 font-bold text-xs">
+                <Timer className="size-3.5 animate-pulse text-rose-400" />
+                <span>{blitzTimeLeft}s</span>
+              </div>
+            )}
 
-          {mode === "streak" && (
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-amber-950/60 border border-amber-500/40 text-amber-300 font-bold text-xs">
-              <Flame className="size-3.5 text-amber-400" />
-              <span>Streak: {stats.streak}</span>
-            </div>
-          )}
+            {mode === "streak" && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-amber-950/60 border border-amber-500/40 text-amber-300 font-bold text-xs">
+                <Flame className="size-3.5 text-amber-400" />
+                <span>Streak: {stats.streak}</span>
+              </div>
+            )}
 
-          {/* Guesses Pip Tracker */}
-          <div className="flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-xl border border-white/5 text-2xs text-slate-300">
-            <span className="text-slate-400">Guesses:</span>
-            <span className="font-bold text-white text-xs">{guesses.length}</span>
-            <span className="text-slate-500">/ {maxGuesses}</span>
+            {/* Guesses Pip Tracker */}
+            <div className="flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-xl border border-white/5 text-2xs text-slate-300">
+              <span className="text-slate-400">Guesses:</span>
+              <span className="font-bold text-white text-xs">{guesses.length}</span>
+              <span className="text-slate-500">/ {maxGuesses}</span>
+            </div>
           </div>
-        </div>
 
-        {/* Right: Actions */}
-        <div className="flex items-center gap-1.5">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onOpenBriefing}
-            className="h-8 text-2xs border-white/10 bg-white/5 hover:bg-white/10 text-slate-200 px-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer"
-            title="Change Mode or Difficulty"
-          >
-            <SlidersHorizontal className="size-3 text-sky-400" />
-            <span className="hidden sm:inline font-semibold">Mode</span>
-          </Button>
+          {/* Desktop Right Actions */}
+          <div className="hidden sm:flex items-center gap-1.5">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onOpenBriefing}
+              className="h-8 text-2xs border-white/10 bg-white/5 hover:bg-white/10 text-slate-200 px-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer"
+              title="Change Mode or Difficulty"
+            >
+              <SlidersHorizontal className="size-3 text-sky-400" />
+              <span className="hidden sm:inline font-semibold">Mode</span>
+            </Button>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setStatsOpen(true)}
-            title="Career Dossier"
-            className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
-          >
-            <Trophy className="size-4 text-amber-400" />
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setStatsOpen(true)}
+              title="Career Dossier"
+              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+            >
+              <Trophy className="size-4 text-amber-400" />
+            </Button>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setHelpOpen(true)}
-            title="Directives"
-            className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
-          >
-            <HelpCircle className="size-4 text-sky-400" />
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setHelpOpen(true)}
+              title="Directives"
+              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+            >
+              <HelpCircle className="size-4 text-sky-400" />
+            </Button>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleResetClick}
-            title={isMissionActive ? "Abandon & Restart" : "New Round"}
-            className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
-          >
-            <RotateCcw className="size-4" />
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleResetClick}
+              title={isMissionActive ? "Abandon & Restart" : "New Round"}
+              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+            >
+              <RotateCcw className="size-4" />
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -214,7 +259,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
           if (!open) setAbandonPending(null);
         }}
       >
-        <DialogContent className="sm:max-w-md bg-[#0a0f1d] border border-amber-500/30 text-white rounded-3xl shadow-2xl backdrop-blur-xl">
+        <DialogContent className="sm:max-w-md bg-[#0a0f1d] border border-amber-500/30 text-white rounded-3xl shadow-2xl backdrop-blur-xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader className="space-y-2">
             <div className="flex items-center gap-2">
               <div className="size-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
@@ -266,7 +311,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
       {/* Career Record Modal */}
       <Dialog open={statsOpen} onOpenChange={setStatsOpen}>
-        <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl">
+        <DialogContent className="sm:max-w-md bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <Trophy className="size-5 text-amber-400" />
@@ -302,7 +347,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
       {/* Mission Directives Modal */}
       <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
-        <DialogContent className="sm:max-w-lg bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-screen overflow-y-auto">
+        <DialogContent className="sm:max-w-lg bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <MapPin className="size-5 text-sky-400" />
