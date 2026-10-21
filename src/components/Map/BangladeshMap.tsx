@@ -6,7 +6,6 @@ import {
   Geographies,
   Geography,
   ZoomableGroup,
-  Marker,
 } from "react-simple-maps";
 import { useGameStore } from "@/lib/store";
 import { DISTRICTS_BY_NAME, DistrictData } from "@/data/bangladesh";
@@ -21,6 +20,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 
 const GEO_URL = "/data/bangladesh-districts-geo.json";
 
@@ -675,21 +675,13 @@ export function BangladeshMap() {
 
           {/* Target marker when game is won */}
           {gameStatus === "won" && targetDistrict && (
-            <Marker
+            <TargetPulseMarker
               coordinates={[
                 targetDistrict.coordinates[1],
                 targetDistrict.coordinates[0],
               ]}
-            >
-              <circle
-                r={6}
-                fill="#10b981"
-                stroke="#ffffff"
-                strokeWidth={2}
-                className="animate-ping opacity-75"
-              />
-              <circle r={3.5} fill="#ffffff" />
-            </Marker>
+              zoom={position.zoom}
+            />
           )}
         </ZoomableGroup>
       </ComposableMap>

@@ -19,8 +19,8 @@ import {
   Geographies,
   Geography,
   ZoomableGroup,
-  Marker,
 } from "react-simple-maps";
+import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 import {
   BookOpen,
   Search,
@@ -518,21 +518,14 @@ export default function ExplorePage() {
 
                     {/* Marker on selected district */}
                     {selectedBD && (
-                      <Marker
+                      <TargetPulseMarker
                         coordinates={[
                           selectedBD.coordinates[1],
                           selectedBD.coordinates[0],
                         ]}
-                      >
-                        <circle
-                          r={5}
-                          fill="#10b981"
-                          stroke="#ffffff"
-                          strokeWidth={1.5}
-                          className="animate-ping opacity-75"
-                        />
-                        <circle r={3} fill="#ffffff" />
-                      </Marker>
+                        zoom={position.zoom}
+                        fillColor="#10b981"
+                      />
                     )}
                   </ZoomableGroup>
                 </ComposableMap>
@@ -692,21 +685,14 @@ export default function ExplorePage() {
                     </Geographies>
 
                     {selectedWorld && (
-                      <Marker
+                      <TargetPulseMarker
                         coordinates={[
                           selectedWorld.coordinates[1],
                           selectedWorld.coordinates[0],
                         ]}
-                      >
-                        <circle
-                          r={5}
-                          fill="#0284c7"
-                          stroke="#ffffff"
-                          strokeWidth={1.5}
-                          className="animate-ping opacity-75"
-                        />
-                        <circle r={3} fill="#ffffff" />
-                      </Marker>
+                        zoom={position.zoom}
+                        fillColor="#0284c7"
+                      />
                     )}
                   </ZoomableGroup>
                 </ComposableMap>

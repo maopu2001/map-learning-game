@@ -7,7 +7,6 @@ import {
   Geography,
   ZoomableGroup,
   Line,
-  Marker,
 } from "react-simple-maps";
 import { useGameStore } from "@/lib/store";
 import {
@@ -27,6 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 
 const GEO_URL = "/data/world-countries-geo-50m.json";
 
@@ -738,21 +738,13 @@ export function WorldMap() {
 
           {/* Target marker when game is won */}
           {gameStatus === "won" && targetCountry && (
-            <Marker
+            <TargetPulseMarker
               coordinates={[
                 targetCountry.coordinates[1],
                 targetCountry.coordinates[0],
               ]}
-            >
-              <circle
-                r={6}
-                fill="#10b981"
-                stroke="#ffffff"
-                strokeWidth={2}
-                className="animate-ping opacity-75"
-              />
-              <circle r={3.5} fill="#ffffff" />
-            </Marker>
+              zoom={position.zoom}
+            />
           )}
         </ZoomableGroup>
       </ComposableMap>

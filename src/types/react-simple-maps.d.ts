@@ -92,4 +92,11 @@ declare module "react-simple-maps" {
   }
 
   export const Graticule: React.FC<GraticuleProps>;
+
+  export function useZoomPanContext(): {
+    x?: number;
+    y?: number;
+    k?: number;
+    transformString?: string;
+  };
 }
