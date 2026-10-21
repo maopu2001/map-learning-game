@@ -32,15 +32,25 @@ export function TargetPulseMarker({
   const strokeW = strokeScreenW / zoom;
 
   return (
-    <Marker coordinates={coordinates}>
+    <Marker
+      coordinates={coordinates}
+      style={{ pointerEvents: "none" }}
+      className="pointer-events-none select-none"
+    >
       <circle
         r={outerR}
         fill={fillColor}
         stroke="#ffffff"
         strokeWidth={strokeW}
-        className="animate-ping opacity-75"
+        style={{ pointerEvents: "none" }}
+        className="animate-ping opacity-75 pointer-events-none"
       />
-      <circle r={innerR} fill="#ffffff" />
+      <circle
+        r={innerR}
+        fill="#ffffff"
+        style={{ pointerEvents: "none" }}
+        className="pointer-events-none"
+      />
     </Marker>
   );
 }
