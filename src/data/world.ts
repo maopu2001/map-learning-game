@@ -17,7 +17,7 @@ export interface CountryData {
   borders: string[]; // ["ARG", "BRA", "CHL", "PRY", "PER"]
   region: string;
   subregion: string;
-  maritimeNeighbors?: MaritimeNeighbor[];
+  maritimeNeighbors?: string[];
   flagEmoji: string;
   triviaFact: string;
   area: number;
@@ -98,22 +98,36 @@ export function getNearestCountries(
   country: CountryData,
   count = 3,
 ): CountryData[] {
-  // If country already has maritimeNeighbors defined, prefer those
+  const result: CountryData[] = [];
+  const seenIds = new Set<string>([country.id]);
+
+  // 1. If country has maritimeNeighbors defined, prioritize them
   if (country.maritimeNeighbors && country.maritimeNeighbors.length > 0) {
-    const list = country.maritimeNeighbors
-      .map((m) => COUNTRIES_BY_ID.get(m.id))
-      .filter((c): c is CountryData => Boolean(c));
-    if (list.length >= count) return list.slice(0, count);
+    for (const id of country.maritimeNeighbors) {
+      const neighbor = COUNTRIES_BY_ID.get(id);
+      if (neighbor && !seenIds.has(neighbor.id)) {
+        result.push(neighbor);
+        seenIds.add(neighbor.id);
+        if (result.length >= count) return result;
+      }
+    }
   }
 
-  return COUNTRIES.filter((c) => c.id !== country.id)
-    .map((c) => ({
-      country: c,
-      dist: haversineDistKm(country.coordinates, c.coordinates),
-    }))
-    .sort((a, b) => a.dist - b.dist)
-    .slice(0, count)
-    .map((item) => item.country);
+  // 2. If we still need more countries to reach count, fill by geographic distance
+  if (result.length < count) {
+    const remaining = COUNTRIES.filter((c) => !seenIds.has(c.id))
+      .map((c) => ({
+        country: c,
+        dist: haversineDistKm(country.coordinates, c.coordinates),
+      }))
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, count - result.length)
+      .map((item) => item.country);
+
+    result.push(...remaining);
+  }
+
+  return result;
 }
 
 export function getEffectiveBorders(country: CountryData): string[] {
