@@ -60,6 +60,8 @@ export default function ExplorePage() {
     BANGLADESH_DISTRICTS[0],
   );
   const [selectedWorld, setSelectedWorld] = useState<CountryData>(COUNTRIES[0]);
+  const [hoveredBD, setHoveredBD] = useState<DistrictData | null>(null);
+  const [hoveredWorld, setHoveredWorld] = useState<CountryData | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [divisionFilter, setDivisionFilter] = useState("All");
   const [mobileTab, setMobileTab] = useState<"map" | "dossier">("map");
@@ -389,6 +391,15 @@ export default function ExplorePage() {
                                 selectedBD.name.toLowerCase(),
                             )
                           : null;
+                        const hoveredGeo = hoveredBD
+                          ? geographies.find(
+                              (g) =>
+                                (
+                                  g.properties.shapeName as string
+                                ).toLowerCase() ===
+                                hoveredBD.name.toLowerCase(),
+                            )
+                          : null;
                         const neighborGeos = selectedBD
                           ? geographies.filter((g) =>
                               selectedBD.borders.some(
@@ -440,6 +451,12 @@ export default function ExplorePage() {
                                 <Geography
                                   key={geo.rsmKey}
                                   geography={geo}
+                                  onMouseEnter={() => {
+                                    if (district) setHoveredBD(district);
+                                  }}
+                                  onMouseLeave={() => {
+                                    setHoveredBD(null);
+                                  }}
                                   onClick={() => {
                                     if (district) selectDistrict(district);
                                   }}
@@ -448,6 +465,8 @@ export default function ExplorePage() {
                                       fill,
                                       stroke,
                                       strokeWidth: 0.65,
+                                      strokeLinejoin: "round",
+                                      strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
                                       transition: "fill 200ms ease",
@@ -456,6 +475,8 @@ export default function ExplorePage() {
                                       fill: isSelected ? fill : "#1e3a5f",
                                       stroke: "#60a5fa",
                                       strokeWidth: 0.65,
+                                      strokeLinejoin: "round",
+                                      strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
                                       cursor: "pointer",
@@ -497,14 +518,46 @@ export default function ExplorePage() {
                                   default: {
                                     fill: "rgba(16, 185, 129, 0.2)",
                                     stroke: "#34d399",
-                                    strokeWidth: 0.65,
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
                                     fill: "rgba(16, 185, 129, 0.2)",
                                     stroke: "#34d399",
-                                    strokeWidth: 0.65,
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
+                                    vectorEffect: "non-scaling-stroke",
+                                    pointerEvents: "none",
+                                  },
+                                }}
+                              />
+                            )}
+
+                            {/* Hovered district overlay - complete perimeter on top */}
+                            {hoveredGeo && hoveredGeo !== selectedGeo && (
+                              <Geography
+                                key={`overlay-bd-hover-${hoveredGeo.rsmKey}`}
+                                geography={hoveredGeo}
+                                style={{
+                                  default: {
+                                    fill: "rgba(96, 165, 250, 0.18)",
+                                    stroke: "#60a5fa",
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
+                                    vectorEffect: "non-scaling-stroke",
+                                    pointerEvents: "none",
+                                  },
+                                  hover: {
+                                    fill: "rgba(96, 165, 250, 0.18)",
+                                    stroke: "#60a5fa",
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
@@ -565,6 +618,17 @@ export default function ExplorePage() {
                               return c?.id === selectedWorld.id;
                             })
                           : null;
+                        const hoveredGeo = hoveredWorld
+                          ? geographies.find((g) => {
+                              const gid = String(g.id);
+                              const c =
+                                COUNTRIES_BY_NUMERIC.get(gid) ||
+                                COUNTRIES_BY_NUMERIC.get(
+                                  String(parseInt(gid, 10)),
+                                );
+                              return c?.id === hoveredWorld.id;
+                            })
+                          : null;
                         const neighborGeos = selectedWorld
                           ? geographies.filter((g) => {
                               const gid = String(g.id);
@@ -609,6 +673,12 @@ export default function ExplorePage() {
                                 <Geography
                                   key={geo.rsmKey}
                                   geography={geo}
+                                  onMouseEnter={() => {
+                                    if (country) setHoveredWorld(country);
+                                  }}
+                                  onMouseLeave={() => {
+                                    setHoveredWorld(null);
+                                  }}
                                   onClick={() => {
                                     if (country) selectCountry(country);
                                   }}
@@ -617,6 +687,8 @@ export default function ExplorePage() {
                                       fill,
                                       stroke,
                                       strokeWidth: 0.55,
+                                      strokeLinejoin: "round",
+                                      strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
                                     },
@@ -624,6 +696,8 @@ export default function ExplorePage() {
                                       fill: isSelected ? fill : "#1e2c45",
                                       stroke: "#94a3b8",
                                       strokeWidth: 0.55,
+                                      strokeLinejoin: "round",
+                                      strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
                                       cursor: "pointer",
@@ -665,14 +739,46 @@ export default function ExplorePage() {
                                   default: {
                                     fill: "rgba(2, 132, 199, 0.22)",
                                     stroke: "#38bdf8",
-                                    strokeWidth: 0.55,
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
                                     fill: "rgba(2, 132, 199, 0.22)",
                                     stroke: "#38bdf8",
-                                    strokeWidth: 0.55,
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
+                                    vectorEffect: "non-scaling-stroke",
+                                    pointerEvents: "none",
+                                  },
+                                }}
+                              />
+                            )}
+
+                            {/* Hovered country overlay - complete perimeter on top */}
+                            {hoveredGeo && hoveredGeo !== selectedGeo && (
+                              <Geography
+                                key={`overlay-world-hover-${hoveredGeo.rsmKey}`}
+                                geography={hoveredGeo}
+                                style={{
+                                  default: {
+                                    fill: "rgba(148, 163, 184, 0.16)",
+                                    stroke: "#94a3b8",
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
+                                    vectorEffect: "non-scaling-stroke",
+                                    pointerEvents: "none",
+                                  },
+                                  hover: {
+                                    fill: "rgba(148, 163, 184, 0.16)",
+                                    stroke: "#94a3b8",
+                                    strokeWidth: 1.2,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
