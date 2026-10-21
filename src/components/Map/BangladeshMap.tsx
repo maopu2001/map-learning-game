@@ -437,22 +437,24 @@ export function BangladeshMap() {
               // Find highlighted geos to overlay on top so entire perimeter borders are complete and unbroken
               const targetGeo = targetDistrict
                 ? geographies.find(
-                    (g) => g.properties.shapeName === targetDistrict.name,
+                    (g) => g.properties?.shapeName === targetDistrict.name,
                   )
                 : null;
-              const neighborGeos = geographies.filter((g) =>
-                activeNeighbors.includes(g.properties.shapeName as string),
-              );
+              const neighborGeos = geographies.filter((g) => {
+                const sName = g.properties?.shapeName as string | undefined;
+                return Boolean(sName && activeNeighbors.includes(sName));
+              });
               const inspectedGeo = inspectedDistrict
                 ? geographies.find(
-                    (g) => g.properties.shapeName === inspectedDistrict.name,
+                    (g) => g.properties?.shapeName === inspectedDistrict.name,
                   )
                 : null;
 
               return (
                 <>
                   {geographies.map((geo) => {
-                    const districtName = geo.properties.shapeName as string;
+                    const districtName = (geo.properties?.shapeName as string) || "";
+                    if (!districtName) return null;
                     const districtData = DISTRICTS_BY_NAME.get(
                       districtName.toLowerCase(),
                     );

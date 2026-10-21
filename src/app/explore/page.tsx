@@ -27,6 +27,7 @@ import {
   Globe2,
   MapPin,
   Users,
+  Maximize2,
   Compass,
   Sparkles,
   Layers,
@@ -62,6 +63,7 @@ export default function ExplorePage() {
   const [selectedWorld, setSelectedWorld] = useState<CountryData>(COUNTRIES[0]);
   const [hoveredBD, setHoveredBD] = useState<DistrictData | null>(null);
   const [hoveredWorld, setHoveredWorld] = useState<CountryData | null>(null);
+  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [divisionFilter, setDivisionFilter] = useState("All");
   const [mobileTab, setMobileTab] = useState<"map" | "dossier">("map");
@@ -129,6 +131,9 @@ export default function ExplorePage() {
   const handleRealmChange = (newRealm: "bangladesh" | "world") => {
     setRealm(newRealm);
     setSearchQuery("");
+    setHoveredBD(null);
+    setHoveredWorld(null);
+    setMousePos(null);
     if (newRealm === "bangladesh") {
       setPosition({ coordinates: [90.3563, 23.685], zoom: 1 });
     } else {
@@ -301,6 +306,18 @@ export default function ExplorePage() {
             {/* Map Box */}
             <div
               ref={mapContainerRef}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setMousePos({
+                  x: e.clientX - rect.left,
+                  y: e.clientY - rect.top,
+                });
+              }}
+              onMouseLeave={() => {
+                setMousePos(null);
+                setHoveredBD(null);
+                setHoveredWorld(null);
+              }}
               className="relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-140px)] min-h-[360px] sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
@@ -385,38 +402,35 @@ export default function ExplorePage() {
                         const selectedGeo = selectedBD
                           ? geographies.find(
                               (g) =>
-                                (
-                                  g.properties.shapeName as string
-                                ).toLowerCase() ===
+                                (g.properties?.shapeName as string | undefined)?.toLowerCase() ===
                                 selectedBD.name.toLowerCase(),
                             )
                           : null;
                         const hoveredGeo = hoveredBD
                           ? geographies.find(
                               (g) =>
-                                (
-                                  g.properties.shapeName as string
-                                ).toLowerCase() ===
+                                (g.properties?.shapeName as string | undefined)?.toLowerCase() ===
                                 hoveredBD.name.toLowerCase(),
                             )
                           : null;
                         const neighborGeos = selectedBD
-                          ? geographies.filter((g) =>
-                              selectedBD.borders.some(
-                                (b) =>
-                                  b.toLowerCase() ===
-                                  (
-                                    g.properties.shapeName as string
-                                  ).toLowerCase(),
-                              ),
-                            )
+                          ? geographies.filter((g) => {
+                              const sName = (g.properties?.shapeName as string | undefined)?.toLowerCase();
+                              return (
+                                Boolean(sName) &&
+                                selectedBD.borders.some(
+                                  (b) => b.toLowerCase() === sName,
+                                )
+                              );
+                            })
                           : [];
 
                         return (
                           <>
                             {geographies.map((geo) => {
-                              const districtName = geo.properties
-                                .shapeName as string;
+                              const districtName =
+                                (geo.properties?.shapeName as string) || "";
+                              if (!districtName) return null;
                               const district = DISTRICTS_BY_NAME.get(
                                 districtName.toLowerCase(),
                               );
@@ -846,6 +860,41 @@ export default function ExplorePage() {
                   <span>Border Neighbor</span>
                 </div>
               </div>
+
+              {/* Elevated Floating Reconnaissance Pill following cursor */}
+              {mousePos && (realm === "bangladesh" ? hoveredBD : hoveredWorld) && (
+                <div
+                  className="pointer-events-none absolute z-30 transition-transform duration-75 ease-out select-none"
+                  style={{
+                    left: mousePos.x,
+                    top: mousePos.y < 50 ? mousePos.y + 18 : mousePos.y - 12,
+                    transform:
+                      mousePos.y < 50
+                        ? "translate(-50%, 0)"
+                        : "translate(-50%, -100%)",
+                  }}
+                >
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0c101c]/95 border border-white/20 shadow-2xl shadow-black/80 backdrop-blur-md text-xs whitespace-nowrap">
+                    <span className="text-base leading-none">
+                      {realm === "bangladesh"
+                        ? hoveredBD?.flagEmoji
+                        : hoveredWorld?.flagEmoji}
+                    </span>
+                    <span className="font-bold text-white">
+                      {realm === "bangladesh"
+                        ? hoveredBD?.name
+                        : hoveredWorld?.name}
+                    </span>
+                    <span className="text-slate-400 text-2xs border-l border-white/10 pl-2">
+                      {realm === "bangladesh"
+                        ? `${hoveredBD?.division} Division`
+                        : hoveredWorld?.capital
+                        ? hoveredWorld.capital
+                        : hoveredWorld?.region}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -973,17 +1022,33 @@ export default function ExplorePage() {
                       <h3 className="text-xl font-black text-white">
                         {selectedWorld.name}
                       </h3>
+                      {selectedWorld.officialName &&
+                        selectedWorld.officialName !== selectedWorld.name && (
+                          <p className="text-2xs text-slate-400 italic truncate max-w-[220px]">
+                            {selectedWorld.officialName}
+                          </p>
+                        )}
                       <p className="text-xs text-sky-400 font-medium">
                         {selectedWorld.region} • {selectedWorld.subregion}
                       </p>
                     </div>
                   </div>
-                  <Badge
-                    variant="outline"
-                    className="border-sky-500/30 text-sky-300 font-mono text-2xs"
-                  >
-                    {selectedWorld.id}
-                  </Badge>
+                  <div className="flex flex-col items-end gap-1">
+                    <Badge
+                      variant="outline"
+                      className="border-sky-500/30 text-sky-300 font-mono text-2xs"
+                    >
+                      {selectedWorld.id}
+                    </Badge>
+                    {selectedWorld.isIsland && (
+                      <Badge
+                        variant="outline"
+                        className="border-sky-500/30 text-sky-400 font-sans text-2xs"
+                      >
+                        Island State
+                      </Badge>
+                    )}
+                  </div>
                 </div>
 
                 {/* Specs */}
@@ -1002,7 +1067,24 @@ export default function ExplorePage() {
                       <Users className="size-3 text-sky-400" /> Population
                     </span>
                     <span className="font-semibold font-mono text-white">
-                      {selectedWorld.population.toLocaleString()}
+                      {selectedWorld.population ? selectedWorld.population.toLocaleString() : "N/A"}
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                    <span className="text-slate-400 text-xs flex items-center gap-1">
+                      <Maximize2 className="size-3 text-amber-400" /> Surface Area
+                    </span>
+                    <span className="font-semibold font-mono text-white">
+                      {selectedWorld.area ? `${selectedWorld.area.toLocaleString()} km²` : "N/A"}
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                    <span className="text-slate-400 text-xs flex items-center gap-1">
+                      <Compass className="size-3 text-purple-400" /> Centroid Coordinates
+                    </span>
+                    <span className="font-semibold font-mono text-white">
+                      {Math.abs(selectedWorld.coordinates[0]).toFixed(1)}°{selectedWorld.coordinates[0] >= 0 ? "N" : "S"},{" "}
+                      {Math.abs(selectedWorld.coordinates[1]).toFixed(1)}°{selectedWorld.coordinates[1] >= 0 ? "E" : "W"}
                     </span>
                   </div>
                 </div>
@@ -1019,8 +1101,8 @@ export default function ExplorePage() {
                 <div className="space-y-2">
                   <h4 className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider">
                     {selectedWorld.borders.length === 0
-                      ? "Nearest Neighbor Nations (Click to Pan):"
-                      : "Land Borders (Click to Pan):"}
+                      ? "Proximate Maritime Neighbors (EEZ):"
+                      : `Contiguous Land Borders (${selectedWorld.borders.length}):`}
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {getEffectiveBorders(selectedWorld).map((iso) => {
