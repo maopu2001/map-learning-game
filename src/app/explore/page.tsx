@@ -357,19 +357,20 @@ export default function ExplorePage() {
               </div>
 
               {/* Active Selection Callout */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-white/10 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
+                <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
                 <span className="text-sm sm:text-base">
                   {realm === "bangladesh"
                     ? selectedBD?.flagEmoji
                     : selectedWorld?.flagEmoji}
                 </span>
-                <span className="font-bold text-2xs sm:text-xs">
+                <span className="font-bold text-white text-2xs sm:text-xs">
                   {realm === "bangladesh"
                     ? selectedBD?.name
                     : selectedWorld?.name}
                 </span>
-                <span className="text-slate-400 text-2xs hidden sm:inline">
-                  (Click any shape to inspect)
+                <span className="text-amber-400/80 text-2xs hidden sm:inline font-mono">
+                  (Target Selected)
                 </span>
               </div>
 
@@ -399,6 +400,10 @@ export default function ExplorePage() {
                   >
                     <Geographies geography={BD_GEO_URL}>
                       {({ geographies }) => {
+                        const strokeWidth = Math.max(
+                          0.35,
+                          Math.min(0.85, 0.65 / Math.sqrt(position.zoom)),
+                        );
                         const selectedGeo = selectedBD
                           ? geographies.find(
                               (g) =>
@@ -447,17 +452,17 @@ export default function ExplorePage() {
                                 district?.division === divisionFilter;
 
                               let fill = isInFilteredDivision
-                                ? "#162035"
+                                ? "#131b2e"
                                 : "#0d1320";
                               let stroke = isInFilteredDivision
-                                ? "#2b3b57"
+                                ? "#24324a"
                                 : "#1c2638";
 
                               if (isSelected) {
-                                fill = "#10b981"; // Emerald selected
-                                stroke = "#34d399";
+                                fill = "#1a253a";
+                                stroke = "#f59e0b";
                               } else if (isNeighbor) {
-                                fill = "#0284c7"; // Cyan neighbor
+                                fill = "#0369a1";
                                 stroke = "#38bdf8";
                               }
 
@@ -478,45 +483,55 @@ export default function ExplorePage() {
                                     default: {
                                       fill,
                                       stroke,
-                                      strokeWidth: 0.65,
+                                      strokeWidth,
                                       strokeLinejoin: "round",
                                       strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
-                                      transition: "fill 200ms ease",
+                                      transition: "fill 200ms ease, stroke 200ms ease",
                                     },
                                     hover: {
-                                      fill: isSelected ? fill : "#1e3a5f",
-                                      stroke: "#60a5fa",
-                                      strokeWidth: 0.65,
+                                      fill: "#1e2c45",
+                                      stroke: isSelected
+                                        ? "#fbbf24"
+                                        : isNeighbor
+                                          ? "#38bdf8"
+                                          : "#94a3b8",
+                                      strokeWidth,
                                       strokeLinejoin: "round",
                                       strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
                                       cursor: "pointer",
                                     },
+                                    pressed: {
+                                      fill: "#0f172a",
+                                      outline: "none",
+                                    },
                                   }}
                                 />
                               );
                             })}
 
-                            {/* Overlays for selected territory & borders: unbroken perimeter, translucent fill */}
+                            {/* OVERLAY 1: Neighbor districts - complete perimeter, opacity-controlled fill */}
                             {neighborGeos.map((geo) => (
                               <Geography
                                 key={`overlay-bd-nb-${geo.rsmKey}`}
                                 geography={geo}
                                 style={{
                                   default: {
-                                    fill: "rgba(2, 132, 199, 0.2)",
+                                    fill: "rgba(3, 105, 161, 0.22)",
                                     stroke: "#38bdf8",
-                                    strokeWidth: 0.65,
+                                    strokeWidth,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
-                                    fill: "rgba(2, 132, 199, 0.2)",
+                                    fill: "rgba(3, 105, 161, 0.22)",
                                     stroke: "#38bdf8",
-                                    strokeWidth: 0.65,
+                                    strokeWidth,
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
@@ -524,26 +539,25 @@ export default function ExplorePage() {
                               />
                             ))}
 
+                            {/* OVERLAY 2: Selected Target - complete perimeter on top, opacity-controlled fill */}
                             {selectedGeo && (
                               <Geography
                                 key={`overlay-bd-sel-${selectedGeo.rsmKey}`}
                                 geography={selectedGeo}
                                 style={{
                                   default: {
-                                    fill: "rgba(16, 185, 129, 0.2)",
-                                    stroke: "#34d399",
-                                    strokeWidth: 1.2,
+                                    fill: "rgba(245, 158, 11, 0.16)",
+                                    stroke: "#f59e0b",
+                                    strokeWidth,
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
-                                    fill: "rgba(16, 185, 129, 0.2)",
-                                    stroke: "#34d399",
-                                    strokeWidth: 1.2,
-                                    strokeLinejoin: "round",
-                                    strokeLinecap: "round",
+                                    fill: "rgba(245, 158, 11, 0.16)",
+                                    stroke: "#f59e0b",
+                                    strokeWidth,
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
@@ -551,25 +565,25 @@ export default function ExplorePage() {
                               />
                             )}
 
-                            {/* Hovered district overlay - complete perimeter on top */}
+                            {/* OVERLAY 3: Hovered district overlay - complete perimeter on top */}
                             {hoveredGeo && hoveredGeo !== selectedGeo && (
                               <Geography
                                 key={`overlay-bd-hover-${hoveredGeo.rsmKey}`}
                                 geography={hoveredGeo}
                                 style={{
                                   default: {
-                                    fill: "rgba(96, 165, 250, 0.18)",
+                                    fill: "rgba(56, 189, 248, 0.38)",
                                     stroke: "#60a5fa",
-                                    strokeWidth: 1.2,
+                                    strokeWidth: Math.max(1.6, strokeWidth * 2.2),
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
-                                    fill: "rgba(96, 165, 250, 0.18)",
+                                    fill: "rgba(56, 189, 248, 0.38)",
                                     stroke: "#60a5fa",
-                                    strokeWidth: 1.2,
+                                    strokeWidth: Math.max(1.6, strokeWidth * 2.2),
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
@@ -591,7 +605,19 @@ export default function ExplorePage() {
                           selectedBD.coordinates[0],
                         ]}
                         zoom={position.zoom}
-                        fillColor="#10b981"
+                        fillColor="#f59e0b"
+                      />
+                    )}
+
+                    {/* Marker on hovered district */}
+                    {hoveredBD && hoveredBD.name !== selectedBD?.name && (
+                      <TargetPulseMarker
+                        coordinates={[
+                          hoveredBD.coordinates[1],
+                          hoveredBD.coordinates[0],
+                        ]}
+                        zoom={position.zoom}
+                        fillColor="#38bdf8"
                       />
                     )}
                   </ZoomableGroup>
@@ -618,6 +644,10 @@ export default function ExplorePage() {
                   >
                     <Geographies geography={WORLD_GEO_URL}>
                       {({ geographies }) => {
+                        const strokeWidth = Math.max(
+                          0.3,
+                          Math.min(0.85, 0.55 / Math.sqrt(position.zoom)),
+                        );
                         const effectiveBorders = selectedWorld
                           ? getEffectiveBorders(selectedWorld)
                           : [];
@@ -668,19 +698,20 @@ export default function ExplorePage() {
                                 );
                               const isSelected =
                                 selectedWorld?.id === country?.id;
-                              const isNeighbor =
+                              const isNeighbor = Boolean(
                                 country?.id &&
-                                effectiveBorders.includes(country.id);
+                                  effectiveBorders.includes(country.id),
+                              );
 
                               let fill = "#131b2e";
                               let stroke = "#24324a";
 
                               if (isSelected) {
-                                fill = "#0284c7";
-                                stroke = "#38bdf8";
+                                fill = "#1a253a";
+                                stroke = "#f59e0b";
                               } else if (isNeighbor) {
-                                fill = "#4f46e5";
-                                stroke = "#818cf8";
+                                fill = "#0369a1";
+                                stroke = "#38bdf8";
                               }
 
                               return (
@@ -700,44 +731,55 @@ export default function ExplorePage() {
                                     default: {
                                       fill,
                                       stroke,
-                                      strokeWidth: 0.55,
+                                      strokeWidth,
                                       strokeLinejoin: "round",
                                       strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
+                                      transition: "fill 200ms ease, stroke 200ms ease",
                                     },
                                     hover: {
-                                      fill: isSelected ? fill : "#1e2c45",
-                                      stroke: "#94a3b8",
-                                      strokeWidth: 0.55,
+                                      fill: "#1e2c45",
+                                      stroke: isSelected
+                                        ? "#fbbf24"
+                                        : isNeighbor
+                                          ? "#38bdf8"
+                                          : "#94a3b8",
+                                      strokeWidth,
                                       strokeLinejoin: "round",
                                       strokeLinecap: "round",
                                       vectorEffect: "non-scaling-stroke",
                                       outline: "none",
                                       cursor: "pointer",
                                     },
+                                    pressed: {
+                                      fill: "#0f172a",
+                                      outline: "none",
+                                    },
                                   }}
                                 />
                               );
                             })}
 
-                            {/* Overlays for selected country & borders: unbroken perimeter, translucent fill */}
+                            {/* OVERLAY 1: Neighbor countries - complete perimeter, opacity-controlled fill */}
                             {neighborGeos.map((geo) => (
                               <Geography
                                 key={`overlay-world-nb-${geo.rsmKey}`}
                                 geography={geo}
                                 style={{
                                   default: {
-                                    fill: "rgba(79, 70, 229, 0.2)",
-                                    stroke: "#818cf8",
-                                    strokeWidth: 0.55,
+                                    fill: "rgba(3, 105, 161, 0.22)",
+                                    stroke: "#38bdf8",
+                                    strokeWidth,
+                                    strokeLinejoin: "round",
+                                    strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
-                                    fill: "rgba(79, 70, 229, 0.2)",
-                                    stroke: "#818cf8",
-                                    strokeWidth: 0.55,
+                                    fill: "rgba(3, 105, 161, 0.22)",
+                                    stroke: "#38bdf8",
+                                    strokeWidth,
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
@@ -745,26 +787,25 @@ export default function ExplorePage() {
                               />
                             ))}
 
+                            {/* OVERLAY 2: Selected Target - complete perimeter on top, opacity-controlled fill */}
                             {selectedGeo && (
                               <Geography
                                 key={`overlay-world-sel-${selectedGeo.rsmKey}`}
                                 geography={selectedGeo}
                                 style={{
                                   default: {
-                                    fill: "rgba(2, 132, 199, 0.22)",
-                                    stroke: "#38bdf8",
-                                    strokeWidth: 1.2,
+                                    fill: "rgba(245, 158, 11, 0.16)",
+                                    stroke: "#f59e0b",
+                                    strokeWidth,
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
-                                    fill: "rgba(2, 132, 199, 0.22)",
-                                    stroke: "#38bdf8",
-                                    strokeWidth: 1.2,
-                                    strokeLinejoin: "round",
-                                    strokeLinecap: "round",
+                                    fill: "rgba(245, 158, 11, 0.16)",
+                                    stroke: "#f59e0b",
+                                    strokeWidth,
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
@@ -772,25 +813,25 @@ export default function ExplorePage() {
                               />
                             )}
 
-                            {/* Hovered country overlay - complete perimeter on top */}
+                            {/* OVERLAY 3: Hovered country overlay - complete perimeter on top */}
                             {hoveredGeo && hoveredGeo !== selectedGeo && (
                               <Geography
                                 key={`overlay-world-hover-${hoveredGeo.rsmKey}`}
                                 geography={hoveredGeo}
                                 style={{
                                   default: {
-                                    fill: "rgba(148, 163, 184, 0.16)",
-                                    stroke: "#94a3b8",
-                                    strokeWidth: 1.2,
+                                    fill: "rgba(56, 189, 248, 0.38)",
+                                    stroke: "#60a5fa",
+                                    strokeWidth: Math.max(1.6, strokeWidth * 2.2),
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     pointerEvents: "none",
                                   },
                                   hover: {
-                                    fill: "rgba(148, 163, 184, 0.16)",
-                                    stroke: "#94a3b8",
-                                    strokeWidth: 1.2,
+                                    fill: "rgba(56, 189, 248, 0.38)",
+                                    stroke: "#60a5fa",
+                                    strokeWidth: Math.max(1.6, strokeWidth * 2.2),
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
@@ -811,7 +852,18 @@ export default function ExplorePage() {
                           selectedWorld.coordinates[0],
                         ]}
                         zoom={position.zoom}
-                        fillColor="#0284c7"
+                        fillColor="#f59e0b"
+                      />
+                    )}
+
+                    {hoveredWorld && hoveredWorld.id !== selectedWorld?.id && (
+                      <TargetPulseMarker
+                        coordinates={[
+                          hoveredWorld.coordinates[1],
+                          hoveredWorld.coordinates[0],
+                        ]}
+                        zoom={position.zoom}
+                        fillColor="#38bdf8"
                       />
                     )}
                   </ZoomableGroup>
@@ -852,29 +904,37 @@ export default function ExplorePage() {
               {/* Legend (desktop) */}
               <div className="hidden lg:flex absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-300 backdrop-blur-md">
                 <div className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-emerald-500 ring-2 ring-emerald-500/20" />
-                  <span>Selected</span>
+                  <span className="size-2.5 rounded-full bg-amber-400 ring-2 ring-amber-400/20" />
+                  <span>Target</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
-                  <span>Border Neighbor</span>
+                  <span>Adjacent Neighbor</span>
                 </div>
               </div>
 
-              {/* Elevated Floating Reconnaissance Pill following cursor */}
-              {mousePos && (realm === "bangladesh" ? hoveredBD : hoveredWorld) && (
+              {/* Elevated Floating Reconnaissance Pill */}
+              {(hoveredBD || hoveredWorld) && (
                 <div
-                  className="pointer-events-none absolute z-30 transition-transform duration-75 ease-out select-none"
-                  style={{
-                    left: mousePos.x,
-                    top: mousePos.y < 50 ? mousePos.y + 18 : mousePos.y - 12,
-                    transform:
-                      mousePos.y < 50
-                        ? "translate(-50%, 0)"
-                        : "translate(-50%, -100%)",
-                  }}
+                  className="pointer-events-none absolute z-30 transition-all duration-75 ease-out select-none"
+                  style={
+                    mousePos
+                      ? {
+                          left: mousePos.x,
+                          top: mousePos.y < 50 ? mousePos.y + 18 : mousePos.y - 12,
+                          transform:
+                            mousePos.y < 50
+                              ? "translate(-50%, 0)"
+                              : "translate(-50%, -100%)",
+                        }
+                      : {
+                          left: "50%",
+                          top: 16,
+                          transform: "translateX(-50%)",
+                        }
+                  }
                 >
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0c101c]/95 border border-white/20 shadow-2xl shadow-black/80 backdrop-blur-md text-xs whitespace-nowrap">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0c101c]/95 border border-sky-400/40 shadow-2xl shadow-black/90 backdrop-blur-md text-xs whitespace-nowrap ring-1 ring-sky-500/20">
                     <span className="text-base leading-none">
                       {realm === "bangladesh"
                         ? hoveredBD?.flagEmoji
@@ -998,13 +1058,20 @@ export default function ExplorePage() {
                       return (
                         <button
                           key={neighborName}
+                          onMouseEnter={() => {
+                            if (neighborData) setHoveredBD(neighborData);
+                          }}
+                          onMouseLeave={() => {
+                            setHoveredBD(null);
+                          }}
                           onClick={() => {
                             if (neighborData) {
                               selectDistrict(neighborData);
+                              setHoveredBD(null);
                               setMobileTab("map");
                             }
                           }}
-                          className="px-2.5 py-1.5 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors"
+                          className="px-2.5 py-1.5 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors cursor-pointer"
                         >
                           {neighborName} ↗
                         </button>
@@ -1110,13 +1177,20 @@ export default function ExplorePage() {
                       return (
                         <button
                           key={iso}
+                          onMouseEnter={() => {
+                            if (neighbor) setHoveredWorld(neighbor);
+                          }}
+                          onMouseLeave={() => {
+                            setHoveredWorld(null);
+                          }}
                           onClick={() => {
                             if (neighbor) {
                               selectCountry(neighbor);
+                              setHoveredWorld(null);
                               setMobileTab("map");
                             }
                           }}
-                          className="px-2.5 py-1.5 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors"
+                          className="px-2.5 py-1.5 rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors cursor-pointer"
                         >
                           {neighbor
                             ? `${neighbor.flagEmoji} ${neighbor.name}`
@@ -1137,11 +1211,14 @@ export default function ExplorePage() {
                   ? filteredDistricts.map((d) => (
                       <button
                         key={d.id}
+                        onMouseEnter={() => setHoveredBD(d)}
+                        onMouseLeave={() => setHoveredBD(null)}
                         onClick={() => {
                           selectDistrict(d);
+                          setHoveredBD(null);
                           setMobileTab("map");
                         }}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white cursor-pointer"
                       >
                         <span className="font-semibold">{d.name}</span>
                         <span className="text-xs font-mono text-slate-500">
@@ -1152,11 +1229,14 @@ export default function ExplorePage() {
                   : filteredCountries.slice(0, 20).map((c) => (
                       <button
                         key={c.id}
+                        onMouseEnter={() => setHoveredWorld(c)}
+                        onMouseLeave={() => setHoveredWorld(null)}
                         onClick={() => {
                           selectCountry(c);
+                          setHoveredWorld(null);
                           setMobileTab("map");
                         }}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white"
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white cursor-pointer"
                       >
                         <span className="font-semibold">
                           {c.flagEmoji} {c.name}
