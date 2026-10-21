@@ -209,12 +209,11 @@ export default function ExplorePage() {
                 <BookOpen className="size-4" />
               </span>
               <h2 className="text-lg sm:text-xl font-bold text-white tracking-wide">
-                Tactical Geography Atlas & Dossier
+                Map Explorer
               </h2>
             </div>
             <p className="text-xs text-slate-400">
-              Free-roam exploration desk. Click any shape to inspect borders,
-              demographic figures, and cultural trivia.
+              Explore at your own pace. Click any district or country to view its borders, facts, and figures.
             </p>
           </div>
 
@@ -268,7 +267,7 @@ export default function ExplorePage() {
           >
             <BookOpen className="size-3.5" />
             <span className="truncate">
-              {realm === "bangladesh" ? selectedBD?.name : selectedWorld?.name} Dossier
+              {realm === "bangladesh" ? selectedBD?.name : selectedWorld?.name} Details
             </span>
           </button>
         </div>
@@ -370,7 +369,7 @@ export default function ExplorePage() {
                     : selectedWorld?.name}
                 </span>
                 <span className="text-amber-400/80 text-2xs hidden sm:inline font-mono">
-                  (Target Selected)
+                  (Selected)
                 </span>
               </div>
 
@@ -896,7 +895,7 @@ export default function ExplorePage() {
                   onClick={() => setMobileTab("dossier")}
                   className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold flex items-center gap-1 shadow-md shadow-purple-950/50 cursor-pointer shrink-0"
                 >
-                  <span>Dossier</span>
+                  <span>Details</span>
                   <ArrowRight className="size-3" />
                 </button>
               </div>
@@ -905,11 +904,11 @@ export default function ExplorePage() {
               <div className="hidden lg:flex absolute bottom-2 left-3 right-3 sm:left-4 sm:right-auto z-10 flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-300 backdrop-blur-md">
                 <div className="flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-amber-400 ring-2 ring-amber-400/20" />
-                  <span>Target</span>
+                  <span>Selected</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
-                  <span>Adjacent Neighbor</span>
+                  <span>Neighbor</span>
                 </div>
               </div>
 
@@ -1017,8 +1016,7 @@ export default function ExplorePage() {
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
                     <span className="text-slate-400 text-xs flex items-center gap-1">
-                      <Compass className="size-3 text-sky-400" /> Centroid
-                      Coordinates
+                      <Compass className="size-3 text-sky-400" /> Coordinates
                     </span>
                     <span className="font-mono text-white font-semibold">
                       {selectedBD.coordinates[0].toFixed(2)}°N,{" "}
@@ -1027,11 +1025,11 @@ export default function ExplorePage() {
                   </div>
                   <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
                     <span className="text-slate-400 text-xs flex items-center gap-1">
-                      <Layers className="size-3 text-emerald-400" /> Bordering
-                      Count
+                      <Layers className="size-3 text-emerald-400" /> Neighboring
+                      Districts
                     </span>
                     <span className="font-mono text-white font-semibold">
-                      {selectedBD.borders.length} Adjacent Districts
+                      {selectedBD.borders.length} Neighbors
                     </span>
                   </div>
                 </div>
@@ -1039,8 +1037,7 @@ export default function ExplorePage() {
                 {/* Trivia Fact */}
                 <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
                   <span className="text-amber-400 font-semibold flex items-center gap-1.5">
-                    <Sparkles className="size-3.5" /> Cultural & Cartographic
-                    Fact
+                    <Sparkles className="size-3.5" /> Did you know?
                   </span>
                   <p className="text-slate-300">{selectedBD.triviaFact}</p>
                 </div>
@@ -1048,7 +1045,7 @@ export default function ExplorePage() {
                 {/* Bordering Neighbors Interactive List */}
                 <div className="space-y-2">
                   <h4 className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider">
-                    Bordering Districts (Click to Pan):
+                    Bordering Districts (click to jump):
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedBD.borders.map((neighborName) => {
@@ -1147,7 +1144,7 @@ export default function ExplorePage() {
                   </div>
                   <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
                     <span className="text-slate-400 text-xs flex items-center gap-1">
-                      <Compass className="size-3 text-purple-400" /> Centroid Coordinates
+                      <Compass className="size-3 text-purple-400" /> Coordinates
                     </span>
                     <span className="font-semibold font-mono text-white">
                       {Math.abs(selectedWorld.coordinates[0]).toFixed(1)}°{selectedWorld.coordinates[0] >= 0 ? "N" : "S"},{" "}
@@ -1159,7 +1156,7 @@ export default function ExplorePage() {
                 {/* Trivia */}
                 <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
                   <span className="text-amber-400 font-semibold flex items-center gap-1.5">
-                    <Sparkles className="size-3.5" /> Cartographic Dossier
+                    <Sparkles className="size-3.5" /> Did you know?
                   </span>
                   <p className="text-slate-300">{selectedWorld.triviaFact}</p>
                 </div>
@@ -1168,8 +1165,8 @@ export default function ExplorePage() {
                 <div className="space-y-2">
                   <h4 className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider">
                     {selectedWorld.borders.length === 0
-                      ? "Proximate Maritime Neighbors (EEZ):"
-                      : `Contiguous Land Borders (${selectedWorld.borders.length}):`}
+                      ? "Nearby Maritime Neighbors:"
+                      : `Bordering Countries (${selectedWorld.borders.length}):`}
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {getEffectiveBorders(selectedWorld).map((iso) => {

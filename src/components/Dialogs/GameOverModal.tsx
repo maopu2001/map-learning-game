@@ -112,15 +112,15 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
           </div>
 
           <DialogTitle className="text-2xl font-black tracking-tight text-white">
-            {isWon ? "Territory Conquered!" : "Border Patrol Outwitted"}
+            {isWon ? "You got it!" : "Game Over"}
           </DialogTitle>
 
           <DialogDescription className="text-slate-400 text-xs">
             {isWon
-              ? `You identified the secret ${isBD ? "district" : "country"} in ${guesses.length} ${
+              ? `You found the secret ${isBD ? "district" : "country"} in ${guesses.length} ${
                   guesses.length === 1 ? "guess" : "guesses"
                 }!`
-              : "Better luck on the next geographic excursion!"}
+              : `The secret ${isBD ? "district" : "country"} was ${currentTarget.name}. Better luck next round!`}
           </DialogDescription>
         </DialogHeader>
 
@@ -136,7 +136,7 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
                 </Badge>
                 {!isBD && targetCountry.isIsland && (
                   <Badge variant="outline" className="text-2xs border-sky-500/30 text-sky-400 font-sans">
-                    Island State
+                    Island Nation
                   </Badge>
                 )}
                 {isBD && targetDistrict.isCoastal && (
@@ -188,12 +188,12 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
                 </div>
                 <div className="px-2.5 py-1.5 rounded-lg bg-[#070a12] border border-white/5 flex items-center justify-between">
                   <span className="text-slate-400 flex items-center gap-1">
-                    <Layers className="size-3 text-amber-400" /> {targetCountry.borders.length > 0 ? "Borders" : "Maritime"}
+                    <Layers className="size-3 text-amber-400" /> {targetCountry.borders.length > 0 ? "Borders" : "Neighbors"}
                   </span>
                   <span className="font-mono font-semibold text-slate-200">
                     {targetCountry.borders.length > 0
-                      ? `${targetCountry.borders.length} Adjacent`
-                      : `${targetCountry.maritimeNeighbors?.length || 0} Proximate`}
+                      ? `${targetCountry.borders.length} Land borders`
+                      : `${targetCountry.maritimeNeighbors?.length || 0} Nearby`}
                   </span>
                 </div>
               </>
@@ -212,7 +212,7 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
                     <Layers className="size-3 text-emerald-400" /> Borders
                   </span>
                   <span className="font-mono font-semibold text-slate-200">
-                    {targetDistrict.borders.length} Adjacent
+                    {targetDistrict.borders.length} Neighbors
                   </span>
                 </div>
               </>
@@ -220,7 +220,7 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
           </div>
 
           <div className="p-3 rounded-lg bg-[#070a12] border border-white/5 text-xs text-slate-300 leading-relaxed">
-            <span className="font-semibold text-amber-400">Trivia Fact: </span>
+            <span className="font-semibold text-amber-400">Did you know? </span>
             {currentTarget.triviaFact}
           </div>
         </div>
@@ -286,7 +286,7 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
               }}
               className="text-2xs text-slate-400 hover:text-white underline underline-offset-4 cursor-pointer font-mono"
             >
-              Change Mode or Threat Level ↗
+              Change mode or difficulty ↗
             </button>
           </div>
         )}

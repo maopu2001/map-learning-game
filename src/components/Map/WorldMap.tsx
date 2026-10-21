@@ -240,7 +240,7 @@ export function WorldMap() {
       <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex flex-col gap-1 sm:gap-1.5 pointer-events-none">
         <div className="flex items-center gap-1.5 sm:gap-2 bg-sky-500/10 border border-sky-500/30 text-sky-300 text-2xs sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
           <Globe2 className="size-3 sm:size-3.5 text-sky-400 shrink-0" />
-          <span>World • 190+ Sovereign Nations</span>
+          <span>World • 195 Countries</span>
         </div>
         <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-2xs sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full backdrop-blur-md">
           <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
@@ -259,11 +259,10 @@ export function WorldMap() {
               <span className="font-semibold text-rose-400 flex items-center gap-1.5">
                 <ShieldAlert className="size-3.5" /> Hard Mode
               </span>
-              <span className="text-2xs text-slate-400">Blind Recon</span>
+              <span className="text-2xs text-slate-400">Map Hidden</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              No territory info is shown on hover or click. Unlock Hint 2 & 3 to
-              reveal adjacent border nations!
+              Countries stay hidden on hover or click. Unlock Hints to reveal neighboring countries!
             </p>
             {lastGuess && (
               <div className="text-xs flex items-center justify-between pt-1 border-t border-slate-800">
@@ -282,15 +281,14 @@ export function WorldMap() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between pb-1 border-b border-amber-500/30">
                   <span className="font-bold text-amber-400 text-sm flex items-center gap-1.5">
-                    <Target className="size-4" /> Mystery Target
+                    <Target className="size-4" /> Secret Target
                   </span>
                   <span className="text-2xs text-amber-300 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-500/30">
-                    Active Target
+                    Target
                   </span>
                 </div>
                 <div className="text-xs text-slate-300 leading-relaxed">
-                  Highlighted amber border. Deduce this mystery nation using
-                  distance clues!
+                  Amber outline. Follow your distance clues to guess this mystery country!
                 </div>
                 {targetCountry && (
                   <div className="text-2xs text-sky-400 font-semibold pt-1 border-t border-slate-800">
@@ -298,7 +296,7 @@ export function WorldMap() {
                       `Hint 1: Continent: ${targetCountry.region}`
                     ) : (
                       <span className="text-slate-500 font-normal">
-                        Hint 1: 🔒 Locked (Unlock in Clues drawer)
+                        Hint 1: 🔒 Locked (Unlock in Hints drawer)
                       </span>
                     )}
                   </div>
@@ -312,13 +310,12 @@ export function WorldMap() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
                   <span className="font-semibold text-slate-400">
-                    Unrevealed Nation
+                    Unrevealed Country
                   </span>
                   <span className="text-2xs text-slate-500">Normal Mode</span>
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Only highlighted adjacent borders and guesses show info.
-                  Unlock neighbor clues or make guesses to reveal!
+                  Only guessed countries and revealed neighbors show details.
                 </p>
               </div>
             ) : (
@@ -339,7 +336,7 @@ export function WorldMap() {
                   <div className="text-xs pt-1.5 space-y-1">
                     {guessedCountriesMap.get(inspectedCountry.id)?.isCorrect ? (
                       <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                        <ShieldCheck className="size-3.5" /> Nation Identified!
+                        <ShieldCheck className="size-3.5" /> Country Found!
                       </span>
                     ) : (
                       <div className="flex items-center justify-between text-slate-300">
@@ -368,13 +365,13 @@ export function WorldMap() {
                 ) : activeNeighbors.includes(inspectedCountry.id) ? (
                   <div className="text-xs text-sky-300 font-semibold pt-1">
                     {targetCountry.borders.length === 0
-                      ? "Nearest Neighbor Country to Secret Target"
-                      : "Adjacent Border to Secret Target"}
+                      ? "Closest neighbor to secret target"
+                      : "Borders the secret target"}
                   </div>
                 ) : (
                   <div className="text-2xs text-slate-400 pt-1 flex items-center justify-between">
-                    <span>Unexplored Territory</span>
-                    <span className="text-slate-500">Type below to guess</span>
+                    <span>Not guessed yet</span>
+                    <span className="text-slate-500">Type name to guess</span>
                   </div>
                 )}
               </div>
@@ -384,9 +381,9 @@ export function WorldMap() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
               <span className="text-slate-400 font-medium flex items-center gap-1">
-                <Target className="size-3 text-amber-400" /> Target Territory
+                <Target className="size-3 text-amber-400" /> Secret Target
               </span>
-              <span className="text-amber-400 font-semibold">Amber Border</span>
+              <span className="text-amber-400 font-semibold">Amber outline</span>
             </div>
 
             {lastGuess ? (
@@ -408,7 +405,7 @@ export function WorldMap() {
             <div className="text-2xs text-slate-500 pt-1 border-t border-slate-800/80 flex items-center justify-between">
               <span>Map Mode:</span>
               <span className="text-slate-400">
-                Clean Cartography (Dots Only)
+                Clean map (dots only)
               </span>
             </div>
           </div>
@@ -779,8 +776,7 @@ export function WorldMap() {
 
           {isTargetInspected && gameStatus === "playing" ? (
             <p className="text-xs text-amber-300 leading-snug">
-              Highlighted amber border. Deduce this mystery nation using
-              distance clues!
+              Amber outline. Follow your distance clues to guess this mystery country!
             </p>
           ) : guessedCountriesMap.has(inspectedCountry.id) ? (
             <div className="flex items-center justify-between text-xs pt-0.5">
@@ -801,14 +797,14 @@ export function WorldMap() {
           ) : activeNeighbors.includes(inspectedCountry.id) ? (
             <p className="text-xs text-sky-300 font-semibold">
               {targetCountry.borders.length === 0
-                ? "Nearest Neighbor Country to Secret Target"
-                : "Adjacent Border to Secret Target"}
+                ? "Closest neighbor to secret target"
+                : "Borders the secret target"}
             </p>
           ) : (
             <p className="text-2xs text-slate-400">
               {difficulty === "normal"
-                ? "Unrevealed territory in Normal Mode."
-                : "Unexplored territory. Type in searchbox to guess!"}
+                ? "Hidden until guessed or revealed."
+                : "Not guessed yet. Type in search box above."}
             </p>
           )}
         </div>

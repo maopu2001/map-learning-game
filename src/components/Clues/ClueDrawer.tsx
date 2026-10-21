@@ -46,7 +46,7 @@ export function ClueDrawer() {
       <div className="flex flex-wrap items-center justify-between border-b border-white/5 pb-2.5 gap-2">
         <div className="flex items-center gap-2">
           <Lightbulb className="size-4 text-amber-400 shrink-0" />
-          <h3 className="text-sm font-semibold text-white">Hints & Clues</h3>
+          <h3 className="text-sm font-semibold text-white">Hints</h3>
           <span className="text-2xs text-slate-400 uppercase tracking-wider font-mono">
             ({isBD ? "Bangladesh" : "World"} • {difficulty})
           </span>
@@ -56,7 +56,7 @@ export function ClueDrawer() {
             variant="outline"
             className="text-xs text-slate-300 border-slate-700 font-mono"
           >
-            Hints Unlocked: {unlockedHints}/3
+            Hints: {unlockedHints} of 3
           </Badge>
         </div>
       </div>
@@ -136,9 +136,9 @@ export function ClueDrawer() {
                 Hint 2:{" "}
                 {difficulty === "hard"
                   ? isBD
-                    ? "1st Border District"
+                    ? "1st Neighboring District"
                     : hasLandBorders
-                      ? "1st Border Country"
+                      ? "1st Neighboring Country"
                       : "Nearest Country"
                   : isBD
                     ? "Starting Letter"
@@ -152,7 +152,7 @@ export function ClueDrawer() {
                   isBD ? (
                     <div>
                       <span className="text-amber-300 font-bold">
-                        1st Border: {targetDistrict.borders[0] || "None"}
+                        Neighbor 1: {targetDistrict.borders[0] || "None"}
                       </span>
                       <p className="text-2xs text-sky-400 font-normal">
                         Highlighted on map
@@ -162,7 +162,7 @@ export function ClueDrawer() {
                     <div>
                       <span className="text-amber-300 font-bold flex items-center gap-1">
                         {neighbor1Country?.flagEmoji}{" "}
-                        {hasLandBorders ? "1st Border" : "Nearest Country"}:{" "}
+                        {hasLandBorders ? "Neighbor 1" : "Nearest Country"}:{" "}
                         {neighbor1Country?.name || "None"}
                       </span>
                       <p className="text-2xs text-sky-400 font-normal">
@@ -232,9 +232,9 @@ export function ClueDrawer() {
                 Hint 3:{" "}
                 {difficulty === "hard"
                   ? isBD
-                    ? "2nd Border District"
+                    ? "2nd Neighboring District"
                     : hasLandBorders
-                      ? "2nd Border Country"
+                      ? "2nd Neighboring Country"
                       : "2nd Nearest Country"
                   : isBD
                     ? "Letter Count"
@@ -248,7 +248,7 @@ export function ClueDrawer() {
                   isBD ? (
                     <div>
                       <span className="text-emerald-300 font-bold">
-                        2nd Border:{" "}
+                        Neighbor 2:{" "}
                         {targetDistrict.borders[1] ||
                           targetDistrict.borders[0] ||
                           "None"}
@@ -261,7 +261,7 @@ export function ClueDrawer() {
                     <div>
                       <span className="text-emerald-300 font-bold flex items-center gap-1">
                         {neighbor2Country?.flagEmoji}{" "}
-                        {hasLandBorders ? "2nd Border" : "2nd Nearest Country"}:{" "}
+                        {hasLandBorders ? "Neighbor 2" : "2nd Nearest Country"}:{" "}
                         {neighbor2Country?.name || "None"}
                       </span>
                       <p className="text-2xs text-sky-400 font-normal">

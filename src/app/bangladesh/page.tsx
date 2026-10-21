@@ -19,7 +19,7 @@ const BangladeshMap = dynamic(
       <div className="w-full h-112 sm:h-136 lg:h-[calc(100vh-80px)] min-h-120 rounded-3xl border border-white/10 bg-[#0c101c] flex items-center justify-center text-slate-500 animate-pulse">
         <div className="flex flex-col items-center gap-2">
           <div className="size-8 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
-          <span className="text-xs font-mono">Loading Bangladesh Cartography...</span>
+          <span className="text-xs font-mono">Loading Bangladesh map...</span>
         </div>
       </div>
     ),
@@ -71,7 +71,7 @@ export default function BangladeshPage() {
         onOpenBriefing={() => setBriefingOpen(true)}
       />
 
-      {/* Mobile-only Segmented Control Bar (Map vs Tactical Intel) */}
+      {/* Mobile-only Segmented Control Bar (Map vs Guesses & Hints) */}
       <div className="lg:hidden flex items-center gap-1.5 p-1 rounded-2xl bg-black/40 border border-white/10 text-xs font-semibold">
         <button
           onClick={() => setMobileTab("map")}
@@ -82,7 +82,7 @@ export default function BangladeshPage() {
           }`}
         >
           <Map className="size-3.5" />
-          <span>Map Arena</span>
+          <span>Map</span>
         </button>
         <button
           onClick={() => setMobileTab("intel")}
@@ -94,7 +94,7 @@ export default function BangladeshPage() {
         >
           <Crosshair className="size-3.5" />
           <span>
-            Tactical Intel ({guesses.length}/{maxGuesses})
+            Guesses & Hints ({guesses.length}/{maxGuesses})
           </span>
           {unlockedHints > 0 && (
             <span className="size-1.5 rounded-full bg-amber-400" />
@@ -107,7 +107,7 @@ export default function BangladeshPage() {
         <GuessInput />
       </div>
 
-      {/* Main Arena: Map (Left 7-8 cols) & Tactical Controls (Right 4-5 cols) */}
+      {/* Main Arena: Map (Left 7-8 cols) & Controls (Right 4-5 cols) */}
       <main className="flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-2.5 sm:gap-3 items-start">
         {/* Left Column: Interactive Map Canvas */}
         <section
@@ -117,7 +117,7 @@ export default function BangladeshPage() {
         >
           <BangladeshMap />
 
-          {/* On Mobile Map View: Latest Guess Telemetry Banner */}
+          {/* On Mobile Map View: Latest Guess Banner */}
           {lastGuess && (
             <div className="lg:hidden p-3 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2.5">
@@ -130,7 +130,7 @@ export default function BangladeshPage() {
                     </span>
                   </div>
                   <span className="text-2xs text-slate-400 font-mono">
-                    Proximity Score: {lastGuess.proximityScore}%
+                    Match: {lastGuess.proximityScore}%
                   </span>
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function BangladeshPage() {
                 onClick={() => setMobileTab("intel")}
                 className="px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-sky-400 flex items-center gap-1 cursor-pointer shrink-0"
               >
-                <span>All Intel</span>
+                <span>View all</span>
                 <ArrowRight className="size-3" />
               </button>
             </div>

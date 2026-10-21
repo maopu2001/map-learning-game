@@ -21,29 +21,25 @@ function TaglineReveal() {
   const [revealedCount, setRevealedCount] = useState(0);
 
   const taglineWords = [
-    "Memorizing",
-    "lists",
-    "of",
+    "Don't",
+    "just",
+    "memorize",
     "names",
-    "creates",
-    "fragile",
-    "recall.",
-    "Borderline",
-    "develops",
-    "an",
-    "enduring",
-    "mental",
-    "atlas",
-    "through",
-    "geodesic",
+    "on",
+    "a",
+    "list.",
+    "Learn",
+    "where",
+    "places",
+    "actually",
+    "are",
+    "by",
+    "following",
     "distance,",
-    "bearing",
-    "vectors,",
+    "direction,",
     "and",
-    "contiguous",
-    "border",
-    "spatial",
-    "intelligence.",
+    "shared",
+    "borders.",
   ];
 
   useEffect(() => {
@@ -83,7 +79,7 @@ function TaglineReveal() {
     >
       <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
         <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
-          Pedagogical Philosophy
+          The Idea
         </span>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-snug sm:leading-tight">
           {taglineWords.map((word, idx) => {
@@ -137,11 +133,11 @@ function TriangulationDemo() {
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
           <h3 className="text-xs font-bold uppercase tracking-wider text-white">
-            Live Triangulation Radar Demo
+            Interactive Demo
           </h3>
         </div>
         <span className="text-2xs text-slate-400">
-          Click a test launch site
+          Pick a sample guess
         </span>
       </div>
 
@@ -162,7 +158,7 @@ function TriangulationDemo() {
           <div className="size-6 rounded-full border border-amber-400/80 animate-ping" />
           <div className="size-3 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50" />
           <span className="absolute top-4 text-3xs font-mono text-amber-300 font-bold whitespace-nowrap">
-            Secret Target
+            Secret Target (Sylhet)
           </span>
         </div>
 
@@ -218,7 +214,7 @@ function TriangulationDemo() {
       {/* Telemetry Output */}
       {distanceKm !== null ? (
         <div className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs font-mono">
-          <span className="text-slate-400">Telemetry Vector:</span>
+          <span className="text-slate-400">Clue:</span>
           <span className="font-bold text-sky-300 flex items-center gap-1.5">
             <span>{distanceKm} km away</span>
             <span>{bearingDir}</span>
@@ -226,7 +222,7 @@ function TriangulationDemo() {
         </div>
       ) : (
         <div className="text-center text-xs text-slate-500 py-1 font-mono">
-          Select any district above to calculate vector coordinates
+          Click any district above to see how distance and direction clues work
         </div>
       )}
     </div>
@@ -239,28 +235,28 @@ function FAQSection() {
 
   const faqs = [
     {
-      q: "How does distance triangulation work without compass in Hard Mode?",
-      a: "In Hard Mode, the directional compass arrow is disabled, requiring mathematical distance triangulation. Your first guess gives a distance radius (a circle around that guess). Your second guess gives another circle that intersects the first at two points. A third guess definitively pinpoints the exact territory centroid.",
+      q: "How do clues work without a compass in Hard Mode?",
+      a: "In Hard Mode, the directional arrow is disabled, so you work with distance alone. Your first guess gives you a distance circle. A second guess creates another circle that narrows down the possibilities to two intersections, and a third guess pinpoints the target location.",
     },
     {
-      q: "Are all 64 Bangladesh districts up to date with official borders?",
-      a: "Yes. The map uses authoritative GeoJSON topological coordinates for all 64 districts across all 8 administrative divisions (Dhaka, Chattogram, Rajshahi, Khulna, Barishal, Sylhet, Rangpur, Mymensingh), corrected for right-hand polygon winding rules.",
+      q: "Are the Bangladesh district boundaries accurate?",
+      a: "Yes. All 64 districts across all 8 divisions (Dhaka, Chattogram, Rajshahi, Khulna, Barishal, Sylhet, Rangpur, Mymensingh) use accurate, detailed boundary data.",
     },
     {
-      q: "How does the game handle island nations with no direct land borders?",
-      a: "For sovereign island states such as Japan, Australia, Iceland, New Zealand, Sri Lanka, and Madagascar, the engine automatically calculates great-circle geodesic distances between centroids to identify the nearest neighbor nations as contiguous border clues, connected by dashed nautical arcs.",
+      q: "How do island countries work if they don't have land borders?",
+      a: "For island nations like Japan, Iceland, New Zealand, Sri Lanka, and Madagascar, the game calculates straight-line distances to find their closest maritime neighbors as hints.",
     },
     {
-      q: "Does Borderline support pinch-to-zoom on mobile and touchpads?",
-      a: "Yes. Standard mouse-wheel and 2-finger scroll gestures do not hijack your page scroll. True 2-finger touchpad pinch (on macOS and Windows) and touch-screen pinch gestures zoom the map smoothly without layout jitter.",
+      q: "Can I pinch to zoom on phones and trackpads?",
+      a: "Yes. Touchscreen pinch-to-zoom and laptop trackpad pinch gestures zoom the map smoothly without hijacking your page scrolling.",
     },
     {
-      q: "How are the daily mystery targets generated?",
-      a: "Daily puzzles are calculated deterministically using an antipodal date-seeded hash string. Every player in the world receives the exact same secret territory each calendar day at midnight local time.",
+      q: "When does the daily puzzle reset?",
+      a: "A new daily puzzle goes live every day at midnight. Everyone around the world receives the exact same mystery location each day.",
     },
     {
-      q: "Is Borderline free for educational institutions and classroom training?",
-      a: "Yes, 100% free with no registration, no advertisements, and zero account barriers. It is widely used by students preparing for competitive exams like BCS and academic geography curricula.",
+      q: "Is Borderline free to play?",
+      a: "Yes, 100% free with no sign-up, no ads, and no paywalls. It's great for casual fun or studying for geography and competitive exams like the BCS.",
     },
   ];
 
@@ -268,10 +264,10 @@ function FAQSection() {
     <section className="space-y-4 max-w-3xl mx-auto">
       <div className="text-center space-y-1">
         <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
-          Frequently Answered
+          Got Questions?
         </span>
         <h2 className="text-2xl sm:text-3xl font-black text-white">
-          Tactical FAQ
+          Frequently Asked Questions
         </h2>
       </div>
 
@@ -321,20 +317,19 @@ export default function HomePage() {
             variant="outline"
             className="border-sky-500/30 bg-sky-500/10 text-sky-400 px-3 py-1 text-xs rounded-full inline-flex items-center gap-1.5 font-mono"
           >
-            <Sparkles className="size-3.5" /> Client-Side Cartography Arena v2.0
+            <Sparkles className="size-3.5" /> Daily Map Guessing Game
           </Badge>
 
           {/* Heading with left-to-right #FFFFFF -> #9B9B9B gradient */}
           <div className="max-w-2xl mx-auto">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
-              Deduce any territory through spatial triangulation
+              Find the mystery place on the map
             </h1>
           </div>
 
           <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Pinpoint mystery Bangladesh districts or sovereign nations in 6
-            guesses using true geodesic distance, 8-point compass vectors, and
-            contiguous border intelligence.
+            Guess the secret Bangladesh district or world country in 6 tries.
+            Every guess reveals distance, direction, and neighbor clues to help you zero in.
           </p>
 
           {/* Primary Action Button Pair */}
@@ -342,7 +337,7 @@ export default function HomePage() {
             <Link href="/bangladesh" className="w-full sm:w-auto">
               <Button className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base px-6 py-3 sm:py-2.5 h-auto rounded-xl gap-2 shadow-xl shadow-emerald-950/60 border border-emerald-400/30">
                 <Play className="size-4 fill-white" />
-                <span>Launch Bangladesh Mission 🇧🇩</span>
+                <span>Play Bangladesh 🇧🇩</span>
               </Button>
             </Link>
 
@@ -352,7 +347,7 @@ export default function HomePage() {
                 className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-5 py-3 sm:py-2.5 h-auto rounded-xl gap-2 border-white/10"
               >
                 <Globe2 className="size-4 text-sky-400" />
-                <span>Explore World Map 🌍</span>
+                <span>Play World 🌍</span>
               </Button>
             </Link>
           </div>
@@ -366,12 +361,12 @@ export default function HomePage() {
             <span className="text-slate-700">•</span>
             <div className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-sky-400" />
-              <span>195 Sovereign Nations</span>
+              <span>195 Countries</span>
             </div>
             <span className="text-slate-700">•</span>
             <div className="flex items-center gap-1.5">
               <span className="size-2 rounded-full bg-purple-400" />
-              <span>100% Offline Ready</span>
+              <span>Free to Play</span>
             </div>
           </div>
 
@@ -392,14 +387,13 @@ export default function HomePage() {
         <section className="space-y-6">
           <div className="text-center space-y-1">
             <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
-              Tactical Workflow
+              How It Works
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">
-              How Deduction Works
+              Three Clues on Every Guess
             </h2>
             <p className="text-xs text-slate-400 max-w-md mx-auto">
-              Three sensory feedback layers turn dry facts into permanent mental
-              maps.
+              Each guess brings you closer with distance, color, and neighbor hints.
             </p>
           </div>
 
@@ -409,12 +403,10 @@ export default function HomePage() {
                 01
               </div>
               <h3 className="font-bold text-white text-base">
-                Geodesic Triangulation
+                Distance & Direction
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Each guess calculates exact great-circle distance in kilometers
-                and 8-point compass bearing from your guess centroid to the
-                secret target.
+                See straight-line distance in kilometers and an 8-point compass arrow pointing toward the target.
               </p>
             </div>
 
@@ -423,12 +415,10 @@ export default function HomePage() {
                 02
               </div>
               <h3 className="font-bold text-white text-base">
-                Proximity Radar Heatmap
+                Warmer & Colder Colors
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Polygons glow Hot Orange (&lt;60km BD / &lt;1500km World), Warm
-                Purple, or Cold Navy directly on the map canvas. Clean shapes
-                with zero label overlap.
+                Guessed areas glow orange when you are close, purple at medium distance, and navy when far away.
               </p>
             </div>
 
@@ -437,11 +427,10 @@ export default function HomePage() {
                 03
               </div>
               <h3 className="font-bold text-white text-base">
-                Contiguous Border Intel
+                Neighbor Hints
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Progressive clues illuminate adjacent neighboring borders on the
-                map in vibrant cyan, enabling tactical contiguity elimination.
+                Unlock bordering areas right on the map to narrow down which region the mystery place is in.
               </p>
             </div>
           </div>
@@ -453,10 +442,10 @@ export default function HomePage() {
         <section className="space-y-6">
           <div className="text-center space-y-1">
             <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-              Cartographic Arenas
+              Game Modes
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">
-              Choose Your Operational Realm
+              Where Do You Want to Play?
             </h2>
           </div>
 
@@ -470,15 +459,14 @@ export default function HomePage() {
                     variant="outline"
                     className="text-2xs border-emerald-500/30 text-emerald-300 bg-emerald-500/10"
                   >
-                    National Hub
+                    Bangladesh
                   </Badge>
                 </div>
                 <h3 className="text-lg font-bold text-white">
-                  Bangladesh's 64 Districts
+                  Bangladesh Districts
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  All 64 districts across 8 divisions. Master riverine networks,
-                  district headquarter borders, and regional layout.
+                  All 64 districts across 8 divisions. Great for students, BCS preparation, and anyone who loves local geography.
                 </p>
                 <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
@@ -487,11 +475,11 @@ export default function HomePage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
-                    <span>District Hop Streak Mode</span>
+                    <span>District Streak Mode</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
-                    <span>BCS / Curriculum Optimized</span>
+                    <span>Division & Neighbor Hints</span>
                   </div>
                 </div>
               </div>
@@ -515,29 +503,27 @@ export default function HomePage() {
                     variant="outline"
                     className="text-2xs border-sky-500/30 text-sky-300 bg-sky-500/10"
                   >
-                    Global Hub
+                    World
                   </Badge>
                 </div>
                 <h3 className="text-lg font-bold text-white">
-                  World 195 Nations
+                  World Countries
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Every sovereign nation on Earth. Microstate zoom
-                  auto-magnification, continent clues, and nearest neighbor
-                  tethers.
+                  195 countries across every continent. Distance indicators and neighbor hints help guide your way.
                 </p>
                 <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-sky-400 shrink-0" />
-                    <span>Global Daily Puzzle</span>
+                    <span>Daily Mystery Country</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-sky-400 shrink-0" />
-                    <span>Border Hop Streak Mode</span>
+                    <span>Country Streak Mode</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-sky-400 shrink-0" />
-                    <span>Island Nautical Fallback</span>
+                    <span>Maritime Neighbor Clues for Islands</span>
                   </div>
                 </div>
               </div>
@@ -545,7 +531,7 @@ export default function HomePage() {
               <div className="pt-6">
                 <Link href="/world" className="block w-full">
                   <Button className="w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs py-2 rounded-xl gap-2 shadow-lg shadow-sky-950/40">
-                    <span>Play World Map</span>
+                    <span>Play World</span>
                     <ArrowRight className="size-3.5" />
                   </Button>
                 </Link>
@@ -561,29 +547,27 @@ export default function HomePage() {
                     variant="outline"
                     className="text-2xs border-purple-500/30 text-purple-300 bg-purple-500/10"
                   >
-                    Study Desk
+                    Explore
                   </Badge>
                 </div>
                 <h3 className="text-lg font-bold text-white">
-                  Free-Roam Atlas
+                  Map Explorer
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Zero time limits or guess caps. Click any territory to open
-                  full demographic dossiers with interactive pan-to-border
-                  buttons.
+                  No timers or guess limits. Click any place on the map to browse capitals, populations, facts, and bordering regions.
                 </p>
                 <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-purple-400 shrink-0" />
-                    <span>Territorial Dossier Cards</span>
+                    <span>District & Country Profiles</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-purple-400 shrink-0" />
-                    <span>Division Filter Chips</span>
+                    <span>Division & Region Filters</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="size-3.5 text-purple-400 shrink-0" />
-                    <span>Interactive Border Panning</span>
+                    <span>Click to Pan to Neighbors</span>
                   </div>
                 </div>
               </div>
@@ -591,7 +575,7 @@ export default function HomePage() {
               <div className="pt-6">
                 <Link href="/explore" className="block w-full">
                   <Button className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs py-2 rounded-xl gap-2 shadow-lg shadow-purple-950/40">
-                    <span>Open Free Atlas</span>
+                    <span>Open Map Explorer</span>
                     <ArrowRight className="size-3.5" />
                   </Button>
                 </Link>
@@ -606,42 +590,38 @@ export default function HomePage() {
         <section className="space-y-4">
           <div className="text-center space-y-1">
             <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold">
-              Gameplay Tiers
+              Difficulty Levels
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white">
-              Three Calibrated Difficulties
+              Choose Your Challenge
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
             <div className="p-4 rounded-2xl border border-emerald-500/30 bg-[#0c101c] space-y-2">
               <div className="font-bold text-emerald-400 text-sm">
-                🟢 Easy Mode (8 Guesses)
+                🟢 Easy (8 Guesses)
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Target division or continent revealed immediately. Full
-                territory inspection on hover and click (except the secret
-                target).
+                Division or continent revealed right away. You can hover or click any territory on the map to inspect its details.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl border border-amber-500/30 bg-[#0c101c] space-y-2">
               <div className="font-bold text-amber-400 text-sm">
-                🟡 Normal Mode (6 Guesses)
+                🟡 Normal (6 Guesses)
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Standard tactical challenge. 8-point compass arrows active. Only
-                highlighted adjacent borders and guesses show info.
+                The standard game. Compass arrow shows direction. Unrevealed areas stay hidden until guessed.
               </p>
             </div>
 
             <div className="p-4 rounded-2xl border border-rose-500/30 bg-[#0c101c] space-y-2">
               <div className="font-bold text-rose-400 text-sm">
-                🔴 Hard Mode (5 Guesses)
+                🔴 Hard (5 Guesses)
               </div>
               <p className="text-slate-400 leading-relaxed">
-                Compass disabled! Pure distance triangulation. Unrevealed
-                territories remain completely blinded.
+                Compass disabled! Distance clues only. A true test for geography lovers.
               </p>
             </div>
           </div>
@@ -658,11 +638,10 @@ export default function HomePage() {
         <section className="p-8 sm:p-12 rounded-3xl border border-white/10 bg-gradient-to-b from-[#0c101c] to-[#070a12] text-center space-y-5 shadow-2xl">
           <div className="space-y-2 max-w-lg mx-auto">
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              Ready to test your spatial perception?
+              Ready to test your geography?
             </h2>
             <p className="text-xs sm:text-sm text-slate-400">
-              100% free · Zero registration required · Instant client-side play
-              in your browser.
+              Free to play · No registration needed · Play directly in your browser.
             </p>
           </div>
 
@@ -670,7 +649,7 @@ export default function HomePage() {
             <Link href="/bangladesh">
               <Button className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm px-6 py-2.5 rounded-xl gap-2 shadow-xl shadow-emerald-950/60">
                 <Play className="size-4 fill-white" />
-                <span>Begin Today&apos;s Mission</span>
+                <span>Play Today&apos;s Puzzle</span>
               </Button>
             </Link>
           </div>
@@ -680,11 +659,10 @@ export default function HomePage() {
       {/* Semantic Footer */}
       <footer className="border-t border-white/5 py-8 text-center text-xs text-slate-500 space-y-2 mt-16 bg-[#070a12]">
         <p>
-          Borderline • Tactical Cartography Arena & Educational Geography
-          Platform
+          Borderline • A map guessing game for Bangladesh & the world
         </p>
         <p className="text-slate-600">
-          Built with Next.js 16, React 19, Tailwind CSS & TopoJSON Cartography
+          Built with Next.js, React, Tailwind CSS & open map data
         </p>
       </footer>
     </div>

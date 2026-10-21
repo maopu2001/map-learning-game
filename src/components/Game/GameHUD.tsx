@@ -90,10 +90,10 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               size="sm"
               onClick={handleExitClick}
               className="h-8 px-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl flex items-center gap-1 cursor-pointer shrink-0"
-              title="Exit to Hub"
+              title="Back to Home"
             >
               <ArrowLeft className="size-3.5" />
-              <span className="hidden sm:inline text-xs font-semibold">Exit</span>
+              <span className="hidden sm:inline text-xs font-semibold">Home</span>
             </Button>
 
             <div className="h-4 w-px bg-white/10 shrink-0" />
@@ -155,7 +155,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               variant="ghost"
               size="icon"
               onClick={() => setStatsOpen(true)}
-              title="Career Dossier"
+              title="Stats"
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <Trophy className="size-3.5 text-amber-400" />
@@ -164,7 +164,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               variant="ghost"
               size="icon"
               onClick={() => setHelpOpen(true)}
-              title="Directives"
+              title="How to Play"
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <HelpCircle className="size-3.5 text-sky-400" />
@@ -173,7 +173,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               variant="ghost"
               size="icon"
               onClick={handleResetClick}
-              title={isMissionActive ? "Abandon & Restart" : "New Round"}
+              title={isMissionActive ? "Restart Round" : "New Round"}
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <RotateCcw className="size-3.5" />
@@ -223,7 +223,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               variant="ghost"
               size="icon"
               onClick={() => setStatsOpen(true)}
-              title="Career Dossier"
+              title="Stats"
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <Trophy className="size-4 text-amber-400" />
@@ -233,7 +233,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               variant="ghost"
               size="icon"
               onClick={() => setHelpOpen(true)}
-              title="Directives"
+              title="How to Play"
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <HelpCircle className="size-4 text-sky-400" />
@@ -243,7 +243,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               variant="ghost"
               size="icon"
               onClick={handleResetClick}
-              title={isMissionActive ? "Abandon & Restart" : "New Round"}
+              title={isMissionActive ? "Restart Round" : "New Round"}
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <RotateCcw className="size-4" />
@@ -266,23 +266,23 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
                 <AlertTriangle className="size-4" />
               </div>
               <DialogTitle className="text-base font-bold text-white">
-                Abandon Active Mission?
+                Leave current game?
               </DialogTitle>
             </div>
             <DialogDescription className="text-xs text-slate-400 leading-relaxed">
-              You are currently engaged in an active reconnaissance mission (
-              {guesses.length > 0 && `${guesses.length} guesses logged`}
+              You have a game in progress (
+              {guesses.length > 0 && `${guesses.length} guesses`}
               {guesses.length > 0 && unlockedHints > 0 && " · "}
               {unlockedHints > 0 && `${unlockedHints} hints unlocked`}
-              {guesses.length === 0 && unlockedHints === 0 && "timer ticking"}
-              ). Quitting or resetting mid-round counts as a forfeit.
+              {guesses.length === 0 && unlockedHints === 0 && "timer running"}
+              ). Quitting or restarting now counts as a forfeit.
             </DialogDescription>
           </DialogHeader>
 
           {mode === "streak" && stats.streak > 0 && (
             <div className="p-3 rounded-2xl bg-amber-950/30 border border-amber-500/20 text-xs text-amber-300 flex items-center justify-between">
               <span className="flex items-center gap-1.5">
-                <Flame className="size-3.5 text-amber-400" /> Active Streak:
+                <Flame className="size-3.5 text-amber-400" /> Current Streak:
               </span>
               <span className="font-bold">{stats.streak} wins (will reset to 0)</span>
             </div>
@@ -303,7 +303,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               onClick={handleConfirmAbandon}
               className="text-xs h-8 bg-rose-600 hover:bg-rose-500 text-white font-medium shadow-md shadow-rose-950/40 rounded-xl"
             >
-              Forfeit & Confirm
+              Forfeit & Quit
             </Button>
           </div>
         </DialogContent>
@@ -315,10 +315,10 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <Trophy className="size-5 text-amber-400" />
-              Cartography Career Dossier
+              Your Stats
             </DialogTitle>
             <DialogDescription className="text-slate-400 text-xs">
-              Verified performance record across all territorial reconnaissance operations.
+              Your overall record across all games played.
             </DialogDescription>
           </DialogHeader>
 
@@ -351,45 +351,45 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <MapPin className="size-5 text-sky-400" />
-              Mission Directives & Difficulty System
+              How to Play & Difficulty Rules
             </DialogTitle>
             <DialogDescription className="text-slate-400 text-xs">
-              How to deduce mystery territories through spatial feedback.
+              Find the secret location using distance and direction clues.
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-3 text-xs text-slate-300 leading-relaxed mt-2">
             <div className="p-3 rounded-2xl bg-black/40 border border-white/5 space-y-1">
-              <div className="font-semibold text-sky-300">1. Spatial Geodesic Vector</div>
+              <div className="font-semibold text-sky-300">1. Distance & Compass Direction</div>
               <p className="text-slate-400">
-                Each guess calculates true geodesic distance in kilometers and 8-point compass bearing from your guess centroid to the secret target.
+                Every guess calculates the distance in kilometers and an 8-point compass arrow pointing toward the secret target.
               </p>
             </div>
 
             <div className="p-3 rounded-2xl bg-black/40 border border-white/5 space-y-1">
-              <div className="font-semibold text-emerald-300">2. Proximity Radar Colors</div>
+              <div className="font-semibold text-emerald-300">2. Proximity Colors</div>
               <p className="text-slate-400">
-                Guessed territories glow by distance: <strong>Hot Orange (&lt;60km BD / &lt;1500km World)</strong>, <strong>Warm Purple</strong>, and <strong>Cold Navy</strong>. Unlocked neighbor hints reveal their true names on the map!
+                Guessed territories glow by distance: <strong>Orange (Very Close)</strong>, <strong>Purple (Medium)</strong>, and <strong>Navy (Far)</strong>. Neighbor hints light up on the map to show which places border the target!
               </p>
             </div>
 
             <div className="p-3 rounded-2xl bg-black/40 border border-white/5 space-y-2">
               <div className="font-semibold text-amber-300 flex items-center gap-1.5">
                 <ShieldAlert className="size-4" />
-                3. Difficulty Tiers
+                3. Difficulty Levels
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div className="p-2.5 rounded-xl bg-black/50 border border-emerald-500/20">
                   <strong className="text-emerald-400">🟢 Easy (8 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Full territory inspection. 8 guesses allowed. Clues available on demand.</p>
+                  <p className="text-slate-400 mt-1">Free map inspection. 8 guesses allowed. Division or continent revealed upfront.</p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-black/50 border border-amber-500/20">
                   <strong className="text-amber-400">🟡 Normal (6 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Standard mystery challenge. Compass arrow active. Neighbor inspection.</p>
+                  <p className="text-slate-400 mt-1">Standard challenge with compass arrows. Unrevealed areas stay hidden.</p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-black/50 border border-rose-500/20">
                   <strong className="text-rose-400">🔴 Hard (5 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Distance only! No compass arrow. Blind triangulation.</p>
+                  <p className="text-slate-400 mt-1">Distance only! Compass arrow is disabled. 5 guesses max.</p>
                 </div>
               </div>
             </div>

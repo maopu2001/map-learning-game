@@ -224,11 +224,10 @@ export function BangladeshMap() {
               <span className="font-semibold text-rose-400 flex items-center gap-1.5">
                 <ShieldAlert className="size-3.5" /> Hard Mode
               </span>
-              <span className="text-2xs text-slate-400">Blind Recon</span>
+              <span className="text-2xs text-slate-400">Map Hidden</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              No territory info is shown on hover or click. Unlock Hint 2 & 3 to
-              reveal adjacent border districts!
+              Districts stay hidden on hover or click. Unlock Hints to reveal neighboring districts!
             </p>
             {lastGuess && (
               <div className="text-xs flex items-center justify-between pt-1 border-t border-slate-800">
@@ -246,15 +245,14 @@ export function BangladeshMap() {
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between pb-1 border-b border-amber-500/30">
                   <span className="font-bold text-amber-400 text-sm flex items-center gap-1.5">
-                    <Target className="size-4" /> Mystery Target
+                    <Target className="size-4" /> Secret Target
                   </span>
                   <span className="text-2xs text-amber-300 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-500/30">
-                    Active Target
+                    Target
                   </span>
                 </div>
                 <div className="text-xs text-slate-300 leading-relaxed">
-                  Highlighted amber border. Deduce this mystery district using
-                  distance clues!
+                  Amber outline. Follow your distance clues to guess this mystery district!
                 </div>
                 {targetDistrict && (
                   <div className="text-2xs text-emerald-400 font-semibold pt-1 border-t border-slate-800">
@@ -262,7 +260,7 @@ export function BangladeshMap() {
                       `Hint 1: Division: ${targetDistrict.division}`
                     ) : (
                       <span className="text-slate-500 font-normal">
-                        Hint 1: 🔒 Locked (Unlock in Clues drawer)
+                        Hint 1: 🔒 Locked (Unlock in Hints drawer)
                       </span>
                     )}
                   </div>
@@ -283,8 +281,7 @@ export function BangladeshMap() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Only highlighted adjacent borders and guesses show info.
-                  Unlock neighbor clues or make guesses to reveal!
+                  Only guessed districts and revealed neighbors show details.
                 </p>
               </div>
             ) : (
@@ -308,7 +305,7 @@ export function BangladeshMap() {
                       inspectedDistrict.name.toLowerCase(),
                     )?.isCorrect ? (
                       <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                        <ShieldCheck className="size-3.5" /> Target Identified!
+                        <ShieldCheck className="size-3.5" /> Target Found!
                       </span>
                     ) : (
                       <div className="flex items-center justify-between text-slate-300">
@@ -340,12 +337,12 @@ export function BangladeshMap() {
                   </div>
                 ) : activeNeighbors.includes(inspectedDistrict.name) ? (
                   <div className="text-xs text-sky-300 font-semibold pt-1">
-                    Adjacent Border to Secret Target
+                    Borders the secret target
                   </div>
                 ) : (
                   <div className="text-2xs text-slate-400 pt-1 flex items-center justify-between">
-                    <span>Unexplored Territory</span>
-                    <span className="text-slate-500">Type below to guess</span>
+                    <span>Not guessed yet</span>
+                    <span className="text-slate-500">Type name to guess</span>
                   </div>
                 )}
               </div>
@@ -355,9 +352,9 @@ export function BangladeshMap() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
               <span className="text-slate-400 font-medium flex items-center gap-1">
-                <Target className="size-3 text-amber-400" /> Target Territory
+                <Target className="size-3 text-amber-400" /> Secret Target
               </span>
-              <span className="text-amber-400 font-semibold">Amber Border</span>
+              <span className="text-amber-400 font-semibold">Amber outline</span>
             </div>
 
             {lastGuess ? (
@@ -378,7 +375,7 @@ export function BangladeshMap() {
             <div className="text-2xs text-slate-500 pt-1 border-t border-slate-800/80 flex items-center justify-between">
               <span>Map Mode:</span>
               <span className="text-slate-400">
-                Clean Cartography (Dots Only)
+                Clean map (dots only)
               </span>
             </div>
           </div>
@@ -716,7 +713,7 @@ export function BangladeshMap() {
 
           {isTargetInspected && gameStatus === "playing" ? (
             <p className="text-xs text-amber-300 leading-snug">
-              Highlighted amber border. Deduce this mystery district using distance clues!
+              Amber outline. Follow your distance and direction clues to find this district!
             </p>
           ) : guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()) ? (
             <div className="flex items-center justify-between text-xs pt-0.5">
@@ -733,13 +730,13 @@ export function BangladeshMap() {
             </div>
           ) : activeNeighbors.includes(inspectedDistrict.name) ? (
             <p className="text-xs text-sky-300 font-semibold">
-              Adjacent Border to Secret Target
+              Borders the secret target
             </p>
           ) : (
             <p className="text-2xs text-slate-400">
               {difficulty === "normal"
-                ? "Unrevealed territory in Normal Mode."
-                : "Unexplored territory. Type in searchbox to guess!"}
+                ? "Hidden until guessed or revealed."
+                : "Not guessed yet. Type in search box above."}
             </p>
           )}
         </div>

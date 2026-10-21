@@ -20,9 +20,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Borderline — Tactical Cartography Arena & Geography Deduction",
+  title: "Borderline — Daily Map & Geography Game",
   description:
-    "Deduce mystery territories through geodesic distance triangulation, compass bearings, and contiguous border intelligence. Master the 64 districts of Bangladesh and 195 sovereign nations.",
+    "Guess the secret country or Bangladesh district in 6 tries. Use distance, compass directions, and neighbor hints to zero in.",
 };
 
 export default function RootLayout({

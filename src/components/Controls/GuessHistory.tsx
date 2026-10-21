@@ -23,21 +23,20 @@ export function GuessHistory() {
       <div className="w-full rounded-2xl border border-white/10 bg-[#0c101c] p-5 text-center text-slate-500 shadow-xl">
         <Target className="size-8 mx-auto mb-2 text-slate-600 opacity-80" />
         <p className="text-sm font-semibold text-slate-300">
-          No reconnaissance guesses yet
+          No guesses yet
         </p>
         <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
           {isBD
-            ? `Type any Bangladesh district above to calculate geodesic distance${
+            ? `Type any Bangladesh district above to see distance${
                 showDirection ? " and compass direction" : ""
               } to the secret district.`
-            : `Type any sovereign country above to calculate geodesic distance${
+            : `Type any country above to see distance${
                 showDirection ? " and compass direction" : ""
-              } to the secret nation.`}
+              } to the secret country.`}
         </p>
         {difficulty === "hard" && (
           <p className="text-xs text-rose-400 mt-2 font-mono bg-rose-950/30 border border-rose-500/20 py-1 px-2.5 rounded-lg inline-block">
-            Hard Mode: Compass bearing disabled — calculate target via distance
-            triangulation!
+            Hard Mode: Compass arrow is disabled — follow distance alone!
           </p>
         )}
       </div>
@@ -48,9 +47,9 @@ export function GuessHistory() {
     <div className="w-full space-y-2.5">
       <div className="flex items-center justify-between text-xs font-mono font-semibold text-slate-400 px-2 uppercase tracking-wider">
         <span>
-          Reconnaissance Log ({guesses.length}/{maxGuesses})
+          Guesses ({guesses.length}/{maxGuesses})
         </span>
-        <span>Proximity Score</span>
+        <span>Closeness</span>
       </div>
 
       <div className="space-y-2">
@@ -105,7 +104,7 @@ export function GuessHistory() {
                             variant="amber"
                             className="text-2xs px-1.5 py-0 shrink-0"
                           >
-                            HOT 🔥
+                            VERY CLOSE 🔥
                           </Badge>
                         )}
                       </div>
@@ -131,10 +130,10 @@ export function GuessHistory() {
                       </span>
                       <span className="text-3xs sm:text-2xs text-slate-400 font-mono">
                         {g.isCorrect
-                          ? "Direct Hit"
+                          ? "Correct!"
                           : showDirection
                             ? `${g.bearing}° ${g.direction}`
-                            : "Triangulated"}
+                            : "Distance only"}
                       </span>
                     </div>
                   </div>

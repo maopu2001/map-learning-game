@@ -150,7 +150,7 @@ export function GuessInput() {
                   ).length === 0 && (
                     <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
                       <Globe className="size-4 text-slate-500" />
-                      <span>No matching Bangladesh districts found</span>
+                      <span>No districts found</span>
                     </CommandEmpty>
                   )}
                 </>
@@ -193,7 +193,7 @@ export function GuessInput() {
                   ).length === 0 && (
                     <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
                       <Globe className="size-4 text-slate-500" />
-                      <span>No matching sovereign nations found</span>
+                      <span>No countries found</span>
                     </CommandEmpty>
                   )}
                 </>

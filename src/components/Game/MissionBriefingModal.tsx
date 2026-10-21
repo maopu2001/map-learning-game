@@ -63,13 +63,13 @@ export function MissionBriefingModal({
               <Crosshair className="size-4" />
             </span>
             <DialogTitle className="text-lg font-black tracking-wide text-white uppercase">
-              Mission Deployment Briefing
+              Game Settings
             </DialogTitle>
           </div>
           <DialogDescription className="text-xs text-slate-400">
             {isBD
-              ? "Reconnaissance theatre: Bangladesh's 64 Districts"
-              : "Reconnaissance theatre: World's 195 Sovereign Nations"}
+              ? "Playing: Bangladesh (64 Districts)"
+              : "Playing: World (195 Countries)"}
           </DialogDescription>
         </DialogHeader>
 
@@ -77,7 +77,7 @@ export function MissionBriefingModal({
           <div className="flex flex-col gap-2 p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs">
             <div className="flex justify-center gap-2 rounded-xl ">
               <AlertTriangle className="size-4 shrink-0" />
-              <span>Deploying will forfeit your active game.</span>
+              <span>Starting a new game will forfeit your active round.</span>
             </div>
             <div className="grid grid-cols-2 gap-2 place-items-center text-amber-400">
               <span className="border p-1 w-full flex justify-center border-amber-500/20 rounded-lg">
@@ -94,7 +94,7 @@ export function MissionBriefingModal({
           {/* Step 1: Mode Select */}
           <div className="space-y-2">
             <label className="text-2xs font-mono font-bold uppercase tracking-wider text-slate-400">
-              1. Select Directive (Mode)
+              1. Select Game Mode
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {/* Daily */}
@@ -112,7 +112,7 @@ export function MissionBriefingModal({
                   Daily Puzzle
                 </div>
                 <div className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-                  Synchronized seed. 1 challenge per day worldwide.
+                  One new puzzle every day for everyone worldwide.
                 </div>
               </button>
 
@@ -131,7 +131,7 @@ export function MissionBriefingModal({
                   {isBD ? "Hop Streak" : "Border Streak"}
                 </div>
                 <div className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-                  Survive contiguous hops. Build your highest streak.
+                  Keep guessing correctly to build your longest streak.
                 </div>
               </button>
 
@@ -145,12 +145,12 @@ export function MissionBriefingModal({
                     : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex gap-2 items-centerfont-bold text-xs text-white">
+                <div className="flex gap-2 items-center font-bold text-xs text-white">
                   <Timer className="size-4 text-rose-400" />
                   Blitz 90s
                 </div>
                 <div className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-                  High-speed sprint against a 90-second clock.
+                  Race against the 90-second countdown clock.
                 </div>
               </button>
             </div>
@@ -159,7 +159,7 @@ export function MissionBriefingModal({
           {/* Step 2: Difficulty Select */}
           <div className="space-y-2">
             <label className="text-2xs font-mono font-bold uppercase tracking-wider text-slate-400">
-              2. Select Threat Level (Difficulty)
+              2. Select Difficulty
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {/* Easy */}
@@ -181,7 +181,7 @@ export function MissionBriefingModal({
                   </span>
                 </div>
                 <div className="text-2xs text-slate-400 leading-relaxed">
-                  Full map inspection allowed. Clues available on demand.
+                  Full map inspection. Division or continent revealed upfront.
                 </div>
               </button>
 
@@ -204,7 +204,7 @@ export function MissionBriefingModal({
                   </span>
                 </div>
                 <div className="text-2xs text-slate-400 leading-relaxed">
-                  Standard challenge. Compass arrow vector active.
+                  Standard game. Compass arrow shows direction.
                 </div>
               </button>
 
@@ -227,7 +227,7 @@ export function MissionBriefingModal({
                   </span>
                 </div>
                 <div className="text-2xs text-slate-400 leading-relaxed">
-                  Blind recon. Distance only (no compass bearing).
+                  Distance clues only (no compass arrow). 5 guesses max.
                 </div>
               </button>
             </div>
@@ -245,7 +245,7 @@ export function MissionBriefingModal({
             }`}
           >
             <Play className="size-4 fill-white" />
-            <span>START MISSION</span>
+            <span>START GAME</span>
           </Button>
         </div>
       </DialogContent>

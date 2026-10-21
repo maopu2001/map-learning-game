@@ -52,7 +52,7 @@ export function Header() {
                     v2.0
                   </span>
                 </div>
-                <p className="text-2xs text-slate-400 leading-none">Tactical Geography Arena</p>
+                <p className="text-2xs text-slate-400 leading-none">Map Guessing Game</p>
               </div>
             </Link>
 
@@ -61,16 +61,16 @@ export function Header() {
               <button
                 onClick={() => setStatsOpen(true)}
                 className="size-9 rounded-xl border border-white/10 bg-white/5 text-amber-400 flex items-center justify-center hover:bg-white/10 transition-colors"
-                aria-label="Career Dossier"
-                title="Career Record Dossier"
+                aria-label="Your Stats"
+                title="Your Stats"
               >
                 <Trophy className="size-4" />
               </button>
               <button
                 onClick={() => setHelpOpen(true)}
                 className="size-9 rounded-xl border border-white/10 bg-white/5 text-sky-400 flex items-center justify-center hover:bg-white/10 transition-colors"
-                aria-label="Mission Directives"
-                title="Mission Directives"
+                aria-label="How to Play"
+                title="How to Play"
               >
                 <HelpCircle className="size-4" />
               </button>
@@ -128,7 +128,7 @@ export function Header() {
               }`}
             >
               <BookOpen className="size-3.5 text-purple-400" />
-              <span>Atlas</span>
+              <span>Explore</span>
             </Link>
           </nav>
 
@@ -138,8 +138,8 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setStatsOpen(true)}
-              title="Career Record Dossier"
-              aria-label="Career Record Dossier"
+              title="Your Stats"
+              aria-label="Your Stats"
               className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5"
             >
               <Trophy className="size-3.5 text-amber-400" />
@@ -149,8 +149,8 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setHelpOpen(true)}
-              title="Mission Directives"
-              aria-label="Mission Directives"
+              title="How to Play"
+              aria-label="How to Play"
               className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5"
             >
               <HelpCircle className="size-3.5 text-sky-400" />
@@ -172,7 +172,7 @@ export function Header() {
                 }`}
               >
                 <Home className="size-4 shrink-0" />
-                <span>Home Hub</span>
+                <span>Home</span>
               </Link>
               <Link
                 href="/bangladesh"
@@ -208,7 +208,7 @@ export function Header() {
                 }`}
               >
                 <BookOpen className="size-4 text-purple-400 shrink-0" />
-                <span>Free Atlas</span>
+                <span>Explore</span>
               </Link>
             </div>
 
@@ -221,7 +221,7 @@ export function Header() {
                 className="p-2.5 min-h-[40px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium"
               >
                 <Trophy className="size-3.5 text-amber-400" />
-                <span>Career Record</span>
+                <span>Stats</span>
               </button>
               <button
                 onClick={() => {
@@ -231,7 +231,7 @@ export function Header() {
                 className="p-2.5 min-h-[40px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium"
               >
                 <HelpCircle className="size-3.5 text-sky-400" />
-                <span>Directives & FAQ</span>
+                <span>How to Play</span>
               </button>
             </div>
           </div>
@@ -244,10 +244,10 @@ export function Header() {
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <Trophy className="size-5 text-amber-400" />
-              Cartography Career Dossier
+              Your Stats
             </DialogTitle>
             <DialogDescription className="text-slate-400 text-xs">
-              Verified performance record across all territorial reconnaissance operations.
+              Your overall record across all games played.
             </DialogDescription>
           </DialogHeader>
 
@@ -280,45 +280,45 @@ export function Header() {
           <DialogHeader>
             <DialogTitle className="text-lg font-bold flex items-center gap-2 text-white">
               <MapPin className="size-5 text-sky-400" />
-              Mission Directives & Difficulty System
+              How to Play & Difficulty Rules
             </DialogTitle>
             <DialogDescription className="text-slate-400 text-xs">
-              How to deduce mystery territories through spatial feedback.
+              Find the secret location using distance and direction clues.
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-3 text-xs text-slate-300 leading-relaxed mt-2">
             <div className="p-3 rounded-2xl bg-black/40 border border-white/5 space-y-1">
-              <div className="font-semibold text-sky-300">1. Spatial Geodesic Vector</div>
+              <div className="font-semibold text-sky-300">1. Distance & Compass Direction</div>
               <p className="text-slate-400">
-                Each guess calculates true geodesic distance in kilometers and 8-point compass bearing from your guess centroid to the secret target.
+                Every guess calculates the distance in kilometers and an 8-point compass arrow pointing toward the secret target.
               </p>
             </div>
 
             <div className="p-3 rounded-2xl bg-black/40 border border-white/5 space-y-1">
-              <div className="font-semibold text-emerald-300">2. Proximity Radar Colors</div>
+              <div className="font-semibold text-emerald-300">2. Proximity Colors</div>
               <p className="text-slate-400">
-                Guessed territories glow by distance: <strong>Hot Orange (&lt;60km BD / &lt;1500km World)</strong>, <strong>Warm Purple</strong>, and <strong>Cold Navy</strong>. Unlocked neighbor hints reveal their true names on the map!
+                Guessed territories glow by distance: <strong>Orange (Very Close)</strong>, <strong>Purple (Medium)</strong>, and <strong>Navy (Far)</strong>. Neighbor hints light up on the map to show which places border the target!
               </p>
             </div>
 
             <div className="p-3 rounded-2xl bg-black/40 border border-white/5 space-y-2">
               <div className="font-semibold text-amber-300 flex items-center gap-1.5">
                 <ShieldAlert className="size-4" />
-                3. Difficulty Tiers
+                3. Difficulty Levels
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                 <div className="p-2.5 rounded-xl bg-black/50 border border-emerald-500/20">
                   <strong className="text-emerald-400">🟢 Easy (8 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Full territory inspection. 8 guesses allowed. Clues available on demand.</p>
+                  <p className="text-slate-400 mt-1">Free map inspection. 8 guesses allowed. Division or continent revealed upfront.</p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-black/50 border border-amber-500/20">
                   <strong className="text-amber-400">🟡 Normal (6 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Standard mystery challenge. Compass arrow active. Neighbor inspection.</p>
+                  <p className="text-slate-400 mt-1">Standard challenge with compass arrows. Unrevealed areas stay hidden.</p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-black/50 border border-rose-500/20">
                   <strong className="text-rose-400">🔴 Hard (5 Guesses)</strong>
-                  <p className="text-slate-400 mt-1">Distance only! No compass arrow. Blind triangulation.</p>
+                  <p className="text-slate-400 mt-1">Distance only! Compass arrow is disabled. 5 guesses max.</p>
                 </div>
               </div>
             </div>
