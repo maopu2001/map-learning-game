@@ -1,20 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles, Play, Globe2 } from "lucide-react";
+import { Play, Globe2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 export function HeroSection() {
   return (
     <section className="text-center space-y-6 pt-4 sm:pt-8">
-      <Badge
-        variant="outline"
-        className="border-sky-500/30 bg-sky-500/10 text-sky-400 px-3 py-1 text-xs rounded-full inline-flex items-center gap-1.5 font-mono"
-      >
-        <Sparkles className="size-3.5" /> Daily Map Guessing Game
-      </Badge>
-
       {/* Heading with left-to-right #FFFFFF -> #9B9B9B gradient */}
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">

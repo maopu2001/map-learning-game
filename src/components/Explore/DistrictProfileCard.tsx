@@ -3,7 +3,7 @@
 import React from "react";
 import { DistrictData, DISTRICTS_BY_NAME } from "@/data/bangladesh";
 import { Badge } from "@/components/ui/badge";
-import { Compass, Layers, Sparkles } from "lucide-react";
+import { CircleQuestionMark, Compass, Layers } from "lucide-react";
 
 interface DistrictProfileCardProps {
   district: DistrictData;
@@ -59,7 +59,7 @@ export function DistrictProfileCard({
       {/* Trivia Fact */}
       <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
         <span className="text-amber-400 font-semibold flex items-center gap-1.5">
-          <Sparkles className="size-3.5" /> Did you know?
+          <CircleQuestionMark className="size-3.5" /> Did you know?
         </span>
         <p className="text-slate-300">{district.triviaFact}</p>
       </div>

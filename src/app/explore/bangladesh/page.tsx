@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Map, Info, ArrowRight } from "lucide-react";
 import {
   BANGLADESH_DISTRICTS,
@@ -614,10 +613,6 @@ export default function BangladeshExplorePage() {
           </div>
         </div>
       </main>
-
-      <div className="hidden lg:block shrink-0">
-        <Footer />
-      </div>
     </div>
   );
 }

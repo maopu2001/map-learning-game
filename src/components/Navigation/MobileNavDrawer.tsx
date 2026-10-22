@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { Home, Play, Globe2, BookOpen, HelpCircle } from "lucide-react";
 
@@ -31,7 +30,7 @@ export function MobileNavDrawer({
         <Link
           href="/"
           onClick={onClose}
-          className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
+          className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
             pathname === "/"
               ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
               : "bg-white/5 text-slate-200 hover:bg-white/10"
@@ -51,7 +50,7 @@ export function MobileNavDrawer({
             <Link
               href="/bangladesh"
               onClick={onClose}
-              className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+              className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isPlayBD
                   ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/50"
                   : "bg-white/5 text-slate-200 hover:bg-white/10"
@@ -63,7 +62,7 @@ export function MobileNavDrawer({
             <Link
               href="/world"
               onClick={onClose}
-              className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+              className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isPlayWorld
                   ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
                   : "bg-white/5 text-slate-200 hover:bg-white/10"
@@ -85,7 +84,7 @@ export function MobileNavDrawer({
             <Link
               href="/explore/bangladesh"
               onClick={onClose}
-              className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+              className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isExploreBD
                   ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
                   : "bg-white/5 text-slate-200 hover:bg-white/10"
@@ -97,7 +96,7 @@ export function MobileNavDrawer({
             <Link
               href="/explore/world"
               onClick={onClose}
-              className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+              className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isExploreWorld
                   ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
                   : "bg-white/5 text-slate-200 hover:bg-white/10"
@@ -116,7 +115,7 @@ export function MobileNavDrawer({
               onClose();
               onOpenHelp();
             }}
-            className="w-full p-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
+            className="w-full p-2.5 min-h-11 rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
           >
             <HelpCircle className="size-3.5 text-sky-400" />
             <span>How to Play</span>
@@ -126,7 +125,7 @@ export function MobileNavDrawer({
 
       {/* Backdrop */}
       <div
-        className="fixed inset-0 top-12 z-40 bg-black/60 backdrop-blur-xs lg:hidden pointer-events-auto transition-opacity animate-in fade-in duration-150 select-none touch-none"
+        className="fixed inset-0 top-13.25 z-40 bg-black/60 backdrop-blur-xs lg:hidden pointer-events-auto transition-opacity animate-in fade-in duration-150 select-none touch-none"
         onTouchStart={(e) => {
           e.preventDefault();
           e.stopPropagation();

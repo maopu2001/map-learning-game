@@ -1,9 +1,19 @@
 "use client";
 
 import React from "react";
-import { CountryData, COUNTRIES_BY_ID, getEffectiveBorders } from "@/data/world";
+import {
+  CountryData,
+  COUNTRIES_BY_ID,
+  getEffectiveBorders,
+} from "@/data/world";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Users, Maximize2, Compass, Sparkles } from "lucide-react";
+import {
+  MapPin,
+  Users,
+  Maximize2,
+  Compass,
+  CircleQuestionMark,
+} from "lucide-react";
 
 interface CountryProfileCardProps {
   country: CountryData | null;
@@ -23,9 +33,12 @@ export function CountryProfileCard({
           <Compass className="size-6 text-amber-400 animate-pulse" />
         </div>
         <div className="space-y-1">
-          <h3 className="text-base font-bold text-white">No Country Selected</h3>
+          <h3 className="text-base font-bold text-white">
+            No Country Selected
+          </h3>
           <p className="text-xs text-slate-400 max-w-xs">
-            Click any highlighted country on the map or search above to view detailed tactical recon.
+            Click any highlighted country on the map or search above to view
+            detailed tactical recon.
           </p>
         </div>
       </div>
@@ -114,7 +127,7 @@ export function CountryProfileCard({
       {/* Trivia */}
       <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
         <span className="text-amber-400 font-semibold flex items-center gap-1.5">
-          <Sparkles className="size-3.5" /> Did you know?
+          <CircleQuestionMark className="size-3.5" /> Did you know?
         </span>
         <p className="text-slate-300">{country.triviaFact}</p>
       </div>

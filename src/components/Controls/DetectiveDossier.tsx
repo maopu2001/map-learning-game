@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { useGameStore } from "@/lib/store";
 import { redactTrivia } from "@/lib/redact";
 import { Badge } from "@/components/ui/badge";
-import { FileText, ShieldAlert, Sparkles, MapPin, Eye } from "lucide-react";
+import { FileText, ShieldAlert, MapPin, Eye } from "lucide-react";
 
 export function DetectiveDossier() {
   const scope = useGameStore((s) => s.scope);
@@ -33,7 +33,11 @@ export function DetectiveDossier() {
     const ratio = unlockedHints >= 2 ? 1 : unlockedHints === 1 ? 0.5 : 0;
 
     const targetWords = isBD
-      ? [targetDistrict?.name, targetDistrict?.division, ...(targetDistrict?.aliases || [])]
+      ? [
+          targetDistrict?.name,
+          targetDistrict?.division,
+          ...(targetDistrict?.aliases || []),
+        ]
       : [
           targetCountry?.name,
           targetCountry?.capital,
@@ -42,7 +46,15 @@ export function DetectiveDossier() {
         ];
 
     return redactTrivia(target.triviaFact, targetWords, ratio);
-  }, [target, difficulty, unlockedHints, gameStatus, isBD, targetDistrict, targetCountry]);
+  }, [
+    target,
+    difficulty,
+    unlockedHints,
+    gameStatus,
+    isBD,
+    targetDistrict,
+    targetCountry,
+  ]);
 
   if (!target) return null;
 
@@ -81,7 +93,9 @@ export function DetectiveDossier() {
               className="text-3xs font-mono border-emerald-500/30 text-emerald-300 bg-emerald-500/10 flex items-center gap-1 px-1.5 py-0.5"
             >
               <MapPin className="size-3" />
-              <span>{isBD ? targetDistrict.division : targetCountry.continent}</span>
+              <span>
+                {isBD ? targetDistrict.division : targetCountry.continent}
+              </span>
             </Badge>
           )}
         </div>
@@ -109,11 +123,6 @@ export function DetectiveDossier() {
 
       {/* Status Bar */}
       <div className="flex items-center justify-between text-2xs text-slate-400 pt-0.5">
-        <span className="flex items-center gap-1 text-slate-400 font-mono">
-          <Sparkles className="size-3 text-amber-400" />
-          <span>Guess the {isBD ? "district" : "country"} described above</span>
-        </span>
-
         {isHard && unlockedHints < 2 && gameStatus === "playing" && (
           <span className="text-3xs text-rose-400 font-mono flex items-center gap-1">
             <Eye className="size-2.5" />
