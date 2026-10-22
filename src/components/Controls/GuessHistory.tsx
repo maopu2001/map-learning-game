@@ -85,7 +85,9 @@ export function GuessHistory() {
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="text-2xl shrink-0">{g.country.flagEmoji}</span>
+                    {!isDistrict && countryItem && (
+                      <span className="text-2xl shrink-0">{countryItem.flagEmoji}</span>
+                    )}
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5 flex-wrap">
                         <span className="font-bold text-xs sm:text-sm text-white truncate">

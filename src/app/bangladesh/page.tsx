@@ -121,7 +121,6 @@ export default function BangladeshPage() {
           {lastGuess && (
             <div className="lg:hidden p-3 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2.5">
-                <span className="text-xl">{lastGuess.country.flagEmoji}</span>
                 <div>
                   <div className="font-bold text-white flex items-center gap-1.5">
                     <span>{lastGuess.country.name}</span>

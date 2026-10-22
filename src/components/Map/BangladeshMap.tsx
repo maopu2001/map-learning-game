@@ -690,7 +690,6 @@ export function BangladeshMap() {
         <div className="md:hidden absolute bottom-2 left-2 right-2 z-30 rounded-2xl border border-slate-700/90 bg-slate-900/98 p-3 shadow-2xl backdrop-blur-xl text-xs text-slate-200 space-y-2 animate-in fade-in zoom-in-95">
           <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
             <div className="flex items-center gap-2">
-              <span className="text-xl leading-none">{inspectedDistrict.flagEmoji}</span>
               <div>
                 <h4 className="font-bold text-white text-sm leading-tight">
                   {isTargetInspected && gameStatus === "playing"

@@ -127,7 +127,7 @@ export function GameOverModal({ onPlayAgain, onChangeMode }: GameOverModalProps 
         {/* Target Country or District Reveal Card */}
         <div className="rounded-xl border border-white/10 bg-black/40 p-4 space-y-3">
           <div className="flex items-center gap-3">
-            <span className="text-4xl">{currentTarget.flagEmoji}</span>
+            {!isBD && <span className="text-4xl">{targetCountry.flagEmoji}</span>}
             <div className="min-w-0 flex-1">
               <h4 className="text-lg font-bold text-white flex items-center gap-2 flex-wrap">
                 <span>{currentTarget.name}</span>

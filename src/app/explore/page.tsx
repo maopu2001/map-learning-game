@@ -23,7 +23,7 @@ import {
 import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 import {
   BookOpen,
-  Search,
+  Globe,
   Globe2,
   MapPin,
   Users,
@@ -36,9 +36,17 @@ import {
   RotateCcw,
   Map,
   ArrowRight,
+  CornerDownLeft,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandItem,
+} from "@/components/ui/command";
 
 const BD_GEO_URL = "/data/bangladesh-districts-geo.json";
 const WORLD_GEO_URL = "/data/world-countries-geo-50m.json";
@@ -64,6 +72,7 @@ export default function ExplorePage() {
   const [hoveredBD, setHoveredBD] = useState<DistrictData | null>(null);
   const [hoveredWorld, setHoveredWorld] = useState<CountryData | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [divisionFilter, setDivisionFilter] = useState("All");
   const [mobileTab, setMobileTab] = useState<"map" | "dossier">("map");
@@ -131,6 +140,7 @@ export default function ExplorePage() {
   const handleRealmChange = (newRealm: "bangladesh" | "world") => {
     setRealm(newRealm);
     setSearchQuery("");
+    setSearchOpen(false);
     setHoveredBD(null);
     setHoveredWorld(null);
     setMousePos(null);
@@ -160,6 +170,8 @@ export default function ExplorePage() {
   // Inspect district
   const selectDistrict = (dist: DistrictData) => {
     setSelectedBD(dist);
+    setSearchQuery("");
+    setSearchOpen(false);
     setPosition({
       coordinates: [dist.coordinates[1], dist.coordinates[0]],
       zoom: 3.5,
@@ -169,10 +181,46 @@ export default function ExplorePage() {
   // Inspect country
   const selectCountry = (c: CountryData) => {
     setSelectedWorld(c);
+    setSearchQuery("");
+    setSearchOpen(false);
     setPosition({
       coordinates: [c.coordinates[1], c.coordinates[0]],
       zoom: c.area < 100000 ? 4 : 2.5,
     });
+  };
+
+  const submitQuery = (rawQuery: string) => {
+    const q = rawQuery.trim().toLowerCase();
+    if (!q) return;
+
+    if (realm === "bangladesh") {
+      const exact = BANGLADESH_DISTRICTS.find((d) => d.name.toLowerCase() === q);
+      const first =
+        exact ||
+        BANGLADESH_DISTRICTS.find(
+          (d) =>
+            d.name.toLowerCase().includes(q) ||
+            d.division.toLowerCase().includes(q),
+        );
+      if (first) {
+        selectDistrict(first);
+        setMobileTab("map");
+      }
+    } else {
+      const exact = COUNTRIES.find((c) => c.name.toLowerCase() === q);
+      const first =
+        exact ||
+        COUNTRIES.find(
+          (c) =>
+            c.name.toLowerCase().includes(q) ||
+            c.id.toLowerCase() === q ||
+            c.aliases.some((a) => a.toLowerCase().includes(q)),
+        );
+      if (first) {
+        selectCountry(first);
+        setMobileTab("map");
+      }
+    }
   };
 
   const filteredDistricts = useMemo(() => {
@@ -272,6 +320,119 @@ export default function ExplorePage() {
           </button>
         </div>
 
+        {/* Search Input always pinned above on mobile for immediate access */}
+        <div className="lg:hidden w-full relative z-20">
+          <Command
+            className="rounded-2xl border border-white/10 bg-[#0c101c] shadow-2xl backdrop-blur-xl overflow-visible"
+            shouldFilter={false}
+          >
+            <div className="relative">
+              <CommandInput
+                value={searchQuery}
+                onValueChange={(val) => {
+                  setSearchQuery(val);
+                  if (!searchOpen && val.length > 0) setSearchOpen(true);
+                }}
+                onFocus={() => setSearchOpen(true)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && searchQuery.trim().length > 0) {
+                    e.preventDefault();
+                    submitQuery(searchQuery);
+                  }
+                }}
+                placeholder={
+                  realm === "bangladesh"
+                    ? "Type district name (Dhaka, Sylhet)..."
+                    : "Type country name (Japan, France)..."
+                }
+                className="text-base sm:text-sm font-medium"
+              />
+              {searchQuery.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => submitQuery(searchQuery)}
+                  className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-slate-200 bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
+                >
+                  <span>Go</span>
+                  <CornerDownLeft className="size-3 text-sky-400" />
+                </button>
+              )}
+            </div>
+
+            {searchOpen && searchQuery.trim().length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 z-50">
+                <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
+                  {realm === "bangladesh" ? (
+                    <>
+                      {filteredDistricts.slice(0, 8).map((d) => (
+                        <CommandItem
+                          key={d.id}
+                          value={d.name}
+                          onSelect={() => {
+                            selectDistrict(d);
+                            setMobileTab("map");
+                          }}
+                          className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className="font-semibold text-xs sm:text-sm text-white">
+                              {d.name}
+                            </span>
+                            <span className="text-xs text-slate-400 font-mono">
+                              ({d.division} Div)
+                            </span>
+                          </div>
+                          <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                        </CommandItem>
+                      ))}
+                      {filteredDistricts.length === 0 && (
+                        <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
+                          <Globe className="size-4 text-slate-500" />
+                          <span>No districts found</span>
+                        </CommandEmpty>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {filteredCountries.slice(0, 8).map((c) => (
+                        <CommandItem
+                          key={c.id}
+                          value={c.name}
+                          onSelect={() => {
+                            selectCountry(c);
+                            setMobileTab("map");
+                          }}
+                          className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className="text-lg">{c.flagEmoji}</span>
+                            <span className="font-semibold text-xs sm:text-sm text-white">
+                              {c.name}
+                            </span>
+                            <span className="text-xs text-slate-400 font-mono">
+                              ({c.id})
+                            </span>
+                            <span className="text-xs text-slate-500 hidden sm:inline font-mono">
+                              {c.region}
+                            </span>
+                          </div>
+                          <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                        </CommandItem>
+                      ))}
+                      {filteredCountries.length === 0 && (
+                        <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
+                          <Globe className="size-4 text-slate-500" />
+                          <span>No countries found</span>
+                        </CommandEmpty>
+                      )}
+                    </>
+                  )}
+                </CommandList>
+              </div>
+            )}
+          </Command>
+        </div>
+
         {/* 2-Column Command Desk: Map (7) + Dossier (5) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-start">
           {/* Map Column (7 cols) */}
@@ -358,11 +519,11 @@ export default function ExplorePage() {
               {/* Active Selection Callout */}
               <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
                 <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-                <span className="text-sm sm:text-base">
-                  {realm === "bangladesh"
-                    ? selectedBD?.flagEmoji
-                    : selectedWorld?.flagEmoji}
-                </span>
+                {realm === "world" && selectedWorld?.flagEmoji && (
+                  <span className="text-sm sm:text-base">
+                    {selectedWorld.flagEmoji}
+                  </span>
+                )}
                 <span className="font-bold text-white text-2xs sm:text-xs">
                   {realm === "bangladesh"
                     ? selectedBD?.name
@@ -872,11 +1033,11 @@ export default function ExplorePage() {
               {/* Mobile Bottom Inspection Sheet */}
               <div className="lg:hidden absolute bottom-2 left-2 right-2 z-20 flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-[#0c101c]/95 backdrop-blur-xl shadow-2xl">
                 <div className="flex items-center gap-2.5 overflow-hidden mr-2">
-                  <span className="text-2xl shrink-0">
-                    {realm === "bangladesh"
-                      ? selectedBD?.flagEmoji
-                      : selectedWorld?.flagEmoji}
-                  </span>
+                  {realm === "world" && selectedWorld?.flagEmoji && (
+                    <span className="text-2xl shrink-0">
+                      {selectedWorld.flagEmoji}
+                    </span>
+                  )}
                   <div className="truncate">
                     <h4 className="font-bold text-white text-xs sm:text-sm truncate">
                       {realm === "bangladesh"
@@ -934,11 +1095,11 @@ export default function ExplorePage() {
                   }
                 >
                   <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0c101c]/95 border border-sky-400/40 shadow-2xl shadow-black/90 backdrop-blur-md text-xs whitespace-nowrap ring-1 ring-sky-500/20">
-                    <span className="text-base leading-none">
-                      {realm === "bangladesh"
-                        ? hoveredBD?.flagEmoji
-                        : hoveredWorld?.flagEmoji}
-                    </span>
+                    {realm === "world" && hoveredWorld?.flagEmoji && (
+                      <span className="text-base leading-none">
+                        {hoveredWorld.flagEmoji}
+                      </span>
+                    )}
                     <span className="font-bold text-white">
                       {realm === "bangladesh"
                         ? hoveredBD?.name
@@ -971,20 +1132,111 @@ export default function ExplorePage() {
               <Map className="size-3.5" />
               <span>Back to Map View</span>
             </button>
-            {/* Search Input */}
-            <div className="relative">
-              <Search className="size-4 text-slate-500 absolute left-3 top-3" />
-              <input
-                type="text"
-                placeholder={
-                  realm === "bangladesh"
-                    ? "Search 64 districts (e.g. Bogura, Sylhet)..."
-                    : "Search 195 countries or capitals..."
-                }
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[#0c101c] border border-white/10 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
-              />
+            {/* Search Input on Desktop (matches game mode Command component) */}
+            <div className="relative w-full z-20">
+              <Command
+                className="rounded-2xl border border-white/10 bg-[#0c101c] shadow-2xl backdrop-blur-xl overflow-visible"
+                shouldFilter={false}
+              >
+                <div className="relative">
+                  <CommandInput
+                    value={searchQuery}
+                    onValueChange={(val) => {
+                      setSearchQuery(val);
+                      if (!searchOpen && val.length > 0) setSearchOpen(true);
+                    }}
+                    onFocus={() => setSearchOpen(true)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && searchQuery.trim().length > 0) {
+                        e.preventDefault();
+                        submitQuery(searchQuery);
+                      }
+                    }}
+                    placeholder={
+                      realm === "bangladesh"
+                        ? "Type district name (Dhaka, Sylhet)..."
+                        : "Type country name (Japan, France)..."
+                    }
+                    className="text-base sm:text-sm font-medium"
+                  />
+                  {searchQuery.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => submitQuery(searchQuery)}
+                      className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-slate-200 bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
+                    >
+                      <span>Go</span>
+                      <CornerDownLeft className="size-3 text-sky-400" />
+                    </button>
+                  )}
+                </div>
+
+                {searchOpen && searchQuery.trim().length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-2 z-50">
+                    <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
+                      {realm === "bangladesh" ? (
+                        <>
+                          {filteredDistricts.slice(0, 8).map((d) => (
+                            <CommandItem
+                              key={d.id}
+                              value={d.name}
+                              onSelect={() => selectDistrict(d)}
+                              className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <span className="font-semibold text-xs sm:text-sm text-white">
+                                  {d.name}
+                                </span>
+                                <span className="text-xs text-slate-400 font-mono">
+                                  ({d.division} Div)
+                                </span>
+                              </div>
+                              <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                            </CommandItem>
+                          ))}
+                          {filteredDistricts.length === 0 && (
+                            <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
+                              <Globe className="size-4 text-slate-500" />
+                              <span>No districts found</span>
+                            </CommandEmpty>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {filteredCountries.slice(0, 8).map((c) => (
+                            <CommandItem
+                              key={c.id}
+                              value={c.name}
+                              onSelect={() => selectCountry(c)}
+                              className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <span className="text-lg">{c.flagEmoji}</span>
+                                <span className="font-semibold text-xs sm:text-sm text-white">
+                                  {c.name}
+                                </span>
+                                <span className="text-xs text-slate-400 font-mono">
+                                  ({c.id})
+                                </span>
+                                <span className="text-xs text-slate-500 hidden sm:inline font-mono">
+                                  {c.region}
+                                </span>
+                              </div>
+                              <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                            </CommandItem>
+                          ))}
+                          {filteredCountries.length === 0 && (
+                            <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
+                              <Globe className="size-4 text-slate-500" />
+                              <span>No countries found</span>
+                            </CommandEmpty>
+                          )}
+                        </>
+                      )}
+                    </CommandList>
+                  </div>
+                )}
+              </Command>
             </div>
 
             {/* Dossier Card */}
@@ -992,7 +1244,6 @@ export default function ExplorePage() {
               <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-5 shadow-2xl space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">{selectedBD.flagEmoji}</span>
                     <div>
                       <h3 className="text-xl font-black text-white">
                         {selectedBD.name}
@@ -1200,51 +1451,6 @@ export default function ExplorePage() {
                 </div>
               </div>
             ) : null}
-
-            {/* Autocomplete list when typing */}
-            {searchQuery.trim().length > 0 && (
-              <div className="rounded-xl border border-white/10 bg-[#0c101c]/95 max-h-48 overflow-y-auto p-1.5 space-y-1 shadow-2xl">
-                {realm === "bangladesh"
-                  ? filteredDistricts.map((d) => (
-                      <button
-                        key={d.id}
-                        onMouseEnter={() => setHoveredBD(d)}
-                        onMouseLeave={() => setHoveredBD(null)}
-                        onClick={() => {
-                          selectDistrict(d);
-                          setHoveredBD(null);
-                          setMobileTab("map");
-                        }}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white cursor-pointer"
-                      >
-                        <span className="font-semibold">{d.name}</span>
-                        <span className="text-xs font-mono text-slate-500">
-                          {d.division}
-                        </span>
-                      </button>
-                    ))
-                  : filteredCountries.slice(0, 20).map((c) => (
-                      <button
-                        key={c.id}
-                        onMouseEnter={() => setHoveredWorld(c)}
-                        onMouseLeave={() => setHoveredWorld(null)}
-                        onClick={() => {
-                          selectCountry(c);
-                          setHoveredWorld(null);
-                          setMobileTab("map");
-                        }}
-                        className="w-full text-left px-3 py-2 rounded-lg text-xs hover:bg-white/10 flex items-center justify-between text-slate-300 hover:text-white cursor-pointer"
-                      >
-                        <span className="font-semibold">
-                          {c.flagEmoji} {c.name}
-                        </span>
-                        <span className="text-xs font-mono text-slate-500">
-                          {c.capital}
-                        </span>
-                      </button>
-                    ))}
-              </div>
-            )}
           </div>
         </div>
       </main>

@@ -134,7 +134,6 @@ export function GuessInput() {
                         className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                       >
                         <div className="flex items-center gap-2.5">
-                          <span className="text-lg">{d.flagEmoji}</span>
                           <span className="font-semibold text-xs sm:text-sm text-white">
                             {d.name}
                           </span>
