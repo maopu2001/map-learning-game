@@ -23,6 +23,7 @@ import {
   ShieldAlert,
   Menu,
   X,
+  Play,
 } from "lucide-react";
 
 export function Header() {
@@ -32,6 +33,12 @@ export function Header() {
   const [statsOpen, setStatsOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const isExplore = pathname.startsWith("/explore");
+  const isPlayBD = pathname === "/bangladesh";
+  const isPlayWorld = pathname === "/world";
+  const isExploreBD = pathname === "/explore/bangladesh";
+  const isExploreWorld = pathname === "/explore/world";
 
   return (
     <>
@@ -84,53 +91,126 @@ export function Header() {
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-black/40 border border-white/5 p-1 rounded-xl">
-            <Link
-              href="/"
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150 flex items-center gap-1.5 ${
-                pathname === "/"
-                  ? "bg-sky-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Home className="size-3.5" />
-              <span>Home</span>
-            </Link>
-            <Link
-              href="/bangladesh"
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150 flex items-center gap-1.5 ${
-                pathname === "/bangladesh"
-                  ? "bg-emerald-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <span>🇧🇩</span>
-              <span>Bangladesh</span>
-            </Link>
-            <Link
-              href="/world"
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150 flex items-center gap-1.5 ${
-                pathname === "/world"
-                  ? "bg-sky-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Globe2 className="size-3.5 text-sky-400" />
-              <span>World</span>
-            </Link>
-            <Link
-              href="/explore"
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all duration-150 flex items-center gap-1.5 ${
-                pathname === "/explore"
-                  ? "bg-purple-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <BookOpen className="size-3.5 text-purple-400" />
-              <span>Explore</span>
-            </Link>
-          </nav>
+          {/* Desktop Navigation */}
+          {isExplore ? (
+            /* Context-Aware Explorer Nav: Switch between BD and World Explorers */
+            <nav className="hidden md:flex items-center gap-1.5 bg-black/40 border border-white/5 p-1 rounded-xl">
+              <span className="text-2xs font-mono uppercase tracking-wider text-slate-500 px-2 flex items-center gap-1">
+                <BookOpen className="size-3 text-purple-400" />
+                <span>Explorer:</span>
+              </span>
+              <Link
+                href="/explore/bangladesh"
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
+                  isExploreBD
+                    ? "bg-emerald-600 text-white shadow-sm"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <span>🇧🇩</span>
+                <span>Bangladesh</span>
+              </Link>
+              <Link
+                href="/explore/world"
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
+                  isExploreWorld
+                    ? "bg-sky-600 text-white shadow-sm"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <Globe2 className="size-3.5 text-sky-400" />
+                <span>World</span>
+              </Link>
+
+              <div className="h-3.5 w-px bg-white/10 mx-1" />
+
+              <Link
+                href={isExploreBD ? "/bangladesh" : "/world"}
+                className="px-2.5 py-1 rounded-lg text-xs font-medium text-slate-400 hover:text-emerald-300 hover:bg-white/5 flex items-center gap-1 transition-colors"
+                title="Play the guessing game"
+              >
+                <Play className="size-3 fill-current" />
+                <span>Play Game</span>
+              </Link>
+            </nav>
+          ) : (
+            /* Standard Dual-Group Navigation (Play Games & Reference Explorers) */
+            <nav className="hidden md:flex items-center gap-2 bg-black/40 border border-white/5 px-2 py-1 rounded-xl text-xs">
+              <Link
+                href="/"
+                className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                  pathname === "/"
+                    ? "bg-sky-600 text-white shadow-sm"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <Home className="size-3" />
+                <span>Home</span>
+              </Link>
+
+              <div className="h-3.5 w-px bg-white/10" />
+
+              {/* Play Games Segment */}
+              <div className="flex items-center gap-1">
+                <span className="text-3xs font-mono uppercase tracking-wider text-slate-500 px-1">
+                  Play:
+                </span>
+                <Link
+                  href="/bangladesh"
+                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                    isPlayBD
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "text-slate-300 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <span>🇧🇩</span>
+                  <span>BD</span>
+                </Link>
+                <Link
+                  href="/world"
+                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                    isPlayWorld
+                      ? "bg-sky-600 text-white shadow-sm"
+                      : "text-slate-300 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <Globe2 className="size-3 text-sky-400" />
+                  <span>World</span>
+                </Link>
+              </div>
+
+              <div className="h-3.5 w-px bg-white/10" />
+
+              {/* Explore Reference Segment */}
+              <div className="flex items-center gap-1">
+                <span className="text-3xs font-mono uppercase tracking-wider text-slate-500 px-1">
+                  Explore:
+                </span>
+                <Link
+                  href="/explore/bangladesh"
+                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                    isExploreBD
+                      ? "bg-purple-600 text-white shadow-sm"
+                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <span>🇧🇩</span>
+                  <span>BD</span>
+                </Link>
+                <Link
+                  href="/explore/world"
+                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                    isExploreWorld
+                      ? "bg-purple-600 text-white shadow-sm"
+                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <Globe2 className="size-3 text-purple-400" />
+                  <span>World</span>
+                </Link>
+              </div>
+            </nav>
+          )}
 
           {/* Right Action Icons */}
           <div className="hidden md:flex items-center gap-1.5">
@@ -140,7 +220,7 @@ export function Header() {
               onClick={() => setStatsOpen(true)}
               title="Your Stats"
               aria-label="Your Stats"
-              className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5"
+              className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <Trophy className="size-3.5 text-amber-400" />
             </Button>
@@ -151,7 +231,7 @@ export function Header() {
               onClick={() => setHelpOpen(true)}
               title="How to Play"
               aria-label="How to Play"
-              className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5"
+              className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
             >
               <HelpCircle className="size-3.5 text-sky-400" />
             </Button>
@@ -160,65 +240,97 @@ export function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pointer-events-auto mt-2 w-full rounded-2xl border border-white/10 bg-[#070a12]/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3">
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
-                  pathname === "/"
-                    ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10"
-                }`}
-              >
-                <Home className="size-4 shrink-0" />
-                <span>Home</span>
-              </Link>
-              <Link
-                href="/bangladesh"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
-                  pathname === "/bangladesh"
-                    ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/50"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10"
-                }`}
-              >
-                <span className="text-base shrink-0">🇧🇩</span>
-                <span>Bangladesh</span>
-              </Link>
-              <Link
-                href="/world"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
-                  pathname === "/world"
-                    ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10"
-                }`}
-              >
-                <Globe2 className="size-4 text-sky-400 shrink-0" />
-                <span>World</span>
-              </Link>
-              <Link
-                href="/explore"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
-                  pathname === "/explore"
-                    ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
-                    : "bg-white/5 text-slate-200 hover:bg-white/10"
-                }`}
-              >
-                <BookOpen className="size-4 text-purple-400 shrink-0" />
-                <span>Explore</span>
-              </Link>
+          <div className="md:hidden pointer-events-auto mt-2 w-full rounded-2xl border border-white/10 bg-[#070a12]/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3 animate-in fade-in zoom-in-95">
+            {/* Section 1: Home */}
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
+                pathname === "/"
+                  ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
+                  : "bg-white/5 text-slate-200 hover:bg-white/10"
+              }`}
+            >
+              <Home className="size-4 shrink-0" />
+              <span>Home</span>
+            </Link>
+
+            {/* Section 2: Play Games */}
+            <div className="space-y-1.5 pt-1">
+              <span className="text-3xs font-mono uppercase tracking-wider text-slate-400 px-1 font-semibold flex items-center gap-1">
+                <Play className="size-3 fill-sky-400 text-sky-400" />
+                <span>Play Games (Daily & Streak)</span>
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/bangladesh"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+                    isPlayBD
+                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/50"
+                      : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  }`}
+                >
+                  <span className="text-base shrink-0">🇧🇩</span>
+                  <span>Play Bangladesh</span>
+                </Link>
+                <Link
+                  href="/world"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+                    isPlayWorld
+                      ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
+                      : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  }`}
+                >
+                  <Globe2 className="size-4 text-sky-400 shrink-0" />
+                  <span>Play World</span>
+                </Link>
+              </div>
             </div>
 
+            {/* Section 3: Reference Explorers */}
+            <div className="space-y-1.5 pt-1">
+              <span className="text-3xs font-mono uppercase tracking-wider text-slate-400 px-1 font-semibold flex items-center gap-1">
+                <BookOpen className="size-3 text-purple-400" />
+                <span>Map Explorers (No Timers)</span>
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/explore/bangladesh"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+                    isExploreBD
+                      ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
+                      : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  }`}
+                >
+                  <span className="text-base shrink-0">🇧🇩</span>
+                  <span>Explore BD</span>
+                </Link>
+                <Link
+                  href="/explore/world"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`p-3 min-h-[44px] rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
+                    isExploreWorld
+                      ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
+                      : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  }`}
+                >
+                  <Globe2 className="size-4 text-purple-400 shrink-0" />
+                  <span>Explore World</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Section 4: Utilities */}
             <div className="pt-2 border-t border-white/5 grid grid-cols-2 gap-2 text-xs">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   setStatsOpen(true);
                 }}
-                className="p-2.5 min-h-[40px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium"
+                className="p-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
               >
                 <Trophy className="size-3.5 text-amber-400" />
                 <span>Stats</span>
@@ -228,7 +340,7 @@ export function Header() {
                   setMobileMenuOpen(false);
                   setHelpOpen(true);
                 }}
-                className="p-2.5 min-h-[40px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium"
+                className="p-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
               >
                 <HelpCircle className="size-3.5 text-sky-400" />
                 <span>How to Play</span>
@@ -274,7 +386,7 @@ export function Header() {
         </DialogContent>
       </Dialog>
 
-      {/* Mission Directives Modal */}
+      {/* How to Play Modal */}
       <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
         <DialogContent className="sm:max-w-lg bg-[#0c101c] border-white/10 text-white rounded-3xl shadow-2xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader>

@@ -572,11 +572,17 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="pt-6">
-                <Link href="/explore" className="block w-full">
-                  <Button className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs py-2 rounded-xl gap-2 shadow-lg shadow-purple-950/40">
-                    <span>Open Map Explorer</span>
-                    <ArrowRight className="size-3.5" />
+              <div className="pt-6 grid grid-cols-2 gap-2">
+                <Link href="/explore/bangladesh" className="block w-full">
+                  <Button className="w-full bg-emerald-600/80 hover:bg-emerald-500 text-white font-semibold text-xs py-2 rounded-xl gap-1.5 shadow-lg shadow-emerald-950/40">
+                    <span>🇧🇩 BD</span>
+                    <ArrowRight className="size-3" />
+                  </Button>
+                </Link>
+                <Link href="/explore/world" className="block w-full">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs py-2 rounded-xl gap-1.5 shadow-lg shadow-purple-950/40">
+                    <span>🌍 World</span>
+                    <ArrowRight className="size-3" />
                   </Button>
                 </Link>
               </div>
