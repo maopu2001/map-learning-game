@@ -19,7 +19,6 @@ import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 import { MapZoomControls } from "@/components/Map/MapZoomControls";
 import { ExploreHeader } from "@/components/Explore/ExploreHeader";
 import { DivisionFilterBar } from "@/components/Explore/DivisionFilterBar";
-import { MapHoverPill } from "@/components/Explore/MapHoverPill";
 import { DistrictSearch } from "@/components/Explore/DistrictSearch";
 import { DistrictProfileCard } from "@/components/Explore/DistrictProfileCard";
 
@@ -32,9 +31,6 @@ export default function BangladeshExplorePage() {
   const [selectedDistrict, setSelectedDistrict] =
     useState<DistrictData>(DEFAULT_DISTRICT);
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictData | null>(
-    null,
-  );
-  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(
     null,
   );
   const [divisionFilter, setDivisionFilter] = useState("All");
@@ -115,6 +111,14 @@ export default function BangladeshExplorePage() {
     });
   };
 
+  const activeDistrict = hoveredDistrict || selectedDistrict;
+  const isHovering = Boolean(
+    hoveredDistrict && hoveredDistrict.name !== selectedDistrict.name,
+  );
+  const isNeighbor = Boolean(
+    hoveredDistrict && selectedDistrict.borders.includes(hoveredDistrict.name),
+  );
+
   return (
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
       <Header />
@@ -183,17 +187,7 @@ export default function BangladeshExplorePage() {
             {/* Map Container */}
             <div
               ref={mapContainerRef}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                setMousePos({
-                  x: e.clientX - rect.left,
-                  y: e.clientY - rect.top,
-                });
-              }}
-              onMouseLeave={() => {
-                setMousePos(null);
-                setHoveredDistrict(null);
-              }}
+              onMouseLeave={() => setHoveredDistrict(null)}
               className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-250px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
@@ -206,15 +200,29 @@ export default function BangladeshExplorePage() {
                 resetTitle="Recenter Bangladesh"
               />
 
-              {/* Active Selection Callout */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-emerald-500/30 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md pointer-events-none">
-                <span className="size-1.5 sm:size-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                <span className="font-bold text-white text-2xs sm:text-xs">
-                  {selectedDistrict.name}
-                </span>
-                <span className="text-emerald-400 text-2xs hidden sm:inline font-mono">
-                  ({selectedDistrict.division} Div)
-                </span>
+              {/* Top-Left Unified Callout (Selection + Hover in same overlay) */}
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 pointer-events-none select-none">
+                <div
+                  className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs transition-all duration-150 ${
+                    isHovering
+                      ? "bg-[#0c101c]/95 border border-sky-400/50 text-slate-200 shadow-2xl ring-1 ring-sky-500/25"
+                      : "bg-[#0c101c]/90 border border-emerald-500/30 text-slate-200 shadow-lg"
+                  }`}
+                >
+                  <span
+                    className={`size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse ${
+                      isHovering ? "bg-sky-400" : "bg-emerald-400"
+                    }`}
+                  />
+                  <span className="font-bold text-white text-2xs sm:text-xs">
+                    {activeDistrict.name}
+                  </span>
+                  {isNeighbor && (
+                    <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                      Neighbor
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* SVG Map Canvas */}
@@ -468,15 +476,6 @@ export default function BangladeshExplorePage() {
                   <span>Neighboring Districts</span>
                 </div>
               </div>
-
-              {/* Hover Pill */}
-              {hoveredDistrict && (
-                <MapHoverPill
-                  mousePos={mousePos}
-                  title={hoveredDistrict.name}
-                  subtitle={`${hoveredDistrict.division} Division`}
-                />
-              )}
             </div>
 
             {/* Mobile Selection Callout on Map view */}

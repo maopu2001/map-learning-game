@@ -36,13 +36,17 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
   const [statsOpen, setStatsOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
-  const [abandonPending, setAbandonPending] = useState<"exit" | "reset" | null>(null);
+  const [abandonPending, setAbandonPending] = useState<"exit" | "reset" | null>(
+    null,
+  );
 
   const maxGuesses = getMaxGuesses(difficulty);
   const isBD = scope === "bangladesh";
   const isMissionActive =
     gameStatus === "playing" &&
-    (guesses.length > 0 || unlockedHints > 0 || (mode === "blitz" && blitzTimeLeft < 90));
+    (guesses.length > 0 ||
+      unlockedHints > 0 ||
+      (mode === "blitz" && blitzTimeLeft < 90));
 
   const handleExitClick = () => {
     if (isMissionActive) {
@@ -85,47 +89,51 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
               title="Back to Home"
             >
               <ArrowLeft className="size-3.5" />
-              <span className="hidden sm:inline text-xs font-semibold">Home</span>
+              <span className="hidden sm:inline text-xs font-semibold">
+                Home
+              </span>
             </Button>
 
             <div className="h-4 w-px bg-white/10 shrink-0" />
 
             {/* Current Mission Badges */}
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-base leading-none shrink-0">{isBD ? "🇧🇩" : "🌍"}</span>
+              <span className="text-base leading-none shrink-0">
+                {isBD ? "🇧🇩" : "🌍"}
+              </span>
               <span className="font-bold text-white tracking-wide text-xs whitespace-nowrap">
                 {isBD ? "Bangladesh" : "World"}
               </span>
 
-              <Badge
-                variant="outline"
-                className={`text-2xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
-                  mode === "daily"
-                    ? "border-sky-500/40 text-sky-300 bg-sky-500/10"
+              <div className="lg:flex hidden items-center border rounded-2xl border-white/10 bg-white/5 py-0.5 text-2xs font-mono font-bold uppercase">
+                <span
+                  className={`tracking-wider border-r border-white/10 px-2 ${
+                    mode === "daily"
+                      ? "text-sky-300"
+                      : mode === "detective"
+                        ? "text-amber-300"
+                        : "text-rose-300"
+                  }`}
+                >
+                  {mode === "daily"
+                    ? "Daily"
                     : mode === "detective"
-                      ? "border-amber-500/40 text-amber-300 bg-amber-500/10"
-                      : "border-rose-500/40 text-rose-300 bg-rose-500/10"
-                }`}
-              >
-                {mode === "daily"
-                  ? "Daily"
-                  : mode === "detective"
-                    ? "Detective"
-                    : "Blitz"}
-              </Badge>
+                      ? "Detective"
+                      : "Blitz"}
+                </span>
 
-              <Badge
-                variant="outline"
-                className={`text-2xs font-mono uppercase px-2 py-0.5 rounded-lg border hidden md:inline-flex ${
-                  difficulty === "easy"
-                    ? "border-emerald-500/30 text-emerald-300 bg-emerald-500/10"
-                    : difficulty === "normal"
-                      ? "border-amber-500/30 text-amber-300 bg-amber-500/10"
-                      : "border-rose-500/30 text-rose-300 bg-rose-500/10"
-                }`}
-              >
-                {difficulty}
-              </Badge>
+                <span
+                  className={`px-2 ${
+                    difficulty === "easy"
+                      ? "text-emerald-300"
+                      : difficulty === "normal"
+                        ? "text-amber-300"
+                        : "text-rose-300"
+                  }`}
+                >
+                  {difficulty}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -176,9 +184,9 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
           <GameTelemetry
             mode={mode}
             blitzTimeLeft={blitzTimeLeft}
-            streak={stats.streak}
             guessCount={guesses.length}
             maxGuesses={maxGuesses}
+            difficulty={difficulty}
           />
 
           {/* Desktop Right Actions */}

@@ -19,7 +19,6 @@ import {
 import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 import { MapZoomControls } from "@/components/Map/MapZoomControls";
 import { ExploreHeader } from "@/components/Explore/ExploreHeader";
-import { MapHoverPill } from "@/components/Explore/MapHoverPill";
 import { CountrySearch } from "@/components/Explore/CountrySearch";
 import { CountryProfileCard } from "@/components/Explore/CountryProfileCard";
 
@@ -33,10 +32,12 @@ export default function WorldExplorePage() {
   const [hoveredCountry, setHoveredCountry] = useState<CountryData | null>(
     null,
   );
-  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(
-    null,
-  );
   const [mobileTab, setMobileTab] = useState<"map" | "info">("map");
+
+  const effectiveBorders = React.useMemo(
+    () => (selectedCountry ? getEffectiveBorders(selectedCountry) : []),
+    [selectedCountry],
+  );
 
   const [position, setPosition] = useState<{
     coordinates: [number, number];
@@ -113,6 +114,14 @@ export default function WorldExplorePage() {
     });
   };
 
+  const activeCountry = hoveredCountry || selectedCountry;
+  const isHovering = Boolean(
+    hoveredCountry && hoveredCountry.id !== selectedCountry?.id,
+  );
+  const isNeighbor = Boolean(
+    hoveredCountry && effectiveBorders.includes(hoveredCountry.id),
+  );
+
   return (
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-[#070a12] text-slate-100 selection:bg-sky-500 selection:text-white lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
       <Header />
@@ -173,17 +182,7 @@ export default function WorldExplorePage() {
             {/* Map Container */}
             <div
               ref={mapContainerRef}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                setMousePos({
-                  x: e.clientX - rect.left,
-                  y: e.clientY - rect.top,
-                });
-              }}
-              onMouseLeave={() => {
-                setMousePos(null);
-                setHoveredCountry(null);
-              }}
+              onMouseLeave={() => setHoveredCountry(null)}
               className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-210px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
@@ -196,18 +195,39 @@ export default function WorldExplorePage() {
                 resetTitle="Recenter World Map"
               />
 
-              {/* Active Selection Callout */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md pointer-events-none">
-                <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-                <span className="text-sm sm:text-base">
-                  {selectedCountry.flagEmoji}
-                </span>
-                <span className="font-bold text-white text-2xs sm:text-xs">
-                  {selectedCountry.name}
-                </span>
-                <span className="text-amber-400/80 text-2xs hidden sm:inline font-mono">
-                  ({selectedCountry.id})
-                </span>
+              {/* Top-Left Unified Callout (Selection + Hover in same overlay) */}
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 pointer-events-none select-none">
+                <div
+                  className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs transition-all duration-150 ${
+                    isHovering
+                      ? "bg-[#0c101c]/95 border border-sky-400/50 text-slate-200 shadow-2xl ring-1 ring-sky-500/25"
+                      : "bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 shadow-lg"
+                  }`}
+                >
+                  <span
+                    className={`size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse ${
+                      isHovering ? "bg-sky-400" : "bg-amber-400"
+                    }`}
+                  />
+                  <span className="text-sm sm:text-base leading-none">
+                    {activeCountry.flagEmoji}
+                  </span>
+                  <span className="font-bold text-white text-2xs sm:text-xs">
+                    {activeCountry.name}
+                  </span>
+                  <span
+                    className={`text-2xs font-mono border-l border-white/10 pl-2 ${
+                      isHovering ? "text-slate-400" : "text-amber-400/90"
+                    }`}
+                  >
+                    {activeCountry.capital || activeCountry.region}
+                  </span>
+                  {isNeighbor && (
+                    <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                      Neighbor
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* SVG Map Canvas */}
@@ -472,20 +492,6 @@ export default function WorldExplorePage() {
                   <span>Neighboring Nations</span>
                 </div>
               </div>
-
-              {/* Hover Pill */}
-              {hoveredCountry && (
-                <MapHoverPill
-                  mousePos={mousePos}
-                  leading={
-                    <span className="text-base leading-none">
-                      {hoveredCountry.flagEmoji}
-                    </span>
-                  }
-                  title={hoveredCountry.name}
-                  subtitle={hoveredCountry.capital || hoveredCountry.region}
-                />
-              )}
             </div>
 
             {/* Mobile Selection Callout on Map view */}
