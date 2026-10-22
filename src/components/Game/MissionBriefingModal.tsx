@@ -96,6 +96,7 @@ export function MissionBriefingModal({
             selectedDifficulty={selectedDifficulty}
             onSelectDifficulty={setSelectedDifficulty}
             isBD={isBD}
+            selectedMode={selectedMode}
           />
         </div>
 

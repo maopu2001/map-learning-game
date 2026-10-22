@@ -47,7 +47,7 @@ export function MobileNavDrawer({
         <div className="space-y-1.5 pt-1">
           <span className="text-3xs font-mono uppercase tracking-wider text-slate-400 px-1 font-semibold flex items-center gap-1">
             <Play className="size-3 fill-sky-400 text-sky-400" />
-            <span>Play Games (Daily & Streak)</span>
+            <span>Play Games (Daily & Detective)</span>
           </span>
           <div className="grid grid-cols-2 gap-2">
             <Link

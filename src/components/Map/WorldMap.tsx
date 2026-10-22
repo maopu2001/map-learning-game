@@ -28,6 +28,7 @@ interface WorldMapProps {
 }
 
 export function WorldMap({ className }: WorldMapProps = {}) {
+  const mode = useGameStore((s) => s.mode);
   const targetCountry = useGameStore((s) => s.targetCountry);
   const guesses = useGameStore((s) => s.guesses);
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -102,10 +103,15 @@ export function WorldMap({ className }: WorldMapProps = {}) {
   const activeNeighbors = useMemo(() => {
     if (!targetCountry) return [];
     const effectiveBorders = getEffectiveBorders(targetCountry);
+    // In Detective Mode (all difficulties): neighbors ONLY appear when Hint 3 is unlocked!
+    if (mode === "detective") {
+      if (unlockedHints >= 3) {
+        return effectiveBorders.slice(0, 1);
+      }
+      return [];
+    }
+    // In Daily/Blitz Hard Mode: Hint 2 reveals 1st neighbor, Hint 3 reveals 2nd neighbor
     if (difficulty === "hard") {
-      // In Hard Mode:
-      // Hint 2 reveals 1st neighboring border country / nearest country
-      // Hint 3 reveals 2nd neighboring border country / 2nd nearest country
       if (unlockedHints === 2) {
         return effectiveBorders.slice(0, 1);
       }
@@ -115,7 +121,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
       return [];
     }
     return effectiveBorders.slice(0, Math.min(3, effectiveBorders.length));
-  }, [targetCountry, difficulty, unlockedHints]);
+  }, [targetCountry, difficulty, unlockedHints, mode]);
 
   const guessedCountriesMap = useMemo(() => {
     const map = new Map<string, (typeof guesses)[0]>();
@@ -183,12 +189,16 @@ export function WorldMap({ className }: WorldMapProps = {}) {
 
   const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : null;
 
+  const isTargetHidden = mode === "detective" && gameStatus === "playing";
+
   // Determine if inspected country is the secret target
-  const isTargetInspected = Boolean(
-    targetCountry &&
-    inspectedCountry &&
-    inspectedCountry.id.toUpperCase() === targetCountry.id.toUpperCase(),
-  );
+  const isTargetInspected =
+    !isTargetHidden &&
+    Boolean(
+      targetCountry &&
+        inspectedCountry &&
+        inspectedCountry.id.toUpperCase() === targetCountry.id.toUpperCase(),
+    );
 
   return (
     <div
@@ -212,6 +222,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
 
       {/* Desktop Floating Reconnaissance Window */}
       <CountryReconWindow
+        mode={mode}
         difficulty={difficulty}
         inspectedCountry={inspectedCountry}
         activeNeighbors={activeNeighbors}
@@ -286,9 +297,11 @@ export function WorldMap({ className }: WorldMapProps = {}) {
                       COUNTRIES_BY_NUMERIC.get(String(parseInt(geoId, 10)));
                     const isoId = country?.id;
 
-                    const isTarget = Boolean(
-                      targetCountry?.id && isoId === targetCountry.id,
-                    );
+                    const isTarget =
+                      (!isTargetHidden || isGameOver) &&
+                      Boolean(
+                        targetCountry?.id && isoId === targetCountry.id,
+                      );
                     const isNeighbor = Boolean(
                       isoId && activeNeighbors.includes(isoId),
                     );
@@ -407,7 +420,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
                   ))}
 
                   {/* OVERLAY 2: Mystery Target - complete perimeter on top, opacity-controlled fill */}
-                  {targetGeo && (
+                  {targetGeo && (!isTargetHidden || isGameOver) && (
                     <Geography
                       key={`overlay-target-${targetGeo.rsmKey}`}
                       geography={targetGeo}
@@ -461,8 +474,9 @@ export function WorldMap({ className }: WorldMapProps = {}) {
                       );
                       const isInspectionAllowed =
                         isGameOver ||
-                        difficulty === "easy" ||
-                        (difficulty === "normal" && (isNeighbor || isGuessed));
+                        (mode !== "detective" && difficulty === "easy") ||
+                        isNeighbor ||
+                        isGuessed;
 
                       const strokeColor = isNeighbor
                         ? "#38bdf8"
@@ -536,6 +550,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
 
       {/* Mobile Bottom Reconnaissance Sheet */}
       <CountryReconSheet
+        mode={mode}
         inspectedCountry={inspectedCountry}
         onClose={() => setInspectedCountry(null)}
         isTargetInspected={isTargetInspected}

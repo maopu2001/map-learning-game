@@ -1,18 +1,20 @@
 "use client";
 
 import React from "react";
-import { GameDifficulty } from "@/lib/store";
+import { GameDifficulty, GameMode } from "@/lib/store";
 
 interface DifficultySelectorProps {
   selectedDifficulty: GameDifficulty;
   onSelectDifficulty: (difficulty: GameDifficulty) => void;
   isBD: boolean;
+  selectedMode?: GameMode;
 }
 
 export function DifficultySelector({
   selectedDifficulty,
   onSelectDifficulty,
   isBD,
+  selectedMode = "daily",
 }: DifficultySelectorProps) {
   return (
     <div className="space-y-1.5 bg-accent/50 px-4 py-2 rounded-2xl">
@@ -84,14 +86,21 @@ export function DifficultySelector({
         </button>
       </div>
       <p className="text-xs text-slate-400 text-center leading-tight min-h-5">
-        {selectedDifficulty === "easy" &&
-          (isBD
-            ? "8 guesses. Division revealed upfront + full inspection."
-            : "8 guesses. Continent revealed upfront + full inspection.")}
-        {selectedDifficulty === "normal" &&
-          "6 guesses. Standard game with unrevealed map areas."}
-        {selectedDifficulty === "hard" &&
-          "5 guesses. Map inspection locked until guessed. High stakes!"}
+        {selectedMode === "detective"
+          ? selectedDifficulty === "easy"
+            ? isBD
+              ? "8 guesses · Full clue · Division confirmed upfront."
+              : "8 guesses · Full clue · Continent confirmed upfront."
+            : selectedDifficulty === "normal"
+              ? "6 guesses · Full clue · Target hidden on map."
+              : "5 guesses · Masked clue (████) · Hints reveal names."
+          : selectedDifficulty === "easy"
+            ? isBD
+              ? "8 guesses · Division confirmed upfront · Free map inspection."
+              : "8 guesses · Continent confirmed upfront · Free map inspection."
+            : selectedDifficulty === "normal"
+              ? "6 guesses · Standard game · Unrevealed map areas."
+              : "5 guesses · Map inspection locked until guessed."}
       </p>
     </div>
   );

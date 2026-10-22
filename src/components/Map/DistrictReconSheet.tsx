@@ -2,10 +2,11 @@
 
 import React from "react";
 import { DistrictData } from "@/data/bangladesh";
-import { GuessResult, GameStatus, GameDifficulty } from "@/lib/store";
+import { GuessResult, GameStatus, GameDifficulty, GameMode } from "@/lib/store";
 import { Target, ShieldCheck, ShieldAlert, X } from "lucide-react";
 
 interface DistrictReconSheetProps {
+  mode?: GameMode;
   inspectedDistrict: DistrictData | null;
   onClose: () => void;
   isTargetInspected: boolean;
@@ -18,6 +19,7 @@ interface DistrictReconSheetProps {
 }
 
 export function DistrictReconSheet({
+  mode = "daily",
   inspectedDistrict,
   onClose,
   isTargetInspected,
@@ -33,8 +35,16 @@ export function DistrictReconSheet({
   const isPlaying = gameStatus === "playing";
   const nameKey = inspectedDistrict.name.toLowerCase();
   const guessedInfo = guessedDistrictsMap.get(nameKey);
-  const isGuessed = guessedDistrictsMap.has(nameKey);
+  const isGuessed = Boolean(guessedInfo);
   const isNeighbor = activeNeighbors.includes(inspectedDistrict.name);
+  const isGameOver = !isPlaying;
+
+  // In Detective mode, names are never visible on unrevealed territories, even on Easy!
+  const isNameVisible =
+    isGameOver ||
+    isGuessed ||
+    isNeighbor ||
+    (mode !== "detective" && difficulty === "easy");
 
   return (
     <div className="md:hidden absolute bottom-2 left-2 right-2 z-30 rounded-2xl border border-slate-700/90 bg-slate-900/98 p-3 shadow-2xl backdrop-blur-xl text-xs text-slate-200 space-y-2 animate-in fade-in zoom-in-95">
@@ -51,22 +61,17 @@ export function DistrictReconSheet({
               </div>
               <p className="text-2xs text-amber-300/80">Secret Location</p>
             </div>
-          ) : difficulty === "hard" && !isGuessed && !isNeighbor && isPlaying ? (
+          ) : !isNameVisible && isPlaying ? (
             <div>
               <div className="flex items-center gap-1.5">
-                <ShieldAlert className="size-3.5 text-rose-400 shrink-0" />
-                <h4 className="font-bold text-rose-400 text-sm leading-tight truncate">
-                  Hidden District
+                <ShieldAlert className="size-3.5 text-slate-400 shrink-0" />
+                <h4 className="font-bold text-slate-300 text-sm leading-tight truncate">
+                  Unrevealed District
                 </h4>
               </div>
-              <p className="text-2xs text-slate-400">Hard Mode</p>
-            </div>
-          ) : difficulty === "normal" && !isGuessed && !isNeighbor && isPlaying ? (
-            <div>
-              <h4 className="font-bold text-slate-300 text-sm leading-tight truncate">
-                Unrevealed District
-              </h4>
-              <p className="text-2xs text-slate-400">Normal Mode</p>
+              <p className="text-2xs text-slate-500 font-mono">
+                {mode === "detective" ? "Detective" : `${difficulty.toUpperCase()}`}
+              </p>
             </div>
           ) : (
             <div>
@@ -108,14 +113,17 @@ export function DistrictReconSheet({
             </div>
           )}
         </div>
-      ) : difficulty === "hard" && !isGuessed && !isNeighbor && isPlaying ? (
-        <p className="text-xs text-slate-400 leading-snug">
-          Districts stay hidden on tap in Hard Mode. Unlock Hints or guess to reveal!
-        </p>
-      ) : difficulty === "normal" && !isGuessed && !isNeighbor && isPlaying ? (
-        <p className="text-xs text-slate-400 leading-snug">
-          Hidden until guessed or revealed through neighbor hints.
-        </p>
+      ) : !isNameVisible && isPlaying ? (
+        <div className="space-y-1">
+          <p className="text-xs text-slate-400 leading-snug">
+            {mode === "detective"
+              ? "Hidden until guessed. Follow distance and compass clues to find it."
+              : "Hidden until guessed or revealed through hints."}
+          </p>
+          <p className="text-2xs text-slate-500 font-mono">
+            Type name in search box to guess.
+          </p>
+        </div>
       ) : isGuessed ? (
         <div className="pt-0.5">
           {guessedInfo?.isCorrect ? (

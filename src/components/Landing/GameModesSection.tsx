@@ -44,7 +44,7 @@ export function GameModesSection() {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
-                <span>District Streak Mode</span>
+                <span>Detective Mode</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0" />
@@ -88,7 +88,7 @@ export function GameModesSection() {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="size-3.5 text-sky-400 shrink-0" />
-                <span>Country Streak Mode</span>
+                <span>Detective Mode</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="size-3.5 text-sky-400 shrink-0" />

@@ -10,8 +10,15 @@ import {
 } from "./engine";
 
 export type GameScope = "world" | "bangladesh";
-export type GameMode = "daily" | "streak" | "blitz";
+export type GameMode = "daily" | "detective" | "blitz";
 export type GameDifficulty = "easy" | "normal" | "hard";
+
+export function isTargetHiddenOnMap(
+  mode: GameMode,
+  gameStatus: GameStatus,
+): boolean {
+  return mode === "detective" && gameStatus === "playing";
+}
 
 export const BD_DIST_MIN_KM = 45;
 export const BD_DIST_MAX_KM = 240;
@@ -91,6 +98,7 @@ export interface GameState {
   makeGuess: (item: CountryData | DistrictData) => void;
   unlockNextHint: () => void;
   revealExtraNeighbor: () => void;
+  nextDetectiveRound: () => void;
   nextStreakRound: () => void;
   resetGame: () => void;
   forfeitAndSwitch: (target: {
@@ -404,7 +412,7 @@ export const useGameStore = create<GameState>()(
         }));
       },
 
-      nextStreakRound: () => {
+      nextDetectiveRound: () => {
         const state = get();
         if (state.scope === "bangladesh") {
           const nextDistrict = pickNextInDistanceRange(
@@ -444,6 +452,10 @@ export const useGameStore = create<GameState>()(
             gameStatus: "playing",
           });
         }
+      },
+
+      nextStreakRound: () => {
+        get().nextDetectiveRound();
       },
 
       resetGame: () => {
@@ -606,22 +618,19 @@ export const useGameStore = create<GameState>()(
               removeItem: () => {},
             },
       ),
-      version: 3,
+      version: 4,
       migrate: (persistedState: unknown, version: number) => {
         const state = (persistedState || {}) as Record<string, unknown>;
         if (!version || version < 2) {
-          return {
-            ...state,
-            scope: state.scope || "bangladesh",
-            difficulty: state.difficulty || "normal",
-            recentTargetIds: [],
-          };
+          state.scope = state.scope || "bangladesh";
+          state.difficulty = state.difficulty || "normal";
+          state.recentTargetIds = [];
         }
         if (version < 3) {
-          return {
-            ...state,
-            recentTargetIds: [],
-          };
+          state.recentTargetIds = [];
+        }
+        if (version < 4 || state.mode === "streak") {
+          state.mode = "detective";
         }
         return state;
       },

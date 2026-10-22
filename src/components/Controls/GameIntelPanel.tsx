@@ -5,6 +5,7 @@ import { useGameStore, getMaxGuesses } from "@/lib/store";
 import { GuessInput } from "@/components/Controls/GuessInput";
 import { GuessHistory } from "@/components/Controls/GuessHistory";
 import { ClueDrawer } from "@/components/Clues/ClueDrawer";
+import { DetectiveDossier } from "@/components/Controls/DetectiveDossier";
 import { Lightbulb, Crosshair, Layers } from "lucide-react";
 
 interface GameIntelPanelProps {
@@ -13,6 +14,7 @@ interface GameIntelPanelProps {
 
 export function GameIntelPanel({ defaultTab = "both" }: GameIntelPanelProps) {
   const [tab, setTab] = useState<"both" | "guesses" | "hints">(defaultTab);
+  const mode = useGameStore((s) => s.mode);
   const difficulty = useGameStore((s) => s.difficulty);
   const guesses = useGameStore((s) => s.guesses);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
@@ -74,6 +76,8 @@ export function GameIntelPanel({ defaultTab = "both" }: GameIntelPanelProps) {
 
       {/* ONLY THIS CONTAINER SCROLLS */}
       <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-2.5 overscroll-contain">
+        {mode === "detective" && <DetectiveDossier />}
+
         {tab === "hints" ? (
           <ClueDrawer />
         ) : tab === "guesses" ? (

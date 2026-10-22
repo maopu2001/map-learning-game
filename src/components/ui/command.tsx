@@ -23,12 +23,14 @@ function Command({
 
 function CommandInput({
   className,
+  ref,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot="command-input-wrapper" className="flex items-center px-3">
       <SearchIcon className="mr-2 size-4 shrink-0 text-slate-400 opacity-60" />
       <CommandPrimitive.Input
+        ref={ref}
         data-slot="command-input"
         className={cn(
           "flex h-11 w-full rounded-md bg-transparent py-3 text-base sm:text-sm outline-none placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-50 text-white",

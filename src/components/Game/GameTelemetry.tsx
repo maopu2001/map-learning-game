@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Timer, Flame } from "lucide-react";
+import { Timer, FileText } from "lucide-react";
 import { GameMode } from "@/lib/store";
 
 interface GameTelemetryProps {
@@ -28,9 +28,9 @@ export function GameTelemetry({
         </div>
       )}
 
-      {mode === "streak" && (
+      {mode === "detective" && (
         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-amber-950/60 border border-amber-500/40 text-amber-300 font-bold text-xs">
-          <Flame className="size-3.5 text-amber-400" />
+          <FileText className="size-3.5 text-amber-400" />
           <span>Streak: {streak}</span>
         </div>
       )}

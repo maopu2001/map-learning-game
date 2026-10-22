@@ -2,7 +2,7 @@
 
 import React from "react";
 import { GameMode } from "@/lib/store";
-import { Calendar, Flame, Timer } from "lucide-react";
+import { Calendar, FileText, Timer } from "lucide-react";
 
 interface ModeSelectorProps {
   selectedMode: GameMode;
@@ -39,23 +39,23 @@ export function ModeSelector({
           <span className="font-semibold text-xs leading-none">Daily</span>
         </button>
 
-        {/* Streak */}
+        {/* Detective */}
         <button
           type="button"
-          onClick={() => onSelectMode("streak")}
+          onClick={() => onSelectMode("detective")}
           className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
-            selectedMode === "streak"
+            selectedMode === "detective"
               ? "bg-amber-500/15 border-amber-500 text-white shadow-sm ring-1 ring-amber-500/50"
               : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
           }`}
         >
-          <Flame
+          <FileText
             className={`size-3.5 sm:size-4 ${
-              selectedMode === "streak" ? "text-amber-400" : "text-slate-400"
+              selectedMode === "detective" ? "text-amber-400" : "text-slate-400"
             }`}
           />
           <span className="font-semibold text-xs leading-none">
-            {isBD ? "Hop Streak" : "Border Streak"}
+            Detective
           </span>
         </button>
 
@@ -79,10 +79,10 @@ export function ModeSelector({
       </div>
       <p className="text-xs text-slate-400 text-center leading-tight min-h-5">
         {selectedMode === "daily" && "One daily puzzle shared worldwide."}
-        {selectedMode === "streak" &&
+        {selectedMode === "detective" &&
           (isBD
-            ? "Guess districts consecutively to build your streak."
-            : "Guess neighboring countries to build your streak.")}
+            ? "Target is hidden on the map. Find the secret district from its clue."
+            : "Target is hidden on the map. Find the secret country from its clue.")}
         {selectedMode === "blitz" &&
           "Find the target location before the 90s timer runs out."}
       </p>

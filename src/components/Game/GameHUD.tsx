@@ -102,17 +102,15 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
                 className={`text-2xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg border ${
                   mode === "daily"
                     ? "border-sky-500/40 text-sky-300 bg-sky-500/10"
-                    : mode === "streak"
+                    : mode === "detective"
                       ? "border-amber-500/40 text-amber-300 bg-amber-500/10"
                       : "border-rose-500/40 text-rose-300 bg-rose-500/10"
                 }`}
               >
                 {mode === "daily"
                   ? "Daily"
-                  : mode === "streak"
-                    ? isBD
-                      ? "Hop Streak"
-                      : "Border Streak"
+                  : mode === "detective"
+                    ? "Detective"
                     : "Blitz"}
               </Badge>
 
@@ -237,7 +235,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
         }}
         guessesCount={guesses.length}
         unlockedHints={unlockedHints}
-        isStreakMode={mode === "streak"}
+        isStreakMode={mode === "detective"}
         currentStreak={stats.streak}
         onConfirm={handleConfirmAbandon}
       />

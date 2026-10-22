@@ -22,6 +22,7 @@ interface BangladeshMapProps {
 }
 
 export function BangladeshMap({ className }: BangladeshMapProps = {}) {
+  const mode = useGameStore((s) => s.mode);
   const targetDistrict = useGameStore((s) => s.targetDistrict);
   const guesses = useGameStore((s) => s.guesses);
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -95,10 +96,15 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
 
   const activeNeighbors = useMemo(() => {
     if (!targetDistrict) return [];
+    // In Detective Mode (all difficulties): neighbors ONLY appear when Hint 3 is unlocked!
+    if (mode === "detective") {
+      if (unlockedHints >= 3) {
+        return targetDistrict.borders.slice(0, 1);
+      }
+      return [];
+    }
+    // In Daily/Blitz Hard Mode: Hint 2 reveals 1st neighbor, Hint 3 reveals 2nd neighbor
     if (difficulty === "hard") {
-      // In Hard Mode:
-      // Hint 2 reveals 1st neighboring border district (highlighted in map and info shown)
-      // Hint 3 reveals 2nd neighboring border district (highlighted in map and info shown)
       if (unlockedHints === 2) {
         return targetDistrict.borders.slice(0, 1);
       }
@@ -107,12 +113,12 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
       }
       return [];
     }
-    // In Normal and Easy mode: highlight adjacent borders
+    // In Daily/Blitz Normal and Easy mode: highlight adjacent borders
     return targetDistrict.borders.slice(
       0,
       Math.min(3, targetDistrict.borders.length),
     );
-  }, [targetDistrict, difficulty, unlockedHints]);
+  }, [targetDistrict, difficulty, unlockedHints, mode]);
 
   const guessedDistrictsMap = useMemo(() => {
     const map = new Map<string, (typeof guesses)[0]>();
@@ -149,12 +155,17 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
 
   const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : null;
 
+  const isTargetHidden = mode === "detective" && gameStatus === "playing";
+
   // Determine if inspected district is the secret target
-  const isTargetInspected = Boolean(
-    targetDistrict &&
-    inspectedDistrict &&
-    inspectedDistrict.name.toLowerCase() === targetDistrict.name.toLowerCase(),
-  );
+  const isTargetInspected =
+    !isTargetHidden &&
+    Boolean(
+      targetDistrict &&
+        inspectedDistrict &&
+        inspectedDistrict.name.toLowerCase() ===
+          targetDistrict.name.toLowerCase(),
+    );
 
   return (
     <div
@@ -177,6 +188,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
 
       {/* Desktop Floating Reconnaissance Window */}
       <DistrictReconWindow
+        mode={mode}
         difficulty={difficulty}
         inspectedDistrict={inspectedDistrict}
         activeNeighbors={activeNeighbors}
@@ -240,10 +252,12 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
                       districtName.toLowerCase(),
                     );
 
-                    const isTarget = Boolean(
-                      targetDistrict?.name &&
-                      districtName === targetDistrict.name,
-                    );
+                    const isTarget =
+                      (!isTargetHidden || isGameOver) &&
+                      Boolean(
+                        targetDistrict?.name &&
+                          districtName === targetDistrict.name,
+                      );
                     const isNeighbor = Boolean(
                       activeNeighbors.includes(districtName),
                     );
@@ -363,7 +377,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
                   ))}
 
                   {/* OVERLAY 2: Mystery Target - complete perimeter on top, opacity-controlled fill */}
-                  {targetGeo && (
+                  {targetGeo && (!isTargetHidden || isGameOver) && (
                     <Geography
                       key={`overlay-target-${targetGeo.rsmKey}`}
                       geography={targetGeo}
@@ -412,8 +426,9 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
                       );
                       const isInspectionAllowed =
                         isGameOver ||
-                        difficulty === "easy" ||
-                        (difficulty === "normal" && (isNeighbor || isGuessed));
+                        (mode !== "detective" && difficulty === "easy") ||
+                        isNeighbor ||
+                        isGuessed;
 
                       const strokeColor = isNeighbor
                         ? "#38bdf8"
@@ -471,6 +486,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
 
       {/* Mobile Bottom Reconnaissance Sheet */}
       <DistrictReconSheet
+        mode={mode}
         inspectedDistrict={inspectedDistrict}
         onClose={() => setInspectedDistrict(null)}
         isTargetInspected={isTargetInspected}

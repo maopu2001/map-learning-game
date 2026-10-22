@@ -71,7 +71,11 @@ export function GameOverModal({
 
   const handleShare = async () => {
     const text = generateShareText(
-      mode === "daily" ? new Date().toISOString().slice(5, 10) : "Border Hop",
+      mode === "daily"
+        ? new Date().toISOString().slice(5, 10)
+        : mode === "detective"
+          ? "Borderline Detective"
+          : "Blitz",
       guesses,
       isWon,
       stats.streak,
@@ -88,7 +92,7 @@ export function GameOverModal({
 
   const handleNextAction = () => {
     setOpen(false);
-    if (mode === "streak" && isWon) {
+    if (mode === "detective" && isWon) {
       nextStreakRound();
     } else {
       resetGame();
@@ -160,9 +164,9 @@ export function GameOverModal({
             onClick={handleNextAction}
             className="w-full sm:w-1/2 bg-sky-600 hover:bg-sky-500 text-white font-semibold shadow-lg shadow-sky-950/50"
           >
-            {mode === "streak" && isWon ? (
+            {mode === "detective" && isWon ? (
               <>
-                Next Hop <ArrowRight className="size-4 ml-1" />
+                Next Round <ArrowRight className="size-4 ml-1" />
               </>
             ) : (
               "Play Again"

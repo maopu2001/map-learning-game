@@ -12,6 +12,7 @@ import { COUNTRIES, CountryData } from "@/data/world";
 import { BANGLADESH_DISTRICTS, DistrictData } from "@/data/bangladesh";
 import { useGameStore } from "@/lib/store";
 import { Globe, ArrowRight, CornerDownLeft } from "lucide-react";
+import { useCommandK } from "@/hooks/useCommandK";
 
 export function GuessInput() {
   const scope = useGameStore((s) => s.scope);
@@ -21,6 +22,8 @@ export function GuessInput() {
 
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+
+  const inputRef = useCommandK(() => setOpen(true));
 
   const guessedIds = new Set(guesses.map((g) => g.country.id));
 
@@ -91,6 +94,7 @@ export function GuessInput() {
       >
         <div className="relative">
           <CommandInput
+            ref={inputRef}
             value={query}
             onValueChange={(val) => {
               setQuery(val);
@@ -106,6 +110,12 @@ export function GuessInput() {
             placeholder={placeholder}
             className="text-base sm:text-sm font-medium"
           />
+          {!query && (
+            <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-slate-500 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded pointer-events-none select-none">
+              <span>⌘</span>
+              <span>K</span>
+            </div>
+          )}
           {query.length > 0 && (
             <button
               type="button"

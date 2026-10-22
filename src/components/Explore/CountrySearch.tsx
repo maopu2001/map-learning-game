@@ -10,6 +10,7 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { Globe, ArrowRight, CornerDownLeft } from "lucide-react";
+import { useCommandK } from "@/hooks/useCommandK";
 
 interface CountrySearchProps {
   onSelectCountry: (country: CountryData) => void;
@@ -18,6 +19,8 @@ interface CountrySearchProps {
 export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const inputRef = useCommandK(() => setSearchOpen(true));
 
   const submitQuery = (rawQuery: string) => {
     const q = rawQuery.trim().toLowerCase();
@@ -67,6 +70,7 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
       >
         <div className="relative">
           <CommandInput
+            ref={inputRef}
             value={searchQuery}
             onValueChange={(val) => {
               setSearchQuery(val);
@@ -82,6 +86,12 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
             placeholder="Search by name, capital, ISO code, or alias..."
             className="text-base sm:text-sm font-medium"
           />
+          {!searchQuery && (
+            <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-slate-500 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded pointer-events-none select-none">
+              <span>⌘</span>
+              <span>K</span>
+            </div>
+          )}
           {searchQuery.length > 0 && (
             <button
               type="button"
