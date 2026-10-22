@@ -65,6 +65,9 @@ export interface GameStats {
   guessesDistribution: Record<number, number>; // 1-8
 }
 
+export type GameStatus = "playing" | "won" | "lost";
+export type { GuessResult };
+
 export interface GameState {
   scope: GameScope; // "world" or "bangladesh"
   mode: GameMode;
@@ -74,7 +77,7 @@ export interface GameState {
   guesses: GuessResult[];
   unlockedHints: number; // 0, 1, 2, 3
   extraNeighborsRevealed: number; // For super-bordered nations
-  gameStatus: "playing" | "won" | "lost";
+  gameStatus: GameStatus;
   stats: GameStats;
   lastDailyDate: string;
   blitzTimeLeft: number;

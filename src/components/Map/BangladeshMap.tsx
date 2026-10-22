@@ -9,17 +9,11 @@ import {
 } from "react-simple-maps";
 import { useGameStore } from "@/lib/store";
 import { DISTRICTS_BY_NAME, DistrictData } from "@/data/bangladesh";
-import {
-  ZoomIn,
-  ZoomOut,
-  RotateCcw,
-  Target,
-  ShieldCheck,
-  ShieldAlert,
-  X,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
+import { MapZoomControls } from "@/components/Map/MapZoomControls";
+import { DistrictReconWindow } from "@/components/Map/DistrictReconWindow";
+import { DistrictReconSheet } from "@/components/Map/DistrictReconSheet";
+import { MapLegend } from "@/components/Map/MapLegend";
 
 const GEO_URL = "/data/bangladesh-districts-geo.json";
 
@@ -167,231 +161,26 @@ export function BangladeshMap() {
       <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
       {/* Floating Zoom Controls (Top Right) */}
-      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex flex-col gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 backdrop-blur-md shadow-lg">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleZoomIn}
-          title="Zoom In"
-          aria-label="Zoom In"
-          className="size-8 sm:size-8 rounded-lg hover:bg-slate-800 text-slate-300"
-        >
-          <ZoomIn className="size-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleZoomOut}
-          title="Zoom Out"
-          aria-label="Zoom Out"
-          className="size-8 sm:size-8 rounded-lg hover:bg-slate-800 text-slate-300"
-        >
-          <ZoomOut className="size-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleResetZoom}
-          title="Recenter Bangladesh"
-          aria-label="Recenter Bangladesh"
-          className="size-8 sm:size-8 rounded-lg hover:bg-slate-800 text-slate-300"
-        >
-          <RotateCcw className="size-4" />
-        </Button>
-      </div>
+      <MapZoomControls
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
+        onResetZoom={handleResetZoom}
+        resetTitle="Recenter Bangladesh"
+      />
 
-      {/* Desktop Floating Reconnaissance Window (Hidden on mobile to preserve touch map area) */}
-      <div className="hidden md:block absolute top-4 left-4 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
-        {difficulty === "hard" &&
-        (!inspectedDistrict ||
-          (!activeNeighbors.includes(inspectedDistrict.name) &&
-            !guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()))) ? (
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between pb-1 border-b border-rose-500/30 text-xs">
-              <span className="font-semibold text-rose-400 flex items-center gap-1.5">
-                <ShieldAlert className="size-3.5" /> Hard Mode
-              </span>
-              <span className="text-2xs text-slate-400">Map Hidden</span>
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Districts stay hidden on hover or click. Unlock Hints to reveal
-              neighboring districts!
-            </p>
-            {lastGuess && (
-              <div className="text-xs flex items-center justify-between pt-1 border-t border-slate-800">
-                <span className="text-slate-400">Last Guess:</span>
-                <span className="font-semibold text-white">
-                  {lastGuess.country.name} ({lastGuess.distanceKm}km)
-                </span>
-              </div>
-            )}
-          </div>
-        ) : inspectedDistrict ? (
-          <div>
-            {/* If inspecting the secret target during active play: NEVER show its name/info! */}
-            {isTargetInspected && gameStatus === "playing" ? (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between pb-1 border-b border-amber-500/30">
-                  <span className="font-bold text-amber-400 text-sm flex items-center gap-1.5">
-                    <Target className="size-4" /> Secret Target
-                  </span>
-                  <span className="text-2xs text-amber-300 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-500/30">
-                    Target
-                  </span>
-                </div>
-                <div className="text-xs text-slate-300 leading-relaxed">
-                  Amber outline. Follow your distance clues to guess this
-                  mystery district!
-                </div>
-                {targetDistrict && (
-                  <div className="text-2xs text-emerald-400 font-semibold pt-1 border-t border-slate-800">
-                    {difficulty === "easy" || unlockedHints >= 1 ? (
-                      `Hint 1: Division: ${targetDistrict.division}`
-                    ) : (
-                      <span className="text-slate-500 font-normal">
-                        Hint 1: 🔒 Locked (Unlock in Hints drawer)
-                      </span>
-                    )}
-                  </div>
-                )}
-              </div>
-            ) : difficulty === "normal" &&
-              !activeNeighbors.includes(inspectedDistrict.name) &&
-              !guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()) &&
-              gameStatus === "playing" ? (
-              /* Normal mode: only highlighted adjacent borders show info! */
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
-                  <span className="font-semibold text-slate-400">
-                    Unrevealed District
-                  </span>
-                  <span className="text-2xs text-slate-500">Normal Mode</span>
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Only guessed districts and revealed neighbors show details.
-                </p>
-              </div>
-            ) : (
-              <div>
-                {/* Easy mode (all other info shown) OR Normal/Hard mode on revealed adjacent border / guess OR Game over */}
-                <div className="flex items-center justify-between pb-1 border-b border-slate-800">
-                  <span className="font-bold text-white text-sm flex items-center gap-1.5">
-                    {inspectedDistrict.name}
-                  </span>
-                  <span className="text-2xs text-slate-400">
-                    {inspectedDistrict.division} Division
-                  </span>
-                </div>
-
-                {/* If guessed */}
-                {guessedDistrictsMap.has(
-                  inspectedDistrict.name.toLowerCase(),
-                ) ? (
-                  <div className="text-xs pt-1.5 space-y-1">
-                    {guessedDistrictsMap.get(
-                      inspectedDistrict.name.toLowerCase(),
-                    )?.isCorrect ? (
-                      <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                        <ShieldCheck className="size-3.5" /> Target Found!
-                      </span>
-                    ) : (
-                      <div className="flex items-center justify-between text-slate-300">
-                        <span>
-                          Dist:{" "}
-                          <strong className="text-amber-400">
-                            {
-                              guessedDistrictsMap.get(
-                                inspectedDistrict.name.toLowerCase(),
-                              )?.distanceKm
-                            }{" "}
-                            km
-                          </strong>
-                        </span>
-                        <span className="font-mono text-xs">
-                          {
-                            guessedDistrictsMap.get(
-                              inspectedDistrict.name.toLowerCase(),
-                            )?.directionEmoji
-                          }{" "}
-                          {
-                            guessedDistrictsMap.get(
-                              inspectedDistrict.name.toLowerCase(),
-                            )?.direction
-                          }
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ) : activeNeighbors.includes(inspectedDistrict.name) ? (
-                  <div className="text-xs text-sky-300 font-semibold pt-1">
-                    Borders the secret target
-                  </div>
-                ) : (
-                  <div className="text-2xs text-slate-400 pt-1 flex items-center justify-between">
-                    <span>Not guessed yet</span>
-                    <span className="text-slate-500">Type name to guess</span>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between pb-1 border-b border-slate-800 text-xs">
-              <span className="text-slate-400 font-medium flex items-center gap-1">
-                <Target className="size-3 text-amber-400" /> Secret Target
-              </span>
-              <span className="text-amber-400 font-semibold">
-                Amber outline
-              </span>
-            </div>
-
-            {lastGuess ? (
-              <div className="text-xs flex items-center justify-between">
-                <span className="text-slate-400">Last:</span>
-                <span className="font-semibold text-white">
-                  {lastGuess.country.name} ({lastGuess.distanceKm}km{" "}
-                  {lastGuess.directionEmoji})
-                </span>
-              </div>
-            ) : (
-              <div className="text-xs text-slate-400">
-                Click or hover any district to inspect info
-              </div>
-            )}
-
-            {/* Helper status */}
-            <div className="text-2xs text-slate-500 pt-1 border-t border-slate-800/80 flex items-center justify-between">
-              <span>Map Mode:</span>
-              <span className="text-slate-400">Clean map (dots only)</span>
-            </div>
-          </div>
-        )}
-
-        {/* Guessed dots row */}
-        {guesses.length > 0 && (
-          <div className="pt-1 border-t border-slate-800/80 flex items-center gap-1 overflow-x-auto">
-            {guesses.map((g, i) => (
-              <span
-                key={i}
-                title={`${g.country.name}: ${g.distanceKm}km`}
-                className={`size-2.5 rounded-full shrink-0 ${
-                  g.isCorrect
-                    ? "bg-emerald-500"
-                    : g.distanceKm < 60
-                      ? "bg-orange-500"
-                      : g.distanceKm < 130
-                        ? "bg-purple-500"
-                        : "bg-slate-600"
-                }`}
-              />
-            ))}
-            <span className="text-2xs text-slate-500 ml-auto">
-              {guesses.length}/6
-            </span>
-          </div>
-        )}
-      </div>
+      {/* Desktop Floating Reconnaissance Window */}
+      <DistrictReconWindow
+        difficulty={difficulty}
+        inspectedDistrict={inspectedDistrict}
+        activeNeighbors={activeNeighbors}
+        guessedDistrictsMap={guessedDistrictsMap}
+        lastGuess={lastGuess}
+        isTargetInspected={isTargetInspected}
+        gameStatus={gameStatus}
+        targetDistrict={targetDistrict}
+        unlockedHints={unlockedHints}
+        guesses={guesses}
+      />
 
       {/* SVG Canvas */}
       <ComposableMap
@@ -674,92 +463,20 @@ export function BangladeshMap() {
       </ComposableMap>
 
       {/* Mobile Bottom Reconnaissance Sheet */}
-      {inspectedDistrict && (
-        <div className="md:hidden absolute bottom-2 left-2 right-2 z-30 rounded-2xl border border-slate-700/90 bg-slate-900/98 p-3 shadow-2xl backdrop-blur-xl text-xs text-slate-200 space-y-2 animate-in fade-in zoom-in-95">
-          <div className="flex items-center justify-between pb-1.5 border-b border-slate-800">
-            <div className="flex items-center gap-2">
-              <div>
-                <h4 className="font-bold text-white text-sm leading-tight">
-                  {isTargetInspected && gameStatus === "playing"
-                    ? "Mystery Target"
-                    : inspectedDistrict.name}
-                </h4>
-                <p className="text-2xs text-emerald-400">
-                  {inspectedDistrict.division} Division
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setInspectedDistrict(null)}
-              className="size-7 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
-              aria-label="Close Inspector"
-            >
-              <X className="size-3.5" />
-            </button>
-          </div>
-
-          {isTargetInspected && gameStatus === "playing" ? (
-            <p className="text-xs text-amber-300 leading-snug">
-              Amber outline. Follow your distance and direction clues to find
-              this district!
-            </p>
-          ) : guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()) ? (
-            <div className="flex items-center justify-between text-xs pt-0.5">
-              <span>
-                Distance:{" "}
-                <strong className="text-amber-400">
-                  {
-                    guessedDistrictsMap.get(
-                      inspectedDistrict.name.toLowerCase(),
-                    )?.distanceKm
-                  }{" "}
-                  km
-                </strong>
-              </span>
-              <span className="font-mono text-xs text-sky-300">
-                {
-                  guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())
-                    ?.directionEmoji
-                }{" "}
-                {
-                  guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())
-                    ?.direction
-                }
-              </span>
-            </div>
-          ) : activeNeighbors.includes(inspectedDistrict.name) ? (
-            <p className="text-xs text-sky-300 font-semibold">
-              Borders the secret target
-            </p>
-          ) : (
-            <p className="text-2xs text-slate-400">
-              {difficulty === "normal"
-                ? "Hidden until guessed or revealed."
-                : "Not guessed yet. Type in search box above."}
-            </p>
-          )}
-        </div>
-      )}
+      <DistrictReconSheet
+        inspectedDistrict={inspectedDistrict}
+        onClose={() => setInspectedDistrict(null)}
+        isTargetInspected={isTargetInspected}
+        gameStatus={gameStatus}
+        difficulty={difficulty}
+        guessedDistrictsMap={guessedDistrictsMap}
+        activeNeighbors={activeNeighbors}
+        targetDistrict={targetDistrict}
+        unlockedHints={unlockedHints}
+      />
 
       {/* Map Legend Footer */}
-      <div className="absolute bottom-2 left-2 right-2 sm:left-4 sm:right-auto z-10 flex flex-wrap items-center gap-1.5 sm:gap-3 bg-slate-900/85 px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-800 text-2xs sm:text-xs text-slate-300 backdrop-blur-md shadow-lg">
-        <div className="flex items-center gap-1.5">
-          <span className="size-2 sm:size-2.5 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
-          <span>Target</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="size-2 sm:size-2.5 rounded-full bg-orange-500 ring-2 ring-orange-500/20" />
-          <span>Hot (&lt;60km)</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="size-2 sm:size-2.5 rounded-full bg-purple-500 ring-2 ring-purple-500/20" />
-          <span>Warm (60-130km)</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="size-2 sm:size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
-          <span>Neighbor</span>
-        </div>
-      </div>
+      <MapLegend hotLabel="Hot (<60km)" warmLabel="Warm (60-130km)" />
     </div>
   );
 }

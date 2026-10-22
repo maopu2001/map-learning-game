@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useRef, useEffect } from "react";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import {
   BANGLADESH_DISTRICTS,
   DISTRICTS_BY_NAME,
@@ -15,43 +15,14 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
-import {
-  BookOpen,
-  Globe,
-  Compass,
-  Sparkles,
-  Layers,
-  ZoomIn,
-  ZoomOut,
-  RotateCcw,
-  ArrowRight,
-  CornerDownLeft,
-  Play,
-  Globe2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Command,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandItem,
-} from "@/components/ui/command";
+import { MapZoomControls } from "@/components/Map/MapZoomControls";
+import { ExploreHeader } from "@/components/Explore/ExploreHeader";
+import { DivisionFilterBar } from "@/components/Explore/DivisionFilterBar";
+import { MapHoverPill } from "@/components/Explore/MapHoverPill";
+import { DistrictSearch } from "@/components/Explore/DistrictSearch";
+import { DistrictProfileCard } from "@/components/Explore/DistrictProfileCard";
 
 const BD_GEO_URL = "/data/bangladesh-districts-geo.json";
-
-const BD_DIVISIONS = [
-  "All",
-  "Dhaka",
-  "Chattogram",
-  "Rajshahi",
-  "Khulna",
-  "Barishal",
-  "Sylhet",
-  "Rangpur",
-  "Mymensingh",
-];
 
 const DEFAULT_DISTRICT =
   DISTRICTS_BY_NAME.get("dhaka") || BANGLADESH_DISTRICTS[0];
@@ -61,8 +32,6 @@ export default function BangladeshExplorePage() {
     useState<DistrictData>(DEFAULT_DISTRICT);
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictData | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [divisionFilter, setDivisionFilter] = useState("All");
 
   const [position, setPosition] = useState<{
@@ -131,47 +100,11 @@ export default function BangladeshExplorePage() {
 
   const selectDistrict = (dist: DistrictData) => {
     setSelectedDistrict(dist);
-    setSearchQuery("");
-    setSearchOpen(false);
     setPosition({
       coordinates: [dist.coordinates[1], dist.coordinates[0]],
       zoom: 3.5,
     });
   };
-
-  const submitQuery = (rawQuery: string) => {
-    const q = rawQuery.trim().toLowerCase();
-    if (!q) return;
-
-    const exact = BANGLADESH_DISTRICTS.find(
-      (d) =>
-        d.name.toLowerCase() === q ||
-        d.aliases?.some((a) => a.toLowerCase() === q),
-    );
-    const first =
-      exact ||
-      BANGLADESH_DISTRICTS.find(
-        (d) =>
-          d.name.toLowerCase().includes(q) ||
-          d.aliases?.some((a) => a.toLowerCase().includes(q)),
-      );
-    if (first) {
-      selectDistrict(first);
-    }
-  };
-
-  const filteredDistricts = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase();
-    return BANGLADESH_DISTRICTS.filter((d) => {
-      const matchesSearch =
-        !q ||
-        d.name.toLowerCase().includes(q) ||
-        d.aliases?.some((a) => a.toLowerCase().includes(q));
-      const matchesDivision =
-        divisionFilter === "All" || d.division === divisionFilter;
-      return matchesSearch && matchesDivision;
-    });
-  }, [searchQuery, divisionFilter]);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white">
@@ -179,69 +112,28 @@ export default function BangladeshExplorePage() {
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-4 space-y-4">
         {/* Top Context Subheader */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl border border-white/10 bg-[#0c101c] shadow-lg">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <BookOpen className="size-4" />
-              </span>
-              <h1 className="text-lg sm:text-xl font-bold text-white tracking-wide">
-                Bangladesh District Explorer
-              </h1>
-              <Badge
-                variant="outline"
-                className="text-2xs border-emerald-500/30 text-emerald-300 bg-emerald-500/10 font-mono"
-              >
-                64 Districts
-              </Badge>
-            </div>
-            <p className="text-xs text-slate-400">
-              Browse districts, study bordering neighbors, and inspect regional facts at your own pace.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Link
-              href="/bangladesh"
-              className="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950/60 transition-colors"
-            >
-              <Play className="size-3.5 fill-white" />
-              <span>Play Bangladesh</span>
-            </Link>
-            <Link
-              href="/explore/world"
-              className="px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-            >
-              <Globe2 className="size-3.5 text-sky-400" />
-              <span className="hidden sm:inline">World Explorer</span>
-              <span className="sm:hidden">World</span>
-            </Link>
-          </div>
-        </div>
+        <ExploreHeader
+          title="Bangladesh Districts Explorer"
+          badgeText="64 Districts • 8 Divisions"
+          description="Browse districts, administrative divisions, and neighboring borders at your own pace."
+          playHref="/bangladesh"
+          playLabel="Play Bangladesh"
+          switchHref="/explore/world"
+          switchLabel="World Explorer"
+          switchShortLabel="World"
+          switchEmoji="🌍"
+          accentColor="emerald"
+        />
 
         {/* 2-Column Responsive Layout: Map + Profile Panel */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
           {/* Left Column: Interactive Map Canvas (7 cols on lg, full on mobile) */}
           <div className="lg:col-span-7 flex flex-col gap-3">
             {/* Division Filters */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
-              <span className="text-xs font-mono text-slate-400 font-medium shrink-0 flex items-center gap-1 mr-1">
-                <Layers className="size-3 text-emerald-400" /> Division:
-              </span>
-              {BD_DIVISIONS.map((div) => (
-                <button
-                  key={div}
-                  onClick={() => setDivisionFilter(div)}
-                  className={`px-3 py-1.5 min-h-[32px] rounded-lg shrink-0 text-xs font-medium border transition-colors cursor-pointer ${
-                    divisionFilter === div
-                      ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                      : "bg-black/40 text-slate-400 border-white/5 hover:text-white"
-                  }`}
-                >
-                  {div}
-                </button>
-              ))}
-            </div>
+            <DivisionFilterBar
+              selectedDivision={divisionFilter}
+              onSelectDivision={setDivisionFilter}
+            />
 
             {/* Map Container */}
             <div
@@ -257,51 +149,25 @@ export default function BangladeshExplorePage() {
                 setMousePos(null);
                 setHoveredDistrict(null);
               }}
-              className="relative w-full h-[50vh] sm:h-[520px] lg:h-[calc(100vh-210px)] min-h-[360px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full h-[50vh] sm:h-[520px] lg:h-[calc(100vh-250px)] min-h-[360px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
               {/* Floating Controls */}
-              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 flex flex-col gap-1.5 bg-[#0c101c]/90 p-1.5 rounded-xl border border-white/10 backdrop-blur-md shadow-lg">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleZoomIn}
-                  title="Zoom In"
-                  aria-label="Zoom In"
-                  className="size-8 rounded-lg hover:bg-white/10 text-slate-300 cursor-pointer"
-                >
-                  <ZoomIn className="size-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleZoomOut}
-                  title="Zoom Out"
-                  aria-label="Zoom Out"
-                  className="size-8 rounded-lg hover:bg-white/10 text-slate-300 cursor-pointer"
-                >
-                  <ZoomOut className="size-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleResetZoom}
-                  title="Recenter Map"
-                  aria-label="Recenter Map"
-                  className="size-8 rounded-lg hover:bg-white/10 text-slate-300 cursor-pointer"
-                >
-                  <RotateCcw className="size-4" />
-                </Button>
-              </div>
+              <MapZoomControls
+                onZoomIn={handleZoomIn}
+                onZoomOut={handleZoomOut}
+                onResetZoom={handleResetZoom}
+                resetTitle="Recenter Bangladesh"
+              />
 
               {/* Active Selection Callout */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md pointer-events-none">
-                <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-[#0c101c]/90 border border-emerald-500/30 text-slate-200 text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md pointer-events-none">
+                <span className="size-1.5 sm:size-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
                 <span className="font-bold text-white text-2xs sm:text-xs">
                   {selectedDistrict.name}
                 </span>
-                <span className="text-amber-400/80 text-2xs hidden sm:inline font-mono">
+                <span className="text-emerald-400 text-2xs hidden sm:inline font-mono">
                   ({selectedDistrict.division} Div)
                 </span>
               </div>
@@ -326,37 +192,30 @@ export default function BangladeshExplorePage() {
                   center={position.coordinates}
                   filterZoomEvent={filterZoomEvent}
                   onMoveEnd={(pos) => setPosition(pos)}
-                  maxZoom={8}
+                  maxZoom={15}
                   minZoom={0.8}
                 >
                   <Geographies geography={BD_GEO_URL}>
                     {({ geographies }) => {
-                      const strokeWidth = Math.max(
-                        0.35,
-                        Math.min(0.85, 0.65 / Math.sqrt(position.zoom)),
-                      );
+                      const strokeWidth = 0.65;
                       const selectedGeo = selectedDistrict
                         ? geographies.find(
                             (g) =>
-                              (g.properties?.shapeName as string | undefined)?.toLowerCase() ===
-                              selectedDistrict.name.toLowerCase(),
+                              g.properties?.shapeName === selectedDistrict.name,
                           )
                         : null;
                       const hoveredGeo = hoveredDistrict
                         ? geographies.find(
                             (g) =>
-                              (g.properties?.shapeName as string | undefined)?.toLowerCase() ===
-                              hoveredDistrict.name.toLowerCase(),
+                              g.properties?.shapeName === hoveredDistrict.name,
                           )
                         : null;
                       const neighborGeos = selectedDistrict
                         ? geographies.filter((g) => {
-                            const sName = (g.properties?.shapeName as string | undefined)?.toLowerCase();
-                            return (
-                              Boolean(sName) &&
-                              selectedDistrict.borders.some(
-                                (b) => b.toLowerCase() === sName,
-                              )
+                            const sName = g.properties
+                              ?.shapeName as string | undefined;
+                            return Boolean(
+                              sName && selectedDistrict.borders.includes(sName),
                             );
                           })
                         : [];
@@ -371,29 +230,26 @@ export default function BangladeshExplorePage() {
                               districtName.toLowerCase(),
                             );
                             const isSelected =
-                              selectedDistrict.name.toLowerCase() ===
-                              districtName.toLowerCase();
-                            const isNeighbor = selectedDistrict.borders.some(
-                              (b) =>
-                                b.toLowerCase() === districtName.toLowerCase(),
+                              selectedDistrict?.name === districtName;
+                            const isNeighbor = Boolean(
+                              selectedDistrict?.borders.includes(districtName),
                             );
-                            const isInFilteredDivision =
+                            const matchesDivision =
                               divisionFilter === "All" ||
                               district?.division === divisionFilter;
 
-                            let fill = isInFilteredDivision
-                              ? "#131b2e"
-                              : "#0d1320";
-                            let stroke = isInFilteredDivision
-                              ? "#24324a"
-                              : "#1c2638";
+                            let fill = "#131b2e";
+                            let stroke = "#24324a";
 
                             if (isSelected) {
                               fill = "#1a253a";
-                              stroke = "#f59e0b";
+                              stroke = "#10b981";
                             } else if (isNeighbor) {
                               fill = "#0369a1";
                               stroke = "#38bdf8";
+                            } else if (!matchesDivision) {
+                              fill = "#080c14";
+                              stroke = "#141c2c";
                             }
 
                             return (
@@ -423,7 +279,7 @@ export default function BangladeshExplorePage() {
                                   hover: {
                                     fill: "#1e2c45",
                                     stroke: isSelected
-                                      ? "#fbbf24"
+                                      ? "#34d399"
                                       : isNeighbor
                                         ? "#38bdf8"
                                         : "#94a3b8",
@@ -446,7 +302,7 @@ export default function BangladeshExplorePage() {
                           {/* Overlay 1: Neighbor districts */}
                           {neighborGeos.map((geo) => (
                             <Geography
-                              key={`overlay-bd-nb-${geo.rsmKey}`}
+                              key={`overlay-explore-nb-${geo.rsmKey}`}
                               geography={geo}
                               style={{
                                 default: {
@@ -472,12 +328,12 @@ export default function BangladeshExplorePage() {
                           {/* Overlay 2: Selected district */}
                           {selectedGeo && (
                             <Geography
-                              key={`overlay-bd-sel-${selectedGeo.rsmKey}`}
+                              key={`overlay-explore-sel-${selectedGeo.rsmKey}`}
                               geography={selectedGeo}
                               style={{
                                 default: {
-                                  fill: "rgba(245, 158, 11, 0.16)",
-                                  stroke: "#f59e0b",
+                                  fill: "rgba(16, 185, 129, 0.16)",
+                                  stroke: "#10b981",
                                   strokeWidth,
                                   strokeLinejoin: "round",
                                   strokeLinecap: "round",
@@ -485,8 +341,8 @@ export default function BangladeshExplorePage() {
                                   pointerEvents: "none",
                                 },
                                 hover: {
-                                  fill: "rgba(245, 158, 11, 0.16)",
-                                  stroke: "#f59e0b",
+                                  fill: "rgba(16, 185, 129, 0.16)",
+                                  stroke: "#10b981",
                                   strokeWidth,
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
@@ -498,13 +354,13 @@ export default function BangladeshExplorePage() {
                           {/* Overlay 3: Hovered district */}
                           {hoveredGeo && hoveredGeo !== selectedGeo && (
                             <Geography
-                              key={`overlay-bd-hover-${hoveredGeo.rsmKey}`}
+                              key={`overlay-explore-hover-${hoveredGeo.rsmKey}`}
                               geography={hoveredGeo}
                               style={{
                                 default: {
                                   fill: "rgba(56, 189, 248, 0.38)",
                                   stroke: "#60a5fa",
-                                  strokeWidth: Math.max(1.6, strokeWidth * 2.2),
+                                  strokeWidth: 1.5,
                                   strokeLinejoin: "round",
                                   strokeLinecap: "round",
                                   vectorEffect: "non-scaling-stroke",
@@ -513,7 +369,7 @@ export default function BangladeshExplorePage() {
                                 hover: {
                                   fill: "rgba(56, 189, 248, 0.38)",
                                   stroke: "#60a5fa",
-                                  strokeWidth: Math.max(1.6, strokeWidth * 2.2),
+                                  strokeWidth: 1.5,
                                   strokeLinejoin: "round",
                                   strokeLinecap: "round",
                                   vectorEffect: "non-scaling-stroke",
@@ -535,7 +391,7 @@ export default function BangladeshExplorePage() {
                         selectedDistrict.coordinates[0],
                       ]}
                       zoom={position.zoom}
-                      fillColor="#f59e0b"
+                      fillColor="#10b981"
                     />
                   )}
 
@@ -567,205 +423,31 @@ export default function BangladeshExplorePage() {
 
               {/* Hover Pill */}
               {hoveredDistrict && (
-                <div
-                  className="pointer-events-none absolute z-30 transition-all duration-75 ease-out select-none"
-                  style={
-                    mousePos
-                      ? {
-                          left: mousePos.x,
-                          top: mousePos.y < 50 ? mousePos.y + 18 : mousePos.y - 12,
-                          transform:
-                            mousePos.y < 50
-                              ? "translate(-50%, 0)"
-                              : "translate(-50%, -100%)",
-                        }
-                      : {
-                          left: "50%",
-                          top: 16,
-                          transform: "translateX(-50%)",
-                        }
-                  }
-                >
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0c101c]/95 border border-sky-400/40 shadow-2xl shadow-black/90 backdrop-blur-md text-xs whitespace-nowrap ring-1 ring-sky-500/20">
-                    <span className="font-bold text-white">
-                      {hoveredDistrict.name}
-                    </span>
-                    <span className="text-slate-400 text-2xs border-l border-white/10 pl-2">
-                      {hoveredDistrict.division} Division
-                    </span>
-                  </div>
-                </div>
+                <MapHoverPill
+                  mousePos={mousePos}
+                  title={hoveredDistrict.name}
+                  subtitle={`${hoveredDistrict.division} Division`}
+                />
               )}
             </div>
           </div>
 
           {/* Right Column: Search Box & District Profile (5 cols) */}
           <div className="lg:col-span-5 space-y-3">
-            {/* Command Search Box (Strictly by District Name) */}
-            <div className="relative w-full z-20">
-              <Command
-                className="rounded-2xl border border-white/10 bg-[#0c101c] shadow-2xl backdrop-blur-xl overflow-visible"
-                shouldFilter={false}
-              >
-                <div className="relative">
-                  <CommandInput
-                    value={searchQuery}
-                    onValueChange={(val) => {
-                      setSearchQuery(val);
-                      if (!searchOpen && val.length > 0) setSearchOpen(true);
-                    }}
-                    onFocus={() => setSearchOpen(true)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && searchQuery.trim().length > 0) {
-                        e.preventDefault();
-                        submitQuery(searchQuery);
-                      }
-                    }}
-                    placeholder="Type district name (Dhaka, Sylhet)..."
-                    className="text-base sm:text-sm font-medium"
-                  />
-                  {searchQuery.length > 0 && (
-                    <button
-                      type="button"
-                      onClick={() => submitQuery(searchQuery)}
-                      className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-slate-200 bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
-                    >
-                      <span>Go</span>
-                      <CornerDownLeft className="size-3 text-sky-400" />
-                    </button>
-                  )}
-                </div>
-
-                {searchOpen && searchQuery.trim().length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 z-50">
-                    <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
-                      {filteredDistricts.slice(0, 8).map((d) => (
-                        <CommandItem
-                          key={d.id}
-                          value={`${d.name} ${d.aliases?.join(" ") || ""}`}
-                          onSelect={() => selectDistrict(d)}
-                          className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-xs sm:text-sm text-white">
-                              {d.name}
-                            </span>
-                            {d.aliases && d.aliases.length > 0 && (
-                              <span className="text-2xs text-slate-400 font-mono">
-                                (aka {d.aliases.join(", ")})
-                              </span>
-                            )}
-                            <span className="text-xs text-slate-400 font-mono">
-                              ({d.division} Div)
-                            </span>
-                          </div>
-                          <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
-                        </CommandItem>
-                      ))}
-                      {filteredDistricts.length === 0 && (
-                        <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
-                          <Globe className="size-4 text-slate-500" />
-                          <span>No districts found</span>
-                        </CommandEmpty>
-                      )}
-                    </CommandList>
-                  </div>
-                )}
-              </Command>
-            </div>
-
-            {/* District Profile Card */}
-            <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-4 sm:p-5 shadow-2xl space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-black text-white">
-                    {selectedDistrict.name}
-                  </h2>
-                  <p className="text-xs text-emerald-400 font-medium">
-                    {selectedDistrict.division} Division • Bangladesh
-                  </p>
-                </div>
-                <Badge
-                  variant="outline"
-                  className="border-emerald-500/30 text-emerald-300 font-mono text-2xs"
-                >
-                  {selectedDistrict.isCoastal
-                    ? "Coastal District"
-                    : "Inland District"}
-                </Badge>
-              </div>
-
-              {/* Spatial Specs */}
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
-                  <span className="text-slate-400 text-xs flex items-center gap-1">
-                    <Compass className="size-3 text-sky-400" /> Coordinates
-                  </span>
-                  <span className="font-mono text-white font-semibold">
-                    {selectedDistrict.coordinates[0].toFixed(2)}°N,{" "}
-                    {selectedDistrict.coordinates[1].toFixed(2)}°E
-                  </span>
-                </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-1">
-                  <span className="text-slate-400 text-xs flex items-center gap-1">
-                    <Layers className="size-3 text-emerald-400" /> Neighbors
-                  </span>
-                  <span className="font-mono text-white font-semibold">
-                    {selectedDistrict.borders.length} Adjacent Districts
-                  </span>
-                </div>
-              </div>
-
-              {/* Trivia Fact */}
-              <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-1 text-xs leading-relaxed">
-                <span className="text-amber-400 font-semibold flex items-center gap-1.5">
-                  <Sparkles className="size-3.5" /> Did you know?
-                </span>
-                <p className="text-slate-300">{selectedDistrict.triviaFact}</p>
-              </div>
-
-              {/* Bordering Districts Interactive List */}
-              <div className="space-y-2">
-                <h3 className="text-xs font-mono font-semibold text-slate-400 uppercase tracking-wider">
-                  Bordering Districts (click to jump):
-                </h3>
-                <div className="flex flex-wrap gap-1.5">
-                  {selectedDistrict.borders.map((neighborName) => {
-                    const neighborData = DISTRICTS_BY_NAME.get(
-                      neighborName.toLowerCase(),
-                    );
-                    return (
-                      <button
-                        key={neighborName}
-                        onMouseEnter={() => {
-                          if (neighborData) setHoveredDistrict(neighborData);
-                        }}
-                        onMouseLeave={() => {
-                          setHoveredDistrict(null);
-                        }}
-                        onClick={() => {
-                          if (neighborData) {
-                            selectDistrict(neighborData);
-                            setHoveredDistrict(null);
-                          }
-                        }}
-                        className="px-2.5 py-1.5 min-h-[36px] rounded-lg text-xs bg-sky-950/40 border border-sky-500/30 text-sky-300 hover:bg-sky-500 hover:text-white transition-colors cursor-pointer"
-                      >
-                        {neighborName} ↗
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+            <DistrictSearch
+              onSelectDistrict={selectDistrict}
+              divisionFilter={divisionFilter}
+            />
+            <DistrictProfileCard
+              district={selectedDistrict}
+              onSelectDistrict={selectDistrict}
+              onHoverDistrict={setHoveredDistrict}
+            />
           </div>
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 py-6 text-center text-xs text-slate-500 mt-12 bg-[#070a12]">
-        <p>Borderline • Bangladesh 64 Districts Explorer</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
