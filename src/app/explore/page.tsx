@@ -63,12 +63,16 @@ const BD_DIVISIONS = [
   "Mymensingh",
 ];
 
+const DEFAULT_BD_DISTRICT =
+  DISTRICTS_BY_NAME.get("dhaka") || BANGLADESH_DISTRICTS[0];
+const DEFAULT_WORLD_COUNTRY =
+  COUNTRIES_BY_ID.get("BGD") || COUNTRIES[0];
+
 export default function ExplorePage() {
   const [realm, setRealm] = useState<"bangladesh" | "world">("bangladesh");
-  const [selectedBD, setSelectedBD] = useState<DistrictData>(
-    BANGLADESH_DISTRICTS[0],
-  );
-  const [selectedWorld, setSelectedWorld] = useState<CountryData>(COUNTRIES[0]);
+  const [selectedBD, setSelectedBD] = useState<DistrictData>(DEFAULT_BD_DISTRICT);
+  const [selectedWorld, setSelectedWorld] =
+    useState<CountryData>(DEFAULT_WORLD_COUNTRY);
   const [hoveredBD, setHoveredBD] = useState<DistrictData | null>(null);
   const [hoveredWorld, setHoveredWorld] = useState<CountryData | null>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
@@ -145,9 +149,11 @@ export default function ExplorePage() {
     setHoveredWorld(null);
     setMousePos(null);
     if (newRealm === "bangladesh") {
+      setSelectedBD(DEFAULT_BD_DISTRICT);
       setPosition({ coordinates: [90.3563, 23.685], zoom: 1 });
     } else {
-      setPosition({ coordinates: [0, 20], zoom: 1 });
+      setSelectedWorld(DEFAULT_WORLD_COUNTRY);
+      setPosition({ coordinates: [DEFAULT_WORLD_COUNTRY.coordinates[1], DEFAULT_WORLD_COUNTRY.coordinates[0]], zoom: 2 });
     }
   };
 
@@ -197,11 +203,7 @@ export default function ExplorePage() {
       const exact = BANGLADESH_DISTRICTS.find((d) => d.name.toLowerCase() === q);
       const first =
         exact ||
-        BANGLADESH_DISTRICTS.find(
-          (d) =>
-            d.name.toLowerCase().includes(q) ||
-            d.division.toLowerCase().includes(q),
-        );
+        BANGLADESH_DISTRICTS.find((d) => d.name.toLowerCase().includes(q));
       if (first) {
         selectDistrict(first);
         setMobileTab("map");
@@ -214,6 +216,10 @@ export default function ExplorePage() {
           (c) =>
             c.name.toLowerCase().includes(q) ||
             c.id.toLowerCase() === q ||
+            c.capital.toLowerCase().includes(q) ||
+            c.region.toLowerCase().includes(q) ||
+            (c.subregion && c.subregion.toLowerCase().includes(q)) ||
+            (c.officialName && c.officialName.toLowerCase().includes(q)) ||
             c.aliases.some((a) => a.toLowerCase().includes(q)),
         );
       if (first) {
@@ -225,9 +231,9 @@ export default function ExplorePage() {
 
   const filteredDistricts = useMemo(() => {
     return BANGLADESH_DISTRICTS.filter((d) => {
-      const matchesSearch =
-        d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        d.division.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = d.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
       const matchesDivision =
         divisionFilter === "All" || d.division === divisionFilter;
       return matchesSearch && matchesDivision;
@@ -235,11 +241,17 @@ export default function ExplorePage() {
   }, [searchQuery, divisionFilter]);
 
   const filteredCountries = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return COUNTRIES;
     return COUNTRIES.filter((c) => {
       return (
-        c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.region.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.capital.toLowerCase().includes(searchQuery.toLowerCase())
+        c.name.toLowerCase().includes(q) ||
+        c.id.toLowerCase().includes(q) ||
+        c.capital.toLowerCase().includes(q) ||
+        c.region.toLowerCase().includes(q) ||
+        (c.subregion && c.subregion.toLowerCase().includes(q)) ||
+        (c.officialName && c.officialName.toLowerCase().includes(q)) ||
+        c.aliases.some((a) => a.toLowerCase().includes(q))
       );
     });
   }, [searchQuery]);
@@ -395,29 +407,33 @@ export default function ExplorePage() {
                   ) : (
                     <>
                       {filteredCountries.slice(0, 8).map((c) => (
-                        <CommandItem
-                          key={c.id}
-                          value={c.name}
-                          onSelect={() => {
-                            selectCountry(c);
-                            setMobileTab("map");
-                          }}
-                          className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <span className="text-lg">{c.flagEmoji}</span>
-                            <span className="font-semibold text-xs sm:text-sm text-white">
-                              {c.name}
-                            </span>
-                            <span className="text-xs text-slate-400 font-mono">
-                              ({c.id})
-                            </span>
-                            <span className="text-xs text-slate-500 hidden sm:inline font-mono">
-                              {c.region}
-                            </span>
-                          </div>
-                          <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
-                        </CommandItem>
+                            <CommandItem
+                              key={c.id}
+                              value={`${c.name} ${c.id} ${c.capital} ${c.region} ${c.subregion || ""} ${c.aliases.join(" ")}`}
+                              onSelect={() => {
+                                selectCountry(c);
+                                setMobileTab("map");
+                              }}
+                              className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <span className="text-lg">{c.flagEmoji}</span>
+                                <div className="flex flex-col">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-semibold text-xs sm:text-sm text-white">
+                                      {c.name}
+                                    </span>
+                                    <span className="text-xs text-slate-400 font-mono">
+                                      ({c.id})
+                                    </span>
+                                  </div>
+                                  <span className="text-2xs text-slate-400 font-mono">
+                                    {c.capital} • {c.subregion || c.region}
+                                  </span>
+                                </div>
+                              </div>
+                              <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                            </CommandItem>
                       ))}
                       {filteredCountries.length === 0 && (
                         <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
@@ -1206,21 +1222,25 @@ export default function ExplorePage() {
                           {filteredCountries.slice(0, 8).map((c) => (
                             <CommandItem
                               key={c.id}
-                              value={c.name}
+                              value={`${c.name} ${c.id} ${c.capital} ${c.region} ${c.subregion || ""} ${c.aliases.join(" ")}`}
                               onSelect={() => selectCountry(c)}
                               className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                             >
                               <div className="flex items-center gap-2.5">
                                 <span className="text-lg">{c.flagEmoji}</span>
-                                <span className="font-semibold text-xs sm:text-sm text-white">
-                                  {c.name}
-                                </span>
-                                <span className="text-xs text-slate-400 font-mono">
-                                  ({c.id})
-                                </span>
-                                <span className="text-xs text-slate-500 hidden sm:inline font-mono">
-                                  {c.region}
-                                </span>
+                                <div className="flex flex-col">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-semibold text-xs sm:text-sm text-white">
+                                      {c.name}
+                                    </span>
+                                    <span className="text-xs text-slate-400 font-mono">
+                                      ({c.id})
+                                    </span>
+                                  </div>
+                                  <span className="text-2xs text-slate-400 font-mono">
+                                    {c.capital} • {c.subregion || c.region}
+                                  </span>
+                                </div>
                               </div>
                               <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
                             </CommandItem>

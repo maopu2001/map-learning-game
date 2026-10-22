@@ -52,11 +52,7 @@ export function GuessInput() {
       const exact = availableDistricts.find((d) => d.name.toLowerCase() === q);
       const first =
         exact ||
-        availableDistricts.find(
-          (d) =>
-            d.name.toLowerCase().includes(q) ||
-            d.division.toLowerCase().includes(q),
-        );
+        availableDistricts.find((d) => d.name.toLowerCase().includes(q));
       if (first) handleSelectDistrict(first);
     } else {
       const exact = availableCountries.find((c) => c.name.toLowerCase() === q);
@@ -120,10 +116,8 @@ export function GuessInput() {
               {isBD ? (
                 <>
                   {availableDistricts
-                    .filter(
-                      (d) =>
-                        d.name.toLowerCase().includes(query.toLowerCase()) ||
-                        d.division.toLowerCase().includes(query.toLowerCase()),
+                    .filter((d) =>
+                      d.name.toLowerCase().includes(query.toLowerCase()),
                     )
                     .slice(0, 8)
                     .map((d) => (
