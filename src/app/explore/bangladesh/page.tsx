@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Map, Info, ArrowRight } from "lucide-react";
 import {
   BANGLADESH_DISTRICTS,
   DISTRICTS_BY_NAME,
@@ -30,15 +31,23 @@ const DEFAULT_DISTRICT =
 export default function BangladeshExplorePage() {
   const [selectedDistrict, setSelectedDistrict] =
     useState<DistrictData>(DEFAULT_DISTRICT);
-  const [hoveredDistrict, setHoveredDistrict] = useState<DistrictData | null>(null);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+  const [hoveredDistrict, setHoveredDistrict] = useState<DistrictData | null>(
+    null,
+  );
+  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(
+    null,
+  );
   const [divisionFilter, setDivisionFilter] = useState("All");
+  const [mobileTab, setMobileTab] = useState<"map" | "info">("map");
 
   const [position, setPosition] = useState<{
     coordinates: [number, number];
     zoom: number;
   }>({
-    coordinates: [DEFAULT_DISTRICT.coordinates[1], DEFAULT_DISTRICT.coordinates[0]],
+    coordinates: [
+      DEFAULT_DISTRICT.coordinates[1],
+      DEFAULT_DISTRICT.coordinates[0],
+    ],
     zoom: 2.5,
   });
 
@@ -107,33 +116,69 @@ export default function BangladeshExplorePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white">
+    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
       <Header />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-4 space-y-4">
-        {/* Top Context Subheader */}
-        <ExploreHeader
-          title="Bangladesh Districts Explorer"
-          badgeText="64 Districts • 8 Divisions"
-          description="Browse districts, administrative divisions, and neighboring borders at your own pace."
-          playHref="/bangladesh"
-          playLabel="Play Bangladesh"
-          switchHref="/explore/world"
-          switchLabel="World Explorer"
-          switchShortLabel="World"
-          switchEmoji="🌍"
-          accentColor="emerald"
-        />
+      <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-4 flex flex-col gap-2 sm:space-y-4 overflow-hidden lg:overflow-visible">
+        {/* Top Context Subheader (Desktop only to prevent mobile vertical overflow) */}
+        <div className="hidden lg:block shrink-0">
+          <ExploreHeader
+            title="Bangladesh Districts Explorer"
+            badgeText="64 Districts • 8 Divisions"
+            description="Browse districts, administrative divisions, and neighboring borders at your own pace."
+            playHref="/bangladesh"
+            playLabel="Play Bangladesh"
+            switchHref="/explore/world"
+            switchLabel="World Explorer"
+            switchShortLabel="World"
+            switchEmoji="🌍"
+            accentColor="emerald"
+          />
+        </div>
+
+        {/* Mobile Tab Switcher */}
+        <div className="lg:hidden flex items-center gap-1.5 p-1 rounded-2xl bg-[#0c101c] border border-white/10 shrink-0 text-xs font-semibold">
+          <button
+            onClick={() => setMobileTab("map")}
+            className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              mobileTab === "map"
+                ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/60"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <Map className="size-3.5" />
+            <span>Map</span>
+          </button>
+          <button
+            onClick={() => setMobileTab("info")}
+            className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              mobileTab === "info"
+                ? "bg-sky-600 text-white shadow-md shadow-sky-950/60"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <Info className="size-3.5" />
+            <span className="truncate">
+              {selectedDistrict ? selectedDistrict.name : "Info"}
+            </span>
+          </button>
+        </div>
 
         {/* 2-Column Responsive Layout: Map + Profile Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-          {/* Left Column: Interactive Map Canvas (7 cols on lg, full on mobile) */}
-          <div className="lg:col-span-7 flex flex-col gap-3">
+        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-4 items-stretch lg:items-start overflow-hidden lg:overflow-visible">
+          {/* Left Column: Interactive Map Canvas (7 cols on lg, full on mobile when map tab) */}
+          <div
+            className={`lg:col-span-7 flex flex-col gap-2 h-full min-h-0 ${
+              mobileTab === "map" ? "flex flex-1" : "hidden lg:flex"
+            }`}
+          >
             {/* Division Filters */}
-            <DivisionFilterBar
-              selectedDivision={divisionFilter}
-              onSelectDivision={setDivisionFilter}
-            />
+            <div className="shrink-0">
+              <DivisionFilterBar
+                selectedDivision={divisionFilter}
+                onSelectDivision={setDivisionFilter}
+              />
+            </div>
 
             {/* Map Container */}
             <div
@@ -149,7 +194,7 @@ export default function BangladeshExplorePage() {
                 setMousePos(null);
                 setHoveredDistrict(null);
               }}
-              className="relative w-full h-[50vh] sm:h-[520px] lg:h-[calc(100vh-250px)] min-h-[360px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-250px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -212,8 +257,9 @@ export default function BangladeshExplorePage() {
                         : null;
                       const neighborGeos = selectedDistrict
                         ? geographies.filter((g) => {
-                            const sName = g.properties
-                              ?.shapeName as string | undefined;
+                            const sName = g.properties?.shapeName as
+                              | string
+                              | undefined;
                             return Boolean(
                               sName && selectedDistrict.borders.includes(sName),
                             );
@@ -274,7 +320,8 @@ export default function BangladeshExplorePage() {
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     outline: "none",
-                                    transition: "fill 200ms ease, stroke 200ms ease",
+                                    transition:
+                                      "fill 200ms ease, stroke 200ms ease",
                                   },
                                   hover: {
                                     fill: "#1e2c45",
@@ -396,16 +443,17 @@ export default function BangladeshExplorePage() {
                   )}
 
                   {/* Marker on hovered district */}
-                  {hoveredDistrict && hoveredDistrict.name !== selectedDistrict.name && (
-                    <TargetPulseMarker
-                      coordinates={[
-                        hoveredDistrict.coordinates[1],
-                        hoveredDistrict.coordinates[0],
-                      ]}
-                      zoom={position.zoom}
-                      fillColor="#38bdf8"
-                    />
-                  )}
+                  {hoveredDistrict &&
+                    hoveredDistrict.name !== selectedDistrict.name && (
+                      <TargetPulseMarker
+                        coordinates={[
+                          hoveredDistrict.coordinates[1],
+                          hoveredDistrict.coordinates[0],
+                        ]}
+                        zoom={position.zoom}
+                        fillColor="#38bdf8"
+                      />
+                    )}
                 </ZoomableGroup>
               </ComposableMap>
 
@@ -430,14 +478,45 @@ export default function BangladeshExplorePage() {
                 />
               )}
             </div>
+
+            {/* Mobile Selection Callout on Map view */}
+            <div className="lg:hidden shrink-0 p-2.5 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs shadow-xl">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="size-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <div className="truncate">
+                  <div className="font-bold text-white text-xs truncate">
+                    {selectedDistrict.name}
+                  </div>
+                  <span className="text-2xs text-slate-400 font-mono">
+                    {selectedDistrict.division} Division •{" "}
+                    {selectedDistrict.borders.length} neighbors
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setMobileTab("info")}
+                className="px-2.5 py-1.5 rounded-xl bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 text-xs font-semibold text-sky-300 flex items-center gap-1 cursor-pointer shrink-0 ml-2 transition-colors"
+              >
+                <span>Details</span>
+                <ArrowRight className="size-3" />
+              </button>
+            </div>
           </div>
 
-          {/* Right Column: Search Box & District Profile (5 cols) */}
-          <div className="lg:col-span-5 space-y-3">
-            <DistrictSearch
-              onSelectDistrict={selectDistrict}
-              divisionFilter={divisionFilter}
-            />
+          {/* Right Column: Search Box & District Profile (5 cols on lg, full on mobile when info tab) */}
+          <div
+            className={`lg:col-span-5 space-y-3 h-full min-h-0 ${
+              mobileTab === "info"
+                ? "flex flex-col flex-1 overflow-y-auto overscroll-contain pb-3"
+                : "hidden lg:block"
+            }`}
+          >
+            <div className="shrink-0 z-30">
+              <DistrictSearch
+                onSelectDistrict={selectDistrict}
+                divisionFilter={divisionFilter}
+              />
+            </div>
             <DistrictProfileCard
               district={selectedDistrict}
               onSelectDistrict={selectDistrict}
@@ -447,7 +526,9 @@ export default function BangladeshExplorePage() {
         </div>
       </main>
 
-      <Footer />
+      <div className="hidden lg:block shrink-0">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Map, Info, ArrowRight } from "lucide-react";
 import {
   COUNTRIES,
   COUNTRIES_BY_NUMERIC,
@@ -24,20 +25,27 @@ import { CountryProfileCard } from "@/components/Explore/CountryProfileCard";
 
 const WORLD_GEO_URL = "/data/world-countries-geo-50m.json";
 
-const DEFAULT_COUNTRY =
-  COUNTRIES.find((c) => c.id === "BGD") || COUNTRIES[0];
+const DEFAULT_COUNTRY = COUNTRIES.find((c) => c.id === "BGD") || COUNTRIES[0];
 
 export default function WorldExplorePage() {
   const [selectedCountry, setSelectedCountry] =
     useState<CountryData>(DEFAULT_COUNTRY);
-  const [hoveredCountry, setHoveredCountry] = useState<CountryData | null>(null);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+  const [hoveredCountry, setHoveredCountry] = useState<CountryData | null>(
+    null,
+  );
+  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(
+    null,
+  );
+  const [mobileTab, setMobileTab] = useState<"map" | "info">("map");
 
   const [position, setPosition] = useState<{
     coordinates: [number, number];
     zoom: number;
   }>({
-    coordinates: [DEFAULT_COUNTRY.coordinates[1], DEFAULT_COUNTRY.coordinates[0]],
+    coordinates: [
+      DEFAULT_COUNTRY.coordinates[1],
+      DEFAULT_COUNTRY.coordinates[0],
+    ],
     zoom: 2.2,
   });
 
@@ -106,28 +114,62 @@ export default function WorldExplorePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070a12] text-slate-100 selection:bg-sky-500 selection:text-white">
+    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-[#070a12] text-slate-100 selection:bg-sky-500 selection:text-white lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
       <Header />
 
-      <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-4 space-y-4">
-        {/* Top Context Subheader */}
-        <ExploreHeader
-          title="World Countries Explorer"
-          badgeText="195 Countries"
-          description="Browse world nations, capitals, populations, and neighboring borders at your own pace."
-          playHref="/world"
-          playLabel="Play World"
-          switchHref="/explore/bangladesh"
-          switchLabel="Bangladesh Explorer"
-          switchShortLabel="BD"
-          switchEmoji="🇧🇩"
-          accentColor="sky"
-        />
+      <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-4 flex flex-col gap-2 sm:space-y-4 overflow-hidden lg:overflow-visible">
+        {/* Top Context Subheader (Desktop only to prevent mobile vertical overflow) */}
+        <div className="hidden lg:block shrink-0">
+          <ExploreHeader
+            title="World Countries Explorer"
+            badgeText="195 Countries"
+            description="Browse world nations, capitals, populations, and neighboring borders at your own pace."
+            playHref="/world"
+            playLabel="Play World"
+            switchHref="/explore/bangladesh"
+            switchLabel="Bangladesh Explorer"
+            switchShortLabel="BD"
+            switchEmoji="🇧🇩"
+            accentColor="sky"
+          />
+        </div>
+
+        {/* Mobile Tab Switcher */}
+        <div className="lg:hidden grid grid-cols-2 items-center gap-1.5 p-1 rounded-2xl bg-[#0c101c] border border-white/10 shrink-0 text-xs font-semibold">
+          <button
+            onClick={() => setMobileTab("map")}
+            className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              mobileTab === "map"
+                ? "bg-sky-600 text-white shadow-md shadow-sky-950/60"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <Map className="size-3.5" />
+            <span>Map</span>
+          </button>
+          <button
+            onClick={() => setMobileTab("info")}
+            className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
+              mobileTab === "info"
+                ? "bg-amber-600 text-white shadow-md shadow-amber-950/60"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <Info className="size-3.5" />
+            <span className="truncate">
+              {selectedCountry ? selectedCountry.name : "Info"}
+            </span>
+          </button>
+        </div>
 
         {/* 2-Column Responsive Layout: Map + Profile Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-          {/* Left Column: Interactive Map Canvas (7 cols on lg, full on mobile) */}
-          <div className="lg:col-span-7 flex flex-col gap-3">
+        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-4 items-stretch lg:items-start overflow-hidden lg:overflow-visible">
+          {/* Left Column: Interactive Map Canvas (7 cols on lg, full on mobile when map tab) */}
+          <div
+            className={`lg:col-span-7 flex flex-col gap-2 h-full min-h-0 ${
+              mobileTab === "map" ? "flex flex-1" : "hidden lg:flex"
+            }`}
+          >
             {/* Map Container */}
             <div
               ref={mapContainerRef}
@@ -142,7 +184,7 @@ export default function WorldExplorePage() {
                 setMousePos(null);
                 setHoveredCountry(null);
               }}
-              className="relative w-full h-[50vh] sm:h-[520px] lg:h-[calc(100vh-210px)] min-h-[360px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-210px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -246,7 +288,7 @@ export default function WorldExplorePage() {
                               selectedCountry?.id === country?.id;
                             const isNeighbor = Boolean(
                               country?.id &&
-                                effectiveBorders.includes(country.id),
+                              effectiveBorders.includes(country.id),
                             );
 
                             let fill = "#131b2e";
@@ -282,15 +324,16 @@ export default function WorldExplorePage() {
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
                                     outline: "none",
-                                    transition: "fill 200ms ease, stroke 200ms ease",
+                                    transition:
+                                      "fill 200ms ease, stroke 200ms ease",
                                   },
                                   hover: {
                                     fill: "#1e2c45",
                                     stroke: isSelected
-                                       ? "#fbbf24"
-                                       : isNeighbor
-                                         ? "#38bdf8"
-                                         : "#94a3b8",
+                                      ? "#fbbf24"
+                                      : isNeighbor
+                                        ? "#38bdf8"
+                                        : "#94a3b8",
                                     strokeWidth,
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
@@ -404,16 +447,17 @@ export default function WorldExplorePage() {
                   )}
 
                   {/* Marker on hovered country */}
-                  {hoveredCountry && hoveredCountry.id !== selectedCountry?.id && (
-                    <TargetPulseMarker
-                      coordinates={[
-                        hoveredCountry.coordinates[1],
-                        hoveredCountry.coordinates[0],
-                      ]}
-                      zoom={position.zoom}
-                      fillColor="#38bdf8"
-                    />
-                  )}
+                  {hoveredCountry &&
+                    hoveredCountry.id !== selectedCountry?.id && (
+                      <TargetPulseMarker
+                        coordinates={[
+                          hoveredCountry.coordinates[1],
+                          hoveredCountry.coordinates[0],
+                        ]}
+                        zoom={position.zoom}
+                        fillColor="#38bdf8"
+                      />
+                    )}
                 </ZoomableGroup>
               </ComposableMap>
 
@@ -443,11 +487,46 @@ export default function WorldExplorePage() {
                 />
               )}
             </div>
+
+            {/* Mobile Selection Callout on Map view */}
+            <div className="lg:hidden shrink-0 p-2.5 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs shadow-xl">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="text-base shrink-0">
+                  {selectedCountry.flagEmoji}
+                </span>
+                <div className="truncate">
+                  <div className="font-bold text-white text-xs truncate">
+                    {selectedCountry.name}
+                  </div>
+                  <span className="text-2xs text-slate-400 font-mono">
+                    {selectedCountry.capital
+                      ? `Capital: ${selectedCountry.capital} • `
+                      : ""}
+                    {selectedCountry.region}
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setMobileTab("info")}
+                className="px-2.5 py-1.5 rounded-xl bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 text-xs font-semibold text-sky-300 flex items-center gap-1 cursor-pointer shrink-0 ml-2 transition-colors"
+              >
+                <span>Details</span>
+                <ArrowRight className="size-3" />
+              </button>
+            </div>
           </div>
 
-          {/* Right Column: Search Box & Country Profile (5 cols) */}
-          <div className="lg:col-span-5 space-y-3">
-            <CountrySearch onSelectCountry={selectCountry} />
+          {/* Right Column: Search Box & Country Profile (5 cols on lg, full on mobile when info tab) */}
+          <div
+            className={`lg:col-span-5 space-y-3 h-full min-h-0 ${
+              mobileTab === "info"
+                ? "flex flex-col flex-1 overflow-y-auto overscroll-contain pb-3"
+                : "hidden lg:block"
+            }`}
+          >
+            <div className="shrink-0 z-30">
+              <CountrySearch onSelectCountry={selectCountry} />
+            </div>
             <CountryProfileCard
               country={selectedCountry}
               onSelectCountry={selectCountry}
@@ -457,7 +536,9 @@ export default function WorldExplorePage() {
         </div>
       </main>
 
-      <Footer />
+      <div className="hidden lg:block shrink-0">
+        <Footer />
+      </div>
     </div>
   );
 }
