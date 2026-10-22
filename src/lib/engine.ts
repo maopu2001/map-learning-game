@@ -1,6 +1,3 @@
-import distance from "@turf/distance";
-import bearing from "@turf/bearing";
-import { point } from "@turf/helpers";
 import { CountryData } from "@/data/world";
 import { DistrictData } from "@/data/bangladesh";
 
@@ -45,6 +42,42 @@ const MAX_EARTH_DIST = 20000;
 // Bangladesh diagonal ~ 750 km
 const MAX_BD_DIST = 750;
 
+const DEG2RAD = Math.PI / 180;
+const RAD2DEG = 180 / Math.PI;
+const EARTH_RADIUS_KM = 6371.0088;
+
+export function haversineDistanceKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+): number {
+  const dLat = (lat2 - lat1) * DEG2RAD;
+  const dLon = (lon2 - lon1) * DEG2RAD;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * DEG2RAD) *
+      Math.cos(lat2 * DEG2RAD) *
+      Math.sin(dLon / 2) ** 2;
+  return 2 * EARTH_RADIUS_KM * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+export function calculateBearing(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+): number {
+  const phi1 = lat1 * DEG2RAD;
+  const phi2 = lat2 * DEG2RAD;
+  const deltaLambda = (lon2 - lon1) * DEG2RAD;
+  const y = Math.sin(deltaLambda) * Math.cos(phi2);
+  const x =
+    Math.cos(phi1) * Math.sin(phi2) -
+    Math.sin(phi1) * Math.cos(phi2) * Math.cos(deltaLambda);
+  return Math.atan2(y, x) * RAD2DEG;
+}
+
 export function evaluateGuess(
   guess: CountryData | DistrictData,
   target: CountryData | DistrictData,
@@ -63,12 +96,11 @@ export function evaluateGuess(
     };
   }
 
-  // Turf uses [lng, lat]
-  const p1 = point([guess.coordinates[1], guess.coordinates[0]]);
-  const p2 = point([target.coordinates[1], target.coordinates[0]]);
+  const [lat1, lon1] = guess.coordinates;
+  const [lat2, lon2] = target.coordinates;
 
-  const dist = Math.round(distance(p1, p2, { units: "kilometers" }));
-  const b = bearing(p1, p2);
+  const dist = Math.round(haversineDistanceKm(lat1, lon1, lat2, lon2));
+  const b = calculateBearing(lat1, lon1, lat2, lon2);
   const { dir, emoji } = bearingToDirection(b);
 
   const maxDist = isDistrictMode ? MAX_BD_DIST : MAX_EARTH_DIST;

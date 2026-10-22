@@ -4,7 +4,6 @@ import React from "react";
 import { useGameStore, getMaxGuesses } from "@/lib/store";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { motion, AnimatePresence } from "framer-motion";
 import { Target } from "lucide-react";
 import { DirectionIcon } from "@/components/ui/direction-icon";
 import { CountryData } from "@/data/world";
@@ -44,36 +43,32 @@ export function GuessHistory() {
       </div>
 
       <div className="space-y-2">
-        <AnimatePresence initial={false}>
-          {guesses.map((g, idx) => {
-            const isWinner = g.isCorrect;
-            const hotThreshold = isBD ? 70 : 1500;
-            const closeThreshold = isBD ? 150 : 3500;
-            const isVeryClose = g.distanceKm < hotThreshold;
-            const isClose = g.distanceKm < closeThreshold;
+        {guesses.map((g, idx) => {
+          const isWinner = g.isCorrect;
+          const hotThreshold = isBD ? 70 : 1500;
+          const closeThreshold = isBD ? 150 : 3500;
+          const isVeryClose = g.distanceKm < hotThreshold;
+          const isClose = g.distanceKm < closeThreshold;
 
-            const isDistrict = "division" in g.country;
-            const districtItem = isDistrict
-              ? (g.country as DistrictData)
-              : null;
-            const countryItem = !isDistrict ? (g.country as CountryData) : null;
+          const isDistrict = "division" in g.country;
+          const districtItem = isDistrict
+            ? (g.country as DistrictData)
+            : null;
+          const countryItem = !isDistrict ? (g.country as CountryData) : null;
 
-            return (
-              <motion.div
-                key={`${g.country.id}-${idx}`}
-                initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className={`flex flex-col gap-2 p-3.5 rounded-xl border transition-all ${
-                  isWinner
-                    ? "bg-emerald-950/50 border-emerald-500/50 shadow-lg shadow-emerald-950/40"
-                    : isVeryClose
-                      ? "bg-orange-950/30 border-orange-500/30"
-                      : isClose
-                        ? "bg-purple-950/30 border-purple-500/30"
-                        : "bg-[#0c101c] border-white/10"
-                }`}
-              >
+          return (
+            <div
+              key={`${g.country.id}-${idx}`}
+              className={`animate-guess-enter flex flex-col gap-2 p-3.5 rounded-xl border transition-all ${
+                isWinner
+                  ? "bg-emerald-950/50 border-emerald-500/50 shadow-lg shadow-emerald-950/40"
+                  : isVeryClose
+                    ? "bg-orange-950/30 border-orange-500/30"
+                    : isClose
+                      ? "bg-purple-950/30 border-purple-500/30"
+                      : "bg-[#0c101c] border-white/10"
+              }`}
+            >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 min-w-0">
                     {!isDistrict && countryItem && (
@@ -148,11 +143,10 @@ export function GuessHistory() {
                     {g.proximityScore}%
                   </span>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </AnimatePresence>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
