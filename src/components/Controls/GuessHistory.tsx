@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from "framer-motion";
 import { Target } from "lucide-react";
+import { DirectionIcon } from "@/components/ui/direction-icon";
 import { CountryData } from "@/data/world";
 import { DistrictData } from "@/data/bangladesh";
 
@@ -114,7 +115,11 @@ export function GuessHistory() {
                         {g.isCorrect
                           ? "0 km"
                           : `${g.distanceKm.toLocaleString()} km`}
-                        <span className="text-sm sm:text-base">{g.directionEmoji}</span>
+                        <DirectionIcon
+                          direction={g.direction}
+                          isCorrect={g.isCorrect}
+                          className="size-3.5 sm:size-4 text-sky-400"
+                        />
                       </span>
                       <span className="text-3xs sm:text-2xs text-slate-400 font-mono">
                         {g.isCorrect

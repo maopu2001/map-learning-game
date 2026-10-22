@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { BookOpen, Play } from "lucide-react";
+import { BookOpen, Play, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface ExploreHeaderProps {
@@ -78,7 +78,11 @@ export function ExploreHeader({
           href={switchHref}
           className="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
         >
-          <span>{switchEmoji}</span>
+          {switchEmoji === "🌍" ? (
+            <Globe className="size-3.5 text-sky-400" />
+          ) : (
+            <span>{switchEmoji}</span>
+          )}
           <span className="hidden sm:inline">{switchLabel}</span>
           <span className="sm:hidden">{switchShortLabel}</span>
         </Link>

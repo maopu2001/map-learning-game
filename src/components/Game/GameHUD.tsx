@@ -3,16 +3,15 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGameStore, getMaxGuesses } from "@/lib/store";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
   SlidersHorizontal,
-  Trophy,
   HelpCircle,
   RotateCcw,
+  Trophy,
+  Globe,
 } from "lucide-react";
-import { StatsDialog } from "@/components/Dialogs/StatsDialog";
 import { HelpDialog } from "@/components/Dialogs/HelpDialog";
 import { AbandonConfirmDialog } from "@/components/Dialogs/AbandonConfirmDialog";
 import { GameTelemetry } from "@/components/Game/GameTelemetry";
@@ -26,15 +25,14 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
   const router = useRouter();
   const mode = useGameStore((s) => s.mode);
   const difficulty = useGameStore((s) => s.difficulty);
-  const stats = useGameStore((s) => s.stats);
   const guesses = useGameStore((s) => s.guesses);
   const blitzTimeLeft = useGameStore((s) => s.blitzTimeLeft);
   const gameStatus = useGameStore((s) => s.gameStatus);
   const resetGame = useGameStore((s) => s.resetGame);
   const forfeitAndSwitch = useGameStore((s) => s.forfeitAndSwitch);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
+  const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
 
-  const [statsOpen, setStatsOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [abandonPending, setAbandonPending] = useState<"exit" | "reset" | null>(
     null,
@@ -42,6 +40,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
   const maxGuesses = getMaxGuesses(difficulty);
   const isBD = scope === "bangladesh";
+  const isDaily = mode === "daily";
   const isMissionActive =
     gameStatus === "playing" &&
     (guesses.length > 0 ||
@@ -57,6 +56,7 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
   };
 
   const handleResetClick = () => {
+    if (isDaily) return;
     if (isMissionActive) {
       setAbandonPending("reset");
     } else {
@@ -98,9 +98,11 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
             {/* Current Mission Badges */}
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-base leading-none shrink-0">
-                {isBD ? "🇧🇩" : "🌍"}
-              </span>
+              {isBD ? (
+                <span className="text-base leading-none shrink-0">🇧🇩</span>
+              ) : (
+                <Globe className="size-4 text-sky-400 shrink-0" />
+              )}
               <span className="font-bold text-white tracking-wide text-xs whitespace-nowrap">
                 {isBD ? "Bangladesh" : "World"}
               </span>
@@ -139,6 +141,18 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
           {/* Quick Actions (Mode & Reset) on mobile top right */}
           <div className="flex sm:hidden items-center gap-1">
+            {isDaily && gameStatus !== "playing" && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setGameOverOpen(true)}
+                className="h-8 text-2xs border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 px-2 rounded-xl flex items-center gap-1 cursor-pointer"
+                title="View Daily Result"
+              >
+                <Trophy className="size-3 text-emerald-400" />
+                <span className="font-semibold">Result</span>
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
@@ -152,15 +166,6 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setStatsOpen(true)}
-              title="Stats"
-              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
-            >
-              <Trophy className="size-3.5 text-amber-400" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
               onClick={() => setHelpOpen(true)}
               title="How to Play"
               className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
@@ -170,9 +175,20 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
             <Button
               variant="ghost"
               size="icon"
+              disabled={isDaily}
               onClick={handleResetClick}
-              title={isMissionActive ? "Restart Round" : "New Round"}
-              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+              title={
+                isDaily
+                  ? "Daily puzzle cannot be restarted"
+                  : isMissionActive
+                    ? "Restart Round"
+                    : "New Round"
+              }
+              className={`size-8 rounded-xl ${
+                isDaily
+                  ? "opacity-30 cursor-not-allowed text-slate-600"
+                  : "text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+              }`}
             >
               <RotateCcw className="size-3.5" />
             </Button>
@@ -191,6 +207,19 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
 
           {/* Desktop Right Actions */}
           <div className="hidden sm:flex items-center gap-1.5">
+            {isDaily && gameStatus !== "playing" && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setGameOverOpen(true)}
+                className="h-8 text-2xs border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 px-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer"
+                title="View Daily Result"
+              >
+                <Trophy className="size-3 text-emerald-400" />
+                <span className="font-semibold">Result</span>
+              </Button>
+            )}
+
             <Button
               variant="outline"
               size="sm"
@@ -200,16 +229,6 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
             >
               <SlidersHorizontal className="size-3 text-sky-400" />
               <span className="hidden sm:inline font-semibold">Mode</span>
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setStatsOpen(true)}
-              title="Stats"
-              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
-            >
-              <Trophy className="size-4 text-amber-400" />
             </Button>
 
             <Button
@@ -225,9 +244,20 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
             <Button
               variant="ghost"
               size="icon"
+              disabled={isDaily}
               onClick={handleResetClick}
-              title={isMissionActive ? "Restart Round" : "New Round"}
-              className="size-8 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+              title={
+                isDaily
+                  ? "Daily puzzle cannot be restarted"
+                  : isMissionActive
+                    ? "Restart Round"
+                    : "New Round"
+              }
+              className={`size-8 rounded-xl ${
+                isDaily
+                  ? "opacity-30 cursor-not-allowed text-slate-600"
+                  : "text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
+              }`}
             >
               <RotateCcw className="size-4" />
             </Button>
@@ -243,13 +273,8 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
         }}
         guessesCount={guesses.length}
         unlockedHints={unlockedHints}
-        isStreakMode={mode === "detective"}
-        currentStreak={stats.streak}
         onConfirm={handleConfirmAbandon}
       />
-
-      {/* Career Record Modal */}
-      <StatsDialog open={statsOpen} onOpenChange={setStatsOpen} />
 
       {/* Mission Directives Modal */}
       <HelpDialog open={helpOpen} onOpenChange={setHelpOpen} />

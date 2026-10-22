@@ -9,15 +9,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, Flame } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
 interface AbandonConfirmDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   guessesCount: number;
   unlockedHints: number;
-  isStreakMode: boolean;
-  currentStreak: number;
   onConfirm: () => void;
 }
 
@@ -26,8 +24,6 @@ export function AbandonConfirmDialog({
   onOpenChange,
   guessesCount,
   unlockedHints,
-  isStreakMode,
-  currentStreak,
   onConfirm,
 }: AbandonConfirmDialogProps) {
   return (
@@ -51,15 +47,6 @@ export function AbandonConfirmDialog({
             ). Quitting or restarting now counts as a forfeit.
           </DialogDescription>
         </DialogHeader>
-
-        {isStreakMode && currentStreak > 0 && (
-          <div className="p-3 rounded-2xl bg-amber-950/30 border border-amber-500/20 text-xs text-amber-300 flex items-center justify-between">
-            <span className="flex items-center gap-1.5">
-              <Flame className="size-3.5 text-amber-400" /> Current Streak:
-            </span>
-            <span className="font-bold">{currentStreak} wins (will reset to 0)</span>
-          </div>
-        )}
 
         <div className="flex items-center justify-end gap-2 pt-2">
           <Button

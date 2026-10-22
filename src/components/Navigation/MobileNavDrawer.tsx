@@ -2,13 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { Home, Play, Globe2, BookOpen, Trophy, HelpCircle } from "lucide-react";
+import { Home, Play, Globe2, BookOpen, HelpCircle } from "lucide-react";
 
 interface MobileNavDrawerProps {
   open: boolean;
   onClose: () => void;
   pathname: string;
-  onOpenStats: () => void;
   onOpenHelp: () => void;
 }
 
@@ -16,7 +15,6 @@ export function MobileNavDrawer({
   open,
   onClose,
   pathname,
-  onOpenStats,
   onOpenHelp,
 }: MobileNavDrawerProps) {
   if (!open) return null;
@@ -112,23 +110,13 @@ export function MobileNavDrawer({
         </div>
 
         {/* Section 4: Utilities */}
-        <div className="pt-2 border-t border-white/5 grid grid-cols-2 gap-2 text-xs">
-          <button
-            onClick={() => {
-              onClose();
-              onOpenStats();
-            }}
-            className="p-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
-          >
-            <Trophy className="size-3.5 text-amber-400" />
-            <span>Stats</span>
-          </button>
+        <div className="pt-2 border-t border-white/5 text-xs">
           <button
             onClick={() => {
               onClose();
               onOpenHelp();
             }}
-            className="p-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
+            className="w-full p-2.5 min-h-[44px] rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
           >
             <HelpCircle className="size-3.5 text-sky-400" />
             <span>How to Play</span>

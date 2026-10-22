@@ -12,7 +12,6 @@ export function DetectiveDossier() {
   const targetCountry = useGameStore((s) => s.targetCountry);
   const targetDistrict = useGameStore((s) => s.targetDistrict);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
-  const stats = useGameStore((s) => s.stats);
   const gameStatus = useGameStore((s) => s.gameStatus);
 
   const isBD = scope === "bangladesh";
@@ -59,13 +58,8 @@ export function DetectiveDossier() {
             <FileText className="size-3.5" />
           </div>
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
-              <span>Detective Clue</span>
-              {stats.streak > 0 && (
-                <span className="text-amber-400 font-mono text-2xs">
-                  Streak: {stats.streak}
-                </span>
-              )}
+            <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+              Detective Clue
             </h3>
           </div>
         </div>

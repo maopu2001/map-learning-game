@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { useGameStore, GameMode, GameDifficulty } from "@/lib/store";
+import React, { useState, useEffect } from "react";
+import { useGameStore, GameMode, GameDifficulty, getTodayDateStr } from "@/lib/store";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Play, SlidersHorizontal, AlertTriangle } from "lucide-react";
+import { Play, SlidersHorizontal, AlertTriangle, Trophy } from "lucide-react";
 import { ModeSelector } from "@/components/Game/ModeSelector";
 import { DifficultySelector } from "@/components/Game/DifficultySelector";
 
@@ -31,16 +31,54 @@ export function MissionBriefingModal({
   const guesses = useGameStore((s) => s.guesses);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
   const gameStatus = useGameStore((s) => s.gameStatus);
+  const dailyHistory = useGameStore((s) => s.dailyHistory);
+  const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
 
   const [selectedMode, setSelectedMode] = useState<GameMode>(currentMode);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<GameDifficulty>(currentDifficulty);
 
+  const today = getTodayDateStr();
   const isBD = scope === "bangladesh";
+  const dailyRecord = dailyHistory?.[scope];
+  const isDailyCompleted =
+    dailyRecord?.date === today && dailyRecord?.gameStatus !== "playing";
   const isMidGame =
     gameStatus === "playing" && (guesses.length > 0 || unlockedHints > 0);
 
+  useEffect(() => {
+    if (open) {
+      setSelectedMode(currentMode);
+      if (
+        currentMode === "daily" &&
+        dailyRecord?.date === today &&
+        dailyRecord?.difficulty
+      ) {
+        setSelectedDifficulty(dailyRecord.difficulty);
+      } else {
+        setSelectedDifficulty(currentDifficulty);
+      }
+    }
+  }, [open, currentMode, currentDifficulty, dailyRecord, today]);
+
+  const handleSelectMode = (mode: GameMode) => {
+    setSelectedMode(mode);
+    if (
+      mode === "daily" &&
+      dailyRecord?.date === today &&
+      dailyRecord?.difficulty
+    ) {
+      setSelectedDifficulty(dailyRecord.difficulty);
+    }
+  };
+
   const handleStartGame = () => {
+    if (selectedMode === "daily" && isDailyCompleted) {
+      onOpenChange(false);
+      setGameOverOpen(true);
+      return;
+    }
+
     forfeitAndSwitch({
       mode: selectedMode,
       difficulty: selectedDifficulty,
@@ -89,7 +127,7 @@ export function MissionBriefingModal({
         <div className="space-y-3">
           <ModeSelector
             selectedMode={selectedMode}
-            onSelectMode={setSelectedMode}
+            onSelectMode={handleSelectMode}
             isBD={isBD}
           />
           <DifficultySelector
@@ -100,19 +138,29 @@ export function MissionBriefingModal({
           />
         </div>
 
-        {/* Start Button */}
+        {/* Start / View Result Button */}
         <div className="pt-1">
-          <Button
-            onClick={handleStartGame}
-            className={`w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer ${
-              isBD
-                ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/60"
-                : "bg-sky-600 hover:bg-sky-500 text-white shadow-sky-950/60"
-            }`}
-          >
-            <Play className="size-3.5 fill-white" />
-            <span>{isMidGame ? "START NEW ROUND" : "PLAY NOW"}</span>
-          </Button>
+          {selectedMode === "daily" && isDailyCompleted ? (
+            <Button
+              onClick={handleStartGame}
+              className="w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer bg-sky-600 hover:bg-sky-500 text-white shadow-sky-950/60"
+            >
+              <Trophy className="size-3.5 text-amber-400" />
+              <span>VIEW TODAY&apos;S RESULT</span>
+            </Button>
+          ) : (
+            <Button
+              onClick={handleStartGame}
+              className={`w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer ${
+                isBD
+                  ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/60"
+                  : "bg-sky-600 hover:bg-sky-500 text-white shadow-sky-950/60"
+              }`}
+            >
+              <Play className="size-3.5 fill-white" />
+              <span>{isMidGame ? "START NEW ROUND" : "PLAY NOW"}</span>
+            </Button>
+          )}
         </div>
       </DialogContent>
     </Dialog>

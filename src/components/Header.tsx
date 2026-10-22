@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Compass,
-  Trophy,
   HelpCircle,
   Globe2,
   BookOpen,
@@ -15,14 +14,12 @@ import {
   X,
   Play,
 } from "lucide-react";
-import { StatsDialog } from "@/components/Dialogs/StatsDialog";
 import { HelpDialog } from "@/components/Dialogs/HelpDialog";
 import { MobileNavDrawer } from "@/components/Navigation/MobileNavDrawer";
 
 export function Header() {
   const pathname = usePathname();
 
-  const [statsOpen, setStatsOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -54,16 +51,8 @@ export function Header() {
               </div>
             </Link>
 
-            {/* Mobile Actions: Stats, Help, Menu */}
+            {/* Mobile Actions: Help, Menu */}
             <div className="flex items-center gap-1.5 lg:hidden">
-              <button
-                onClick={() => setStatsOpen(true)}
-                className="size-9 rounded-xl border border-white/10 bg-white/5 text-amber-400 flex items-center justify-center hover:bg-white/10 transition-colors"
-                aria-label="Your Stats"
-                title="Your Stats"
-              >
-                <Trophy className="size-4" />
-              </button>
               <button
                 onClick={() => setHelpOpen(true)}
                 className="size-9 rounded-xl border border-white/10 bg-white/5 text-sky-400 flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -210,17 +199,6 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setStatsOpen(true)}
-              title="Your Stats"
-              aria-label="Your Stats"
-              className="size-7 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer"
-            >
-              <Trophy className="size-3.5 text-amber-400" />
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="icon"
               onClick={() => setHelpOpen(true)}
               title="How to Play"
               aria-label="How to Play"
@@ -236,13 +214,11 @@ export function Header() {
           open={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
           pathname={pathname}
-          onOpenStats={() => setStatsOpen(true)}
           onOpenHelp={() => setHelpOpen(true)}
         />
       </header>
 
       {/* Modals */}
-      <StatsDialog open={statsOpen} onOpenChange={setStatsOpen} />
       <HelpDialog open={helpOpen} onOpenChange={setHelpOpen} />
     </>
   );

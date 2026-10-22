@@ -9,7 +9,6 @@ import { HowItWorksSection } from "@/components/Landing/HowItWorksSection";
 import { GameModesSection } from "@/components/Landing/GameModesSection";
 import { DifficultyMatrixSection } from "@/components/Landing/DifficultyMatrixSection";
 import { FAQSection } from "@/components/Landing/FAQSection";
-import { CTABanner } from "@/components/Landing/CTABanner";
 
 export default function HomePage() {
   return (
@@ -23,7 +22,6 @@ export default function HomePage() {
         <GameModesSection />
         <DifficultyMatrixSection />
         <FAQSection />
-        <CTABanner />
       </main>
 
       <Footer />

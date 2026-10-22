@@ -149,7 +149,6 @@ export function generateShareText(
   dayIndex: number | string,
   guesses: GuessResult[],
   won: boolean,
-  streak: number,
   modeName = "Borderline",
   maxGuesses = 6,
 ): string {
@@ -163,6 +162,6 @@ export function generateShareText(
     return `${squares} ${g.distanceKm.toLocaleString()} km ${g.directionEmoji}`;
   });
 
-  const footer = `\nStreak: ${streak} 🔥\nPlay at borderline.game`;
+  const footer = `\nPlay at borderline.game`;
   return `${header}${rows.join("\n")}${footer}`;
 }

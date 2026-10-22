@@ -43,7 +43,7 @@ export function HeroSection() {
             className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white font-semibold text-sm sm:text-base px-5 py-3 sm:py-2.5 h-auto rounded-xl gap-2 border-white/10"
           >
             <Globe2 className="size-4 text-sky-400" />
-            <span>Play World 🌍</span>
+            <span>Play World</span>
           </Button>
         </Link>
       </div>

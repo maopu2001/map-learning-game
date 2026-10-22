@@ -2,6 +2,7 @@
 
 import React, { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 
 interface HintCardProps {
   icon: ReactNode;
@@ -64,8 +65,9 @@ export function HintCard({
           Reveal
         </Button>
       ) : isUnlocked ? (
-        <div className="text-2xs text-emerald-400 font-medium mt-2">
-          ✓ Unlocked
+        <div className="text-2xs text-emerald-400 font-medium mt-2 flex items-center justify-center gap-1">
+          <Check className="size-3 text-emerald-400 stroke-[3]" />
+          <span>Unlocked</span>
         </div>
       ) : (
         <span className="text-2xs text-slate-500 mt-2 text-center">

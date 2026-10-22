@@ -9,6 +9,7 @@ import { GameIntelPanel } from "@/components/Controls/GameIntelPanel";
 import { GameOverModal } from "@/components/Dialogs/GameOverModal";
 import { useGameStore, getMaxGuesses } from "@/lib/store";
 import { Map, Crosshair, ArrowRight } from "lucide-react";
+import { DirectionIcon } from "@/components/ui/direction-icon";
 
 const WorldMap = dynamic(
   () => import("@/components/Map/WorldMap").then((mod) => mod.WorldMap),
@@ -43,15 +44,13 @@ export default function WorldPage() {
 
   useEffect(() => {
     initRouteScope("world");
-  }, [initRouteScope]);
-
-  // Open briefing automatically when starting fresh
-  useEffect(() => {
-    if (guesses.length === 0 && unlockedHints === 0) {
+    const state = useGameStore.getState();
+    const isDailyDone = state.mode === "daily" && state.gameStatus !== "playing";
+    const isFresh = state.guesses.length === 0 && state.unlockedHints === 0;
+    if (isFresh || isDailyDone) {
       setBriefingOpen(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initRouteScope]);
 
   // Blitz ticker
   useEffect(() => {
@@ -129,8 +128,13 @@ export default function WorldPage() {
                 <div>
                   <div className="font-bold text-white flex items-center gap-1.5">
                     <span>{lastGuess.country.name}</span>
-                    <span className="font-mono text-sky-300">
-                      {lastGuess.distanceKm.toLocaleString()} km {lastGuess.directionEmoji}
+                    <span className="font-mono text-sky-300 flex items-center gap-1">
+                      <span>{lastGuess.distanceKm.toLocaleString()} km</span>
+                      <DirectionIcon
+                        direction={lastGuess.direction}
+                        isCorrect={lastGuess.isCorrect}
+                        className="size-3 text-sky-400 inline"
+                      />
                     </span>
                   </div>
                   <span className="text-2xs text-slate-400 font-mono">

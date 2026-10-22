@@ -4,6 +4,7 @@ import React from "react";
 import { DistrictData } from "@/data/bangladesh";
 import { GuessResult, GameStatus, GameDifficulty, GameMode } from "@/lib/store";
 import { Target, ShieldCheck, ShieldAlert, X } from "lucide-react";
+import { DirectionIcon } from "@/components/ui/direction-icon";
 
 interface DistrictReconSheetProps {
   mode?: GameMode;
@@ -138,8 +139,13 @@ export function DistrictReconSheet({
                   {guessedInfo?.distanceKm} km
                 </strong>
               </span>
-              <span className="font-mono text-xs text-sky-300">
-                {guessedInfo?.directionEmoji} {guessedInfo?.direction}
+              <span className="font-mono text-xs text-sky-300 flex items-center gap-1">
+                <DirectionIcon
+                  direction={guessedInfo?.direction}
+                  isCorrect={guessedInfo?.isCorrect}
+                  className="size-3.5 inline text-sky-400"
+                />
+                <span>{guessedInfo?.direction}</span>
               </span>
             </div>
           )}

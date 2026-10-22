@@ -11,7 +11,8 @@ import {
 import { COUNTRIES, CountryData } from "@/data/world";
 import { BANGLADESH_DISTRICTS, DistrictData } from "@/data/bangladesh";
 import { useGameStore } from "@/lib/store";
-import { Globe, ArrowRight, CornerDownLeft } from "lucide-react";
+import { Globe, ArrowRight, CornerDownLeft, Trophy, XCircle, Eye } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useCommandK } from "@/hooks/useCommandK";
 
 export function GuessInput() {
@@ -94,7 +95,40 @@ export function GuessInput() {
     }
   };
 
+  const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
+
   if (gameStatus !== "playing") {
+    if (mode === "daily") {
+      const isWon = gameStatus === "won";
+      return (
+        <div className="w-full p-2.5 sm:p-3 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between gap-2 shadow-lg">
+          <div className="flex items-center gap-2 min-w-0">
+            {isWon ? (
+              <Trophy className="size-4 sm:size-5 text-amber-400 shrink-0" />
+            ) : (
+              <XCircle className="size-4 sm:size-5 text-rose-500 shrink-0" />
+            )}
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-white truncate">
+                {isWon ? "Daily Puzzle Solved!" : "Daily Puzzle Completed"}
+              </p>
+              <p className="text-2xs text-slate-400 font-mono">
+                1 play per day • {guesses.length} guesses
+              </p>
+            </div>
+          </div>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setGameOverOpen(true)}
+            className="h-7 text-xs px-2.5 border-white/10 bg-white/5 hover:bg-white/10 text-sky-400 hover:text-sky-300 rounded-xl flex items-center gap-1 cursor-pointer shrink-0"
+          >
+            <Eye className="size-3" />
+            <span>Result</span>
+          </Button>
+        </div>
+      );
+    }
     return null;
   }
 

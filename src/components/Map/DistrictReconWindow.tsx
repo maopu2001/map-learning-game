@@ -4,6 +4,7 @@ import React from "react";
 import { DistrictData } from "@/data/bangladesh";
 import { GuessResult, GameStatus, GameDifficulty, GameMode } from "@/lib/store";
 import { Target, ShieldCheck, ShieldAlert } from "lucide-react";
+import { DirectionIcon } from "@/components/ui/direction-icon";
 
 interface DistrictReconWindowProps {
   mode?: GameMode;
@@ -145,9 +146,13 @@ export function DistrictReconWindow({
                           {guessedDistrictsMap.get(nameKey)?.distanceKm} km
                         </strong>
                       </span>
-                      <span className="font-mono text-xs text-sky-300">
-                        {guessedDistrictsMap.get(nameKey)?.directionEmoji}{" "}
-                        {guessedDistrictsMap.get(nameKey)?.direction}
+                      <span className="font-mono text-xs text-sky-300 flex items-center gap-1">
+                        <DirectionIcon
+                          direction={guessedDistrictsMap.get(nameKey)?.direction}
+                          isCorrect={guessedDistrictsMap.get(nameKey)?.isCorrect}
+                          className="size-3.5 inline text-sky-400"
+                        />
+                        <span>{guessedDistrictsMap.get(nameKey)?.direction}</span>
                       </span>
                     </div>
                   )}
@@ -179,9 +184,15 @@ export function DistrictReconWindow({
           {lastGuess ? (
             <div className="text-xs flex items-center justify-between">
               <span className="text-slate-400">Last:</span>
-              <span className="font-semibold text-white">
-                {lastGuess.country.name} ({lastGuess.distanceKm}km{" "}
-                {lastGuess.directionEmoji})
+              <span className="font-semibold text-white flex items-center gap-1">
+                <span>{lastGuess.country.name}</span>
+                <span className="text-slate-400">({lastGuess.distanceKm}km</span>
+                <DirectionIcon
+                  direction={lastGuess.direction}
+                  isCorrect={lastGuess.isCorrect}
+                  className="size-3 inline text-sky-400"
+                />
+                <span className="text-slate-400">)</span>
               </span>
             </div>
           ) : (

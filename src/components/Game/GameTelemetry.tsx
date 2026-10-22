@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import { Timer, FileText } from "lucide-react";
+import { Timer } from "lucide-react";
 import { GameMode } from "@/lib/store";
-import { Badge } from "../ui/badge";
 
 interface GameTelemetryProps {
   mode: GameMode;

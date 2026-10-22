@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Globe2, BookOpen, CheckCircle2, ArrowRight } from "lucide-react";
+import { Globe2, BookOpen, CheckCircle2, ArrowRight, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -150,7 +150,8 @@ export function GameModesSection() {
             </Link>
             <Link href="/explore/world" className="block w-full">
               <Button className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs py-2 rounded-xl gap-1.5 shadow-lg shadow-purple-950/40">
-                <span>🌍 World</span>
+                <Globe className="size-3.5 text-white" />
+                <span>World</span>
                 <ArrowRight className="size-3" />
               </Button>
             </Link>
