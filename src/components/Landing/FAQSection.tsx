@@ -8,8 +8,8 @@ export function FAQSection() {
 
   const faqs = [
     {
-      q: "How do clues work without a compass in Hard Mode?",
-      a: "In Hard Mode, the directional arrow is disabled, so you work with distance alone. Your first guess gives you a distance circle. A second guess creates another circle that narrows down the possibilities to two intersections, and a third guess pinpoints the target location.",
+      q: "How does Hard Mode work?",
+      a: "Hard Mode gives you only 5 guesses instead of 6, and keeps map territories locked from inspection until guessed or revealed through hints. Every guess gives you precise distance and compass direction to the target.",
     },
     {
       q: "Are the Bangladesh district boundaries accurate?",

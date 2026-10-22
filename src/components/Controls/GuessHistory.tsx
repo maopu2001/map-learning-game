@@ -16,7 +16,6 @@ export function GuessHistory() {
 
   const isBD = scope === "bangladesh";
   const maxGuesses = getMaxGuesses(difficulty);
-  const showDirection = difficulty !== "hard";
 
   if (guesses.length === 0) {
     return (
@@ -27,18 +26,9 @@ export function GuessHistory() {
         </p>
         <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
           {isBD
-            ? `Type any Bangladesh district above to see distance${
-                showDirection ? " and compass direction" : ""
-              } to the secret district.`
-            : `Type any country above to see distance${
-                showDirection ? " and compass direction" : ""
-              } to the secret country.`}
+            ? "Type any Bangladesh district above to see distance and compass direction to the secret district."
+            : "Type any country above to see distance and compass direction to the secret country."}
         </p>
-        {difficulty === "hard" && (
-          <p className="text-xs text-rose-400 mt-2 font-mono bg-rose-950/30 border border-rose-500/20 py-1 px-2.5 rounded-lg inline-block">
-            Hard Mode: Compass arrow is disabled — follow distance alone!
-          </p>
-        )}
       </div>
     );
   }
@@ -124,18 +114,12 @@ export function GuessHistory() {
                         {g.isCorrect
                           ? "0 km"
                           : `${g.distanceKm.toLocaleString()} km`}
-                        {showDirection ? (
-                          <span className="text-sm sm:text-base">{g.directionEmoji}</span>
-                        ) : (
-                          <span className="text-xs text-slate-500">📏</span>
-                        )}
+                        <span className="text-sm sm:text-base">{g.directionEmoji}</span>
                       </span>
                       <span className="text-3xs sm:text-2xs text-slate-400 font-mono">
                         {g.isCorrect
                           ? "Correct!"
-                          : showDirection
-                            ? `${g.bearing}° ${g.direction}`
-                            : "Distance only"}
+                          : `${g.bearing}° ${g.direction}`}
                       </span>
                     </div>
                   </div>

@@ -80,7 +80,7 @@ export function HelpDialog({ open, onOpenChange }: HelpDialogProps) {
               <div className="p-2.5 rounded-xl bg-black/50 border border-rose-500/20">
                 <strong className="text-rose-400">🔴 Hard (5 Guesses)</strong>
                 <p className="text-slate-400 mt-1">
-                  Distance only! Compass arrow is disabled. 5 guesses max.
+                  5 guesses max. Territories locked from map inspection. High stakes!
                 </p>
               </div>
             </div>

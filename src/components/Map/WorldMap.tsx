@@ -23,7 +23,11 @@ import { MapLegend } from "@/components/Map/MapLegend";
 
 const GEO_URL = "/data/world-countries-geo-50m.json";
 
-export function WorldMap() {
+interface WorldMapProps {
+  className?: string;
+}
+
+export function WorldMap({ className }: WorldMapProps = {}) {
   const targetCountry = useGameStore((s) => s.targetCountry);
   const guesses = useGameStore((s) => s.guesses);
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -190,7 +194,10 @@ export function WorldMap() {
     <div
       ref={mapContainerRef}
       onMouseLeave={() => setInspectedCountry(null)}
-      className="relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-80px)] min-h-90 sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+      className={
+        className ||
+        "relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-80px)] min-h-90 sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+      }
     >
       {/* Background Grid */}
       <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />

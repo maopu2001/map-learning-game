@@ -89,9 +89,9 @@ export function DifficultySelector({
             ? "8 guesses. Division revealed upfront + full inspection."
             : "8 guesses. Continent revealed upfront + full inspection.")}
         {selectedDifficulty === "normal" &&
-          "6 guesses. Standard game with compass direction hints."}
+          "6 guesses. Standard game with unrevealed map areas."}
         {selectedDifficulty === "hard" &&
-          "5 guesses. Distance clues only (no compass arrow)."}
+          "5 guesses. Map inspection locked until guessed. High stakes!"}
       </p>
     </div>
   );

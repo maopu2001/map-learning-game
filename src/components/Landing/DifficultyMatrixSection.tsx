@@ -38,7 +38,7 @@ export function DifficultyMatrixSection() {
             🔴 Hard (5 Guesses)
           </div>
           <p className="text-slate-400 leading-relaxed">
-            Compass disabled! Distance clues only. A true test for geography lovers.
+            5 guesses max. Territories locked from map inspection until guessed or revealed. High stakes!
           </p>
         </div>
       </div>
