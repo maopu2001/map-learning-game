@@ -42,7 +42,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-2 sm:top-2.5 z-40 w-full px-2 sm:px-3 pointer-events-none">
+      <header className="sticky top-2 sm:top-2.5 z-50 w-full px-2 sm:px-3 pointer-events-none">
         <div className="w-full pointer-events-auto rounded-2xl border border-white/10 bg-[#070a12]/90 backdrop-blur-2xl px-3 sm:px-4 py-2 shadow-2xl shadow-black/80 flex items-center justify-between gap-2.5">
           {/* Brand + Mobile Toggle */}
           <div className="flex items-center justify-between w-full md:w-auto gap-3">
@@ -243,7 +243,7 @@ export function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden pointer-events-auto mt-2 w-full rounded-2xl border border-white/10 bg-[#070a12]/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3 animate-in fade-in zoom-in-95">
+          <div className="md:hidden absolute top-14 left-2 right-2 z-50 pointer-events-auto mt-2 rounded-2xl border border-white/10 bg-[#070a12]/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3 animate-in fade-in zoom-in-95">
             {/* Section 1: Home */}
             <Link
               href="/"
@@ -352,6 +352,28 @@ export function Header() {
           </div>
         )}
       </header>
+
+      {/* Mobile Menu Backdrop (click outside to dismiss, intercepts underlying touches) */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-xs md:hidden pointer-events-auto transition-opacity animate-in fade-in duration-150 select-none touch-none"
+          onTouchStart={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMobileMenuOpen(false);
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMobileMenuOpen(false);
+          }}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Career Record Modal */}
       <Dialog open={statsOpen} onOpenChange={setStatsOpen}>

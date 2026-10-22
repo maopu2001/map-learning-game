@@ -13,7 +13,6 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  MapPin,
   Target,
   ShieldCheck,
   ShieldAlert,
@@ -201,20 +200,8 @@ export function BangladeshMap() {
         </Button>
       </div>
 
-      {/* Scope Badge & Target Highlight Pill (Top Left) */}
-      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex flex-col gap-1 sm:gap-1.5 pointer-events-none">
-        <div className="flex items-center gap-1.5 sm:gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-2xs sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md">
-          <MapPin className="size-3 sm:size-3.5 text-emerald-400 shrink-0" />
-          <span>Bangladesh • 64 Districts</span>
-        </div>
-        <div className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-2xs sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full backdrop-blur-md">
-          <span className="size-1.5 sm:size-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-          <span>Target Border Highlighted</span>
-        </div>
-      </div>
-
       {/* Desktop Floating Reconnaissance Window (Hidden on mobile to preserve touch map area) */}
-      <div className="hidden md:block absolute top-4 right-16 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
+      <div className="hidden md:block absolute top-4 left-4 z-20 w-64 max-w-xs rounded-xl border border-slate-700/80 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-md text-xs text-slate-200 space-y-2">
         {difficulty === "hard" &&
         (!inspectedDistrict ||
           (!activeNeighbors.includes(inspectedDistrict.name) &&
@@ -227,7 +214,8 @@ export function BangladeshMap() {
               <span className="text-2xs text-slate-400">Map Hidden</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Districts stay hidden on hover or click. Unlock Hints to reveal neighboring districts!
+              Districts stay hidden on hover or click. Unlock Hints to reveal
+              neighboring districts!
             </p>
             {lastGuess && (
               <div className="text-xs flex items-center justify-between pt-1 border-t border-slate-800">
@@ -252,7 +240,8 @@ export function BangladeshMap() {
                   </span>
                 </div>
                 <div className="text-xs text-slate-300 leading-relaxed">
-                  Amber outline. Follow your distance clues to guess this mystery district!
+                  Amber outline. Follow your distance clues to guess this
+                  mystery district!
                 </div>
                 {targetDistrict && (
                   <div className="text-2xs text-emerald-400 font-semibold pt-1 border-t border-slate-800">
@@ -276,9 +265,7 @@ export function BangladeshMap() {
                   <span className="font-semibold text-slate-400">
                     Unrevealed District
                   </span>
-                  <span className="text-2xs text-slate-500">
-                    Normal Mode
-                  </span>
+                  <span className="text-2xs text-slate-500">Normal Mode</span>
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Only guessed districts and revealed neighbors show details.
@@ -354,7 +341,9 @@ export function BangladeshMap() {
               <span className="text-slate-400 font-medium flex items-center gap-1">
                 <Target className="size-3 text-amber-400" /> Secret Target
               </span>
-              <span className="text-amber-400 font-semibold">Amber outline</span>
+              <span className="text-amber-400 font-semibold">
+                Amber outline
+              </span>
             </div>
 
             {lastGuess ? (
@@ -374,9 +363,7 @@ export function BangladeshMap() {
             {/* Helper status */}
             <div className="text-2xs text-slate-500 pt-1 border-t border-slate-800/80 flex items-center justify-between">
               <span>Map Mode:</span>
-              <span className="text-slate-400">
-                Clean map (dots only)
-              </span>
+              <span className="text-slate-400">Clean map (dots only)</span>
             </div>
           </div>
         )}
@@ -450,7 +437,8 @@ export function BangladeshMap() {
               return (
                 <>
                   {geographies.map((geo) => {
-                    const districtName = (geo.properties?.shapeName as string) || "";
+                    const districtName =
+                      (geo.properties?.shapeName as string) || "";
                     if (!districtName) return null;
                     const districtData = DISTRICTS_BY_NAME.get(
                       districtName.toLowerCase(),
@@ -712,19 +700,31 @@ export function BangladeshMap() {
 
           {isTargetInspected && gameStatus === "playing" ? (
             <p className="text-xs text-amber-300 leading-snug">
-              Amber outline. Follow your distance and direction clues to find this district!
+              Amber outline. Follow your distance and direction clues to find
+              this district!
             </p>
           ) : guessedDistrictsMap.has(inspectedDistrict.name.toLowerCase()) ? (
             <div className="flex items-center justify-between text-xs pt-0.5">
               <span>
                 Distance:{" "}
                 <strong className="text-amber-400">
-                  {guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())?.distanceKm} km
+                  {
+                    guessedDistrictsMap.get(
+                      inspectedDistrict.name.toLowerCase(),
+                    )?.distanceKm
+                  }{" "}
+                  km
                 </strong>
               </span>
               <span className="font-mono text-xs text-sky-300">
-                {guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())?.directionEmoji}{" "}
-                {guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())?.direction}
+                {
+                  guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())
+                    ?.directionEmoji
+                }{" "}
+                {
+                  guessedDistrictsMap.get(inspectedDistrict.name.toLowerCase())
+                    ?.direction
+                }
               </span>
             </div>
           ) : activeNeighbors.includes(inspectedDistrict.name) ? (

@@ -15,7 +15,7 @@ import {
   Flame,
   Timer,
   Play,
-  Crosshair,
+  SlidersHorizontal,
   AlertTriangle,
 } from "lucide-react";
 
@@ -45,7 +45,7 @@ export function MissionBriefingModal({
   const isMidGame =
     gameStatus === "playing" && (guesses.length > 0 || unlockedHints > 0);
 
-  const handleDeploy = () => {
+  const handleStartGame = () => {
     forfeitAndSwitch({
       mode: selectedMode,
       difficulty: selectedDifficulty,
@@ -56,196 +56,206 @@ export function MissionBriefingModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl bg-[#090d18] border border-white/10 text-white rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-2xl max-h-[90dvh] overflow-y-auto">
-        <DialogHeader className="space-y-1 text-left">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-md bg-[#090d18] border border-white/10 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl backdrop-blur-2xl">
+        <DialogHeader className="space-y-0.5 text-left">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400">
-              <Crosshair className="size-4" />
+            <span className="p-1 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400">
+              <SlidersHorizontal className="size-3.5" />
             </span>
-            <DialogTitle className="text-lg font-black tracking-wide text-white uppercase">
+            <DialogTitle className="text-base sm:text-lg font-bold tracking-tight text-white">
               Game Settings
             </DialogTitle>
           </div>
-          <DialogDescription className="text-xs text-slate-400">
-            {isBD
-              ? "Playing: Bangladesh (64 Districts)"
-              : "Playing: World (195 Countries)"}
+          <DialogDescription className="text-2xs sm:text-xs text-slate-400">
+            {isBD ? "Bangladesh • 64 Districts" : "World • 195 Countries"}
           </DialogDescription>
         </DialogHeader>
 
         {isMidGame && (
-          <div className="flex flex-col gap-2 p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs">
-            <div className="flex justify-center gap-2 rounded-xl ">
-              <AlertTriangle className="size-4 shrink-0" />
-              <span>Starting a new game will forfeit your active round.</span>
+          <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <AlertTriangle className="size-3.5 shrink-0 text-amber-400" />
+              <span className="truncate text-2xs sm:text-xs">
+                Forfeits current round
+              </span>
             </div>
-            <div className="grid grid-cols-2 gap-2 place-items-center text-amber-400">
-              <span className="border p-1 w-full flex justify-center border-amber-500/20 rounded-lg">
-                Guesses: {guesses.length}
-              </span>
-              <span className="border p-1 w-full flex justify-center border-amber-500/20 rounded-lg">
-                Hints: {unlockedHints}
-              </span>
+            <div className="flex items-center gap-1.5 text-2xs text-amber-300/80 font-mono shrink-0">
+              <span>{guesses.length} {guesses.length === 1 ? "guess" : "guesses"}</span>
+              <span>•</span>
+              <span>{unlockedHints} {unlockedHints === 1 ? "hint" : "hints"}</span>
             </div>
           </div>
         )}
 
-        <div className="space-y-4 my-2">
-          {/* Step 1: Mode Select */}
-          <div className="space-y-2">
-            <label className="text-2xs font-mono font-bold uppercase tracking-wider text-slate-400">
-              1. Select Game Mode
+        <div className="space-y-3">
+          {/* Mode Selector */}
+          <div className="space-y-2 bg-accent/50 px-4 py-2 rounded-2xl">
+            <label className="text-2xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+              Game Mode
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-1">
               {/* Daily */}
               <button
                 type="button"
                 onClick={() => setSelectedMode("daily")}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
                   selectedMode === "daily"
-                    ? "bg-sky-600/20 border-sky-500 text-white shadow-lg shadow-sky-950/50"
-                    : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    ? "bg-sky-500/15 border-sky-500 text-white shadow-sm ring-1 ring-sky-500/50"
+                    : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex gap-2 items-center font-bold text-xs text-white">
-                  <Calendar className="flex size-4 text-sky-400" />
-                  Daily Puzzle
-                </div>
-                <div className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-                  One new puzzle every day for everyone worldwide.
-                </div>
+                <Calendar
+                  className={`size-3.5 sm:size-4 ${
+                    selectedMode === "daily" ? "text-sky-400" : "text-slate-400"
+                  }`}
+                />
+                <span className="font-semibold text-xs leading-none">Daily</span>
               </button>
 
               {/* Streak */}
               <button
                 type="button"
                 onClick={() => setSelectedMode("streak")}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
                   selectedMode === "streak"
-                    ? "bg-amber-600/20 border-amber-500 text-white shadow-lg shadow-amber-950/50"
-                    : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    ? "bg-amber-500/15 border-amber-500 text-white shadow-sm ring-1 ring-amber-500/50"
+                    : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex gap-2 items-center font-bold text-xs text-white">
-                  <Flame className="size-4 text-amber-400" />
+                <Flame
+                  className={`size-3.5 sm:size-4 ${
+                    selectedMode === "streak" ? "text-amber-400" : "text-slate-400"
+                  }`}
+                />
+                <span className="font-semibold text-xs leading-none">
                   {isBD ? "Hop Streak" : "Border Streak"}
-                </div>
-                <div className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-                  Keep guessing correctly to build your longest streak.
-                </div>
+                </span>
               </button>
 
               {/* Blitz */}
               <button
                 type="button"
                 onClick={() => setSelectedMode("blitz")}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
                   selectedMode === "blitz"
-                    ? "bg-rose-600/20 border-rose-500 text-white shadow-lg shadow-rose-950/50"
-                    : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    ? "bg-rose-500/15 border-rose-500 text-white shadow-sm ring-1 ring-rose-500/50"
+                    : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex gap-2 items-center font-bold text-xs text-white">
-                  <Timer className="size-4 text-rose-400" />
-                  Blitz 90s
-                </div>
-                <div className="text-2xs text-slate-400 mt-0.5 leading-relaxed">
-                  Race against the 90-second countdown clock.
-                </div>
+                <Timer
+                  className={`size-3.5 sm:size-4 ${
+                    selectedMode === "blitz" ? "text-rose-400" : "text-slate-400"
+                  }`}
+                />
+                <span className="font-semibold text-xs leading-none">Blitz 90s</span>
               </button>
             </div>
+            <p className="text-xs text-slate-400 text-center leading-tight min-h-5">
+              {selectedMode === "daily" &&
+                "One daily puzzle shared worldwide."}
+              {selectedMode === "streak" &&
+                (isBD
+                  ? "Guess districts consecutively to build your streak."
+                  : "Guess neighboring countries to build your streak.")}
+              {selectedMode === "blitz" &&
+                "Find the target location before the 90s timer runs out."}
+            </p>
           </div>
 
-          {/* Step 2: Difficulty Select */}
-          <div className="space-y-2">
-            <label className="text-2xs font-mono font-bold uppercase tracking-wider text-slate-400">
-              2. Select Difficulty
+          {/* Difficulty Selector */}
+          <div className="space-y-1.5 bg-accent/50 px-4 py-2 rounded-2xl">
+            <label className="text-2xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+              Difficulty
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-1">
               {/* Easy */}
               <button
                 type="button"
                 onClick={() => setSelectedDifficulty("easy")}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1.5 ${
+                className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
                   selectedDifficulty === "easy"
-                    ? "bg-emerald-600/20 border-emerald-500 text-white shadow-lg shadow-emerald-950/50"
-                    : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    ? "bg-emerald-500/15 border-emerald-500 text-white shadow-sm ring-1 ring-emerald-500/50"
+                    : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-emerald-400">
-                    🟢 Easy
-                  </span>
-                  <span className="text-2xs font-mono text-emerald-300">
-                    8 Guesses
+                <div className="flex items-center gap-1">
+                  <span className="size-1.5 rounded-full bg-emerald-400" />
+                  <span className="font-semibold text-xs text-emerald-300 leading-none">
+                    Easy
                   </span>
                 </div>
-                <div className="text-2xs text-slate-400 leading-relaxed">
-                  Full map inspection. Division or continent revealed upfront.
-                </div>
+                <span className="text-2xs text-slate-400 font-mono leading-none">
+                  8 guesses
+                </span>
               </button>
 
               {/* Normal */}
               <button
                 type="button"
                 onClick={() => setSelectedDifficulty("normal")}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1.5 ${
+                className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
                   selectedDifficulty === "normal"
-                    ? "bg-amber-600/20 border-amber-500 text-white shadow-lg shadow-amber-950/50"
-                    : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    ? "bg-amber-500/15 border-amber-500 text-white shadow-sm ring-1 ring-amber-500/50"
+                    : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-amber-400">
-                    🟡 Normal
-                  </span>
-                  <span className="text-2xs font-mono text-amber-300">
-                    6 Guesses
+                <div className="flex items-center gap-1">
+                  <span className="size-1.5 rounded-full bg-amber-400" />
+                  <span className="font-semibold text-xs text-amber-300 leading-none">
+                    Normal
                   </span>
                 </div>
-                <div className="text-2xs text-slate-400 leading-relaxed">
-                  Standard game. Compass arrow shows direction.
-                </div>
+                <span className="text-2xs text-slate-400 font-mono leading-none">
+                  6 guesses
+                </span>
               </button>
 
               {/* Hard */}
               <button
                 type="button"
                 onClick={() => setSelectedDifficulty("hard")}
-                className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1.5 ${
+                className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
                   selectedDifficulty === "hard"
-                    ? "bg-rose-600/20 border-rose-500 text-white shadow-lg shadow-rose-950/50"
-                    : "bg-black/40 border-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200"
+                    ? "bg-rose-500/15 border-rose-500 text-white shadow-sm ring-1 ring-rose-500/50"
+                    : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-rose-400">
-                    🔴 Hard
-                  </span>
-                  <span className="text-2xs font-mono text-rose-300">
-                    5 Guesses
+                <div className="flex items-center gap-1">
+                  <span className="size-1.5 rounded-full bg-rose-400" />
+                  <span className="font-semibold text-xs text-rose-300 leading-none">
+                    Hard
                   </span>
                 </div>
-                <div className="text-2xs text-slate-400 leading-relaxed">
-                  Distance clues only (no compass arrow). 5 guesses max.
-                </div>
+                <span className="text-2xs text-slate-400 font-mono leading-none">
+                  5 guesses
+                </span>
               </button>
             </div>
+            <p className="text-xs text-slate-400 text-center leading-tight min-h-5">
+              {selectedDifficulty === "easy" &&
+                (isBD
+                  ? "8 guesses. Division revealed upfront + full inspection."
+                  : "8 guesses. Continent revealed upfront + full inspection.")}
+              {selectedDifficulty === "normal" &&
+                "6 guesses. Standard game with compass direction hints."}
+              {selectedDifficulty === "hard" &&
+                "5 guesses. Distance clues only (no compass arrow)."}
+            </p>
           </div>
         </div>
 
-        {/* Deploy Action */}
-        <div className="pt-2">
+        {/* Start Button */}
+        <div className="pt-1">
           <Button
-            onClick={handleDeploy}
-            className={`w-full h-11 rounded-2xl font-bold text-sm tracking-wide gap-2 shadow-xl cursor-pointer ${
+            onClick={handleStartGame}
+            className={`w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer ${
               isBD
                 ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/60"
                 : "bg-sky-600 hover:bg-sky-500 text-white shadow-sky-950/60"
             }`}
           >
-            <Play className="size-4 fill-white" />
-            <span>START GAME</span>
+            <Play className="size-3.5 fill-white" />
+            <span>{isMidGame ? "START NEW ROUND" : "PLAY NOW"}</span>
           </Button>
         </div>
       </DialogContent>
