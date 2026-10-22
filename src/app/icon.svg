@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="ring-grad" x1="100" y1="100" x2="412" y2="412" gradientUnits="userSpaceOnUse">
+      <stop class="ring-stop-1" stop-color="#38bdf8"/>
+      <stop class="ring-stop-2" offset="1" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <style>
+    /* Dark Mode (Default) */
+    .bg { fill: #080c16; stroke: #1e293b; stroke-width: 4px; }
+    .ring-stop-1 { stop-color: #38bdf8; }
+    .ring-stop-2 { stop-color: #10b981; }
+    .needle-n1 { fill: #38bdf8; }
+    .needle-n2 { fill: #0284c7; }
+    .needle-s1 { fill: #475569; }
+    .needle-s2 { fill: #64748b; }
+    .core-bg { fill: #080c16; stroke: #38bdf8; }
+    .core-dot { fill: #10b981; }
+
+    /* Light Mode */
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #f8fafc; stroke: #cbd5e1; }
+      .ring-stop-1 { stop-color: #0284c7; }
+      .ring-stop-2 { stop-color: #059669; }
+      .needle-n1 { fill: #0284c7; }
+      .needle-n2 { fill: #0369a1; }
+      .needle-s1 { fill: #64748b; }
+      .needle-s2 { fill: #94a3b8; }
+      .core-bg { fill: #f8fafc; stroke: #0284c7; }
+      .core-dot { fill: #059669; }
+    }
+  </style>
+  <rect width="512" height="512" rx="120" class="bg"/>
+  <circle cx="256" cy="256" r="156" stroke="url(#ring-grad)" stroke-width="22"/>
+  <polygon points="256,80 256,224 172,256" class="needle-n1"/>
+  <polygon points="256,80 340,256 256,224" class="needle-n2"/>
+  <polygon points="256,432 172,256 256,288" class="needle-s1"/>
+  <polygon points="256,432 256,288 340,256" class="needle-s2"/>
+  <circle cx="256" cy="256" r="28" stroke-width="6" class="core-bg"/>
+  <circle cx="256" cy="256" r="12" class="core-dot"/>
+</svg>

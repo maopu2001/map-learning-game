@@ -181,7 +181,7 @@ export function generateShareText(
   dayIndex: number | string,
   guesses: GuessResult[],
   won: boolean,
-  modeName = "Borderline",
+  modeName = "Shimana",
   maxGuesses = 6,
 ): string {
   const countStr = won ? `${guesses.length}/${maxGuesses}` : `X/${maxGuesses}`;
@@ -194,6 +194,6 @@ export function generateShareText(
     return `${squares} ${g.distanceKm.toLocaleString()} km ${g.directionEmoji}`;
   });
 
-  const footer = `\nPlay at borderline.game`;
+  const footer = `\nPlay Shimana: https://shimana.maopu.com.bd`;
   return `${header}${rows.join("\n")}${footer}`;
 }

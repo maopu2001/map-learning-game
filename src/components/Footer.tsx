@@ -9,7 +9,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="space-y-0.5 text-center sm:text-left">
           <p className="font-normal text-slate-300">
-            Borderline © {year} · Interactive map guessing game for Bangladesh & the world
+            Shimana (সীমানা) © {year} · Interactive map guessing game for Bangladesh & the world
           </p>
           <p className="text-[11px] text-slate-500">
             Built for geography enthusiasts, learners & educators.

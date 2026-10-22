@@ -24,6 +24,336 @@ import { MapLegend } from "@/components/Map/MapLegend";
 
 const GEO_URL = "/data/world-countries-geo-50m.json";
 
+type GeoFeature = {
+  rsmKey: string;
+  id: string | number;
+  properties: Record<string, unknown>;
+  geometry: Record<string, unknown>;
+};
+
+interface CountryGeographyItemProps {
+  geo: GeoFeature;
+  country?: CountryData;
+  fill: string;
+  stroke: string;
+  hoverFill: string;
+  hoverStroke: string;
+  strokeWidth: number;
+  onSelect: (country: CountryData) => void;
+}
+
+const CountryGeographyItem = React.memo(function CountryGeographyItem({
+  geo,
+  country,
+  fill,
+  stroke,
+  hoverFill,
+  hoverStroke,
+  strokeWidth,
+  onSelect,
+}: CountryGeographyItemProps) {
+  const handleAction = React.useCallback(() => {
+    if (country) onSelect(country);
+  }, [country, onSelect]);
+
+  return (
+    <Geography
+      geography={geo}
+      onMouseEnter={handleAction}
+      onClick={handleAction}
+      style={{
+        default: {
+          fill,
+          stroke,
+          strokeWidth,
+          strokeLinejoin: "round",
+          strokeLinecap: "round",
+          vectorEffect: "non-scaling-stroke",
+          outline: "none",
+          transition: "fill 200ms ease, stroke 200ms ease",
+        },
+        hover: {
+          fill: hoverFill,
+          stroke: hoverStroke,
+          strokeWidth,
+          strokeLinejoin: "round",
+          strokeLinecap: "round",
+          vectorEffect: "non-scaling-stroke",
+          outline: "none",
+          cursor: "pointer",
+        },
+        pressed: {
+          fill: "#0f172a",
+          outline: "none",
+        },
+      }}
+    />
+  );
+});
+
+interface WorldGeographiesContentProps {
+  geographies: GeoFeature[];
+  strokeWidth: number;
+  isGameOver: boolean;
+  isTargetHidden: boolean;
+  targetCountry: CountryData | null;
+  activeNeighbors: string[];
+  guessedCountriesMap: Map<string, any>;
+  gameStatus: string;
+  mode: string;
+  difficulty: string;
+  inspectedCountry: CountryData | null;
+  onSelectCountry: (country: CountryData) => void;
+}
+
+function WorldGeographiesContent({
+  geographies,
+  strokeWidth,
+  isGameOver,
+  isTargetHidden,
+  targetCountry,
+  activeNeighbors,
+  guessedCountriesMap,
+  gameStatus,
+  mode,
+  difficulty,
+  inspectedCountry,
+  onSelectCountry,
+}: WorldGeographiesContentProps) {
+  const geoIndex = useMemo(() => {
+    const byIso = new Map<string, GeoFeature>();
+    const countryByGeo = new Map<GeoFeature, CountryData>();
+    for (const g of geographies) {
+      const gid = String(g.id);
+      const c =
+        COUNTRIES_BY_NUMERIC.get(gid) ||
+        COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10))) ||
+        (g.properties?.name
+          ? COUNTRIES_BY_NAME.get(String(g.properties.name).toLowerCase())
+          : undefined);
+      if (c) {
+        byIso.set(c.id, g);
+        countryByGeo.set(g, c);
+      }
+    }
+    return { byIso, countryByGeo };
+  }, [geographies]);
+
+  const targetGeo = targetCountry?.id
+    ? geoIndex.byIso.get(targetCountry.id) ?? null
+    : null;
+  const neighborGeos = useMemo(
+    () =>
+      activeNeighbors
+        .map((id) => geoIndex.byIso.get(id))
+        .filter((g): g is GeoFeature => Boolean(g)),
+    [activeNeighbors, geoIndex],
+  );
+  const inspectedGeo = inspectedCountry?.id
+    ? geoIndex.byIso.get(inspectedCountry.id) ?? null
+    : null;
+
+  return (
+    <>
+      {geographies.map((geo) => {
+        const country = geoIndex.countryByGeo.get(geo);
+        const isoId = country?.id;
+
+        const isTarget =
+          (!isTargetHidden || isGameOver) &&
+          Boolean(targetCountry?.id && isoId && isoId === targetCountry.id);
+        const isNeighbor = Boolean(
+          isoId && activeNeighbors.includes(isoId),
+        );
+        const guessResult = isoId
+          ? guessedCountriesMap.get(isoId)
+          : undefined;
+        const isGuessed = Boolean(guessResult);
+
+        let fill = "#131b2e";
+        let stroke = "#24324a";
+
+        if (isTarget) {
+          if (isGameOver) {
+            fill = gameStatus === "won" ? "#10b981" : "#f59e0b";
+            stroke = "#34d399";
+          } else {
+            fill = isGuessed
+              ? guessResult?.isCorrect
+                ? "#10b981"
+                : fill
+              : "#1a253a";
+            stroke = "#f59e0b";
+          }
+        } else if (isGuessed) {
+          if (guessResult?.isCorrect) {
+            fill = "#10b981";
+            stroke = "#34d399";
+          } else {
+            const dist = guessResult?.distanceKm ?? 99999;
+            if (dist < 1500) {
+              fill = "#c2410c";
+              stroke = "#fb923c";
+            } else if (dist < 4000) {
+              fill = "#6d28d9";
+              stroke = "#a78bfa";
+            } else {
+              fill = "#1e293b";
+              stroke = "#475569";
+            }
+          }
+        } else if (isNeighbor) {
+          fill = "#0369a1";
+          stroke = "#38bdf8";
+        }
+
+        const hoverFill = isGuessed ? fill : "#1e2c45";
+        const hoverStroke = isTarget
+          ? "#fbbf24"
+          : isNeighbor
+            ? "#38bdf8"
+            : "#94a3b8";
+
+        return (
+          <CountryGeographyItem
+            key={geo.rsmKey}
+            geo={geo}
+            country={country}
+            fill={fill}
+            stroke={stroke}
+            hoverFill={hoverFill}
+            hoverStroke={hoverStroke}
+            strokeWidth={strokeWidth}
+            onSelect={onSelectCountry}
+          />
+        );
+      })}
+
+      {/* OVERLAY 1: Neighbor hint countries - complete perimeter, opacity-controlled fill */}
+      {neighborGeos.map((geo) => (
+        <Geography
+          key={`overlay-neighbor-${geo.rsmKey}`}
+          geography={geo}
+          style={{
+            default: {
+              fill: "rgba(3, 105, 161, 0.22)",
+              stroke: "#38bdf8",
+              strokeWidth,
+              strokeLinejoin: "round",
+              strokeLinecap: "round",
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+            hover: {
+              fill: "rgba(3, 105, 161, 0.22)",
+              stroke: "#38bdf8",
+              strokeWidth,
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+          }}
+        />
+      ))}
+
+      {/* OVERLAY 2: Mystery Target - complete perimeter on top, opacity-controlled fill */}
+      {targetGeo && (!isTargetHidden || isGameOver) && (
+        <Geography
+          key={`overlay-target-${targetGeo.rsmKey}`}
+          geography={targetGeo}
+          style={{
+            default: {
+              fill:
+                isGameOver && gameStatus === "won"
+                  ? "rgba(16, 185, 129, 0.22)"
+                  : "rgba(245, 158, 11, 0.16)",
+              stroke:
+                isGameOver && gameStatus === "won"
+                  ? "#34d399"
+                  : "#f59e0b",
+              strokeWidth,
+              strokeLinejoin: "round",
+              strokeLinecap: "round",
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+            hover: {
+              fill:
+                isGameOver && gameStatus === "won"
+                  ? "rgba(16, 185, 129, 0.22)"
+                  : "rgba(245, 158, 11, 0.16)",
+              stroke:
+                isGameOver && gameStatus === "won"
+                  ? "#34d399"
+                  : "#f59e0b",
+              strokeWidth,
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+          }}
+        />
+      )}
+
+      {/* OVERLAY 3: Hovered/Inspected territory - full unbroken perimeter on top, translucent fill */}
+      {inspectedGeo &&
+        inspectedGeo !== targetGeo &&
+        (() => {
+          const gid = String(inspectedGeo.id);
+          const c =
+            COUNTRIES_BY_NUMERIC.get(gid) ||
+            COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10)));
+          const iso = c?.id;
+          const isNeighbor = Boolean(
+            iso && activeNeighbors.includes(iso),
+          );
+          const isGuessed = Boolean(
+            iso && guessedCountriesMap.has(iso),
+          );
+          const isInspectionAllowed =
+            isGameOver ||
+            (mode !== "detective" && difficulty === "easy") ||
+            isNeighbor ||
+            isGuessed;
+
+          const strokeColor = isNeighbor
+            ? "#38bdf8"
+            : isInspectionAllowed
+              ? "#60a5fa"
+              : "rgba(148, 163, 184, 0.7)";
+          const fillColor = isNeighbor
+            ? "rgba(3, 105, 161, 0.2)"
+            : isInspectionAllowed
+              ? "rgba(56, 189, 248, 0.16)"
+              : "rgba(255, 255, 255, 0.05)";
+
+          return (
+            <Geography
+              key={`overlay-inspected-${inspectedGeo.rsmKey}`}
+              geography={inspectedGeo}
+              style={{
+                default: {
+                  fill: fillColor,
+                  stroke: strokeColor,
+                  strokeWidth,
+                  strokeLinejoin: "round",
+                  strokeLinecap: "round",
+                  vectorEffect: "non-scaling-stroke",
+                  pointerEvents: "none",
+                },
+                hover: {
+                  fill: fillColor,
+                  stroke: strokeColor,
+                  strokeWidth,
+                  vectorEffect: "non-scaling-stroke",
+                  pointerEvents: "none",
+                },
+              }}
+            />
+          );
+        })()}
+    </>
+  );
+}
+
 interface WorldMapProps {
   className?: string;
 }
@@ -184,6 +514,10 @@ export function WorldMap({ className }: WorldMapProps = {}) {
     setPosition({ coordinates: [0, 20], zoom: 1 });
   };
 
+  const handleSelectCountry = React.useCallback((country: CountryData) => {
+    setInspectedCountry(country);
+  }, []);
+
   const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : null;
 
   const isTargetHidden = mode === "detective" && gameStatus === "playing";
@@ -252,267 +586,22 @@ export function WorldMap({ className }: WorldMapProps = {}) {
           minZoom={1}
         >
           <Geographies geography={GEO_URL}>
-            {({ geographies }) => {
-              const strokeWidth = 0.55;
-              const isGameOver = gameStatus !== "playing";
-
-              const getCountryFromGeo = (
-                g: (typeof geographies)[0],
-              ): CountryData | undefined => {
-                const gid = String(g.id);
-                return (
-                  COUNTRIES_BY_NUMERIC.get(gid) ||
-                  COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10))) ||
-                  (g.properties?.name
-                    ? COUNTRIES_BY_NAME.get(
-                        String(g.properties.name).toLowerCase(),
-                      )
-                    : undefined)
-                );
-              };
-
-              // Find highlighted geos to overlay on top so entire perimeter borders are complete and unbroken
-              const targetGeo = targetCountry
-                ? geographies.find(
-                    (g) => getCountryFromGeo(g)?.id === targetCountry.id,
-                  )
-                : null;
-
-              const neighborGeos = geographies.filter((g) => {
-                const c = getCountryFromGeo(g);
-                return Boolean(c?.id && activeNeighbors.includes(c.id));
-              });
-
-              const inspectedGeo = inspectedCountry
-                ? geographies.find(
-                    (g) => getCountryFromGeo(g)?.id === inspectedCountry.id,
-                  )
-                : null;
-
-              return (
-                <>
-                  {geographies.map((geo) => {
-                    const country = getCountryFromGeo(geo);
-                    const isoId = country?.id;
-
-                    const isTarget =
-                      (!isTargetHidden || isGameOver) &&
-                      Boolean(targetCountry?.id && isoId && isoId === targetCountry.id);
-                    const isNeighbor = Boolean(
-                      isoId && activeNeighbors.includes(isoId),
-                    );
-                    const guessResult = isoId
-                      ? guessedCountriesMap.get(isoId)
-                      : undefined;
-                    const isGuessed = Boolean(guessResult);
-
-                    let fill = "#131b2e";
-                    let stroke = "#24324a";
-
-                    if (isTarget) {
-                      if (isGameOver) {
-                        fill = gameStatus === "won" ? "#10b981" : "#f59e0b";
-                        stroke = "#34d399";
-                      } else {
-                        fill = isGuessed
-                          ? guessResult?.isCorrect
-                            ? "#10b981"
-                            : fill
-                          : "#1a253a";
-                        stroke = "#f59e0b";
-                      }
-                    } else if (isGuessed) {
-                      if (guessResult?.isCorrect) {
-                        fill = "#10b981";
-                        stroke = "#34d399";
-                      } else {
-                        const dist = guessResult?.distanceKm ?? 99999;
-                        if (dist < 1500) {
-                          fill = "#c2410c";
-                          stroke = "#fb923c";
-                        } else if (dist < 4000) {
-                          fill = "#6d28d9";
-                          stroke = "#a78bfa";
-                        } else {
-                          fill = "#1e293b";
-                          stroke = "#475569";
-                        }
-                      }
-                    } else if (isNeighbor) {
-                      fill = "#0369a1";
-                      stroke = "#38bdf8";
-                    }
-
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={() => {
-                          if (country) setInspectedCountry(country);
-                        }}
-                        onClick={() => {
-                          if (country) {
-                            setInspectedCountry(country);
-                          }
-                        }}
-                        style={{
-                          default: {
-                            fill,
-                            stroke,
-                            strokeWidth,
-                            strokeLinejoin: "round",
-                            strokeLinecap: "round",
-                            vectorEffect: "non-scaling-stroke",
-                            outline: "none",
-                            transition: "fill 200ms ease, stroke 200ms ease",
-                          },
-                          hover: {
-                            fill: isGuessed ? fill : "#1e2c45",
-                            stroke: isTarget
-                              ? "#fbbf24"
-                              : isNeighbor
-                                ? "#38bdf8"
-                                : "#94a3b8",
-                            strokeWidth,
-                            strokeLinejoin: "round",
-                            strokeLinecap: "round",
-                            vectorEffect: "non-scaling-stroke",
-                            outline: "none",
-                            cursor: "pointer",
-                          },
-                          pressed: {
-                            fill: "#0f172a",
-                            outline: "none",
-                          },
-                        }}
-                      />
-                    );
-                  })}
-
-                  {/* OVERLAY 1: Neighbor hint countries - complete perimeter, opacity-controlled fill */}
-                  {neighborGeos.map((geo) => (
-                    <Geography
-                      key={`overlay-neighbor-${geo.rsmKey}`}
-                      geography={geo}
-                      style={{
-                        default: {
-                          fill: "rgba(3, 105, 161, 0.22)",
-                          stroke: "#38bdf8",
-                          strokeWidth,
-                          strokeLinejoin: "round",
-                          strokeLinecap: "round",
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                        hover: {
-                          fill: "rgba(3, 105, 161, 0.22)",
-                          stroke: "#38bdf8",
-                          strokeWidth,
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                      }}
-                    />
-                  ))}
-
-                  {/* OVERLAY 2: Mystery Target - complete perimeter on top, opacity-controlled fill */}
-                  {targetGeo && (!isTargetHidden || isGameOver) && (
-                    <Geography
-                      key={`overlay-target-${targetGeo.rsmKey}`}
-                      geography={targetGeo}
-                      style={{
-                        default: {
-                          fill:
-                            isGameOver && gameStatus === "won"
-                              ? "rgba(16, 185, 129, 0.22)"
-                              : "rgba(245, 158, 11, 0.16)",
-                          stroke:
-                            isGameOver && gameStatus === "won"
-                              ? "#34d399"
-                              : "#f59e0b",
-                          strokeWidth,
-                          strokeLinejoin: "round",
-                          strokeLinecap: "round",
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                        hover: {
-                          fill:
-                            isGameOver && gameStatus === "won"
-                              ? "rgba(16, 185, 129, 0.22)"
-                              : "rgba(245, 158, 11, 0.16)",
-                          stroke:
-                            isGameOver && gameStatus === "won"
-                              ? "#34d399"
-                              : "#f59e0b",
-                          strokeWidth,
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                      }}
-                    />
-                  )}
-
-                  {/* OVERLAY 3: Hovered/Inspected territory - full unbroken perimeter on top, translucent fill */}
-                  {inspectedGeo &&
-                    inspectedGeo !== targetGeo &&
-                    (() => {
-                      const gid = String(inspectedGeo.id);
-                      const c =
-                        COUNTRIES_BY_NUMERIC.get(gid) ||
-                        COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10)));
-                      const iso = c?.id;
-                      const isNeighbor = Boolean(
-                        iso && activeNeighbors.includes(iso),
-                      );
-                      const isGuessed = Boolean(
-                        iso && guessedCountriesMap.has(iso),
-                      );
-                      const isInspectionAllowed =
-                        isGameOver ||
-                        (mode !== "detective" && difficulty === "easy") ||
-                        isNeighbor ||
-                        isGuessed;
-
-                      const strokeColor = isNeighbor
-                        ? "#38bdf8"
-                        : isInspectionAllowed
-                          ? "#60a5fa"
-                          : "rgba(148, 163, 184, 0.7)";
-                      const fillColor = isNeighbor
-                        ? "rgba(3, 105, 161, 0.2)"
-                        : isInspectionAllowed
-                          ? "rgba(56, 189, 248, 0.16)"
-                          : "rgba(255, 255, 255, 0.05)";
-
-                      return (
-                        <Geography
-                          key={`overlay-inspected-${inspectedGeo.rsmKey}`}
-                          geography={inspectedGeo}
-                          style={{
-                            default: {
-                              fill: fillColor,
-                              stroke: strokeColor,
-                              strokeWidth,
-                              strokeLinejoin: "round",
-                              strokeLinecap: "round",
-                              vectorEffect: "non-scaling-stroke",
-                              pointerEvents: "none",
-                            },
-                            hover: {
-                              fill: fillColor,
-                              stroke: strokeColor,
-                              strokeWidth,
-                              vectorEffect: "non-scaling-stroke",
-                              pointerEvents: "none",
-                            },
-                          }}
-                        />
-                      );
-                    })()}
-                </>
-              );
-            }}
+            {({ geographies }) => (
+              <WorldGeographiesContent
+                geographies={geographies}
+                strokeWidth={0.55}
+                isGameOver={gameStatus !== "playing"}
+                isTargetHidden={isTargetHidden}
+                targetCountry={targetCountry}
+                activeNeighbors={activeNeighbors}
+                guessedCountriesMap={guessedCountriesMap}
+                gameStatus={gameStatus}
+                mode={mode}
+                difficulty={difficulty}
+                inspectedCountry={inspectedCountry}
+                onSelectCountry={handleSelectCountry}
+              />
+            )}
           </Geographies>
 
           {/* Nautical Tethers for Island Isolation */}

@@ -28,7 +28,7 @@ export function FAQSection() {
       a: "A new daily puzzle goes live every day at midnight. Everyone around the world receives the exact same mystery location each day.",
     },
     {
-      q: "Is Borderline free to play?",
+      q: "Is Shimana free to play?",
       a: "Yes, 100% free with no sign-up, no ads, and no paywalls. It's great for casual fun or studying for geography and competitive exams like the BCS.",
     },
   ];

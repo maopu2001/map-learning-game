@@ -27,15 +27,22 @@ export function GuessInput() {
 
   const inputRef = useCommandK(() => setOpen(true));
 
-  const guessedIds = new Set(guesses.map((g) => g.country.id));
+  const guessedIds = React.useMemo(
+    () => new Set(guesses.map((g) => g.country.id)),
+    [guesses],
+  );
 
   const isBD = scope === "bangladesh";
   const allowCountryAliases = mode !== "detective";
 
   // Filter items excluding already guessed
-  const availableCountries = COUNTRIES.filter((c) => !guessedIds.has(c.id));
-  const availableDistricts = BANGLADESH_DISTRICTS.filter(
-    (d) => !guessedIds.has(d.id),
+  const availableCountries = React.useMemo(
+    () => COUNTRIES.filter((c) => !guessedIds.has(c.id)),
+    [guessedIds],
+  );
+  const availableDistricts = React.useMemo(
+    () => BANGLADESH_DISTRICTS.filter((d) => !guessedIds.has(d.id)),
+    [guessedIds],
   );
 
   const matchesDistrict = (d: DistrictData, q: string) => {

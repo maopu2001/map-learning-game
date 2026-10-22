@@ -17,6 +17,329 @@ import { MapLegend } from "@/components/Map/MapLegend";
 
 const GEO_URL = "/data/bangladesh-districts-topo.json";
 
+type GeoFeature = {
+  rsmKey: string;
+  id: string | number;
+  properties: Record<string, unknown>;
+  geometry: Record<string, unknown>;
+};
+
+interface DistrictGeographyItemProps {
+  geo: GeoFeature;
+  districtData?: DistrictData;
+  fill: string;
+  stroke: string;
+  hoverFill: string;
+  hoverStroke: string;
+  strokeWidth: number;
+  onSelect: (district: DistrictData) => void;
+}
+
+const DistrictGeographyItem = React.memo(function DistrictGeographyItem({
+  geo,
+  districtData,
+  fill,
+  stroke,
+  hoverFill,
+  hoverStroke,
+  strokeWidth,
+  onSelect,
+}: DistrictGeographyItemProps) {
+  const handleAction = React.useCallback(() => {
+    if (districtData) onSelect(districtData);
+  }, [districtData, onSelect]);
+
+  return (
+    <Geography
+      geography={geo}
+      onMouseEnter={handleAction}
+      onClick={handleAction}
+      style={{
+        default: {
+          fill,
+          stroke,
+          strokeWidth,
+          strokeLinejoin: "round",
+          strokeLinecap: "round",
+          vectorEffect: "non-scaling-stroke",
+          outline: "none",
+          transition: "fill 200ms ease, stroke 200ms ease",
+        },
+        hover: {
+          fill: hoverFill,
+          stroke: hoverStroke,
+          strokeWidth,
+          strokeLinejoin: "round",
+          strokeLinecap: "round",
+          vectorEffect: "non-scaling-stroke",
+          outline: "none",
+          cursor: "pointer",
+        },
+        pressed: {
+          fill: "#0f172a",
+          outline: "none",
+        },
+      }}
+    />
+  );
+});
+
+interface BangladeshGeographiesContentProps {
+  geographies: GeoFeature[];
+  strokeWidth: number;
+  isGameOver: boolean;
+  isTargetHidden: boolean;
+  targetDistrict: DistrictData | null;
+  activeNeighbors: string[];
+  guessedDistrictsMap: Map<string, any>;
+  gameStatus: string;
+  mode: string;
+  difficulty: string;
+  inspectedDistrict: DistrictData | null;
+  onSelectDistrict: (district: DistrictData) => void;
+}
+
+function BangladeshGeographiesContent({
+  geographies,
+  strokeWidth,
+  isGameOver,
+  isTargetHidden,
+  targetDistrict,
+  activeNeighbors,
+  guessedDistrictsMap,
+  gameStatus,
+  mode,
+  difficulty,
+  inspectedDistrict,
+  onSelectDistrict,
+}: BangladeshGeographiesContentProps) {
+  const geoIndex = useMemo(() => {
+    const byName = new Map<string, GeoFeature>();
+    const districtByGeo = new Map<GeoFeature, DistrictData>();
+    for (const g of geographies) {
+      const sName = (g.properties?.shapeName as string) || "";
+      if (sName) {
+        const lower = sName.toLowerCase();
+        byName.set(lower, g);
+        const data = DISTRICTS_BY_NAME.get(lower);
+        if (data) {
+          districtByGeo.set(g, data);
+        }
+      }
+    }
+    return { byName, districtByGeo };
+  }, [geographies]);
+
+  const targetGeo = targetDistrict
+    ? geoIndex.byName.get(targetDistrict.name.toLowerCase()) ?? null
+    : null;
+  const neighborGeos = useMemo(
+    () =>
+      activeNeighbors
+        .map((n) => geoIndex.byName.get(n.toLowerCase()))
+        .filter((g): g is GeoFeature => Boolean(g)),
+    [activeNeighbors, geoIndex],
+  );
+  const inspectedGeo = inspectedDistrict
+    ? geoIndex.byName.get(inspectedDistrict.name.toLowerCase()) ?? null
+    : null;
+
+  return (
+    <>
+      {geographies.map((geo) => {
+        const districtName = (geo.properties?.shapeName as string) || "";
+        if (!districtName) return null;
+        const districtData = geoIndex.districtByGeo.get(geo);
+
+        const isTarget =
+          (!isTargetHidden || isGameOver) &&
+          Boolean(
+            targetDistrict?.name && districtName === targetDistrict.name,
+          );
+        const isNeighbor = Boolean(activeNeighbors.includes(districtName));
+        const guessResult = guessedDistrictsMap.get(districtName.toLowerCase());
+        const isGuessed = Boolean(guessResult);
+
+        let fill = "#131b2e";
+        let stroke = "#24324a";
+
+        // Base fills and strokes
+        if (isTarget) {
+          if (isGameOver) {
+            fill = gameStatus === "won" ? "#10b981" : "#f59e0b";
+            stroke = "#34d399";
+          } else {
+            fill = isGuessed
+              ? guessResult?.isCorrect
+                ? "#10b981"
+                : fill
+              : "#1a253a";
+            stroke = "#f59e0b";
+          }
+        } else if (isGuessed) {
+          if (guessResult?.isCorrect) {
+            fill = "#10b981";
+            stroke = "#34d399";
+          } else {
+            const dist = guessResult?.distanceKm ?? 999;
+            if (dist < 60) {
+              fill = "#c2410c";
+              stroke = "#fb923c";
+            } else if (dist < 130) {
+              fill = "#6d28d9";
+              stroke = "#a78bfa";
+            } else {
+              fill = "#1e293b";
+              stroke = "#475569";
+            }
+          }
+        } else if (isNeighbor) {
+          fill = "#0369a1";
+          stroke = "#38bdf8";
+        }
+
+        const hoverFill = isGuessed ? fill : "#1e2c45";
+        const hoverStroke = isTarget
+          ? "#fbbf24"
+          : isNeighbor
+            ? "#38bdf8"
+            : "#94a3b8";
+
+        return (
+          <DistrictGeographyItem
+            key={geo.rsmKey}
+            geo={geo}
+            districtData={districtData}
+            fill={fill}
+            stroke={stroke}
+            hoverFill={hoverFill}
+            hoverStroke={hoverStroke}
+            strokeWidth={strokeWidth}
+            onSelect={onSelectDistrict}
+          />
+        );
+      })}
+
+      {/* OVERLAY 1: Neighbor hint districts - complete perimeter, opacity-controlled fill */}
+      {neighborGeos.map((geo) => (
+        <Geography
+          key={`overlay-neighbor-${geo.rsmKey}`}
+          geography={geo}
+          style={{
+            default: {
+              fill: "rgba(3, 105, 161, 0.22)",
+              stroke: "#38bdf8",
+              strokeWidth,
+              strokeLinejoin: "round",
+              strokeLinecap: "round",
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+            hover: {
+              fill: "rgba(3, 105, 161, 0.22)",
+              stroke: "#38bdf8",
+              strokeWidth,
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+          }}
+        />
+      ))}
+
+      {/* OVERLAY 2: Mystery Target - complete perimeter on top, opacity-controlled fill */}
+      {targetGeo && (!isTargetHidden || isGameOver) && (
+        <Geography
+          key={`overlay-target-${targetGeo.rsmKey}`}
+          geography={targetGeo}
+          style={{
+            default: {
+              fill:
+                isGameOver && gameStatus === "won"
+                  ? "rgba(16, 185, 129, 0.22)"
+                  : "rgba(245, 158, 11, 0.16)",
+              stroke:
+                isGameOver && gameStatus === "won"
+                  ? "#34d399"
+                  : "#f59e0b",
+              strokeWidth,
+              strokeLinejoin: "round",
+              strokeLinecap: "round",
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+            hover: {
+              fill:
+                isGameOver && gameStatus === "won"
+                  ? "rgba(16, 185, 129, 0.22)"
+                  : "rgba(245, 158, 11, 0.16)",
+              stroke:
+                isGameOver && gameStatus === "won"
+                  ? "#34d399"
+                  : "#f59e0b",
+              strokeWidth,
+              vectorEffect: "non-scaling-stroke",
+              pointerEvents: "none",
+            },
+          }}
+        />
+      )}
+
+      {/* OVERLAY 3: Hovered/Inspected territory - full unbroken perimeter on top, translucent fill */}
+      {inspectedGeo &&
+        inspectedGeo !== targetGeo &&
+        (() => {
+          const name =
+            (inspectedGeo.properties.shapeName as string) || "";
+          const isNeighbor = activeNeighbors.includes(name);
+          const isGuessed = guessedDistrictsMap.has(
+            name.toLowerCase(),
+          );
+          const isInspectionAllowed =
+            isGameOver ||
+            (mode !== "detective" && difficulty === "easy") ||
+            isNeighbor ||
+            isGuessed;
+
+          const strokeColor = isNeighbor
+            ? "#38bdf8"
+            : isInspectionAllowed
+              ? "#60a5fa"
+              : "rgba(148, 163, 184, 0.7)";
+          const fillColor = isNeighbor
+            ? "rgba(3, 105, 161, 0.2)"
+            : isInspectionAllowed
+              ? "rgba(56, 189, 248, 0.16)"
+              : "rgba(255, 255, 255, 0.05)";
+
+          return (
+            <Geography
+              key={`overlay-inspected-${inspectedGeo.rsmKey}`}
+              geography={inspectedGeo}
+              style={{
+                default: {
+                  fill: fillColor,
+                  stroke: strokeColor,
+                  strokeWidth,
+                  strokeLinejoin: "round",
+                  strokeLinecap: "round",
+                  vectorEffect: "non-scaling-stroke",
+                  pointerEvents: "none",
+                },
+                hover: {
+                  fill: fillColor,
+                  stroke: strokeColor,
+                  strokeWidth,
+                  vectorEffect: "non-scaling-stroke",
+                  pointerEvents: "none",
+                },
+              }}
+            />
+          );
+        })()}
+    </>
+  );
+}
+
 interface BangladeshMapProps {
   className?: string;
 }
@@ -148,6 +471,10 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
     });
   };
 
+  const handleSelectDistrict = React.useCallback((district: DistrictData) => {
+    setInspectedDistrict(district);
+  }, []);
+
   const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : null;
 
   const isTargetHidden = mode === "detective" && gameStatus === "playing";
@@ -217,253 +544,22 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
           minZoom={0.8}
         >
           <Geographies geography={GEO_URL}>
-            {({ geographies }) => {
-              const strokeWidth = 0.65;
-              const isGameOver = gameStatus !== "playing";
-
-              // Find highlighted geos to overlay on top so entire perimeter borders are complete and unbroken
-              const targetGeo = targetDistrict
-                ? geographies.find(
-                    (g) => g.properties?.shapeName === targetDistrict.name,
-                  )
-                : null;
-              const neighborGeos = geographies.filter((g) => {
-                const sName = g.properties?.shapeName as string | undefined;
-                return Boolean(sName && activeNeighbors.includes(sName));
-              });
-              const inspectedGeo = inspectedDistrict
-                ? geographies.find(
-                    (g) => g.properties?.shapeName === inspectedDistrict.name,
-                  )
-                : null;
-
-              return (
-                <>
-                  {geographies.map((geo) => {
-                    const districtName =
-                      (geo.properties?.shapeName as string) || "";
-                    if (!districtName) return null;
-                    const districtData = DISTRICTS_BY_NAME.get(
-                      districtName.toLowerCase(),
-                    );
-
-                    const isTarget =
-                      (!isTargetHidden || isGameOver) &&
-                      Boolean(
-                        targetDistrict?.name &&
-                          districtName === targetDistrict.name,
-                      );
-                    const isNeighbor = Boolean(
-                      activeNeighbors.includes(districtName),
-                    );
-                    const guessResult = guessedDistrictsMap.get(
-                      districtName.toLowerCase(),
-                    );
-                    const isGuessed = Boolean(guessResult);
-
-                    let fill = "#131b2e";
-                    let stroke = "#24324a";
-
-                    // Base fills and strokes
-                    if (isTarget) {
-                      if (isGameOver) {
-                        fill = gameStatus === "won" ? "#10b981" : "#f59e0b";
-                        stroke = "#34d399";
-                      } else {
-                        fill = isGuessed
-                          ? guessResult?.isCorrect
-                            ? "#10b981"
-                            : fill
-                          : "#1a253a";
-                        stroke = "#f59e0b";
-                      }
-                    } else if (isGuessed) {
-                      if (guessResult?.isCorrect) {
-                        fill = "#10b981";
-                        stroke = "#34d399";
-                      } else {
-                        const dist = guessResult?.distanceKm ?? 999;
-                        if (dist < 60) {
-                          fill = "#c2410c";
-                          stroke = "#fb923c";
-                        } else if (dist < 130) {
-                          fill = "#6d28d9";
-                          stroke = "#a78bfa";
-                        } else {
-                          fill = "#1e293b";
-                          stroke = "#475569";
-                        }
-                      }
-                    } else if (isNeighbor) {
-                      fill = "#0369a1";
-                      stroke = "#38bdf8";
-                    }
-
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        onMouseEnter={() => {
-                          if (districtData) setInspectedDistrict(districtData);
-                        }}
-                        onClick={() => {
-                          if (districtData) {
-                            setInspectedDistrict(districtData);
-                          }
-                        }}
-                        style={{
-                          default: {
-                            fill,
-                            stroke,
-                            strokeWidth,
-                            strokeLinejoin: "round",
-                            strokeLinecap: "round",
-                            vectorEffect: "non-scaling-stroke",
-                            outline: "none",
-                            transition: "fill 200ms ease, stroke 200ms ease",
-                          },
-                          hover: {
-                            fill: isGuessed ? fill : "#1e2c45",
-                            stroke: isTarget
-                              ? "#fbbf24"
-                              : isNeighbor
-                                ? "#38bdf8"
-                                : "#94a3b8",
-                            strokeWidth,
-                            strokeLinejoin: "round",
-                            strokeLinecap: "round",
-                            vectorEffect: "non-scaling-stroke",
-                            outline: "none",
-                            cursor: "pointer",
-                          },
-                          pressed: {
-                            fill: "#0f172a",
-                            outline: "none",
-                          },
-                        }}
-                      />
-                    );
-                  })}
-
-                  {/* OVERLAY 1: Neighbor hint districts - complete perimeter, opacity-controlled fill */}
-                  {neighborGeos.map((geo) => (
-                    <Geography
-                      key={`overlay-neighbor-${geo.rsmKey}`}
-                      geography={geo}
-                      style={{
-                        default: {
-                          fill: "rgba(3, 105, 161, 0.22)",
-                          stroke: "#38bdf8",
-                          strokeWidth,
-                          strokeLinejoin: "round",
-                          strokeLinecap: "round",
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                        hover: {
-                          fill: "rgba(3, 105, 161, 0.22)",
-                          stroke: "#38bdf8",
-                          strokeWidth,
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                      }}
-                    />
-                  ))}
-
-                  {/* OVERLAY 2: Mystery Target - complete perimeter on top, opacity-controlled fill */}
-                  {targetGeo && (!isTargetHidden || isGameOver) && (
-                    <Geography
-                      key={`overlay-target-${targetGeo.rsmKey}`}
-                      geography={targetGeo}
-                      style={{
-                        default: {
-                          fill:
-                            isGameOver && gameStatus === "won"
-                              ? "rgba(16, 185, 129, 0.22)"
-                              : "rgba(245, 158, 11, 0.16)",
-                          stroke:
-                            isGameOver && gameStatus === "won"
-                              ? "#34d399"
-                              : "#f59e0b",
-                          strokeWidth,
-                          strokeLinejoin: "round",
-                          strokeLinecap: "round",
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                        hover: {
-                          fill:
-                            isGameOver && gameStatus === "won"
-                              ? "rgba(16, 185, 129, 0.22)"
-                              : "rgba(245, 158, 11, 0.16)",
-                          stroke:
-                            isGameOver && gameStatus === "won"
-                              ? "#34d399"
-                              : "#f59e0b",
-                          strokeWidth,
-                          vectorEffect: "non-scaling-stroke",
-                          pointerEvents: "none",
-                        },
-                      }}
-                    />
-                  )}
-
-                  {/* OVERLAY 3: Hovered/Inspected territory - full unbroken perimeter on top, translucent fill */}
-                  {inspectedGeo &&
-                    inspectedGeo !== targetGeo &&
-                    (() => {
-                      const name =
-                        (inspectedGeo.properties.shapeName as string) || "";
-                      const isNeighbor = activeNeighbors.includes(name);
-                      const isGuessed = guessedDistrictsMap.has(
-                        name.toLowerCase(),
-                      );
-                      const isInspectionAllowed =
-                        isGameOver ||
-                        (mode !== "detective" && difficulty === "easy") ||
-                        isNeighbor ||
-                        isGuessed;
-
-                      const strokeColor = isNeighbor
-                        ? "#38bdf8"
-                        : isInspectionAllowed
-                          ? "#60a5fa"
-                          : "rgba(148, 163, 184, 0.7)";
-                      const fillColor = isNeighbor
-                        ? "rgba(3, 105, 161, 0.2)"
-                        : isInspectionAllowed
-                          ? "rgba(56, 189, 248, 0.16)"
-                          : "rgba(255, 255, 255, 0.05)";
-
-                      return (
-                        <Geography
-                          key={`overlay-inspected-${inspectedGeo.rsmKey}`}
-                          geography={inspectedGeo}
-                          style={{
-                            default: {
-                              fill: fillColor,
-                              stroke: strokeColor,
-                              strokeWidth,
-                              strokeLinejoin: "round",
-                              strokeLinecap: "round",
-                              vectorEffect: "non-scaling-stroke",
-                              pointerEvents: "none",
-                            },
-                            hover: {
-                              fill: fillColor,
-                              stroke: strokeColor,
-                              strokeWidth,
-                              vectorEffect: "non-scaling-stroke",
-                              pointerEvents: "none",
-                            },
-                          }}
-                        />
-                      );
-                    })()}
-                </>
-              );
-            }}
+            {({ geographies }) => (
+              <BangladeshGeographiesContent
+                geographies={geographies}
+                strokeWidth={0.65}
+                isGameOver={gameStatus !== "playing"}
+                isTargetHidden={isTargetHidden}
+                targetDistrict={targetDistrict}
+                activeNeighbors={activeNeighbors}
+                guessedDistrictsMap={guessedDistrictsMap}
+                gameStatus={gameStatus}
+                mode={mode}
+                difficulty={difficulty}
+                inspectedDistrict={inspectedDistrict}
+                onSelectDistrict={handleSelectDistrict}
+              />
+            )}
           </Geographies>
 
           {/* Target marker when game is won */}

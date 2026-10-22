@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
-  Compass,
   HelpCircle,
   Globe2,
   BookOpen,
@@ -36,13 +35,22 @@ export function Header() {
           {/* Brand + Mobile Toggle */}
           <div className="flex items-center justify-between w-full lg:w-auto gap-3">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="flex size-8 items-center justify-center rounded-xl bg-gradient-to-tr from-sky-600 to-emerald-500 text-white shadow-md shadow-sky-600/30 group-hover:scale-105 transition-transform duration-200">
-                <Compass className="size-4" />
+              <div className="size-8 rounded-xl overflow-hidden border border-white/15 shadow-md shadow-sky-600/30 group-hover:scale-105 transition-transform duration-200 shrink-0 bg-[#0b1329]">
+                <img
+                  src="/icon.svg"
+                  alt="Shimana Logo"
+                  width={32}
+                  height={32}
+                  className="size-full object-cover"
+                />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-sm sm:text-base font-black tracking-wider text-white">
-                    BORDERLINE
+                    SHIMANA
+                  </span>
+                  <span className="text-2xs font-mono px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 font-medium hidden sm:inline-block">
+                    সীমানা
                   </span>
                 </div>
                 <p className="text-2xs text-slate-400 leading-none">

@@ -12,6 +12,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://shimana.maopu.com.bd";
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -20,9 +23,86 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Borderline — Daily Map & Geography Game",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "Shimana (সীমানা) — Daily Map & Geography Guessing Game",
+    template: "%s | Shimana",
+  },
   description:
-    "Guess the secret country or Bangladesh district in 6 tries. Use distance, compass directions, and neighbor hints to zero in.",
+    "Guess the secret country or Bangladesh district in 6 tries. Use distance, compass directions, and neighbor hints to zero in. Free daily map puzzles, Blitz speedruns, and Detective mode.",
+  keywords: [
+    "Shimana",
+    "সীমানা",
+    "geography game",
+    "map game",
+    "country guesser",
+    "bangladesh district game",
+    "wordle geography",
+    "globle",
+    "worldle",
+    "daily map puzzle",
+    "geoguessr alternative",
+    "bcs geography",
+    "bangladesh map",
+    "interactive world map",
+  ],
+  applicationName: "Shimana",
+  authors: [{ name: "M. Aktaruzzaman Opu", url: "https://maopu.com.bd" }],
+  creator: "M. Aktaruzzaman Opu",
+  publisher: "Shimana",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: ["/icon.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: baseUrl,
+    siteName: "Shimana",
+    title: "Shimana (সীমানা) — Daily Map & Geography Guessing Game",
+    description:
+      "Find the mystery place on the map! Guess the secret country or Bangladesh district in 6 tries with distance & compass direction hints.",
+    images: [
+      {
+        url: "/icon.svg",
+        width: 512,
+        height: 512,
+        alt: "Shimana Compass Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shimana (সীমানা) — Daily Map & Geography Guessing Game",
+    description:
+      "Find the mystery place on the map! Guess the secret country or Bangladesh district in 6 tries with distance & compass direction hints.",
+    images: ["/icon.svg"],
+  },
+  category: "game",
 };
 
 export default function RootLayout({
@@ -32,9 +112,64 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link
+          rel="preload"
+          href="/data/world-countries-geo-50m.json"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/data/bangladesh-districts-topo.json"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-[#070a12] text-slate-100 font-sans antialiased selection:bg-sky-500 selection:text-white`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebApplication",
+                  "@id": `${baseUrl}/#app`,
+                  name: "Shimana",
+                  alternateName: ["সীমানা", "Shimana Map Game"],
+                  url: baseUrl,
+                  applicationCategory: "GameApplication",
+                  genre: ["Geography", "Trivia", "Puzzle", "Educational"],
+                  operatingSystem: "All",
+                  browserRequirements: "Requires JavaScript. Requires HTML5.",
+                  description:
+                    "Daily interactive map and geography guessing game featuring 64 Bangladesh districts and 195 world countries.",
+                  offers: {
+                    "@type": "Offer",
+                    price: "0",
+                    priceCurrency: "USD",
+                  },
+                  author: {
+                    "@type": "Person",
+                    name: "M. Aktaruzzaman Opu",
+                    url: "https://maopu.com.bd",
+                  },
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": `${baseUrl}/#website`,
+                  url: baseUrl,
+                  name: "Shimana",
+                  description: "Daily Map & Geography Guessing Game",
+                  inLanguage: ["en", "bn"],
+                },
+              ],
+            }),
+          }}
+        />
         {children}
       </body>
     </html>

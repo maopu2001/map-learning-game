@@ -784,16 +784,27 @@ export const useGameStore = create<GameState>()(
       },
     }),
     {
-      name: "borderline-game-storage",
-      storage: createJSONStorage(() =>
-        typeof window !== "undefined"
-          ? window.localStorage
-          : {
-              getItem: () => null,
-              setItem: () => {},
-              removeItem: () => {},
-            },
-      ),
+      name: "shimana-game-storage",
+      storage: createJSONStorage(() => {
+        if (typeof window !== "undefined") {
+          try {
+            if (!window.localStorage.getItem("shimana-game-storage")) {
+              const legacy = window.localStorage.getItem("borderline-game-storage");
+              if (legacy) {
+                window.localStorage.setItem("shimana-game-storage", legacy);
+              }
+            }
+          } catch {
+            // Ignore storage errors
+          }
+          return window.localStorage;
+        }
+        return {
+          getItem: () => null,
+          setItem: () => {},
+          removeItem: () => {},
+        };
+      }),
       version: 6,
       migrate: (persistedState: unknown, version: number) => {
         const state = (persistedState || {}) as Record<string, unknown>;

@@ -104,11 +104,11 @@ export function GameOverModal({
       mode === "daily"
         ? new Date().toISOString().slice(5, 10)
         : mode === "detective"
-          ? "Borderline Detective"
+          ? "Shimana Detective"
           : "Blitz",
       guesses,
       isWon,
-      isBD ? "Bangladesh Borderline" : "Borderline",
+      isBD ? "Bangladesh Shimana" : "Shimana",
     );
     try {
       await navigator.clipboard.writeText(text);
