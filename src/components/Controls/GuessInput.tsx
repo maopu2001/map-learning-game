@@ -16,6 +16,7 @@ import { useCommandK } from "@/hooks/useCommandK";
 
 export function GuessInput() {
   const scope = useGameStore((s) => s.scope);
+  const mode = useGameStore((s) => s.mode);
   const makeGuess = useGameStore((s) => s.makeGuess);
   const guesses = useGameStore((s) => s.guesses);
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -28,12 +29,31 @@ export function GuessInput() {
   const guessedIds = new Set(guesses.map((g) => g.country.id));
 
   const isBD = scope === "bangladesh";
+  const allowCountryAliases = mode !== "detective";
 
   // Filter items excluding already guessed
   const availableCountries = COUNTRIES.filter((c) => !guessedIds.has(c.id));
   const availableDistricts = BANGLADESH_DISTRICTS.filter(
     (d) => !guessedIds.has(d.id),
   );
+
+  const matchesDistrict = (d: DistrictData, q: string) => {
+    const lower = q.toLowerCase();
+    return (
+      d.name.toLowerCase().includes(lower) ||
+      Boolean(d.aliases?.some((a) => a.toLowerCase().includes(lower)))
+    );
+  };
+
+  const matchesCountry = (c: CountryData, q: string) => {
+    const lower = q.toLowerCase();
+    return (
+      c.name.toLowerCase().includes(lower) ||
+      c.id.toLowerCase().includes(lower) ||
+      (allowCountryAliases &&
+        c.aliases.some((a) => a.toLowerCase().includes(lower)))
+    );
+  };
 
   const handleSelectCountry = (country: CountryData) => {
     makeGuess(country);
@@ -58,22 +78,18 @@ export function GuessInput() {
           d.aliases?.some((a) => a.toLowerCase() === q),
       );
       const first =
-        exact ||
-        availableDistricts.find(
-          (d) =>
-            d.name.toLowerCase().includes(q) ||
-            d.aliases?.some((a) => a.toLowerCase().includes(q)),
-        );
+        exact || availableDistricts.find((d) => matchesDistrict(d, q));
       if (first) handleSelectDistrict(first);
     } else {
-      const exact = availableCountries.find((c) => c.name.toLowerCase() === q);
+      const exact = availableCountries.find(
+        (c) =>
+          c.name.toLowerCase() === q ||
+          c.id.toLowerCase() === q ||
+          (allowCountryAliases &&
+            c.aliases.some((a) => a.toLowerCase() === q)),
+      );
       const first =
-        exact ||
-        availableCountries.find(
-          (c) =>
-            c.name.toLowerCase().includes(q) ||
-            c.id.toLowerCase() === q,
-        );
+        exact || availableCountries.find((c) => matchesCountry(c, q));
       if (first) handleSelectCountry(first);
     }
   };
@@ -134,13 +150,7 @@ export function GuessInput() {
               {isBD ? (
                 <>
                   {availableDistricts
-                    .filter(
-                      (d) =>
-                        d.name.toLowerCase().includes(query.toLowerCase()) ||
-                        d.aliases?.some((a) =>
-                          a.toLowerCase().includes(query.toLowerCase()),
-                        ),
-                    )
+                    .filter((d) => matchesDistrict(d, query))
                     .slice(0, 8)
                     .map((d) => (
                       <CommandItem
@@ -165,9 +175,8 @@ export function GuessInput() {
                         <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
                       </CommandItem>
                     ))}
-                  {availableDistricts.filter((d) =>
-                    d.name.toLowerCase().includes(query.toLowerCase()),
-                  ).length === 0 && (
+                  {availableDistricts.filter((d) => matchesDistrict(d, query))
+                    .length === 0 && (
                     <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
                       <Globe className="size-4 text-slate-500" />
                       <span>No districts found</span>
@@ -177,14 +186,7 @@ export function GuessInput() {
               ) : (
                 <>
                   {availableCountries
-                    .filter(
-                      (c) =>
-                        c.name.toLowerCase().includes(query.toLowerCase()) ||
-                        c.id.toLowerCase().includes(query.toLowerCase()) ||
-                        c.aliases.some((a) =>
-                          a.toLowerCase().includes(query.toLowerCase()),
-                        ),
-                    )
+                    .filter((c) => matchesCountry(c, query))
                     .slice(0, 8)
                     .map((c) => (
                       <CommandItem
@@ -208,9 +210,8 @@ export function GuessInput() {
                         <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
                       </CommandItem>
                     ))}
-                  {availableCountries.filter((c) =>
-                    c.name.toLowerCase().includes(query.toLowerCase()),
-                  ).length === 0 && (
+                  {availableCountries.filter((c) => matchesCountry(c, query))
+                    .length === 0 && (
                     <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
                       <Globe className="size-4 text-slate-500" />
                       <span>No countries found</span>
