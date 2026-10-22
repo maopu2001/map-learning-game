@@ -143,20 +143,30 @@ export default function BangladeshExplorePage() {
     const q = rawQuery.trim().toLowerCase();
     if (!q) return;
 
-    const exact = BANGLADESH_DISTRICTS.find((d) => d.name.toLowerCase() === q);
+    const exact = BANGLADESH_DISTRICTS.find(
+      (d) =>
+        d.name.toLowerCase() === q ||
+        d.aliases?.some((a) => a.toLowerCase() === q),
+    );
     const first =
       exact ||
-      BANGLADESH_DISTRICTS.find((d) => d.name.toLowerCase().includes(q));
+      BANGLADESH_DISTRICTS.find(
+        (d) =>
+          d.name.toLowerCase().includes(q) ||
+          d.aliases?.some((a) => a.toLowerCase().includes(q)),
+      );
     if (first) {
       selectDistrict(first);
     }
   };
 
   const filteredDistricts = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
     return BANGLADESH_DISTRICTS.filter((d) => {
-      const matchesSearch = d.name
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+      const matchesSearch =
+        !q ||
+        d.name.toLowerCase().includes(q) ||
+        d.aliases?.some((a) => a.toLowerCase().includes(q));
       const matchesDivision =
         divisionFilter === "All" || d.division === divisionFilter;
       return matchesSearch && matchesDivision;
@@ -632,7 +642,7 @@ export default function BangladeshExplorePage() {
                       {filteredDistricts.slice(0, 8).map((d) => (
                         <CommandItem
                           key={d.id}
-                          value={d.name}
+                          value={`${d.name} ${d.aliases?.join(" ") || ""}`}
                           onSelect={() => selectDistrict(d)}
                           className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                         >
@@ -640,6 +650,11 @@ export default function BangladeshExplorePage() {
                             <span className="font-semibold text-xs sm:text-sm text-white">
                               {d.name}
                             </span>
+                            {d.aliases && d.aliases.length > 0 && (
+                              <span className="text-2xs text-slate-400 font-mono">
+                                (aka {d.aliases.join(", ")})
+                              </span>
+                            )}
                             <span className="text-xs text-slate-400 font-mono">
                               ({d.division} Div)
                             </span>

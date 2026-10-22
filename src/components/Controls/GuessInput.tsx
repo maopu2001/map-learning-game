@@ -49,10 +49,18 @@ export function GuessInput() {
     if (!q) return;
 
     if (isBD) {
-      const exact = availableDistricts.find((d) => d.name.toLowerCase() === q);
+      const exact = availableDistricts.find(
+        (d) =>
+          d.name.toLowerCase() === q ||
+          d.aliases?.some((a) => a.toLowerCase() === q),
+      );
       const first =
         exact ||
-        availableDistricts.find((d) => d.name.toLowerCase().includes(q));
+        availableDistricts.find(
+          (d) =>
+            d.name.toLowerCase().includes(q) ||
+            d.aliases?.some((a) => a.toLowerCase().includes(q)),
+        );
       if (first) handleSelectDistrict(first);
     } else {
       const exact = availableCountries.find((c) => c.name.toLowerCase() === q);
@@ -116,14 +124,18 @@ export function GuessInput() {
               {isBD ? (
                 <>
                   {availableDistricts
-                    .filter((d) =>
-                      d.name.toLowerCase().includes(query.toLowerCase()),
+                    .filter(
+                      (d) =>
+                        d.name.toLowerCase().includes(query.toLowerCase()) ||
+                        d.aliases?.some((a) =>
+                          a.toLowerCase().includes(query.toLowerCase()),
+                        ),
                     )
                     .slice(0, 8)
                     .map((d) => (
                       <CommandItem
                         key={d.id}
-                        value={d.name}
+                        value={`${d.name} ${d.aliases?.join(" ") || ""}`}
                         onSelect={() => handleSelectDistrict(d)}
                         className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
                       >
@@ -131,6 +143,11 @@ export function GuessInput() {
                           <span className="font-semibold text-xs sm:text-sm text-white">
                             {d.name}
                           </span>
+                          {d.aliases && d.aliases.length > 0 && (
+                            <span className="text-2xs text-slate-400 font-mono">
+                              (aka {d.aliases.join(", ")})
+                            </span>
+                          )}
                           <span className="text-xs text-slate-400 font-mono">
                             ({d.division} Div)
                           </span>

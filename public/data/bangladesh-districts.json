@@ -4,46 +4,77 @@
     "shapeId": "16705992B77600989823530",
     "name": "Bagerhat",
     "division": "Khulna",
-    "coordinates": [22.1555, 89.7109],
-    "borders": ["Barguna", "Gopalganj", "Khulna", "Narail", "Pirojpur"],
+    "coordinates": [
+      22.1555,
+      89.7109
+    ],
+    "borders": [
+      "Barguna",
+      "Gopalganj",
+      "Khulna",
+      "Narail",
+      "Pirojpur"
+    ],
     "triviaFact": "Home to the UNESCO World Heritage Mosque City founded in the 15th century by Khan Jahan Ali—featuring the iconic Sixty Dome Mosque (Shat Gombuj Masjid)—as well as Mongla (the country's second-largest seaport), the eastern Sundarbans mangrove forest, and major shrimp farming hubs.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Bandarban",
     "shapeId": "16705992B23463827258150",
     "name": "Bandarban",
-    "division": "Chittagong",
-    "coordinates": [21.7101, 92.2521],
-    "borders": ["Chittagong", "Cox's Bazar", "Rangamati"],
+    "division": "Chattogram",
+    "coordinates": [
+      21.7101,
+      92.2521
+    ],
+    "borders": [
+      "Chattogram",
+      "Cox's Bazar",
+      "Rangamati"
+    ],
     "triviaFact": "Renowned for housing the highest mountain peaks in Bangladesh—including Saka Haphong, Keokradong, and Tazing Dong—alongside diverse indigenous hill communities, the Buddha Dhatu Jadi (Golden Temple), Nilgiri hills, Boga Lake, Nafakhum waterfall, and the winding Sangu River.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Barguna",
     "shapeId": "16705992B13795829103768",
     "name": "Barguna",
-    "division": "Barisal",
-    "coordinates": [22.1593, 90.1364],
-    "borders": ["Bagerhat", "Barisal", "Jhalokati", "Patuakhali", "Pirojpur"],
+    "division": "Barishal",
+    "coordinates": [
+      22.1593,
+      90.1364
+    ],
+    "borders": [
+      "Bagerhat",
+      "Barishal",
+      "Jhalakathi",
+      "Patuakhali",
+      "Pirojpur"
+    ],
     "triviaFact": "A scenic coastal deltaic district where the Payra, Bishkhali, and Baleshwar rivers empty into the Bay of Bengal, famous for the Haringhata mangrove forest, Sonakata Eco-Park, the 17th-century Mughal Bibi Chini Shahi Mosque, and historic Rakhine indigenous settlements at Taltali.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
-    "id": "Barisal",
+    "id": "Barishal",
     "shapeId": "16705992B66943755852345",
-    "name": "Barisal",
-    "division": "Barisal",
-    "coordinates": [22.8135, 90.4358],
+    "name": "Barishal",
+    "division": "Barishal",
+    "coordinates": [
+      22.8135,
+      90.4358
+    ],
     "borders": [
       "Barguna",
       "Bhola",
       "Chandpur",
       "Gopalganj",
-      "Jhalokati",
+      "Jhalakathi",
       "Lakshmipur",
       "Madaripur",
       "Patuakhali",
@@ -52,25 +83,40 @@
     ],
     "triviaFact": "Often hailed as the 'Venice of the East' for its dense network of rivers and canals along the Kirtankhola River, celebrated for its century-old floating guava and vegetable markets, the ornate Baitul Aman (Guthia) Mosque, Durga Sagar Dighi, and the historic Oxford Mission Church.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": [
+      "Barisal"
+    ]
   },
   {
     "id": "Bhola",
     "shapeId": "16705992B37732832620169",
     "name": "Bhola",
-    "division": "Barisal",
-    "coordinates": [22.3538, 90.7395],
-    "borders": ["Barisal", "Lakshmipur", "Noakhali", "Patuakhali"],
+    "division": "Barishal",
+    "coordinates": [
+      22.3538,
+      90.7395
+    ],
+    "borders": [
+      "Barishal",
+      "Lakshmipur",
+      "Noakhali",
+      "Patuakhali"
+    ],
     "triviaFact": "The largest offshore island district in Bangladesh, situated at the mouth of the Meghna estuary and famous for the scenic island of Monpura, the mangrove wildlife sanctuary of Char Kukri Mukri, the Jakobs Tower viewpoint in Char Fasson, abundant natural gas fields, and rich buffalo-milk curd (Mahi Dahi).",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
-    "id": "Bogra",
+    "id": "Bogura",
     "shapeId": "16705992B87441692505107",
-    "name": "Bogra",
+    "name": "Bogura",
     "division": "Rajshahi",
-    "coordinates": [24.7959, 89.2852],
+    "coordinates": [
+      24.7959,
+      89.2852
+    ],
     "borders": [
       "Gaibandha",
       "Jamalpur",
@@ -81,16 +127,22 @@
     ],
     "triviaFact": "Archaeological heartland of ancient Pundravardhana centered on the 3rd-century BCE fortified citadel of Mahasthangarh, Gokul Medh (Behula's Basor Ghar), and the Mughal-era Kherua Mosque, while nationwide it is synonymous with GI-certified sweetened yogurt (Mishti Doi) and crispy Kotkoti.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": [
+      "Bogra"
+    ]
   },
   {
     "id": "Brahmanbaria",
     "shapeId": "16705992B2831557138260",
     "name": "Brahmanbaria",
-    "division": "Chittagong",
-    "coordinates": [23.9271, 91.1258],
+    "division": "Chattogram",
+    "coordinates": [
+      23.9271,
+      91.1258
+    ],
     "borders": [
-      "Comilla",
+      "Cumilla",
       "Habiganj",
       "Kishoreganj",
       "Narayanganj",
@@ -98,17 +150,21 @@
     ],
     "triviaFact": "Revered as a cultural capital of eastern Bengal and birthplace of classical music maestro Ustad Alauddin Khan, famous for the Titas River (immortalized in Advaita Mallabarman's classic novel), the cube-shaped Chhanamukhi sweet, traditional Titas boat races, and the massive Titas gas field.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Chandpur",
     "shapeId": "16705992B70711841490613",
     "name": "Chandpur",
-    "division": "Chittagong",
-    "coordinates": [23.2324, 90.7136],
+    "division": "Chattogram",
+    "coordinates": [
+      23.2324,
+      90.7136
+    ],
     "borders": [
-      "Barisal",
-      "Comilla",
+      "Barishal",
+      "Cumilla",
       "Lakshmipur",
       "Munshiganj",
       "Noakhali",
@@ -116,14 +172,18 @@
     ],
     "triviaFact": "Globally known as the 'City of Hilsa' at the dramatic triple confluence (Triveni) of the Padma, Meghna, and Dakatiya rivers, renowned for producing the country's most prized silver Hilsa fish, the grand Hajiganj Bara Mosque, Lohagarh Math, and a centuries-old river port.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
-    "id": "Chittagong",
+    "id": "Chattogram",
     "shapeId": "16705992B94200136889214",
-    "name": "Chittagong",
-    "division": "Chittagong",
-    "coordinates": [22.4199, 91.8399],
+    "name": "Chattogram",
+    "division": "Chattogram",
+    "coordinates": [
+      22.4199,
+      91.8399
+    ],
     "borders": [
       "Bandarban",
       "Cox's Bazar",
@@ -134,25 +194,39 @@
     ],
     "triviaFact": "The commercial capital and largest seaport of Bangladesh along the Karnaphuli River and Bay of Bengal, famed for Patenga Beach, Foy's Lake, the Sitakunda Chandranath Hill and waterfalls, the 1930 Armoury Raid history, the Shrine of Bayazid Bostami, and traditional spicy Mezban beef feasts.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": [
+      "Chittagong"
+    ]
   },
   {
     "id": "Chuadanga",
     "shapeId": "16705992B19758630986204",
     "name": "Chuadanga",
     "division": "Khulna",
-    "coordinates": [23.5494, 88.8246],
-    "borders": ["Jhenaidah", "Kushtia", "Meherpur"],
+    "coordinates": [
+      23.5494,
+      88.8246
+    ],
+    "borders": [
+      "Jhenaidah",
+      "Kushtia",
+      "Meherpur"
+    ],
     "triviaFact": "Western borderland district along the Mathabhanga River that served as the first provisional wartime capital headquarters in April 1971, famous for Carew & Co. at Darshana (the country's largest sugar complex and sole distillery), the Three-Domed Gholadari Mosque, and extensive betel leaf and mango orchards.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
-    "id": "Comilla",
+    "id": "Cumilla",
     "shapeId": "16705992B59490572634285",
-    "name": "Comilla",
-    "division": "Chittagong",
-    "coordinates": [23.4458, 91.0208],
+    "name": "Cumilla",
+    "division": "Chattogram",
+    "coordinates": [
+      23.4458,
+      91.0208
+    ],
     "borders": [
       "Brahmanbaria",
       "Chandpur",
@@ -163,25 +237,38 @@
     ],
     "triviaFact": "Ancient seat of the Samatata kingdom famed for the 8th-century Buddhist monastery ruins of Shalban Vihara and Mainamati along the Lalmai Hills, the WWII Maynamati War Cemetery, historic Khadi (Khaddar) handloom textiles, and authentic Kheer-soaked Rasmalai from Matri Bhandar.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": [
+      "Comilla"
+    ]
   },
   {
     "id": "Cox's Bazar",
     "shapeId": "16705992B34517682786426",
     "name": "Cox's Bazar",
-    "division": "Chittagong",
-    "coordinates": [21.5318, 92.0699],
-    "borders": ["Bandarban", "Chittagong"],
+    "division": "Chattogram",
+    "coordinates": [
+      21.5318,
+      92.0699
+    ],
+    "borders": [
+      "Bandarban",
+      "Chattogram"
+    ],
     "triviaFact": "Premier coastal destination boasting the world's longest unbroken natural sandy sea beach stretching over 120 kilometers, complemented by the scenic Marine Drive, Himchari waterfalls, Inani coral boulders, Maheshkhali Island's Adinath Temple, colorful Sampan fishing boats, and Saint Martin's coral island.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Dhaka",
     "shapeId": "16705992B90744549146712",
     "name": "Dhaka",
     "division": "Dhaka",
-    "coordinates": [23.8299, 90.2123],
+    "coordinates": [
+      23.8299,
+      90.2123
+    ],
     "borders": [
       "Faridpur",
       "Gazipur",
@@ -192,14 +279,18 @@
     ],
     "triviaFact": "The bustling national capital on the banks of the Buriganga River, historically the Mughal seat of Jahangirnagar and the 'City of Mosques,' celebrated for Lalbagh Fort, Ahsan Manzil, Louis Kahn's Jatiya Sangsad Bhaban, the National Martyrs' Memorial at Savar, legendary Dhakai Muslin, and royal Kacchi Biryani.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Dinajpur",
     "shapeId": "16705992B66423446659680",
     "name": "Dinajpur",
     "division": "Rangpur",
-    "coordinates": [25.5824, 88.842],
+    "coordinates": [
+      25.5824,
+      88.842
+    ],
     "borders": [
       "Gaibandha",
       "Joypurhat",
@@ -210,14 +301,18 @@
     ],
     "triviaFact": "Northern agricultural powerhouse famed for the 18th-century terracotta masterpiece Kantajew Temple, the vast man-made Ramsagar Tank, the ornate Nayabad Mosque, Swapnapuri theme park, fragrant Kataribhog rice, and world-renowned Bedana lychees.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Faridpur",
     "shapeId": "16705992B67131385183639",
     "name": "Faridpur",
     "division": "Dhaka",
-    "coordinates": [23.456, 89.8017],
+    "coordinates": [
+      23.456,
+      89.8017
+    ],
     "borders": [
       "Dhaka",
       "Gopalganj",
@@ -230,27 +325,39 @@
     ],
     "triviaFact": "Riverine heartland along the Padma and Kumar rivers named after 12th-century Sufi saint Shah Sheikh Fariduddin, celebrated as the birthplace of 'Polli Kobi' (Rural Poet) Jasimuddin, the Pathrail Shahi Mosque, Kanaipur Zamindar Bari, and the nation's leading production of golden jute fiber and date-palm jaggery.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Feni",
     "shapeId": "16705992B83268326466345",
     "name": "Feni",
-    "division": "Chittagong",
-    "coordinates": [22.9813, 91.3969],
-    "borders": ["Chittagong", "Comilla", "Noakhali"],
+    "division": "Chattogram",
+    "coordinates": [
+      22.9813,
+      91.3969
+    ],
+    "borders": [
+      "Chattogram",
+      "Cumilla",
+      "Noakhali"
+    ],
     "triviaFact": "Strategic southeastern corridor between the Feni, Muhuri, and Kuhuri rivers linking Dhaka and Chittagong, famous for the massive Muhuri Irrigation Project and wind power plant, the historic Vijay Singh Dighi, Chandgazi Bhuiyan Mosque, and traditional buffalo-milk ghee and Khandani sweets.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Gaibandha",
     "shapeId": "16705992B74857221285320",
     "name": "Gaibandha",
     "division": "Rangpur",
-    "coordinates": [25.3148, 89.4468],
+    "coordinates": [
+      25.3148,
+      89.4468
+    ],
     "borders": [
-      "Bogra",
+      "Bogura",
       "Dinajpur",
       "Jamalpur",
       "Joypurhat",
@@ -259,14 +366,18 @@
     ],
     "triviaFact": "Northern riverine district along the Brahmaputra (Jamuna), Teesta, and Ghaghat rivers, renowned for its creamy signature dessert Rasmanjuri, fiery char-grown green and red chilies, the historic Balashi Ghat ferry terminal, Naldanga and Bamandanga Zamindar Baris, and Bardhan Kuthi.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Gazipur",
     "shapeId": "16705992B50862305652789",
     "name": "Gazipur",
     "division": "Dhaka",
-    "coordinates": [24.0684, 90.405],
+    "coordinates": [
+      24.0684,
+      90.405
+    ],
     "borders": [
       "Dhaka",
       "Kishoreganj",
@@ -277,17 +388,21 @@
     ],
     "triviaFact": "Industrial and ecological powerhouse just north of the capital, home to the deciduous Sal forests of Bhawal National Park, the Safari Park at Sreepur, the historic Bhawal Rajbari, the Biswa Ijtema grounds along the Turag River at Tongi, and the richest jackfruit orchards in the country.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Gopalganj",
     "shapeId": "16705992B87804307332289",
     "name": "Gopalganj",
     "division": "Dhaka",
-    "coordinates": [23.1469, 89.9155],
+    "coordinates": [
+      23.1469,
+      89.9155
+    ],
     "borders": [
       "Bagerhat",
-      "Barisal",
+      "Barishal",
       "Faridpur",
       "Madaripur",
       "Narail",
@@ -295,33 +410,41 @@
     ],
     "triviaFact": "Historic riverine district along the Madhumati River and Tungipara, famed for the ancient earthen ramparts of Kotalipara (dating to the 6th-century Chandravarman period), the vast lotus-filled wetlands of Chanda Beel, Ulpur Zamindar Bari, and traditional brassware and Rosogolla.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Habiganj",
     "shapeId": "16705992B7772300815487",
     "name": "Habiganj",
     "division": "Sylhet",
-    "coordinates": [24.343, 91.4214],
+    "coordinates": [
+      24.343,
+      91.4214
+    ],
     "borders": [
       "Brahmanbaria",
       "Kishoreganj",
-      "Maulvibazar",
+      "Moulvibazar",
       "Sunamganj",
       "Sylhet"
     ],
     "triviaFact": "Lush northeastern district along the Khowai River, home to the Satchari National Park and Rema-Kalenga Wildlife Sanctuary (one of the largest natural forests in Bangladesh), over twenty scenic tea estates, the 16th-century Uchail Shankarpasha Shahi Mosque, Bithangal Akhra, and the major Bibiyana gas field.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Jamalpur",
     "shapeId": "16705992B65705561019803",
     "name": "Jamalpur",
     "division": "Mymensingh",
-    "coordinates": [24.9339, 89.8967],
+    "coordinates": [
+      24.9339,
+      89.8967
+    ],
     "borders": [
-      "Bogra",
+      "Bogura",
       "Gaibandha",
       "Kurigram",
       "Mymensingh",
@@ -331,110 +454,182 @@
     ],
     "triviaFact": "Situated between the Jamuna and Old Brahmaputra rivers, internationally celebrated for its GI-certified traditional Nakshi Kantha (hand-embroidered quilts), the Lauchapra picnic hills bordering the Garo range, the shrine of Hazrat Shah Jamal, and savory Chhanar Polao.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
-    "id": "Jessore",
+    "id": "Jashore",
     "shapeId": "16705992B28022870637862",
-    "name": "Jessore",
+    "name": "Jashore",
     "division": "Khulna",
-    "coordinates": [23.1153, 89.1399],
-    "borders": ["Jhenaidah", "Khulna", "Magura", "Narail", "Satkhira"],
+    "coordinates": [
+      23.1153,
+      89.1399
+    ],
+    "borders": [
+      "Jhenaidah",
+      "Khulna",
+      "Magura",
+      "Narail",
+      "Satkhira"
+    ],
     "triviaFact": "Established in 1781 as the first modern administrative district in Bengal; renowned as the 'Flower Capital of Bangladesh' at Godkhali, the birthplace of sonnet pioneer Michael Madhusudan Dutt at Sagardari along the Kapotaksha River, the Benapole land port, and aromatic Khejur Gur (date-palm jaggery).",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": [
+      "Jessore"
+    ]
   },
   {
-    "id": "Jhalokati",
+    "id": "Jhalakathi",
     "shapeId": "16705992B14602656752780",
-    "name": "Jhalokati",
-    "division": "Barisal",
-    "coordinates": [22.5699, 90.1718],
-    "borders": ["Barguna", "Barisal", "Pirojpur"],
+    "name": "Jhalakathi",
+    "division": "Barishal",
+    "coordinates": [
+      22.5699,
+      90.1718
+    ],
+    "borders": [
+      "Barguna",
+      "Barishal",
+      "Pirojpur"
+    ],
     "triviaFact": "Compact riverine district intersected by the Sugandha, Bishkhali, and Gabkhan rivers—including the British-excavated Gabkhan Channel, dubbed the 'Suez Canal of Bengal'—famous for the Bhimruli floating guava market, Kirtipasha Zamindar Bari, Sujabad Fort, and traditional Shitalpati woven mats.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Jhenaidah",
     "shapeId": "16705992B77509092527129",
     "name": "Jhenaidah",
     "division": "Khulna",
-    "coordinates": [23.4433, 89.0273],
-    "borders": ["Chuadanga", "Jessore", "Kushtia", "Magura", "Rajbari"],
+    "coordinates": [
+      23.4433,
+      89.0273
+    ],
+    "borders": [
+      "Chuadanga",
+      "Jashore",
+      "Kushtia",
+      "Magura",
+      "Rajbari"
+    ],
     "triviaFact": "Southwestern heritage hub home to the medieval Sultanate Mosque City of Barobazar (Shahr Muhammadabad), the Naldanga Rajbari and temple complex, Miyar Dalan, one of Asia's largest sprawling banyan trees at Mallikpur, and the birthplace of mystic bard Pagla Kanai and revolutionary Bagha Jatin.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Joypurhat",
     "shapeId": "16705992B2288856744536",
     "name": "Joypurhat",
     "division": "Rajshahi",
-    "coordinates": [25.079, 89.0796],
-    "borders": ["Bogra", "Dinajpur", "Gaibandha", "Naogaon"],
+    "coordinates": [
+      25.079,
+      89.0796
+    ],
+    "borders": [
+      "Bogura",
+      "Dinajpur",
+      "Gaibandha",
+      "Naogaon"
+    ],
     "triviaFact": "Fertile northern Barind district renowned for its record potato and poultry production, the country's largest sugar mill in its namesake town, the ancient Nandail Dighi, Gopinathpur Temple, Lockma Rajbari near the Indian border, and rich underground deposits of coal and limestone at Jamalganj.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Khagrachhari",
     "shapeId": "16705992B35326431749719",
     "name": "Khagrachhari",
-    "division": "Chittagong",
-    "coordinates": [23.1997, 91.8739],
-    "borders": ["Chittagong", "Rangamati"],
+    "division": "Chattogram",
+    "coordinates": [
+      23.1997,
+      91.8739
+    ],
+    "borders": [
+      "Chattogram",
+      "Rangamati"
+    ],
     "triviaFact": "Scenic hill tract district nestled in the Chengi and Myani river valleys, famous for the torch-lit subterranean stream of Alutila Cave, Richhang Waterfall, the Devotakhum canyon gorge, the Mong Circle Chief's heritage, and serving as the primary road gateway to the cloud-kissed Sajek Valley.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Khulna",
     "shapeId": "16705992B21968895988188",
     "name": "Khulna",
     "division": "Khulna",
-    "coordinates": [22.264, 89.4297],
-    "borders": ["Bagerhat", "Jessore", "Narail", "Satkhira"],
+    "coordinates": [
+      22.264,
+      89.4297
+    ],
+    "borders": [
+      "Bagerhat",
+      "Jashore",
+      "Narail",
+      "Satkhira"
+    ],
     "triviaFact": "Third-largest metropolitan center and southern industrial hub at the confluence of the Rupsha and Bhairab rivers, serving as the primary gateway to the Sundarbans mangrove forest and the Royal Bengal Tiger, the Rabindra Complex at Dakshinpara, and the heart of the country's 'White Gold' shrimp export industry.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Kishoreganj",
     "shapeId": "16705992B82604838368079",
     "name": "Kishoreganj",
     "division": "Dhaka",
-    "coordinates": [24.4282, 90.9363],
+    "coordinates": [
+      24.4282,
+      90.9363
+    ],
     "borders": [
       "Brahmanbaria",
       "Gazipur",
       "Habiganj",
       "Mymensingh",
       "Narsingdi",
-      "Netrakona",
+      "Netrokona",
       "Sunamganj"
     ],
     "triviaFact": "Expansive haor-basin district famed for the historic Solakia Eidgah, the Pagla Mosque on the Narasunda River, the 16th-century forts of Baro-Bhuiyan leader Isa Khan at Jangalbari and Egarosindur, the temple of Bengal's first female poet Chandrabati, the scenic Nikli-Mithamain haor road, and Austagram's GI-certified Paneer cheese.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Kurigram",
     "shapeId": "16705992B97164497642406",
     "name": "Kurigram",
     "division": "Rangpur",
-    "coordinates": [25.9491, 89.6423],
-    "borders": ["Gaibandha", "Jamalpur", "Lalmonirhat", "Rangpur"],
+    "coordinates": [
+      25.9491,
+      89.6423
+    ],
+    "borders": [
+      "Gaibandha",
+      "Jamalpur",
+      "Lalmonirhat",
+      "Rangpur"
+    ],
     "triviaFact": "Northern borderland district where the mighty Brahmaputra, Dharla, Teesta, and Dudhkumar rivers weave around more than 400 river islands (chars), celebrated for the historic Chilmari river port (immortalized in Bhawaiya folk songs), Bhitarbandh and Panga Zamindar Baris, the Shahi Mosque of Sardarpara, and the legacy of peasant rebel Nurldin.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Kushtia",
     "shapeId": "16705992B21124734124900",
     "name": "Kushtia",
     "division": "Khulna",
-    "coordinates": [23.8912, 89.0304],
+    "coordinates": [
+      23.8912,
+      89.0304
+    ],
     "borders": [
       "Chuadanga",
       "Jhenaidah",
@@ -446,58 +641,99 @@
     ],
     "triviaFact": "Revered as the cultural capital of southwestern Bengal, home to the Shrine (Akhra) of mystic Baul philosopher Lalon Shah at Cheuriya, Rabindranath Tagore's Shilaidaha Kuthibari along the Padma and Gorai rivers, novelist Mir Mosharraf Hossain's Lahinipara home, and the iconic crunchy sesame treat Til-er Khaja.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Lakshmipur",
     "shapeId": "16705992B31973889793084",
     "name": "Lakshmipur",
-    "division": "Chittagong",
-    "coordinates": [22.9496, 90.85],
-    "borders": ["Barisal", "Bhola", "Chandpur", "Noakhali"],
+    "division": "Chattogram",
+    "coordinates": [
+      22.9496,
+      90.85
+    ],
+    "borders": [
+      "Barishal",
+      "Bhola",
+      "Chandpur",
+      "Noakhali"
+    ],
     "triviaFact": "Fertile estuarine district along the Lower Meghna River, renowned as the 'Soybean Capital of Bangladesh' for producing over 70% of the nation's soybeans, alongside vast betel nut (Supari) and coconut plantations, Dalal Bazar Zamindar Bari, Kaman Khola Zamindar Bari, and the ornate Masjid-e-Noor.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Lalmonirhat",
     "shapeId": "16705992B84214314165922",
     "name": "Lalmonirhat",
     "division": "Rangpur",
-    "coordinates": [26.1816, 89.1626],
-    "borders": ["Kurigram", "Nilphamari", "Rangpur"],
+    "coordinates": [
+      26.1816,
+      89.1626
+    ],
+    "borders": [
+      "Kurigram",
+      "Nilphamari",
+      "Rangpur"
+    ],
     "triviaFact": "Long northern frontier district hugging the Teesta and Dharla rivers, famous for the Tin Bigha Corridor and Dahagram-Angarpota enclave history, a massive WWII-era Allied military airbase (one of the largest in South Asia), Tushbhandar and Kakina Zamindar Baris, and the 69-Mosque archaeological site.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Madaripur",
     "shapeId": "16705992B87985099055959",
     "name": "Madaripur",
     "division": "Dhaka",
-    "coordinates": [23.2055, 90.1594],
-    "borders": ["Barisal", "Faridpur", "Gopalganj", "Munshiganj", "Shariatpur"],
+    "coordinates": [
+      23.2055,
+      90.1594
+    ],
+    "borders": [
+      "Barishal",
+      "Faridpur",
+      "Gopalganj",
+      "Munshiganj",
+      "Shariatpur"
+    ],
     "triviaFact": "Riverine district along the Padma and Arial Khan rivers named after 15th-century Sufi saint Badiuddin Zinda Shah Madar, famous for the scenic Shakuni Lake in the center of town, the 17th-century Algi Kazibari Mosque, Raja Ram Mandir at Khalia, the anti-colonial Faraizi movement of Haji Shariatullah, and prized Khejur Gur.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Magura",
     "shapeId": "16705992B78415132034426",
     "name": "Magura",
     "division": "Khulna",
-    "coordinates": [23.4246, 89.4026],
-    "borders": ["Faridpur", "Jessore", "Jhenaidah", "Narail", "Rajbari"],
+    "coordinates": [
+      23.4246,
+      89.4026
+    ],
+    "borders": [
+      "Faridpur",
+      "Jashore",
+      "Jhenaidah",
+      "Narail",
+      "Rajbari"
+    ],
     "triviaFact": "Picturesque southwestern district at the confluence of the Madhumati, Nabaganga, Kumar, and Chitra rivers, celebrated for the 17th-century palace ruins and temples of King Sitaram Ray at Mohammadpur, the Buddhist stupa mound of Bhaatbhita, Siddheshwari Math, and as the hometown of cricket legend Shakib Al Hasan.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Manikganj",
     "shapeId": "16705992B79131283702140",
     "name": "Manikganj",
     "division": "Dhaka",
-    "coordinates": [23.8807, 89.9834],
+    "coordinates": [
+      23.8807,
+      89.9834
+    ],
     "borders": [
       "Dhaka",
       "Faridpur",
@@ -508,39 +744,57 @@
     ],
     "triviaFact": "River-framed district at the confluence of the Padma and Jamuna rivers (hosting the busy Paturia-Aricha ferry terminals), famous for the grand 19th-century Baliati Palace and Teota Zamindar Bari, the birthplace of first Language Movement martyr Abdus Salam and Rafiq Uddin Ahmed, and GI-certified Hazari Gur (white date-palm jaggery).",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
-    "id": "Maulvibazar",
+    "id": "Moulvibazar",
     "shapeId": "16705992B62450131352427",
-    "name": "Maulvibazar",
+    "name": "Moulvibazar",
     "division": "Sylhet",
-    "coordinates": [24.4407, 91.924],
-    "borders": ["Habiganj", "Sylhet"],
+    "coordinates": [
+      24.4407,
+      91.924
+    ],
+    "borders": [
+      "Habiganj",
+      "Sylhet"
+    ],
     "triviaFact": "Hailed as the 'Tea Capital of Bangladesh' with over 90 lush tea estates centered around Srimangal, home to Lawachara National Park (and endangered Hoolock gibbons), the Madhabkunda and Hum Hum waterfalls, Baikka Beel bird sanctuary in Hail Haor, Madhabpur Lake, and the GI-certified Agarwood-Attar industry of Barlekha.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Meherpur",
     "shapeId": "16705992B11914188004823",
     "name": "Meherpur",
     "division": "Khulna",
-    "coordinates": [23.7926, 88.6799],
-    "borders": ["Chuadanga", "Kushtia"],
+    "coordinates": [
+      23.7926,
+      88.6799
+    ],
+    "borders": [
+      "Chuadanga",
+      "Kushtia"
+    ],
     "triviaFact": "The smallest district in Bangladesh by area and the historic birthplace of the nation's first government—where the Provisional Government of Bangladesh took its oath at the mango grove of Mujibnagar (Baidyanathtala) on April 17, 1971—also famous for the colonial Amjhupi Neel Kuthi (Indigo House) and the century-old Savitri sweet.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Munshiganj",
     "shapeId": "16705992B99884694518333",
     "name": "Munshiganj",
     "division": "Dhaka",
-    "coordinates": [23.5337, 90.4514],
+    "coordinates": [
+      23.5337,
+      90.4514
+    ],
     "borders": [
       "Chandpur",
-      "Comilla",
+      "Cumilla",
       "Dhaka",
       "Faridpur",
       "Madaripur",
@@ -549,64 +803,86 @@
     ],
     "triviaFact": "Known in antiquity as Bikrampur, the ancient capital of the Chandra, Varman, and Sena dynasties and birthplace of 10th-century Buddhist scholar Atisha Dipankara and scientist Sir Jagadish Chandra Bose; today famous for the Mughal river fortress of Idrakpur, the northern end of the Padma Bridge, Baba Adam's Mosque, and being the country's top potato producer.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Mymensingh",
     "shapeId": "16705992B54511139091050",
     "name": "Mymensingh",
     "division": "Mymensingh",
-    "coordinates": [24.7456, 90.4722],
+    "coordinates": [
+      24.7456,
+      90.4722
+    ],
     "borders": [
       "Gazipur",
       "Jamalpur",
       "Kishoreganj",
-      "Netrakona",
+      "Netrokona",
       "Sherpur",
       "Tangail"
     ],
     "triviaFact": "Historic cultural and educational capital along the Old Brahmaputra River, famous for the palatial Shashi Lodge and Alexander Castle, the Bangladesh Agricultural University, the medieval folk ballads 'Maimansingha Gitika', the Shilpacharya Zainul Abedin Sangrahashala, and the legendary GI-certified Muktagachhar Monda sweet.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Naogaon",
     "shapeId": "16705992B34203284467157",
     "name": "Naogaon",
     "division": "Rajshahi",
-    "coordinates": [24.865, 88.7668],
-    "borders": ["Bogra", "Joypurhat", "Natore", "Nawabganj", "Rajshahi"],
+    "coordinates": [
+      24.865,
+      88.7668
+    ],
+    "borders": [
+      "Bogura",
+      "Joypurhat",
+      "Natore",
+      "Chapainawabganj",
+      "Rajshahi"
+    ],
     "triviaFact": "Archaeological treasure trove and agricultural powerhouse in the Barind Tract, home to the UNESCO World Heritage site of Paharpur Buddhist Bihar (8th-century Somapura Mahavihara), the stone Kusumba Mosque (featured on the 5-taka note), Dubalhati Rajbari, Rabindranath Tagore's Patisar Kuthibari, and record rice and mango production.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Narail",
     "shapeId": "16705992B56503274196630",
     "name": "Narail",
     "division": "Khulna",
-    "coordinates": [23.13, 89.5701],
+    "coordinates": [
+      23.13,
+      89.5701
+    ],
     "borders": [
       "Bagerhat",
       "Faridpur",
       "Gopalganj",
-      "Jessore",
+      "Jashore",
       "Khulna",
       "Magura"
     ],
     "triviaFact": "Serene southwestern district along the Chitra and Madhumati rivers, celebrated as the home of world-renowned avant-garde painter SM Sultan (featuring the Sultan Complex and his double-decker boat 'Shishu Swargo'), one of the last places on Earth practicing traditional otter fishing, and the hometown of cricket captain Mashrafe Mortaza.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Narayanganj",
     "shapeId": "16705992B28796010313895",
     "name": "Narayanganj",
     "division": "Dhaka",
-    "coordinates": [23.7656, 90.5798],
+    "coordinates": [
+      23.7656,
+      90.5798
+    ],
     "borders": [
       "Brahmanbaria",
-      "Comilla",
+      "Cumilla",
       "Dhaka",
       "Gazipur",
       "Munshiganj",
@@ -614,27 +890,40 @@
     ],
     "triviaFact": "Historically dubbed the 'Dundee of the East' for its booming jute and river trade along the Shitalakshya River, home to the medieval Bengal capital of Sonargaon, the preserved colonial merchant street of Panam Nagar, the Mughal water forts of Hajiganj and Sonakanda, and UNESCO-recognized Jamdani weaving villages.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Narsingdi",
     "shapeId": "16705992B95243043657125",
     "name": "Narsingdi",
     "division": "Dhaka",
-    "coordinates": [23.9726, 90.7314],
-    "borders": ["Brahmanbaria", "Gazipur", "Kishoreganj", "Narayanganj"],
+    "coordinates": [
+      23.9726,
+      90.7314
+    ],
+    "borders": [
+      "Brahmanbaria",
+      "Gazipur",
+      "Kishoreganj",
+      "Narayanganj"
+    ],
     "triviaFact": "Vibrant textile and archaeological hub between the Meghna and Old Brahmaputra rivers, home to the 2,500-year-old fortified urban ruins of Wari-Bateshwar (linked to ancient Gangaridai), the massive wholesale cloth market of Shekherchar-Baburhat ('Manchester of the East'), and GI-certified Amritsagar bananas and Lotkon (Burmese grape).",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Natore",
     "shapeId": "16705992B43065208682222",
     "name": "Natore",
     "division": "Rajshahi",
-    "coordinates": [24.4294, 89.089],
+    "coordinates": [
+      24.4294,
+      89.089
+    ],
     "borders": [
-      "Bogra",
+      "Bogura",
       "Kushtia",
       "Naogaon",
       "Pabna",
@@ -643,109 +932,179 @@
     ],
     "triviaFact": "Royal heartland of North Bengal famous for the sprawling moated estates of Uttara Ganabhaban (Dighapatia Rajbari) and Rani Bhabani's Rajbari, bordered by the vast Chalan Beel and Halti Beel wetlands, immortalized in Jibanananda Das's poem 'Banalata Sen', and renowned for its GI-certified sweet Kanchagolla.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
-    "id": "Nawabganj",
+    "id": "Chapainawabganj",
     "shapeId": "16705992B76725860359822",
-    "name": "Nawabganj",
+    "name": "Chapainawabganj",
     "division": "Rajshahi",
-    "coordinates": [24.7929, 88.3412],
-    "borders": ["Naogaon", "Rajshahi"],
+    "coordinates": [
+      24.7929,
+      88.3412
+    ],
+    "borders": [
+      "Naogaon",
+      "Rajshahi"
+    ],
     "triviaFact": "Commonly known as Chapainawabganj, the undisputed 'Mango Capital of Bangladesh' at the westernmost tip along the Padma and Mahananda rivers, famous for the 15th-century Sultanate architectural gems of Choto Sona Mosque and Darasbari Mosque (part of ancient Gaur), satirical Gambhira folk theatre, and traditional Kalai Ruti.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": [
+      "Nawabganj"
+    ]
   },
   {
-    "id": "Netrakona",
+    "id": "Netrokona",
     "shapeId": "16705992B47191620994273",
-    "name": "Netrakona",
+    "name": "Netrokona",
     "division": "Mymensingh",
-    "coordinates": [24.8969, 90.8424],
-    "borders": ["Kishoreganj", "Mymensingh", "Sunamganj"],
+    "coordinates": [
+      24.8969,
+      90.8424
+    ],
+    "borders": [
+      "Kishoreganj",
+      "Mymensingh",
+      "Sunamganj"
+    ],
     "triviaFact": "Scenic northeastern border district where the emerald waters of the Someshwari River and the white ceramic clay hills of Birishiri and Durgapur meet the Garo Hills, also famed for the vast Dingapota Haor, Susang Durgapur Rajbari, the birthplace of writer Humayun Ahmed, and the giant pillow-shaped Balish Mishti sweet.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Nilphamari",
     "shapeId": "16705992B74406959438199",
     "name": "Nilphamari",
     "division": "Rangpur",
-    "coordinates": [25.9982, 88.9309],
-    "borders": ["Dinajpur", "Lalmonirhat", "Panchagarh", "Rangpur"],
+    "coordinates": [
+      25.9982,
+      88.9309
+    ],
+    "borders": [
+      "Dinajpur",
+      "Lalmonirhat",
+      "Panchagarh",
+      "Rangpur"
+    ],
     "triviaFact": "Northern historical and industrial district named after its 19th-century British indigo plantations (Nilkuthi), home to the tranquil bird-sanctuary reservoir of Nilsagar, the Teesta Barrage at Dalia (the country's largest irrigation project), the historic 1870 Saidpur Railway Workshop, and the Uttara Export Processing Zone.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Noakhali",
     "shapeId": "16705992B96773862439533",
     "name": "Noakhali",
-    "division": "Chittagong",
-    "coordinates": [22.6702, 91.1272],
+    "division": "Chattogram",
+    "coordinates": [
+      22.6702,
+      91.1272
+    ],
     "borders": [
       "Bhola",
       "Chandpur",
-      "Chittagong",
-      "Comilla",
+      "Chattogram",
+      "Cumilla",
       "Feni",
       "Lakshmipur"
     ],
     "triviaFact": "Dynamic coastal deltaic district where new islands (chars) continually emerge from the Meghna estuary, famous for the spotted-deer mangrove island of Nijhum Dwip and Hatiya, the Mughal-style Bajra Shahi Mosque, the historic Gandhi Ashram at Jayag, Bhasan Char, and rich coconut-infused desserts like Khola Ja পিঠা and Narikel Naru.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Pabna",
     "shapeId": "16705992B46384724638491",
     "name": "Pabna",
     "division": "Rajshahi",
-    "coordinates": [24.1189, 89.3771],
-    "borders": ["Kushtia", "Manikganj", "Natore", "Rajbari", "Sirajganj"],
+    "coordinates": [
+      24.1189,
+      89.3771
+    ],
+    "borders": [
+      "Kushtia",
+      "Manikganj",
+      "Natore",
+      "Rajbari",
+      "Sirajganj"
+    ],
     "triviaFact": "Historic gateway to North Bengal bounded by the Padma and Jamuna rivers, famous for the 1915 red-steel Hardinge Bridge, the country's first nuclear power plant at Rooppur, the 17th-century terracotta Jor Bangla Temple, Tarash Bhavan, the southern Chalan Beel, and being the birthplace of legendary actress Suchitra Sen.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Panchagarh",
     "shapeId": "16705992B66536058617583",
     "name": "Panchagarh",
     "division": "Rangpur",
-    "coordinates": [26.313, 88.5602],
-    "borders": ["Dinajpur", "Nilphamari", "Thakurgaon"],
+    "coordinates": [
+      26.313,
+      88.5602
+    ],
+    "borders": [
+      "Dinajpur",
+      "Nilphamari",
+      "Thakurgaon"
+    ],
     "triviaFact": "The northernmost district of Bangladesh, stretching up to Tetulia and Banglabandha Zero Point near the Himalayan foothills, famed for clear autumn and winter views of snow-capped Mount Kanchenjunga, thriving plain-land organic tea gardens, the 1,400-year-old walled fort city of Bhitagarh, Mirzapur Shahi Mosque, and the Rocks Museum.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Patuakhali",
     "shapeId": "16705992B49808088196813",
     "name": "Patuakhali",
-    "division": "Barisal",
-    "coordinates": [22.1079, 90.397],
-    "borders": ["Barguna", "Barisal", "Bhola"],
+    "division": "Barishal",
+    "coordinates": [
+      22.1079,
+      90.397
+    ],
+    "borders": [
+      "Barguna",
+      "Barishal",
+      "Bhola"
+    ],
     "triviaFact": "Celebrated as 'Sagar Kannya' (Daughter of the Sea), home to Kuakata—one of the rare beaches in South Asia where visitors can watch both the sunrise and sunset unobstructed over the Bay of Bengal—as well as the deep-sea Payra Port, Fatrar Char mangrove forest, Misripara Buddhist Temple, and Somaeshwar-era river islands.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Pirojpur",
     "shapeId": "16705992B46028667424095",
     "name": "Pirojpur",
-    "division": "Barisal",
-    "coordinates": [22.5499, 90.0159],
-    "borders": ["Bagerhat", "Barguna", "Barisal", "Gopalganj", "Jhalokati"],
+    "division": "Barishal",
+    "coordinates": [
+      22.5499,
+      90.0159
+    ],
+    "borders": [
+      "Bagerhat",
+      "Barguna",
+      "Barishal",
+      "Gopalganj",
+      "Jhalakathi"
+    ],
     "triviaFact": "Lush southern riverine district laced by the Baleshwar, Kacha, and Sandhya rivers, famous for the floating guava, hog-plum (Amra), and timber markets of Swarupkathi (Nesarabad), the 17th-century Rayerkathi Royal Palace and Shiva temples, the Momin Mosque of Mathbaria, and thriving coir and boat-building industries.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Rajbari",
     "shapeId": "16705992B48875454234518",
     "name": "Rajbari",
     "division": "Dhaka",
-    "coordinates": [23.6918, 89.563],
+    "coordinates": [
+      23.6918,
+      89.563
+    ],
     "borders": [
       "Faridpur",
       "Jhenaidah",
@@ -756,36 +1115,57 @@
     ],
     "triviaFact": "Known as a vital 'Gateway to the South' along the Padma and Gorai rivers via the Daulatdia-Goalanda river corridor, named after the historic estates of Raja Surya Kumar and home to the Mir Mosharraf Hossain Memorial Complex at Padamdi, the Nalia Joar temple, Goalanda's famous river Hilsa, and Kheer Chomchom sweets.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Rajshahi",
     "shapeId": "16705992B51815672792645",
     "name": "Rajshahi",
     "division": "Rajshahi",
-    "coordinates": [24.4953, 88.71],
-    "borders": ["Kushtia", "Naogaon", "Natore", "Nawabganj"],
+    "coordinates": [
+      24.4953,
+      88.71
+    ],
+    "borders": [
+      "Kushtia",
+      "Naogaon",
+      "Natore",
+      "Chapainawabganj"
+    ],
     "triviaFact": "Hailed as the 'Silk City' and 'Education City' of Bangladesh along the northern embankment of the Padma River, renowned for the Varendra Research Museum (the country's oldest museum, founded in 1910), the terracotta Puthia Temple Complex, the 16th-century Bagha Mosque, luxurious GI-certified Rajshahi Silk, and prized Fazli mangoes.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Rangamati",
     "shapeId": "16705992B35610473312733",
     "name": "Rangamati",
-    "division": "Chittagong",
-    "coordinates": [22.8242, 92.3426],
-    "borders": ["Bandarban", "Chittagong", "Khagrachhari"],
+    "division": "Chattogram",
+    "coordinates": [
+      22.8242,
+      92.3426
+    ],
+    "borders": [
+      "Bandarban",
+      "Chattogram",
+      "Khagrachhari"
+    ],
     "triviaFact": "The largest district in Bangladesh by area, centered around the sprawling turquoise waters of Kaptai Lake and the Karnaphuli Hydroelectric Dam, famous for the cloud-kissed Sajek Valley in Baghaichhari, the iconic Hanging Bridge (Jhulonto Bridge), Shuvolong Waterfalls, Rajban Vihara, and vibrant Chakma and Marma indigenous cultures.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Rangpur",
     "shapeId": "16705992B34260815515495",
     "name": "Rangpur",
     "division": "Rangpur",
-    "coordinates": [25.6114, 89.2193],
+    "coordinates": [
+      25.6114,
+      89.2193
+    ],
     "borders": [
       "Dinajpur",
       "Gaibandha",
@@ -795,80 +1175,135 @@
     ],
     "triviaFact": "Northern divisional metropolis along the Ghaghat and Teesta rivers, famous for the grand Indo-Saracenic Tajhat Palace, the century-old Carmichael College campus, the birthplace of feminist pioneer Begum Rokeya at Pairaband, GI-certified handwoven Shatranji carpets, and the prized fiberless Haribhanga mango.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Satkhira",
     "shapeId": "16705992B60176987344662",
     "name": "Satkhira",
     "division": "Khulna",
-    "coordinates": [22.1915, 89.1632],
-    "borders": ["Jessore", "Khulna"],
+    "coordinates": [
+      22.1915,
+      89.1632
+    ],
+    "borders": [
+      "Jashore",
+      "Khulna"
+    ],
     "triviaFact": "Southwestern coastal district encompassing the largest portion of the Bangladesh Sundarbans, famous for the Kalagachhia and Munshiganj eco-tourism trails, Mandarbaria Sea Beach, the shrine of Khan Bahadur Ahsanullah at Nalta Sharif, the Tetulia Jami Mosque, Bhomra land port, and premier Bagda shrimp and Himsagar mango production.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": true
+    "isCoastal": true,
+    "aliases": []
   },
   {
     "id": "Shariatpur",
     "shapeId": "16705992B92388810566131",
     "name": "Shariatpur",
     "division": "Dhaka",
-    "coordinates": [23.2285, 90.4327],
-    "borders": ["Barisal", "Chandpur", "Madaripur", "Munshiganj"],
+    "coordinates": [
+      23.2285,
+      90.4327
+    ],
+    "borders": [
+      "Barishal",
+      "Chandpur",
+      "Madaripur",
+      "Munshiganj"
+    ],
     "triviaFact": "Dynamic riverine district flanked by the mighty Padma and Meghna rivers (hosting the southern plaza of the Padma Bridge at Zajira) and named after anti-colonial reformer Haji Shariatullah, famous for the 600-year-old Dhanuka Manasa Bari, Rudrakar Math, Burirhat Mosque, and traditional Bibikhana Pitha and Bhagya Kul sweets.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Sherpur",
     "shapeId": "16705992B90842308963557",
     "name": "Sherpur",
     "division": "Mymensingh",
-    "coordinates": [25.0712, 90.0882],
-    "borders": ["Jamalpur", "Mymensingh"],
+    "coordinates": [
+      25.0712,
+      90.0882
+    ],
+    "borders": [
+      "Jamalpur",
+      "Mymensingh"
+    ],
     "triviaFact": "Picturesque northern border district nestled along the foothills of the Garo Hills of Meghalaya, famous for the Ghazni Obokash and Madhutila Eco-Park hill resorts, the 16th-century Ghagra Lashkarbari Mosque, the ancient fort of Garhjaripa, and its GI-certified aromatic Tulshimala rice and Chhanar Payesh dessert.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Sirajganj",
     "shapeId": "16705992B55394931042500",
     "name": "Sirajganj",
     "division": "Rajshahi",
-    "coordinates": [24.4226, 89.5449],
-    "borders": ["Bogra", "Jamalpur", "Manikganj", "Natore", "Pabna", "Tangail"],
+    "coordinates": [
+      24.4226,
+      89.5449
+    ],
+    "borders": [
+      "Bogura",
+      "Jamalpur",
+      "Manikganj",
+      "Natore",
+      "Pabna",
+      "Tangail"
+    ],
     "triviaFact": "Known as the 'Gateway to North Bengal' anchored by the western end of the Jamuna Multipurpose Bridge, famous for Rabindranath Tagore's Shahjadpur Kachharibari, the 18th-century terracotta Navaratna Temple at Hatikumrul, the Baghabari dairy belt, and the largest handloom and powerloom Lungi and Saree textile industry in Bangladesh.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Sunamganj",
     "shapeId": "16705992B61059366245275",
     "name": "Sunamganj",
     "division": "Sylhet",
-    "coordinates": [24.8965, 91.3729],
-    "borders": ["Habiganj", "Kishoreganj", "Netrakona", "Sylhet"],
+    "coordinates": [
+      24.8965,
+      91.3729
+    ],
+    "borders": [
+      "Habiganj",
+      "Kishoreganj",
+      "Netrokona",
+      "Sylhet"
+    ],
     "triviaFact": "Known as the 'Land of Haors and Mystic Bards' along the Surma River and Meghalaya hills, home to the UNESCO Ramsar wetland of Tanguar Haor, the turquoise quarry lakes of Niladri (Tekerghat), the crimson Shimul Bagan silk-cotton forest along the Jadukata River, and the legacy of folk legends Hason Raja and Baul Shah Abdul Karim.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Sylhet",
     "shapeId": "16705992B47932115867008",
     "name": "Sylhet",
     "division": "Sylhet",
-    "coordinates": [24.9119, 91.977],
-    "borders": ["Habiganj", "Maulvibazar", "Sunamganj"],
+    "coordinates": [
+      24.9119,
+      91.977
+    ],
+    "borders": [
+      "Habiganj",
+      "Moulvibazar",
+      "Sunamganj"
+    ],
     "triviaFact": "Northeastern spiritual and scenic heartland known as the 'Land of Two Leaves and a Bud,' famous for the shrines of Hazrat Shah Jalal and Hazrat Shah Paran, the crystal-clear mountain streams of Jaflong, Bichnakandi, and Sada Pathor (Bholaganj), Ratargul Swamp Forest, Keane Bridge, and Malnicherra (the subcontinent's oldest commercial tea garden).",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Tangail",
     "shapeId": "16705992B55867939933107",
     "name": "Tangail",
     "division": "Dhaka",
-    "coordinates": [24.3414, 89.9904],
+    "coordinates": [
+      24.3414,
+      89.9904
+    ],
     "borders": [
       "Dhaka",
       "Gazipur",
@@ -879,17 +1314,25 @@
     ],
     "triviaFact": "Central riverine district along the Jamuna and Louhajang rivers, world-famous for its GI-certified handloom Tangail Saree and Porabari Chomchom sweet, the grand Victorian Mohera and Pakutia Zamindar Baris, the 17th-century Mughal Atia Mosque, the 201-Dome Mosque, and the deciduous Sal forests and pineapple orchards of Madhupur National Park.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   },
   {
     "id": "Thakurgaon",
     "shapeId": "16705992B44482388014877",
     "name": "Thakurgaon",
     "division": "Rangpur",
-    "coordinates": [25.9699, 88.3616],
-    "borders": ["Dinajpur", "Panchagarh"],
+    "coordinates": [
+      25.9699,
+      88.3616
+    ],
+    "borders": [
+      "Dinajpur",
+      "Panchagarh"
+    ],
     "triviaFact": "Tranquil northern agricultural district along the Tangon, Nagor, and Kulik rivers, famous for Baliadangi's 200-year-old giant Suryapuri mango tree—whose sprawling, wave-like branches cover nearly two acres of land—along with the 18th-century Jamalpur Jami Mosque, Haripur Rajbari, and major wheat and sugar cultivation.",
     "flagEmoji": "🇧🇩",
-    "isCoastal": false
+    "isCoastal": false,
+    "aliases": []
   }
 ]
