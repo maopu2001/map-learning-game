@@ -57,7 +57,7 @@ export function ClueDrawer() {
   let hint1Content: React.ReactNode = isBD ? (
     <span className="text-sky-300">Division: {targetDistrict.division}</span>
   ) : (
-    <span className="text-sky-300">Continent: {targetCountry.region}</span>
+    <span className="text-sky-300">Continent: {targetCountry.continent}</span>
   );
 
   if (isDetective) {

@@ -50,7 +50,7 @@ export function HowItWorksSection() {
             Neighbor Hints
           </h3>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Unlock bordering areas right on the map to narrow down which region the mystery place is in.
+            Unlock bordering areas right on the map to narrow down which continent or subregion the mystery place is in.
           </p>
         </div>
       </div>

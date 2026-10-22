@@ -22,7 +22,7 @@ import { DivisionFilterBar } from "@/components/Explore/DivisionFilterBar";
 import { DistrictSearch } from "@/components/Explore/DistrictSearch";
 import { DistrictProfileCard } from "@/components/Explore/DistrictProfileCard";
 
-const BD_GEO_URL = "/data/bangladesh-districts-geo.json";
+const BD_GEO_URL = "/data/bangladesh-districts-topo.json";
 
 const DEFAULT_DISTRICT =
   DISTRICTS_BY_NAME.get("dhaka") || BANGLADESH_DISTRICTS[0];
@@ -48,6 +48,49 @@ export default function BangladeshExplorePage() {
   });
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const animRef = useRef<number | null>(null);
+  const positionRef = useRef(position);
+  positionRef.current = position;
+
+  useEffect(() => {
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, []);
+
+  const flyTo = (targetCoords: [number, number], targetZoom: number) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    const startCoords = positionRef.current.coordinates;
+    const startZoom = positionRef.current.zoom;
+    const startTime = performance.now();
+    const duration = 320;
+
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      // Smooth ease-out cubic
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      const currentLng =
+        startCoords[0] + (targetCoords[0] - startCoords[0]) * ease;
+      const currentLat =
+        startCoords[1] + (targetCoords[1] - startCoords[1]) * ease;
+      const currentZoom = startZoom + (targetZoom - startZoom) * ease;
+
+      setPosition({
+        coordinates: [currentLng, currentLat],
+        zoom: currentZoom,
+      });
+
+      if (progress < 1) {
+        animRef.current = requestAnimationFrame(step);
+      } else {
+        animRef.current = null;
+      }
+    };
+
+    animRef.current = requestAnimationFrame(step);
+  };
 
   // Prevent browser viewport tab-zooming on trackpad pinch so the map zooms instead
   useEffect(() => {
@@ -55,9 +98,7 @@ export default function BangladeshExplorePage() {
     if (!el) return;
 
     const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
+      e.preventDefault();
     };
 
     const onGesture = (e: Event) => {
@@ -76,11 +117,15 @@ export default function BangladeshExplorePage() {
   }, []);
 
   const filterZoomEvent = (event: unknown) => {
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
     const e = event as { type?: string; ctrlKey?: boolean; button?: number };
     if (!e || !e.type) return true;
 
     if (e.type === "wheel") {
-      return Boolean(e.ctrlKey);
+      return true;
     }
     if (e.type === "mousedown") {
       return e.button === 0;
@@ -92,23 +137,42 @@ export default function BangladeshExplorePage() {
   };
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 8) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 50) }));
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.5, 0.8) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 0.8) }));
   };
 
   const handleResetZoom = () => {
-    setPosition({ coordinates: [90.3563, 23.685], zoom: 1 });
+    flyTo([90.3563, 23.685], 1);
   };
 
-  const selectDistrict = (dist: DistrictData) => {
+  const selectDistrict = (dist: DistrictData, shouldFly = true) => {
     setSelectedDistrict(dist);
-    setPosition({
-      coordinates: [dist.coordinates[1], dist.coordinates[0]],
-      zoom: 3.5,
-    });
+    if (divisionFilter !== "All" && dist.division !== divisionFilter) {
+      setDivisionFilter(dist.division);
+    }
+    if (shouldFly) {
+      const targetZoom = Math.max(positionRef.current.zoom, 3.5);
+      flyTo([dist.coordinates[1], dist.coordinates[0]], targetZoom);
+    }
+  };
+
+  const handleSelectDivision = (division: string) => {
+    setDivisionFilter(division);
+    if (division === "All") {
+      flyTo([90.3563, 23.685], 1);
+    } else {
+      const divisionDistrict = DISTRICTS_BY_NAME.get(division.toLowerCase());
+      if (divisionDistrict) {
+        setSelectedDistrict(divisionDistrict);
+        flyTo(
+          [divisionDistrict.coordinates[1], divisionDistrict.coordinates[0]],
+          2.6,
+        );
+      }
+    }
   };
 
   const activeDistrict = hoveredDistrict || selectedDistrict;
@@ -117,6 +181,12 @@ export default function BangladeshExplorePage() {
   );
   const isNeighbor = Boolean(
     hoveredDistrict && selectedDistrict.borders.includes(hoveredDistrict.name),
+  );
+  const isHoverInDivision = Boolean(
+    hoveredDistrict &&
+      divisionFilter !== "All" &&
+      hoveredDistrict.division === divisionFilter &&
+      hoveredDistrict.name !== selectedDistrict.name,
   );
 
   return (
@@ -180,7 +250,7 @@ export default function BangladeshExplorePage() {
             <div className="shrink-0">
               <DivisionFilterBar
                 selectedDivision={divisionFilter}
-                onSelectDivision={setDivisionFilter}
+                onSelectDivision={handleSelectDivision}
               />
             </div>
 
@@ -217,9 +287,9 @@ export default function BangladeshExplorePage() {
                   <span className="font-bold text-white text-2xs sm:text-xs">
                     {activeDistrict.name}
                   </span>
-                  {isNeighbor && (
+                  {isHovering && (isNeighbor || isHoverInDivision) && (
                     <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
-                      Neighbor
+                      {isNeighbor ? "Neighbor" : `${hoveredDistrict?.division} Division`}
                     </span>
                   )}
                 </div>
@@ -244,13 +314,21 @@ export default function BangladeshExplorePage() {
                   zoom={position.zoom}
                   center={position.coordinates}
                   filterZoomEvent={filterZoomEvent}
-                  onMoveEnd={(pos) => setPosition(pos)}
-                  maxZoom={15}
+                  onMoveEnd={(pos) => {
+                    if (animRef.current) {
+                      cancelAnimationFrame(animRef.current);
+                      animRef.current = null;
+                    }
+                    setPosition(pos);
+                  }}
+                  maxZoom={50}
                   minZoom={0.8}
                 >
                   <Geographies geography={BD_GEO_URL}>
                     {({ geographies }) => {
                       const strokeWidth = 0.65;
+                      const isDivisionActive = divisionFilter !== "All";
+
                       const selectedGeo = selectedDistrict
                         ? geographies.find(
                             (g) =>
@@ -263,16 +341,23 @@ export default function BangladeshExplorePage() {
                               g.properties?.shapeName === hoveredDistrict.name,
                           )
                         : null;
-                      const neighborGeos = selectedDistrict
-                        ? geographies.filter((g) => {
-                            const sName = g.properties?.shapeName as
-                              | string
-                              | undefined;
-                            return Boolean(
-                              sName && selectedDistrict.borders.includes(sName),
-                            );
-                          })
-                        : [];
+
+                      // Highlight whole division when filter is active, otherwise highlight neighbors
+                      const highlightedGeos = geographies.filter((g) => {
+                        const sName = g.properties?.shapeName as
+                          | string
+                          | undefined;
+                        if (!sName || sName === selectedDistrict?.name) {
+                          return false;
+                        }
+                        if (isDivisionActive) {
+                          const d = DISTRICTS_BY_NAME.get(sName.toLowerCase());
+                          return d?.division === divisionFilter;
+                        }
+                        return Boolean(
+                          selectedDistrict?.borders.includes(sName),
+                        );
+                      });
 
                       return (
                         <>
@@ -285,12 +370,17 @@ export default function BangladeshExplorePage() {
                             );
                             const isSelected =
                               selectedDistrict?.name === districtName;
+                            const isInDivision =
+                              isDivisionActive &&
+                              district?.division === divisionFilter;
                             const isNeighbor = Boolean(
                               selectedDistrict?.borders.includes(districtName),
                             );
+                            const isHighlighted = isDivisionActive
+                              ? isInDivision && !isSelected
+                              : isNeighbor && !isSelected;
                             const matchesDivision =
-                              divisionFilter === "All" ||
-                              district?.division === divisionFilter;
+                              !isDivisionActive || isInDivision;
 
                             let fill = "#131b2e";
                             let stroke = "#24324a";
@@ -298,7 +388,7 @@ export default function BangladeshExplorePage() {
                             if (isSelected) {
                               fill = "#1a253a";
                               stroke = "#10b981";
-                            } else if (isNeighbor) {
+                            } else if (isHighlighted) {
                               fill = "#0369a1";
                               stroke = "#38bdf8";
                             } else if (!matchesDivision) {
@@ -335,7 +425,7 @@ export default function BangladeshExplorePage() {
                                     fill: "#1e2c45",
                                     stroke: isSelected
                                       ? "#34d399"
-                                      : isNeighbor
+                                      : isHighlighted
                                         ? "#38bdf8"
                                         : "#94a3b8",
                                     strokeWidth,
@@ -354,10 +444,10 @@ export default function BangladeshExplorePage() {
                             );
                           })}
 
-                          {/* Overlay 1: Neighbor districts */}
-                          {neighborGeos.map((geo) => (
+                          {/* Overlay 1: Highlighted districts (Division or Neighbors) */}
+                          {highlightedGeos.map((geo) => (
                             <Geography
-                              key={`overlay-explore-nb-${geo.rsmKey}`}
+                              key={`overlay-explore-hl-${geo.rsmKey}`}
                               geography={geo}
                               style={{
                                 default: {

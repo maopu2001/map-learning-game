@@ -83,7 +83,8 @@ export function CountryReconSheet({
                   {inspectedCountry.name}
                 </h4>
                 <p className="text-2xs text-sky-400">
-                  {inspectedCountry.region}
+                  {inspectedCountry.continent}
+                  {inspectedCountry.subregion ? ` • ${inspectedCountry.subregion}` : ""}
                 </p>
               </div>
             </div>
@@ -108,7 +109,7 @@ export function CountryReconSheet({
             <div className="text-2xs font-semibold pt-1 border-t border-slate-800">
               {difficulty === "easy" || unlockedHints >= 1 ? (
                 <span className="text-sky-400">
-                  Hint 1: Continent: {targetCountry.region}
+                  Hint 1: Continent: {targetCountry.continent}
                 </span>
               ) : (
                 <span className="text-slate-500 font-normal">

@@ -68,21 +68,68 @@ export function GuessInput() {
     setOpen(false);
   };
 
+  const filteredDistricts = React.useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return availableDistricts;
+    const list = availableDistricts.filter((d) => matchesDistrict(d, q));
+    return list.sort((a, b) => {
+      const aExact = a.name.toLowerCase() === q;
+      const bExact = b.name.toLowerCase() === q;
+      if (aExact && !bExact) return -1;
+      if (!aExact && bExact) return 1;
+
+      const aStarts = a.name.toLowerCase().startsWith(q);
+      const bStarts = b.name.toLowerCase().startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      return 0;
+    });
+  }, [availableDistricts, query]);
+
+  const filteredCountries = React.useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return availableCountries;
+    const list = availableCountries.filter((c) => matchesCountry(c, q));
+    return list.sort((a, b) => {
+      const aExact = a.name.toLowerCase() === q || a.id.toLowerCase() === q;
+      const bExact = b.name.toLowerCase() === q || b.id.toLowerCase() === q;
+      if (aExact && !bExact) return -1;
+      if (!aExact && bExact) return 1;
+
+      const aStarts =
+        a.name.toLowerCase().startsWith(q) || a.id.toLowerCase().startsWith(q);
+      const bStarts =
+        b.name.toLowerCase().startsWith(q) || b.id.toLowerCase().startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      const aNameInc = a.name.toLowerCase().includes(q);
+      const bNameInc = b.name.toLowerCase().includes(q);
+      if (aNameInc && !bNameInc) return -1;
+      if (!aNameInc && bNameInc) return 1;
+
+      return 0;
+    });
+  }, [availableCountries, query, allowCountryAliases]);
+
   const submitQuery = (rawQuery: string) => {
     const q = rawQuery.trim().toLowerCase();
     if (!q) return;
 
     if (isBD) {
-      const exact = availableDistricts.find(
+      const exact = filteredDistricts.find(
         (d) =>
           d.name.toLowerCase() === q ||
           d.aliases?.some((a) => a.toLowerCase() === q),
       );
       const first =
-        exact || availableDistricts.find((d) => matchesDistrict(d, q));
+        exact ||
+        filteredDistricts.find((d) => d.name.toLowerCase().startsWith(q)) ||
+        filteredDistricts[0];
       if (first) handleSelectDistrict(first);
     } else {
-      const exact = availableCountries.find(
+      const exact = filteredCountries.find(
         (c) =>
           c.name.toLowerCase() === q ||
           c.id.toLowerCase() === q ||
@@ -90,7 +137,13 @@ export function GuessInput() {
             c.aliases.some((a) => a.toLowerCase() === q)),
       );
       const first =
-        exact || availableCountries.find((c) => matchesCountry(c, q));
+        exact ||
+        filteredCountries.find(
+          (c) =>
+            c.name.toLowerCase().startsWith(q) ||
+            c.id.toLowerCase().startsWith(q),
+        ) ||
+        filteredCountries[0];
       if (first) handleSelectCountry(first);
     }
   };
@@ -152,9 +205,14 @@ export function GuessInput() {
             }}
             onFocus={() => setOpen(true)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && query.trim().length > 0) {
-                e.preventDefault();
-                submitQuery(query);
+              if (e.key === "Enter") {
+                const activeItem = document.querySelector(
+                  '[cmdk-item][aria-selected="true"]',
+                );
+                if (!activeItem && query.trim().length > 0) {
+                  e.preventDefault();
+                  submitQuery(query);
+                }
               }
             }}
             placeholder={placeholder}
@@ -183,34 +241,30 @@ export function GuessInput() {
             <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
               {isBD ? (
                 <>
-                  {availableDistricts
-                    .filter((d) => matchesDistrict(d, query))
-                    .slice(0, 8)
-                    .map((d) => (
-                      <CommandItem
-                        key={d.id}
-                        value={`${d.name} ${d.aliases?.join(" ") || ""}`}
-                        onSelect={() => handleSelectDistrict(d)}
-                        className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span className="font-semibold text-xs sm:text-sm text-white">
-                            {d.name}
+                  {filteredDistricts.slice(0, 8).map((d) => (
+                    <CommandItem
+                      key={d.id}
+                      value={d.name}
+                      onSelect={() => handleSelectDistrict(d)}
+                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="font-semibold text-xs sm:text-sm text-white">
+                          {d.name}
+                        </span>
+                        {d.aliases && d.aliases.length > 0 && (
+                          <span className="text-2xs text-slate-400 font-mono">
+                            (aka {d.aliases.join(", ")})
                           </span>
-                          {d.aliases && d.aliases.length > 0 && (
-                            <span className="text-2xs text-slate-400 font-mono">
-                              (aka {d.aliases.join(", ")})
-                            </span>
-                          )}
-                          <span className="text-xs text-slate-400 font-mono">
-                            ({d.division} Div)
-                          </span>
-                        </div>
-                        <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
-                      </CommandItem>
-                    ))}
-                  {availableDistricts.filter((d) => matchesDistrict(d, query))
-                    .length === 0 && (
+                        )}
+                        <span className="text-xs text-slate-400 font-mono">
+                          ({d.division} Div)
+                        </span>
+                      </div>
+                      <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                    </CommandItem>
+                  ))}
+                  {filteredDistricts.length === 0 && (
                     <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
                       <Globe className="size-4 text-slate-500" />
                       <span>No districts found</span>
@@ -219,33 +273,29 @@ export function GuessInput() {
                 </>
               ) : (
                 <>
-                  {availableCountries
-                    .filter((c) => matchesCountry(c, query))
-                    .slice(0, 8)
-                    .map((c) => (
-                      <CommandItem
-                        key={c.id}
-                        value={c.name}
-                        onSelect={() => handleSelectCountry(c)}
-                        className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-lg">{c.flagEmoji}</span>
-                          <span className="font-semibold text-xs sm:text-sm text-white">
-                            {c.name}
-                          </span>
-                          <span className="text-xs text-slate-400 font-mono">
-                            ({c.id})
-                          </span>
-                          <span className="text-xs text-slate-500 hidden sm:inline font-mono">
-                            {c.region}
-                          </span>
-                        </div>
-                        <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
-                      </CommandItem>
-                    ))}
-                  {availableCountries.filter((c) => matchesCountry(c, query))
-                    .length === 0 && (
+                  {filteredCountries.slice(0, 8).map((c) => (
+                    <CommandItem
+                      key={c.id}
+                      value={c.name}
+                      onSelect={() => handleSelectCountry(c)}
+                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-lg">{c.flagEmoji}</span>
+                        <span className="font-semibold text-xs sm:text-sm text-white">
+                          {c.name}
+                        </span>
+                        <span className="text-xs text-slate-400 font-mono">
+                          ({c.id})
+                        </span>
+                        <span className="text-xs text-slate-500 hidden sm:inline font-mono">
+                          {c.continent}
+                        </span>
+                      </div>
+                      <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                    </CommandItem>
+                  ))}
+                  {filteredCountries.length === 0 && (
                     <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
                       <Globe className="size-4 text-slate-500" />
                       <span>No countries found</span>

@@ -104,7 +104,7 @@ export function GuessHistory() {
                       <span className="text-2xs sm:text-xs text-slate-400 block truncate">
                         {districtItem
                           ? `${districtItem.division} Division`
-                          : `${countryItem?.capital} • ${countryItem?.region}`}
+                          : `${countryItem?.capital} • ${countryItem?.continent}`}
                       </span>
                     </div>
                   </div>

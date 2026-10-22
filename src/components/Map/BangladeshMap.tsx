@@ -15,7 +15,7 @@ import { DistrictReconWindow } from "@/components/Map/DistrictReconWindow";
 import { DistrictReconSheet } from "@/components/Map/DistrictReconSheet";
 import { MapLegend } from "@/components/Map/MapLegend";
 
-const GEO_URL = "/data/bangladesh-districts-geo.json";
+const GEO_URL = "/data/bangladesh-districts-topo.json";
 
 interface BangladeshMapProps {
   className?: string;
@@ -47,10 +47,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
     if (!el) return;
 
     const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        // Trackpad pinch gesture
-        e.preventDefault();
-      }
+      e.preventDefault();
     };
 
     const onGesture = (e: Event) => {
@@ -76,9 +73,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
 
     // Mouse wheel or 2-finger scroll
     if (e.type === "wheel") {
-      // Only allow zoom if it's a touchpad pinch gesture (ctrlKey: true)
-      // Regular scroll wheel or 2-finger page scroll has ctrlKey: false -> disabled!
-      return Boolean(e.ctrlKey);
+      return true;
     }
 
     // Drag / panning
@@ -139,11 +134,11 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
   }, [targetDistrict]);
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 15) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 50) }));
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.5, 0.8) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 0.8) }));
   };
 
   const handleResetZoom = () => {
@@ -218,7 +213,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
           center={position.coordinates}
           filterZoomEvent={filterZoomEvent}
           onMoveEnd={(pos) => setPosition(pos)}
-          maxZoom={15}
+          maxZoom={50}
           minZoom={0.8}
         >
           <Geographies geography={GEO_URL}>

@@ -6,6 +6,11 @@ export interface MaritimeNeighbor {
   distanceKm: number;
 }
 
+export interface RegionCenter {
+  center: [number, number];
+  zoom: number;
+}
+
 export interface CountryData {
   id: string; // ISO 3166-1 alpha-3 (e.g., "BOL")
   numericId: string; // "068"
@@ -15,6 +20,7 @@ export interface CountryData {
   capital: string;
   coordinates: [number, number]; // [lat, lng]
   borders: string[]; // ["ARG", "BRA", "CHL", "PRY", "PER"]
+  continent: string;
   region: string;
   subregion: string;
   maritimeNeighbors?: string[];
@@ -25,7 +31,29 @@ export interface CountryData {
   isIsland: boolean;
 }
 
-export const COUNTRIES: CountryData[] = rawCountries as CountryData[];
+const rawData = rawCountries as unknown as
+  | {
+      continentCenters?: Record<string, RegionCenter>;
+      subregionCenters?: Record<string, RegionCenter>;
+      countries?: CountryData[];
+    }
+  | CountryData[];
+
+export const COUNTRIES: CountryData[] = Array.isArray(rawData)
+  ? (rawData as CountryData[])
+  : (rawData.countries || []);
+
+export const CONTINENT_CENTERS: Record<string, RegionCenter> = Array.isArray(
+  rawData,
+)
+  ? {}
+  : rawData.continentCenters || {};
+
+export const SUBREGION_CENTERS: Record<string, RegionCenter> = Array.isArray(
+  rawData,
+)
+  ? {}
+  : rawData.subregionCenters || {};
 
 export const COUNTRIES_BY_ID = new Map<string, CountryData>();
 export const COUNTRIES_BY_NUMERIC = new Map<string, CountryData>();

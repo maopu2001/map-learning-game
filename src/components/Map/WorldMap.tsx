@@ -12,6 +12,7 @@ import { useGameStore } from "@/lib/store";
 import {
   COUNTRIES_BY_ID,
   COUNTRIES_BY_NUMERIC,
+  COUNTRIES_BY_NAME,
   CountryData,
   getEffectiveBorders,
 } from "@/data/world";
@@ -54,9 +55,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
     if (!el) return;
 
     const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
+      e.preventDefault();
     };
 
     const onGesture = (e: Event) => {
@@ -81,9 +80,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
 
     // Mouse wheel or 2-finger scroll
     if (e.type === "wheel") {
-      // Only allow zoom if it's a touchpad pinch gesture (ctrlKey: true)
-      // Regular scroll wheel or 2-finger page scroll has ctrlKey: false -> disabled!
-      return Boolean(e.ctrlKey);
+      return true;
     }
 
     // Drag / panning
@@ -176,11 +173,11 @@ export function WorldMap({ className }: WorldMapProps = {}) {
   }, [targetCountry, activeNeighbors]);
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 18) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 30) }));
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.5, 1) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 1) }));
   };
 
   const handleResetZoom = () => {
@@ -196,8 +193,8 @@ export function WorldMap({ className }: WorldMapProps = {}) {
     !isTargetHidden &&
     Boolean(
       targetCountry &&
-        inspectedCountry &&
-        inspectedCountry.id.toUpperCase() === targetCountry.id.toUpperCase(),
+      inspectedCountry &&
+      inspectedCountry.id.toUpperCase() === targetCountry.id.toUpperCase(),
     );
 
   return (
@@ -251,7 +248,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
           center={position.coordinates}
           filterZoomEvent={filterZoomEvent}
           onMoveEnd={(pos) => setPosition(pos)}
-          maxZoom={18}
+          maxZoom={30}
           minZoom={1}
         >
           <Geographies geography={GEO_URL}>
@@ -259,49 +256,48 @@ export function WorldMap({ className }: WorldMapProps = {}) {
               const strokeWidth = 0.55;
               const isGameOver = gameStatus !== "playing";
 
+              const getCountryFromGeo = (
+                g: (typeof geographies)[0],
+              ): CountryData | undefined => {
+                const gid = String(g.id);
+                return (
+                  COUNTRIES_BY_NUMERIC.get(gid) ||
+                  COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10))) ||
+                  (g.properties?.name
+                    ? COUNTRIES_BY_NAME.get(
+                        String(g.properties.name).toLowerCase(),
+                      )
+                    : undefined)
+                );
+              };
+
               // Find highlighted geos to overlay on top so entire perimeter borders are complete and unbroken
               const targetGeo = targetCountry
-                ? geographies.find((g) => {
-                    const gid = String(g.id);
-                    const c =
-                      COUNTRIES_BY_NUMERIC.get(gid) ||
-                      COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10)));
-                    return c?.id === targetCountry.id;
-                  })
+                ? geographies.find(
+                    (g) => getCountryFromGeo(g)?.id === targetCountry.id,
+                  )
                 : null;
 
               const neighborGeos = geographies.filter((g) => {
-                const gid = String(g.id);
-                const c =
-                  COUNTRIES_BY_NUMERIC.get(gid) ||
-                  COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10)));
+                const c = getCountryFromGeo(g);
                 return Boolean(c?.id && activeNeighbors.includes(c.id));
               });
 
               const inspectedGeo = inspectedCountry
-                ? geographies.find((g) => {
-                    const gid = String(g.id);
-                    const c =
-                      COUNTRIES_BY_NUMERIC.get(gid) ||
-                      COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10)));
-                    return c?.id === inspectedCountry.id;
-                  })
+                ? geographies.find(
+                    (g) => getCountryFromGeo(g)?.id === inspectedCountry.id,
+                  )
                 : null;
 
               return (
                 <>
                   {geographies.map((geo) => {
-                    const geoId = String(geo.id);
-                    const country =
-                      COUNTRIES_BY_NUMERIC.get(geoId) ||
-                      COUNTRIES_BY_NUMERIC.get(String(parseInt(geoId, 10)));
+                    const country = getCountryFromGeo(geo);
                     const isoId = country?.id;
 
                     const isTarget =
                       (!isTargetHidden || isGameOver) &&
-                      Boolean(
-                        targetCountry?.id && isoId === targetCountry.id,
-                      );
+                      Boolean(targetCountry?.id && isoId && isoId === targetCountry.id);
                     const isNeighbor = Boolean(
                       isoId && activeNeighbors.includes(isoId),
                     );
@@ -530,6 +526,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
                   stroke="#38bdf8"
                   strokeWidth={1.2}
                   strokeDasharray="3 3"
+                  style={{ vectorEffect: "non-scaling-stroke" }}
                 />
               </React.Fragment>
             );
@@ -563,10 +560,7 @@ export function WorldMap({ className }: WorldMapProps = {}) {
       />
 
       {/* Map Legend Footer */}
-      <MapLegend
-        hotLabel="Hot (<1500km)"
-        warmLabel="Warm (1500-4000km)"
-      />
+      <MapLegend hotLabel="Hot (<1500km)" warmLabel="Warm (1500-4000km)" />
     </div>
   );
 }

@@ -63,7 +63,7 @@ export function TargetRevealCard({
             {isBD && targetDistrict
               ? `${targetDistrict.division} Division`
               : targetCountry
-                ? `Capital: ${targetCountry.capital} • ${targetCountry.subregion || targetCountry.region}`
+                ? `Capital: ${targetCountry.capital} • ${targetCountry.continent}${targetCountry.subregion ? ` • ${targetCountry.subregion}` : ""}`
                 : ""}
           </p>
         </div>

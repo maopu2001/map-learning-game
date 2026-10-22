@@ -94,7 +94,7 @@ export function CountryReconWindow({
               {targetCountry && (
                 <div className="text-2xs text-sky-400 font-semibold pt-1 border-t border-slate-800">
                   {difficulty === "easy" || unlockedHints >= 1 ? (
-                    `Hint 1: Continent: ${targetCountry.region}`
+                    `Hint 1: Continent: ${targetCountry.continent}`
                   ) : (
                     <span className="text-slate-500 font-normal">
                       Hint 1: 🔒 Locked (Unlock in Hints drawer)
@@ -131,7 +131,8 @@ export function CountryReconWindow({
                   <span>{inspectedCountry.name}</span>
                 </span>
                 <span className="text-2xs text-slate-400">
-                  {inspectedCountry.region}
+                  {inspectedCountry.continent}
+                  {inspectedCountry.subregion ? ` • ${inspectedCountry.subregion}` : ""}
                 </span>
               </div>
 

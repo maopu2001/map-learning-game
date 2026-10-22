@@ -11,12 +11,19 @@ import {
 } from "@/components/ui/command";
 import { Globe, ArrowRight, CornerDownLeft } from "lucide-react";
 import { useCommandK } from "@/hooks/useCommandK";
+import { getContinentForCountry } from "@/components/Explore/RegionFilterBar";
 
 interface CountrySearchProps {
   onSelectCountry: (country: CountryData) => void;
+  continentFilter?: string;
+  subregionFilter?: string;
 }
 
-export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
+export function CountrySearch({
+  onSelectCountry,
+  continentFilter = "All",
+  subregionFilter = "All",
+}: CountrySearchProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,19 +33,17 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
     const q = rawQuery.trim().toLowerCase();
     if (!q) return;
 
-    const exact = COUNTRIES.find((c) => c.name.toLowerCase() === q);
+    const exact = filteredCountries.find(
+      (c) => c.name.toLowerCase() === q || c.id.toLowerCase() === q,
+    );
     const first =
       exact ||
-      COUNTRIES.find(
+      filteredCountries.find(
         (c) =>
-          c.name.toLowerCase().includes(q) ||
-          c.id.toLowerCase() === q ||
-          c.capital.toLowerCase().includes(q) ||
-          c.region.toLowerCase().includes(q) ||
-          (c.subregion && c.subregion.toLowerCase().includes(q)) ||
-          (c.officialName && c.officialName.toLowerCase().includes(q)) ||
-          c.aliases.some((a) => a.toLowerCase().includes(q)),
-      );
+          c.name.toLowerCase().startsWith(q) ||
+          c.id.toLowerCase().startsWith(q),
+      ) ||
+      filteredCountries[0];
     if (first) {
       onSelectCountry(first);
       setSearchQuery("");
@@ -48,17 +53,49 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
 
   const filteredCountries = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return COUNTRIES;
-    return COUNTRIES.filter((c) => {
+    const list = COUNTRIES.filter((c) => {
+      const matchesContinent =
+        continentFilter === "All" ||
+        getContinentForCountry(c) === continentFilter;
+      if (!matchesContinent) return false;
+
+      const matchesSubregion =
+        subregionFilter === "All" || c.subregion === subregionFilter;
+      if (!matchesSubregion) return false;
+
+      if (!q) return true;
       return (
         c.name.toLowerCase().includes(q) ||
         c.id.toLowerCase().includes(q) ||
         c.capital.toLowerCase().includes(q) ||
-        c.region.toLowerCase().includes(q) ||
+        c.continent.toLowerCase().includes(q) ||
         (c.subregion && c.subregion.toLowerCase().includes(q)) ||
         (c.officialName && c.officialName.toLowerCase().includes(q)) ||
         c.aliases.some((a) => a.toLowerCase().includes(q))
       );
+    });
+
+    if (!q) return list;
+
+    return list.sort((a, b) => {
+      const aExact = a.name.toLowerCase() === q || a.id.toLowerCase() === q;
+      const bExact = b.name.toLowerCase() === q || b.id.toLowerCase() === q;
+      if (aExact && !bExact) return -1;
+      if (!aExact && bExact) return 1;
+
+      const aStarts =
+        a.name.toLowerCase().startsWith(q) || a.id.toLowerCase().startsWith(q);
+      const bStarts =
+        b.name.toLowerCase().startsWith(q) || b.id.toLowerCase().startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      const aNameInc = a.name.toLowerCase().includes(q);
+      const bNameInc = b.name.toLowerCase().includes(q);
+      if (aNameInc && !bNameInc) return -1;
+      if (!aNameInc && bNameInc) return 1;
+
+      return 0;
     });
   }, [searchQuery]);
 
@@ -78,9 +115,14 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
             }}
             onFocus={() => setSearchOpen(true)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && searchQuery.trim().length > 0) {
-                e.preventDefault();
-                submitQuery(searchQuery);
+              if (e.key === "Enter") {
+                const activeItem = document.querySelector(
+                  '[cmdk-item][aria-selected="true"]',
+                );
+                if (!activeItem && searchQuery.trim().length > 0) {
+                  e.preventDefault();
+                  submitQuery(searchQuery);
+                }
               }
             }}
             placeholder="Search by name, capital, ISO code, or alias..."
@@ -110,13 +152,13 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
               {filteredCountries.slice(0, 8).map((c) => (
                 <CommandItem
                   key={c.id}
-                  value={`${c.name} ${c.id} ${c.capital} ${c.region} ${c.subregion || ""} ${c.aliases.join(" ")}`}
+                  value={c.name}
                   onSelect={() => {
                     onSelectCountry(c);
                     setSearchQuery("");
                     setSearchOpen(false);
                   }}
-                  className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                  className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
                 >
                   <div className="flex items-center gap-2.5">
                     <span className="text-lg">{c.flagEmoji}</span>
@@ -130,7 +172,8 @@ export function CountrySearch({ onSelectCountry }: CountrySearchProps) {
                         </span>
                       </div>
                       <span className="text-2xs text-slate-400 font-mono">
-                        {c.capital} • {c.subregion || c.region}
+                        {c.capital} • {c.continent}
+                        {c.subregion ? ` • ${c.subregion}` : ""}
                       </span>
                     </div>
                   </div>

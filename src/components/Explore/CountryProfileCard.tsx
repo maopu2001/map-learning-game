@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Maximize2, Compass, Sparkles } from "lucide-react";
 
 interface CountryProfileCardProps {
-  country: CountryData;
+  country: CountryData | null;
   onSelectCountry: (country: CountryData) => void;
   onHoverCountry: (country: CountryData | null) => void;
 }
@@ -16,6 +16,22 @@ export function CountryProfileCard({
   onSelectCountry,
   onHoverCountry,
 }: CountryProfileCardProps) {
+  if (!country) {
+    return (
+      <div className="rounded-2xl border border-white/10 bg-[#0c101c] p-6 shadow-2xl flex flex-col items-center justify-center text-center space-y-3 min-h-[280px]">
+        <div className="size-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400">
+          <Compass className="size-6 text-amber-400 animate-pulse" />
+        </div>
+        <div className="space-y-1">
+          <h3 className="text-base font-bold text-white">No Country Selected</h3>
+          <p className="text-xs text-slate-400 max-w-xs">
+            Click any highlighted country on the map or search above to view detailed tactical recon.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const effectiveBorders = getEffectiveBorders(country);
 
   return (
@@ -33,7 +49,8 @@ export function CountryProfileCard({
               </p>
             )}
             <p className="text-xs text-sky-400 font-medium">
-              {country.region} • {country.subregion}
+              {country.continent}
+              {country.subregion ? ` • ${country.subregion}` : ""}
             </p>
           </div>
         </div>

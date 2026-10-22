@@ -6,9 +6,12 @@ import { Footer } from "@/components/Footer";
 import { Map, Info, ArrowRight } from "lucide-react";
 import {
   COUNTRIES,
-  COUNTRIES_BY_NUMERIC,
   CountryData,
+  COUNTRIES_BY_NUMERIC,
+  COUNTRIES_BY_NAME,
   getEffectiveBorders,
+  CONTINENT_CENTERS,
+  SUBREGION_CENTERS,
 } from "@/data/world";
 import {
   ComposableMap,
@@ -21,17 +24,21 @@ import { MapZoomControls } from "@/components/Map/MapZoomControls";
 import { ExploreHeader } from "@/components/Explore/ExploreHeader";
 import { CountrySearch } from "@/components/Explore/CountrySearch";
 import { CountryProfileCard } from "@/components/Explore/CountryProfileCard";
+import {
+  ContinentFilterBar,
+  getContinentForCountry,
+} from "@/components/Explore/RegionFilterBar";
 
 const WORLD_GEO_URL = "/data/world-countries-geo-50m.json";
 
-const DEFAULT_COUNTRY = COUNTRIES.find((c) => c.id === "BGD") || COUNTRIES[0];
-
 export default function WorldExplorePage() {
   const [selectedCountry, setSelectedCountry] =
-    useState<CountryData>(DEFAULT_COUNTRY);
+    useState<CountryData | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<CountryData | null>(
     null,
   );
+  const [continentFilter, setContinentFilter] = useState("All");
+  const [subregionFilter, setSubregionFilter] = useState("All");
   const [mobileTab, setMobileTab] = useState<"map" | "info">("map");
 
   const effectiveBorders = React.useMemo(
@@ -43,14 +50,54 @@ export default function WorldExplorePage() {
     coordinates: [number, number];
     zoom: number;
   }>({
-    coordinates: [
-      DEFAULT_COUNTRY.coordinates[1],
-      DEFAULT_COUNTRY.coordinates[0],
-    ],
-    zoom: 2.2,
+    coordinates: [0, 20],
+    zoom: 1,
   });
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const animRef = useRef<number | null>(null);
+  const positionRef = useRef(position);
+  positionRef.current = position;
+
+  useEffect(() => {
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, []);
+
+  const flyTo = (targetCoords: [number, number], targetZoom: number) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    const startCoords = positionRef.current.coordinates;
+    const startZoom = positionRef.current.zoom;
+    const startTime = performance.now();
+    const duration = 320;
+
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      // Smooth ease-out cubic
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      const currentLng =
+        startCoords[0] + (targetCoords[0] - startCoords[0]) * ease;
+      const currentLat =
+        startCoords[1] + (targetCoords[1] - startCoords[1]) * ease;
+      const currentZoom = startZoom + (targetZoom - startZoom) * ease;
+
+      setPosition({
+        coordinates: [currentLng, currentLat],
+        zoom: currentZoom,
+      });
+
+      if (progress < 1) {
+        animRef.current = requestAnimationFrame(step);
+      } else {
+        animRef.current = null;
+      }
+    };
+
+    animRef.current = requestAnimationFrame(step);
+  };
 
   // Prevent browser viewport tab-zooming on trackpad pinch so the map zooms instead
   useEffect(() => {
@@ -58,9 +105,7 @@ export default function WorldExplorePage() {
     if (!el) return;
 
     const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
+      e.preventDefault();
     };
 
     const onGesture = (e: Event) => {
@@ -79,11 +124,15 @@ export default function WorldExplorePage() {
   }, []);
 
   const filterZoomEvent = (event: unknown) => {
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
     const e = event as { type?: string; ctrlKey?: boolean; button?: number };
     if (!e || !e.type) return true;
 
     if (e.type === "wheel") {
-      return Boolean(e.ctrlKey);
+      return true;
     }
     if (e.type === "mousedown") {
       return e.button === 0;
@@ -95,23 +144,123 @@ export default function WorldExplorePage() {
   };
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.5, 8) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 60) }));
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.5, 0.8) }));
+    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 0.8) }));
   };
 
   const handleResetZoom = () => {
-    setPosition({ coordinates: [0, 20], zoom: 1 });
+    flyTo([0, 20], 1);
   };
 
-  const selectCountry = (c: CountryData) => {
+  const selectCountry = (c: CountryData, shouldFly = true) => {
     setSelectedCountry(c);
-    setPosition({
-      coordinates: [c.coordinates[1], c.coordinates[0]],
-      zoom: c.area < 100000 ? 4 : 2.5,
-    });
+    const cont = getContinentForCountry(c);
+    if (continentFilter !== "All" && cont !== continentFilter) {
+      setContinentFilter(cont);
+      setSubregionFilter("All");
+    } else if (
+      subregionFilter !== "All" &&
+      c.subregion &&
+      c.subregion !== subregionFilter
+    ) {
+      setSubregionFilter(c.subregion);
+    }
+    if (shouldFly) {
+      const minZoom = c.area < 10000 ? 5 : c.area < 100000 ? 4 : 2.5;
+      const targetZoom = Math.max(positionRef.current.zoom, minZoom);
+      flyTo([c.coordinates[1], c.coordinates[0]], targetZoom);
+    }
+  };
+
+  const getDynamicCenterAndZoom = (
+    countries: CountryData[],
+  ): { center: [number, number]; zoom: number } => {
+    if (countries.length === 0) return { center: [0, 20], zoom: 1 };
+    const lats = countries.map((c) => c.coordinates[0]);
+    const lngs = countries.map((c) => c.coordinates[1]);
+    const minLat = Math.min(...lats);
+    const maxLat = Math.max(...lats);
+    const minLng = Math.min(...lngs);
+    const maxLng = Math.max(...lngs);
+    const center: [number, number] = [
+      (minLng + maxLng) / 2,
+      (minLat + maxLat) / 2,
+    ];
+    const dLng = Math.max(1, maxLng - minLng);
+    const dLat = Math.max(1, maxLat - minLat);
+    const zoom = Math.max(
+      1.4,
+      Math.min(5.5, Math.min(360 / dLng, 180 / dLat) * 0.75),
+    );
+    return { center, zoom: Math.round(zoom * 10) / 10 };
+  };
+
+  const handleSelectContinent = (cont: string) => {
+    setContinentFilter(cont);
+    setSubregionFilter("All");
+    setSelectedCountry(null);
+    if (cont === "All") {
+      flyTo([0, 20], 1);
+    } else {
+      const target =
+        CONTINENT_CENTERS[cont] ||
+        getDynamicCenterAndZoom(
+          COUNTRIES.filter((c) => getContinentForCountry(c) === cont),
+        );
+      if (target) {
+        flyTo(target.center, target.zoom);
+      }
+    }
+  };
+
+  const handleSelectSubregion = (sub: string) => {
+    setSubregionFilter(sub);
+    setSelectedCountry(null);
+    if (sub === "All") {
+      if (continentFilter !== "All") {
+        const target =
+          CONTINENT_CENTERS[continentFilter] ||
+          getDynamicCenterAndZoom(
+            COUNTRIES.filter(
+              (c) => getContinentForCountry(c) === continentFilter,
+            ),
+          );
+        if (target) {
+          flyTo(target.center, target.zoom);
+        } else {
+          flyTo([0, 20], 1);
+        }
+      } else {
+        flyTo([0, 20], 1);
+      }
+    } else {
+      const target =
+        SUBREGION_CENTERS[sub] ||
+        getDynamicCenterAndZoom(COUNTRIES.filter((c) => c.subregion === sub));
+      if (target) {
+        flyTo(target.center, target.zoom);
+      }
+    }
+  };
+
+  const isFilterActive =
+    continentFilter !== "All" || subregionFilter !== "All";
+
+  const matchesFilter = (c: CountryData | null | undefined) => {
+    if (!c) return false;
+    if (
+      continentFilter !== "All" &&
+      getContinentForCountry(c) !== continentFilter
+    ) {
+      return false;
+    }
+    if (subregionFilter !== "All" && c.subregion !== subregionFilter) {
+      return false;
+    }
+    return true;
   };
 
   const activeCountry = hoveredCountry || selectedCountry;
@@ -120,6 +269,12 @@ export default function WorldExplorePage() {
   );
   const isNeighbor = Boolean(
     hoveredCountry && effectiveBorders.includes(hoveredCountry.id),
+  );
+  const isHoverInFilterZone = Boolean(
+    hoveredCountry &&
+      isFilterActive &&
+      matchesFilter(hoveredCountry) &&
+      hoveredCountry.id !== selectedCountry?.id,
   );
 
   return (
@@ -179,11 +334,21 @@ export default function WorldExplorePage() {
               mobileTab === "map" ? "flex flex-1" : "hidden lg:flex"
             }`}
           >
+            {/* Continent / Subregion Filter Bar */}
+            <div className="shrink-0">
+              <ContinentFilterBar
+                selectedContinent={continentFilter}
+                onSelectContinent={handleSelectContinent}
+                selectedSubregion={subregionFilter}
+                onSelectSubregion={handleSelectSubregion}
+              />
+            </div>
+
             {/* Map Container */}
             <div
               ref={mapContainerRef}
               onMouseLeave={() => setHoveredCountry(null)}
-              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-210px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-250px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -197,37 +362,57 @@ export default function WorldExplorePage() {
 
               {/* Top-Left Unified Callout (Selection + Hover in same overlay) */}
               <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 pointer-events-none select-none">
-                <div
-                  className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs transition-all duration-150 ${
-                    isHovering
-                      ? "bg-[#0c101c]/95 border border-sky-400/50 text-slate-200 shadow-2xl ring-1 ring-sky-500/25"
-                      : "bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 shadow-lg"
-                  }`}
-                >
-                  <span
-                    className={`size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse ${
-                      isHovering ? "bg-sky-400" : "bg-amber-400"
-                    }`}
-                  />
-                  <span className="text-sm sm:text-base leading-none">
-                    {activeCountry.flagEmoji}
-                  </span>
-                  <span className="font-bold text-white text-2xs sm:text-xs">
-                    {activeCountry.name}
-                  </span>
-                  <span
-                    className={`text-2xs font-mono border-l border-white/10 pl-2 ${
-                      isHovering ? "text-slate-400" : "text-amber-400/90"
+                {activeCountry ? (
+                  <div
+                    className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs transition-all duration-150 ${
+                      isHovering
+                        ? "bg-[#0c101c]/95 border border-sky-400/50 text-slate-200 shadow-2xl ring-1 ring-sky-500/25"
+                        : "bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 shadow-lg"
                     }`}
                   >
-                    {activeCountry.capital || activeCountry.region}
-                  </span>
-                  {isNeighbor && (
-                    <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
-                      Neighbor
+                    <span
+                      className={`size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse ${
+                        isHovering ? "bg-sky-400" : "bg-amber-400"
+                      }`}
+                    />
+                    <span className="text-sm sm:text-base leading-none">
+                      {activeCountry.flagEmoji}
                     </span>
-                  )}
-                </div>
+                    <span className="font-bold text-white text-2xs sm:text-xs">
+                      {activeCountry.name}
+                    </span>
+                    <span
+                      className={`text-2xs font-mono border-l border-white/10 pl-2 ${
+                        isHovering ? "text-slate-400" : "text-amber-400/90"
+                      }`}
+                    >
+                      {activeCountry.capital || activeCountry.continent}
+                    </span>
+                    {isHovering && (isNeighbor || isHoverInFilterZone) && (
+                      <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                        {isNeighbor
+                          ? "Neighbor"
+                          : subregionFilter !== "All"
+                            ? hoveredCountry?.subregion
+                            : hoveredCountry
+                              ? getContinentForCountry(hoveredCountry)
+                              : ""}
+                      </span>
+                    )}
+                  </div>
+                ) : isFilterActive ? (
+                  <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs bg-[#0c101c]/90 border border-sky-500/30 text-slate-200 shadow-lg">
+                    <span className="size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse bg-sky-400" />
+                    <span className="font-bold text-white text-2xs sm:text-xs">
+                      {subregionFilter !== "All"
+                        ? subregionFilter
+                        : continentFilter}
+                    </span>
+                    <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                      Zone Highlighted
+                    </span>
+                  </div>
+                ) : null}
               </div>
 
               {/* SVG Map Canvas */}
@@ -246,8 +431,14 @@ export default function WorldExplorePage() {
                   zoom={position.zoom}
                   center={position.coordinates}
                   filterZoomEvent={filterZoomEvent}
-                  onMoveEnd={(pos) => setPosition(pos)}
-                  maxZoom={8}
+                  onMoveEnd={(pos) => {
+                    if (animRef.current) {
+                      cancelAnimationFrame(animRef.current);
+                      animRef.current = null;
+                    }
+                    setPosition(pos);
+                  }}
+                  maxZoom={60}
                   minZoom={1}
                 >
                   <Geographies geography={WORLD_GEO_URL}>
@@ -256,60 +447,65 @@ export default function WorldExplorePage() {
                         0.3,
                         Math.min(0.85, 0.55 / Math.sqrt(position.zoom)),
                       );
-                      const effectiveBorders = selectedCountry
-                        ? getEffectiveBorders(selectedCountry)
-                        : [];
+
+                      const getCountryFromGeo = (
+                        g: (typeof geographies)[0],
+                      ): CountryData | undefined => {
+                        const gid = String(g.id);
+                        return (
+                          COUNTRIES_BY_NUMERIC.get(gid) ||
+                          COUNTRIES_BY_NUMERIC.get(String(parseInt(gid, 10))) ||
+                          (g.properties?.name
+                            ? COUNTRIES_BY_NAME.get(
+                                String(g.properties.name).toLowerCase(),
+                              )
+                            : undefined)
+                        );
+                      };
+
                       const selectedGeo = selectedCountry
-                        ? geographies.find((g) => {
-                            const gid = String(g.id);
-                            const c =
-                              COUNTRIES_BY_NUMERIC.get(gid) ||
-                              COUNTRIES_BY_NUMERIC.get(
-                                String(parseInt(gid, 10)),
-                              );
-                            return c?.id === selectedCountry.id;
-                          })
+                        ? geographies.find(
+                            (g) =>
+                              getCountryFromGeo(g)?.id === selectedCountry.id,
+                          )
                         : null;
                       const hoveredGeo = hoveredCountry
-                        ? geographies.find((g) => {
-                            const gid = String(g.id);
-                            const c =
-                              COUNTRIES_BY_NUMERIC.get(gid) ||
-                              COUNTRIES_BY_NUMERIC.get(
-                                String(parseInt(gid, 10)),
-                              );
-                            return c?.id === hoveredCountry.id;
-                          })
+                        ? geographies.find(
+                            (g) =>
+                              getCountryFromGeo(g)?.id === hoveredCountry.id,
+                          )
                         : null;
-                      const neighborGeos = selectedCountry
-                        ? geographies.filter((g) => {
-                            const gid = String(g.id);
-                            const c =
-                              COUNTRIES_BY_NUMERIC.get(gid) ||
-                              COUNTRIES_BY_NUMERIC.get(
-                                String(parseInt(gid, 10)),
-                              );
-                            return Boolean(
-                              c?.id && effectiveBorders.includes(c.id),
-                            );
-                          })
-                        : [];
+
+                      // Highlight countries in active continent/subregion or neighbors
+                      const highlightedGeos = geographies.filter((g) => {
+                        const c = getCountryFromGeo(g);
+                        if (!c || c.id === selectedCountry?.id) return false;
+                        if (isFilterActive) {
+                          return matchesFilter(c);
+                        }
+                        return Boolean(c.id && effectiveBorders.includes(c.id));
+                      });
 
                       return (
                         <>
                           {geographies.map((geo) => {
-                            const geoId = String(geo.id);
-                            const country =
-                              COUNTRIES_BY_NUMERIC.get(geoId) ||
-                              COUNTRIES_BY_NUMERIC.get(
-                                String(parseInt(geoId, 10)),
-                              );
-                            const isSelected =
-                              selectedCountry?.id === country?.id;
+                            const country = getCountryFromGeo(geo);
+                            const isSelected = Boolean(
+                              selectedCountry?.id &&
+                                country?.id &&
+                                selectedCountry.id === country.id,
+                            );
                             const isNeighbor = Boolean(
                               country?.id &&
-                              effectiveBorders.includes(country.id),
+                                effectiveBorders.includes(country.id),
                             );
+                            const isFilterMatch =
+                              isFilterActive && matchesFilter(country);
+                            const isHighlighted = isFilterActive
+                              ? isFilterMatch && !isSelected
+                              : isNeighbor && !isSelected;
+                            const matchesActiveFilter =
+                              !isFilterActive || isFilterMatch;
 
                             let fill = "#131b2e";
                             let stroke = "#24324a";
@@ -317,9 +513,12 @@ export default function WorldExplorePage() {
                             if (isSelected) {
                               fill = "#1a253a";
                               stroke = "#f59e0b";
-                            } else if (isNeighbor) {
+                            } else if (isHighlighted) {
                               fill = "#0369a1";
                               stroke = "#38bdf8";
+                            } else if (!matchesActiveFilter) {
+                              fill = "#080c14";
+                              stroke = "#141c2c";
                             }
 
                             return (
@@ -351,7 +550,7 @@ export default function WorldExplorePage() {
                                     fill: "#1e2c45",
                                     stroke: isSelected
                                       ? "#fbbf24"
-                                      : isNeighbor
+                                      : isHighlighted
                                         ? "#38bdf8"
                                         : "#94a3b8",
                                     strokeWidth,
@@ -370,10 +569,10 @@ export default function WorldExplorePage() {
                             );
                           })}
 
-                          {/* Overlay 1: Neighbor countries */}
-                          {neighborGeos.map((geo) => (
+                          {/* Overlay 1: Highlighted countries (Continent/Subregion or Neighbors) */}
+                          {highlightedGeos.map((geo) => (
                             <Geography
-                              key={`overlay-world-nb-${geo.rsmKey}`}
+                              key={`overlay-world-hl-${geo.rsmKey}`}
                               geography={geo}
                               style={{
                                 default: {
@@ -495,31 +694,36 @@ export default function WorldExplorePage() {
             </div>
 
             {/* Mobile Selection Callout on Map view */}
-            <div className="lg:hidden shrink-0 p-2.5 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs shadow-xl">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-base shrink-0">
-                  {selectedCountry.flagEmoji}
-                </span>
-                <div className="truncate">
-                  <div className="font-bold text-white text-xs truncate">
-                    {selectedCountry.name}
-                  </div>
-                  <span className="text-2xs text-slate-400 font-mono">
-                    {selectedCountry.capital
-                      ? `Capital: ${selectedCountry.capital} • `
-                      : ""}
-                    {selectedCountry.region}
+            {selectedCountry && (
+              <div className="lg:hidden shrink-0 p-2.5 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs shadow-xl">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="text-base shrink-0">
+                    {selectedCountry.flagEmoji}
                   </span>
+                  <div className="truncate">
+                    <div className="font-bold text-white text-xs truncate">
+                      {selectedCountry.name}
+                    </div>
+                    <span className="text-2xs text-slate-400 font-mono">
+                      {selectedCountry.capital
+                        ? `Capital: ${selectedCountry.capital} • `
+                        : ""}
+                      {selectedCountry.continent}
+                      {selectedCountry.subregion
+                        ? ` • ${selectedCountry.subregion}`
+                        : ""}
+                    </span>
+                  </div>
                 </div>
+                <button
+                  onClick={() => setMobileTab("info")}
+                  className="px-2.5 py-1.5 rounded-xl bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 text-xs font-semibold text-sky-300 flex items-center gap-1 cursor-pointer shrink-0 ml-2 transition-colors"
+                >
+                  <span>Details</span>
+                  <ArrowRight className="size-3" />
+                </button>
               </div>
-              <button
-                onClick={() => setMobileTab("info")}
-                className="px-2.5 py-1.5 rounded-xl bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 text-xs font-semibold text-sky-300 flex items-center gap-1 cursor-pointer shrink-0 ml-2 transition-colors"
-              >
-                <span>Details</span>
-                <ArrowRight className="size-3" />
-              </button>
-            </div>
+            )}
           </div>
 
           {/* Right Column: Search Box & Country Profile (5 cols on lg, full on mobile when info tab) */}
@@ -531,7 +735,11 @@ export default function WorldExplorePage() {
             }`}
           >
             <div className="shrink-0 z-30">
-              <CountrySearch onSelectCountry={selectCountry} />
+              <CountrySearch
+                onSelectCountry={selectCountry}
+                continentFilter={continentFilter}
+                subregionFilter={subregionFilter}
+              />
             </div>
             <CountryProfileCard
               country={selectedCountry}

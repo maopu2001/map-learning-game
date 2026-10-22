@@ -123,6 +123,7 @@ const defaultTargetCountry = COUNTRIES[0] || {
   capital: "Sucre / La Paz",
   coordinates: [-17, -65],
   borders: ["ARG", "BRA", "CHL", "PRY", "PER"],
+  continent: "South America",
   region: "Americas",
   subregion: "South America",
   flagEmoji: "🇧🇴",

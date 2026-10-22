@@ -123,7 +123,7 @@ export function GameModesSection() {
               Map Explorer
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              No timers or guess limits. Click any place on the map to browse capitals, populations, facts, and bordering regions.
+              No timers or guess limits. Click any place on the map to browse capitals, populations, facts, and bordering nations.
             </p>
             <div className="space-y-1.5 text-xs text-slate-300 pt-2 border-t border-white/5">
               <div className="flex items-center gap-2">
@@ -132,7 +132,7 @@ export function GameModesSection() {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="size-3.5 text-purple-400 shrink-0" />
-                <span>Division & Region Filters</span>
+                <span>Division, Continent & Subregion Filters</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="size-3.5 text-purple-400 shrink-0" />

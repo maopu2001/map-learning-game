@@ -81,7 +81,7 @@ export function DetectiveDossier() {
               className="text-3xs font-mono border-emerald-500/30 text-emerald-300 bg-emerald-500/10 flex items-center gap-1 px-1.5 py-0.5"
             >
               <MapPin className="size-3" />
-              <span>{isBD ? targetDistrict.division : targetCountry.region}</span>
+              <span>{isBD ? targetDistrict.division : targetCountry.continent}</span>
             </Badge>
           )}
         </div>

@@ -30,15 +30,11 @@ export function DistrictSearch({
     const q = rawQuery.trim().toLowerCase();
     if (!q) return;
 
-    const exact = BANGLADESH_DISTRICTS.find((d) => d.name.toLowerCase() === q);
+    const exact = filteredDistricts.find((d) => d.name.toLowerCase() === q);
     const first =
       exact ||
-      BANGLADESH_DISTRICTS.find(
-        (d) =>
-          d.name.toLowerCase().includes(q) ||
-          d.division.toLowerCase().includes(q) ||
-          d.aliases?.some((a) => a.toLowerCase().includes(q)),
-      );
+      filteredDistricts.find((d) => d.name.toLowerCase().startsWith(q)) ||
+      filteredDistricts[0];
     if (first) {
       onSelectDistrict(first);
       setSearchQuery("");
@@ -48,7 +44,7 @@ export function DistrictSearch({
 
   const filteredDistricts = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    return BANGLADESH_DISTRICTS.filter((d) => {
+    const list = BANGLADESH_DISTRICTS.filter((d) => {
       const matchesDivision =
         divisionFilter === "All" || d.division === divisionFilter;
       if (!matchesDivision) return false;
@@ -58,6 +54,16 @@ export function DistrictSearch({
         d.division.toLowerCase().includes(q) ||
         d.aliases?.some((a) => a.toLowerCase().includes(q))
       );
+    });
+
+    if (!q) return list;
+
+    return list.sort((a, b) => {
+      const aStarts = a.name.toLowerCase().startsWith(q);
+      const bStarts = b.name.toLowerCase().startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+      return 0;
     });
   }, [searchQuery, divisionFilter]);
 
@@ -77,9 +83,14 @@ export function DistrictSearch({
             }}
             onFocus={() => setSearchOpen(true)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && searchQuery.trim().length > 0) {
-                e.preventDefault();
-                submitQuery(searchQuery);
+              if (e.key === "Enter") {
+                const activeItem = document.querySelector(
+                  '[cmdk-item][aria-selected="true"]',
+                );
+                if (!activeItem && searchQuery.trim().length > 0) {
+                  e.preventDefault();
+                  submitQuery(searchQuery);
+                }
               }
             }}
             placeholder="Type district name (Dhaka, Sylhet)..."
@@ -109,13 +120,13 @@ export function DistrictSearch({
               {filteredDistricts.slice(0, 8).map((d) => (
                 <CommandItem
                   key={d.id}
-                  value={`${d.name} ${d.aliases?.join(" ") || ""}`}
+                  value={d.name}
                   onSelect={() => {
                     onSelectDistrict(d);
                     setSearchQuery("");
                     setSearchOpen(false);
                   }}
-                  className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white cursor-pointer transition-colors"
+                  className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
                 >
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-xs sm:text-sm text-white">
