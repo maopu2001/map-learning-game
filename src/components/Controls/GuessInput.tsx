@@ -161,7 +161,7 @@ export function GuessInput() {
     if (mode === "daily") {
       const isWon = gameStatus === "won";
       return (
-        <div className="w-full p-2.5 sm:p-3 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between gap-2 shadow-lg">
+        <div className="w-full p-2.5 sm:p-3 rounded-2xl bg-surface-card border border-white/10 flex items-center justify-between gap-2 shadow-lg">
           <div className="flex items-center gap-2 min-w-0">
             {isWon ? (
               <Trophy className="size-4 sm:size-5 text-amber-400 shrink-0" />
@@ -199,7 +199,7 @@ export function GuessInput() {
   return (
     <div className="relative w-full z-20">
       <Command
-        className="rounded-2xl border border-white/10 bg-[#0c101c] shadow-2xl backdrop-blur-xl overflow-visible"
+        className="rounded-2xl border border-white/10 bg-surface-card shadow-2xl backdrop-blur-xl overflow-visible"
         shouldFilter={false}
       >
         <div className="relative">
@@ -245,7 +245,7 @@ export function GuessInput() {
 
         {open && query.trim().length > 0 && (
           <div className="absolute top-full left-0 right-0 mt-2 z-50">
-            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
+            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-surface-card/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
               {isBD ? (
                 <>
                   {filteredDistricts.slice(0, 8).map((d) => (
@@ -253,7 +253,7 @@ export function GuessInput() {
                       key={d.id}
                       value={d.name}
                       onSelect={() => handleSelectDistrict(d)}
-                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-10.5 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="font-semibold text-xs sm:text-sm text-white">
@@ -285,7 +285,7 @@ export function GuessInput() {
                       key={c.id}
                       value={c.name}
                       onSelect={() => handleSelectCountry(c)}
-                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-10.5 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="text-lg">{c.flagEmoji}</span>

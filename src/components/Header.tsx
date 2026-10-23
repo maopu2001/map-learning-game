@@ -31,7 +31,7 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 w-full pointer-events-none">
-        <div className="w-full pointer-events-auto border-b border-white/20 bg-[#070a12]/90 backdrop-blur-2xl px-3 sm:px-4 py-2 shadow-2xl shadow-black/80 flex items-center justify-between gap-2.5">
+        <div className="w-full pointer-events-auto border-b border-white/20 bg-surface-base/90 backdrop-blur-2xl px-3 sm:px-4 py-2 shadow-2xl shadow-black/80 flex items-center justify-between gap-2.5">
           {/* Brand + Mobile Toggle */}
           <div className="flex items-center justify-between w-full lg:w-auto gap-3">
             <Link href="/" className="flex items-center gap-2.5 group">
