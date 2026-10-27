@@ -3,43 +3,44 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-export function FAQSection() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+interface FAQItem {
+  q: string;
+  a: string;
+}
 
-  const faqs = [
-    {
-      q: "How does Hard Mode work?",
-      a: "Hard Mode gives you only 5 guesses instead of 6, and keeps map territories locked from inspection until guessed or revealed through hints. Every guess gives you precise distance and compass direction to the target.",
-    },
-    {
-      q: "Are the Bangladesh district boundaries accurate?",
-      a: "Yes. All 64 districts across all 8 divisions (Dhaka, Chattogram, Rajshahi, Khulna, Barishal, Sylhet, Rangpur, Mymensingh) use accurate, detailed boundary data.",
-    },
-    {
-      q: "How do island countries work if they don't have land borders?",
-      a: "For island nations like Japan, Iceland, New Zealand, Sri Lanka, and Madagascar, the game calculates straight-line distances to find their closest maritime neighbors as hints.",
-    },
-    {
-      q: "Can I pinch to zoom on phones and trackpads?",
-      a: "Yes. Touchscreen pinch-to-zoom and laptop trackpad pinch gestures zoom the map smoothly without hijacking your page scrolling.",
-    },
-    {
-      q: "When does the daily puzzle reset?",
-      a: "A new daily puzzle goes live every day at midnight. Everyone around the world receives the exact same mystery location each day.",
-    },
-    {
-      q: "Is Shimana free to play?",
-      a: "Yes, 100% free with no sign-up, no ads, and no paywalls. It's great for casual fun or studying for geography and competitive exams like the BCS.",
-    },
-  ];
+const faqs: FAQItem[] = [
+  {
+    q: "How often do the Daily Puzzles reset?",
+    a: "Every night at midnight local time! Both Bangladesh and World daily puzzles feature the exact same mystery location for all players worldwide each day.",
+  },
+  {
+    q: "How does distance and direction work?",
+    a: "We compute the great-circle (Haversine) distance from your guessed location's geographic center to the mystery target. The compass direction points along the initial bearing from your guess to the target.",
+  },
+  {
+    q: "What is Detective Mode?",
+    a: "In Detective Mode, the target location's perimeter is completely invisible until you find it or run out of guesses. You receive an intel dossier with geography facts and redacted clues that unlock as you progress.",
+  },
+  {
+    q: "Can I use Shimana for BCS or university admission prep?",
+    a: "Yes! Bangladesh district boundaries, administrative divisions, coordinates, and bordering neighbors match the official survey data, making it an ideal interactive visual study tool for competitive exams.",
+  },
+  {
+    q: "Is there any install required?",
+    a: "No installation required! Shimana runs entirely in modern mobile and desktop browsers with offline caching capabilities.",
+  },
+];
+
+export function FAQSection() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
     <section className="space-y-4 max-w-3xl mx-auto">
       <div className="text-center space-y-1">
-        <span className="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">
+        <span className="text-xs font-mono uppercase tracking-widest text-accent font-semibold">
           Got Questions?
         </span>
-        <h2 className="text-2xl sm:text-3xl font-black text-white">
+        <h2 className="text-2xl sm:text-3xl font-black text-foreground">
           Frequently Asked Questions
         </h2>
       </div>
@@ -50,21 +51,21 @@ export function FAQSection() {
           return (
             <div
               key={idx}
-              className="rounded-xl border border-white/10 bg-[#0c101c] overflow-hidden transition-all duration-200"
+              className="rounded-xl border border-border bg-card overflow-hidden transition-all duration-200"
             >
               <button
                 onClick={() => setOpenIdx(isOpen ? null : idx)}
-                className="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:text-sky-300"
+                className="w-full p-4 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-foreground hover:text-primary transition-colors cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`size-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                    isOpen ? "rotate-180 text-sky-400" : ""
+                  className={`size-4 text-muted-foreground shrink-0 transition-transform duration-200 ${
+                    isOpen ? "rotate-180 text-primary" : ""
                   }`}
                 />
               </button>
               {isOpen && (
-                <div className="px-4 pb-4 text-xs text-slate-400 leading-relaxed border-t border-white/5 pt-3">
+                <div className="px-4 pb-4 text-xs text-muted-foreground leading-relaxed border-t border-border pt-3">
                   {faq.a}
                 </div>
               )}

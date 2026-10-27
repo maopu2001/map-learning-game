@@ -70,7 +70,7 @@ export function DistrictSearch({
   return (
     <div className="relative w-full z-20">
       <Command
-        className="rounded-2xl border border-white/10 bg-[#0c101c] shadow-2xl backdrop-blur-xl overflow-visible"
+        className="rounded-2xl border border-border bg-card shadow-2xl backdrop-blur-xl overflow-visible"
         shouldFilter={false}
       >
         <div className="relative">
@@ -97,7 +97,7 @@ export function DistrictSearch({
             className="text-base sm:text-sm font-medium"
           />
           {!searchQuery && (
-            <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-slate-500 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded pointer-events-none select-none">
+            <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-muted-foreground bg-muted/50 border border-border px-1.5 py-0.5 rounded pointer-events-none select-none">
               <span>⌘</span>
               <span>K</span>
             </div>
@@ -106,17 +106,17 @@ export function DistrictSearch({
             <button
               type="button"
               onClick={() => submitQuery(searchQuery)}
-              className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-slate-200 bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
+              className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-bd-primary bg-bd-subtle hover:bg-bd-primary/20 border border-bd-subtle-border px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
             >
               <span>Go</span>
-              <CornerDownLeft className="size-3 text-sky-400" />
+              <CornerDownLeft className="size-3 text-bd-primary" />
             </button>
           )}
         </div>
 
         {searchOpen && searchQuery.trim().length > 0 && (
           <div className="absolute top-full left-0 right-0 mt-2 z-50">
-            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-[#0c101c]/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
+            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-border bg-card/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
               {filteredDistricts.slice(0, 8).map((d) => (
                 <CommandItem
                   key={d.id}
@@ -126,27 +126,27 @@ export function DistrictSearch({
                     setSearchQuery("");
                     setSearchOpen(false);
                   }}
-                  className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                  className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-[42px] rounded-lg text-foreground hover:bg-muted data-[selected=true]:bg-muted data-[selected=true]:text-foreground cursor-pointer transition-colors"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-xs sm:text-sm text-white">
+                    <span className="font-semibold text-xs sm:text-sm text-foreground">
                       {d.name}
                     </span>
                     {d.aliases && d.aliases.length > 0 && (
-                      <span className="text-2xs text-slate-400 font-mono">
+                      <span className="text-2xs text-muted-foreground font-mono">
                         (aka {d.aliases.join(", ")})
                       </span>
                     )}
-                    <span className="text-xs text-slate-400 font-mono">
+                    <span className="text-xs text-muted-foreground font-mono">
                       ({d.division} Div)
                     </span>
                   </div>
-                  <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                  <ArrowRight className="size-3.5 text-muted-foreground opacity-60" />
                 </CommandItem>
               ))}
               {filteredDistricts.length === 0 && (
-                <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
-                  <Globe className="size-4 text-slate-500" />
+                <CommandEmpty className="py-6 text-center text-xs text-muted-foreground flex items-center justify-center gap-2 font-mono">
+                  <Globe className="size-4 text-muted-foreground" />
                   <span>No districts found</span>
                 </CommandEmpty>
               )}

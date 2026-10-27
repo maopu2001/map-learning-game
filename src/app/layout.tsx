@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,7 +20,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#070a12",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fcf3f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#03160b" },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -111,7 +115,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -127,7 +131,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-[#070a12] text-slate-100 font-sans antialiased selection:bg-sky-500 selection:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground`}
       >
         <script
           type="application/ld+json"
@@ -170,7 +174,14 @@ export default function RootLayout({
             }),
           }}
         />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -30,9 +30,14 @@ import {
 
 const WORLD_GEO_URL = "/data/world-countries-geo-50m.json";
 
+const DEFAULT_WORLD_COUNTRY =
+  COUNTRIES_BY_NAME.get("bangladesh") ||
+  COUNTRIES.find((c) => c.id === "BGD") ||
+  COUNTRIES[0];
+
 export default function WorldExplorePage() {
   const [selectedCountry, setSelectedCountry] =
-    useState<CountryData | null>(null);
+    useState<CountryData | null>(DEFAULT_WORLD_COUNTRY);
   const [hoveredCountry, setHoveredCountry] = useState<CountryData | null>(
     null,
   );
@@ -49,8 +54,11 @@ export default function WorldExplorePage() {
     coordinates: [number, number];
     zoom: number;
   }>({
-    coordinates: [0, 20],
-    zoom: 1,
+    coordinates: [
+      DEFAULT_WORLD_COUNTRY.coordinates[1],
+      DEFAULT_WORLD_COUNTRY.coordinates[0],
+    ],
+    zoom: 2.5,
   });
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -277,7 +285,7 @@ export default function WorldExplorePage() {
   );
 
   return (
-    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-[#070a12] text-slate-100 selection:bg-sky-500 selection:text-white lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
+    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
       <Header />
 
       <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-4 flex flex-col gap-2 sm:space-y-4 overflow-hidden lg:overflow-visible">
@@ -293,18 +301,18 @@ export default function WorldExplorePage() {
             switchLabel="Bangladesh Explorer"
             switchShortLabel="BD"
             switchEmoji="🇧🇩"
-            accentColor="sky"
+            accentColor="world"
           />
         </div>
 
         {/* Mobile Tab Switcher */}
-        <div className="lg:hidden grid grid-cols-2 items-center gap-1.5 p-1 rounded-2xl bg-[#0c101c] border border-white/10 shrink-0 text-xs font-semibold">
+        <div className="lg:hidden grid grid-cols-2 items-center gap-1.5 p-1 rounded-2xl bg-card border border-border shrink-0 text-xs font-semibold">
           <button
             onClick={() => setMobileTab("map")}
             className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
               mobileTab === "map"
-                ? "bg-sky-600 text-white shadow-md shadow-sky-950/60"
-                : "text-slate-400 hover:text-white"
+                ? "bg-accent text-accent-foreground shadow-md"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <Map className="size-3.5" />
@@ -314,8 +322,8 @@ export default function WorldExplorePage() {
             onClick={() => setMobileTab("info")}
             className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
               mobileTab === "info"
-                ? "bg-amber-600 text-white shadow-md shadow-amber-950/60"
-                : "text-slate-400 hover:text-white"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <Info className="size-3.5" />
@@ -347,7 +355,7 @@ export default function WorldExplorePage() {
             <div
               ref={mapContainerRef}
               onMouseLeave={() => setHoveredCountry(null)}
-              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-250px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-250px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -365,30 +373,30 @@ export default function WorldExplorePage() {
                   <div
                     className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs transition-all duration-150 ${
                       isHovering
-                        ? "bg-[#0c101c]/95 border border-sky-400/50 text-slate-200 shadow-2xl ring-1 ring-sky-500/25"
-                        : "bg-[#0c101c]/90 border border-amber-500/30 text-slate-200 shadow-lg"
+                        ? "bg-card/95 border border-primary/50 text-foreground shadow-2xl ring-1 ring-primary/25"
+                        : "bg-card/90 border border-accent/30 text-foreground shadow-lg"
                     }`}
                   >
                     <span
                       className={`size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse ${
-                        isHovering ? "bg-sky-400" : "bg-amber-400"
+                        isHovering ? "bg-primary" : "bg-accent"
                       }`}
                     />
                     <span className="text-sm sm:text-base leading-none">
                       {activeCountry.flagEmoji}
                     </span>
-                    <span className="font-bold text-white text-2xs sm:text-xs">
+                    <span className="font-bold text-foreground text-2xs sm:text-xs">
                       {activeCountry.name}
                     </span>
                     <span
-                      className={`text-2xs font-mono border-l border-white/10 pl-2 ${
-                        isHovering ? "text-slate-400" : "text-amber-400/90"
+                      className={`text-2xs font-mono border-l border-border pl-2 ${
+                        isHovering ? "text-muted-foreground" : "text-accent"
                       }`}
                     >
                       {activeCountry.capital || activeCountry.continent}
                     </span>
                     {isHovering && (isNeighbor || isHoverInFilterZone) && (
-                      <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                      <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-accent/20 text-accent border border-accent/40">
                         {isNeighbor
                           ? "Neighbor"
                           : subregionFilter !== "All"
@@ -400,14 +408,14 @@ export default function WorldExplorePage() {
                     )}
                   </div>
                 ) : isFilterActive ? (
-                  <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs bg-[#0c101c]/90 border border-sky-500/30 text-slate-200 shadow-lg">
-                    <span className="size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse bg-sky-400" />
-                    <span className="font-bold text-white text-2xs sm:text-xs">
+                  <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs bg-card/90 border border-accent/30 text-foreground shadow-lg">
+                    <span className="size-1.5 sm:size-2 rounded-full shrink-0 animate-pulse bg-accent" />
+                    <span className="font-bold text-foreground text-2xs sm:text-xs">
                       {subregionFilter !== "All"
                         ? subregionFilter
                         : continentFilter}
                     </span>
-                    <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-500/40">
+                    <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-accent/20 text-accent border border-accent/40">
                       Zone Highlighted
                     </span>
                   </div>
@@ -475,52 +483,88 @@ export default function WorldExplorePage() {
                           )
                         : null;
 
-                      // Highlight countries in active continent/subregion or neighbors
-                      const highlightedGeos = geographies.filter((g) => {
+                      // Neighbors of the selected country
+                      const neighborGeos = geographies.filter((g) => {
                         const c = getCountryFromGeo(g);
-                        if (!c || c.id === selectedCountry?.id) return false;
-                        if (isFilterActive) {
-                          return matchesFilter(c);
-                        }
-                        return Boolean(c.id && effectiveBorders.includes(c.id));
+                        return Boolean(
+                          c?.id &&
+                            c.id !== selectedCountry?.id &&
+                            effectiveBorders.includes(c.id),
+                        );
                       });
+
+                      // Countries matching active filter (excluding selected and neighbors)
+                      const filterMatchGeos = isFilterActive
+                        ? geographies.filter((g) => {
+                            const c = getCountryFromGeo(g);
+                            if (
+                              !c ||
+                              c.id === selectedCountry?.id ||
+                              effectiveBorders.includes(c.id)
+                            )
+                              return false;
+                            return matchesFilter(c);
+                          })
+                        : [];
+
+                      const styledGeographies = geographies
+                        .map((geo) => {
+                          const country = getCountryFromGeo(geo);
+                          const isSelected = Boolean(
+                            selectedCountry?.id &&
+                              country?.id &&
+                              selectedCountry.id === country.id,
+                          );
+                          const isNeighbor = Boolean(
+                            selectedCountry?.id &&
+                              country?.id &&
+                              effectiveBorders.includes(country.id),
+                          );
+                          const isFilterMatch =
+                            isFilterActive && matchesFilter(country);
+
+                          let priority = 0;
+                          let fill = "var(--map-land)";
+                          let stroke = "var(--map-land-border)";
+                          let itemStrokeWidth = strokeWidth * 0.9;
+
+                          if (isSelected) {
+                            priority = 3;
+                            fill = "var(--map-target)";
+                            stroke = "var(--map-target-stroke)";
+                            itemStrokeWidth = strokeWidth * 1.6;
+                          } else if (isNeighbor) {
+                            priority = 2;
+                            fill = "var(--map-neighbor)";
+                            stroke = "var(--map-neighbor-stroke)";
+                            itemStrokeWidth = strokeWidth * 1.35;
+                          } else if (isFilterActive && isFilterMatch) {
+                            priority = 1;
+                            fill = "var(--map-filter)";
+                            stroke = "var(--map-filter-stroke)";
+                            itemStrokeWidth = strokeWidth * 1.1;
+                          } else if (isFilterActive && !isFilterMatch) {
+                            priority = -1;
+                            fill = "var(--map-sea)";
+                            stroke = "var(--border)";
+                            itemStrokeWidth = strokeWidth * 0.8;
+                          }
+
+                          return {
+                            geo,
+                            country,
+                            priority,
+                            fill,
+                            stroke,
+                            itemStrokeWidth,
+                          };
+                        })
+                        .sort((a, b) => a.priority - b.priority);
 
                       return (
                         <>
-                          {geographies.map((geo) => {
-                            const country = getCountryFromGeo(geo);
-                            const isSelected = Boolean(
-                              selectedCountry?.id &&
-                                country?.id &&
-                                selectedCountry.id === country.id,
-                            );
-                            const isNeighbor = Boolean(
-                              country?.id &&
-                                effectiveBorders.includes(country.id),
-                            );
-                            const isFilterMatch =
-                              isFilterActive && matchesFilter(country);
-                            const isHighlighted = isFilterActive
-                              ? isFilterMatch && !isSelected
-                              : isNeighbor && !isSelected;
-                            const matchesActiveFilter =
-                              !isFilterActive || isFilterMatch;
-
-                            let fill = "#131b2e";
-                            let stroke = "#24324a";
-
-                            if (isSelected) {
-                              fill = "#1a253a";
-                              stroke = "#f59e0b";
-                            } else if (isHighlighted) {
-                              fill = "#0369a1";
-                              stroke = "#38bdf8";
-                            } else if (!matchesActiveFilter) {
-                              fill = "#080c14";
-                              stroke = "#141c2c";
-                            }
-
-                            return (
+                          {styledGeographies.map(
+                            ({ geo, country, fill, stroke, itemStrokeWidth }) => (
                               <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
@@ -537,7 +581,7 @@ export default function WorldExplorePage() {
                                   default: {
                                     fill,
                                     stroke,
-                                    strokeWidth,
+                                    strokeWidth: itemStrokeWidth,
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
@@ -546,13 +590,9 @@ export default function WorldExplorePage() {
                                       "fill 200ms ease, stroke 200ms ease",
                                   },
                                   hover: {
-                                    fill: "#1e2c45",
-                                    stroke: isSelected
-                                      ? "#fbbf24"
-                                      : isHighlighted
-                                        ? "#38bdf8"
-                                        : "#94a3b8",
-                                    strokeWidth,
+                                    fill: "var(--map-land-hover)",
+                                    stroke: "var(--map-inspect-stroke)",
+                                    strokeWidth: strokeWidth * 1.6,
                                     strokeLinejoin: "round",
                                     strokeLinecap: "round",
                                     vectorEffect: "non-scaling-stroke",
@@ -560,33 +600,35 @@ export default function WorldExplorePage() {
                                     cursor: "pointer",
                                   },
                                   pressed: {
-                                    fill: "#0f172a",
+                                    fill: "var(--map-land-hover)",
                                     outline: "none",
                                   },
                                 }}
                               />
-                            );
-                          })}
+                            ),
+                          )}
 
-                          {/* Overlay 1: Highlighted countries (Continent/Subregion or Neighbors) */}
-                          {highlightedGeos.map((geo) => (
+                          {/* Overlay 1: Filter matches (Continent/Subregion) */}
+                          {filterMatchGeos.map((geo) => (
                             <Geography
-                              key={`overlay-world-hl-${geo.rsmKey}`}
+                              key={`overlay-world-filter-${geo.rsmKey}`}
                               geography={geo}
                               style={{
                                 default: {
-                                  fill: "rgba(3, 105, 161, 0.22)",
-                                  stroke: "#38bdf8",
-                                  strokeWidth,
+                                  fill: "var(--map-filter)",
+                                  fillOpacity: 0.20,
+                                  stroke: "var(--map-filter-stroke)",
+                                  strokeWidth: strokeWidth * 1.1,
                                   strokeLinejoin: "round",
                                   strokeLinecap: "round",
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
                                 },
                                 hover: {
-                                  fill: "rgba(3, 105, 161, 0.22)",
-                                  stroke: "#38bdf8",
-                                  strokeWidth,
+                                  fill: "var(--map-filter)",
+                                  fillOpacity: 0.20,
+                                  stroke: "var(--map-filter-stroke)",
+                                  strokeWidth: strokeWidth * 1.1,
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
                                 },
@@ -594,25 +636,55 @@ export default function WorldExplorePage() {
                             />
                           ))}
 
-                          {/* Overlay 2: Selected country */}
-                          {selectedGeo && (
+                          {/* Overlay 2: Neighboring countries */}
+                          {neighborGeos.map((geo) => (
                             <Geography
-                              key={`overlay-world-sel-${selectedGeo.rsmKey}`}
-                              geography={selectedGeo}
+                              key={`overlay-world-neighbor-${geo.rsmKey}`}
+                              geography={geo}
                               style={{
                                 default: {
-                                  fill: "rgba(245, 158, 11, 0.16)",
-                                  stroke: "#f59e0b",
-                                  strokeWidth,
+                                  fill: "var(--map-neighbor)",
+                                  fillOpacity: 0.22,
+                                  stroke: "var(--map-neighbor-stroke)",
+                                  strokeWidth: strokeWidth * 1.35,
                                   strokeLinejoin: "round",
                                   strokeLinecap: "round",
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
                                 },
                                 hover: {
-                                  fill: "rgba(245, 158, 11, 0.16)",
-                                  stroke: "#f59e0b",
-                                  strokeWidth,
+                                  fill: "var(--map-neighbor)",
+                                  fillOpacity: 0.22,
+                                  stroke: "var(--map-neighbor-stroke)",
+                                  strokeWidth: strokeWidth * 1.35,
+                                  vectorEffect: "non-scaling-stroke",
+                                  pointerEvents: "none",
+                                },
+                              }}
+                            />
+                          ))}
+
+                          {/* Overlay 3: Selected country */}
+                          {selectedGeo && (
+                            <Geography
+                              key={`overlay-world-sel-${selectedGeo.rsmKey}`}
+                              geography={selectedGeo}
+                              style={{
+                                default: {
+                                  fill: "var(--map-target)",
+                                  fillOpacity: 0.24,
+                                  stroke: "var(--map-target-stroke)",
+                                  strokeWidth: strokeWidth * 1.6,
+                                  strokeLinejoin: "round",
+                                  strokeLinecap: "round",
+                                  vectorEffect: "non-scaling-stroke",
+                                  pointerEvents: "none",
+                                },
+                                hover: {
+                                  fill: "var(--map-target)",
+                                  fillOpacity: 0.24,
+                                  stroke: "var(--map-target-stroke)",
+                                  strokeWidth: strokeWidth * 1.6,
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
                                 },
@@ -620,27 +692,25 @@ export default function WorldExplorePage() {
                             />
                           )}
 
-                          {/* Overlay 3: Hovered country */}
+                          {/* Overlay 4: Hovered country */}
                           {hoveredGeo && hoveredGeo !== selectedGeo && (
                             <Geography
                               key={`overlay-world-hover-${hoveredGeo.rsmKey}`}
                               geography={hoveredGeo}
                               style={{
                                 default: {
-                                  fill: "rgba(56, 189, 248, 0.38)",
-                                  stroke: "#60a5fa",
-                                  strokeWidth: Math.max(1.6, strokeWidth * 2.2),
+                                  fill: "var(--map-inspect-fill)",
+                                  stroke: "var(--map-inspect-stroke)",
+                                  strokeWidth: strokeWidth * 1.6,
                                   strokeLinejoin: "round",
                                   strokeLinecap: "round",
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
                                 },
                                 hover: {
-                                  fill: "rgba(56, 189, 248, 0.38)",
-                                  stroke: "#60a5fa",
-                                  strokeWidth: Math.max(1.6, strokeWidth * 2.2),
-                                  strokeLinejoin: "round",
-                                  strokeLinecap: "round",
+                                  fill: "var(--map-inspect-fill)",
+                                  stroke: "var(--map-inspect-stroke)",
+                                  strokeWidth: strokeWidth * 1.6,
                                   vectorEffect: "non-scaling-stroke",
                                   pointerEvents: "none",
                                 },
@@ -660,7 +730,7 @@ export default function WorldExplorePage() {
                         selectedCountry.coordinates[0],
                       ]}
                       zoom={position.zoom}
-                      fillColor="#f59e0b"
+                      fillColor="var(--map-target)"
                     />
                   )}
 
@@ -673,37 +743,43 @@ export default function WorldExplorePage() {
                           hoveredCountry.coordinates[0],
                         ]}
                         zoom={position.zoom}
-                        fillColor="#38bdf8"
+                        fillColor="var(--map-neighbor-stroke)"
                       />
                     )}
                 </ZoomableGroup>
               </ComposableMap>
 
               {/* Legend (Desktop) */}
-              <div className="hidden sm:flex absolute bottom-3 left-3 z-10 flex-wrap items-center gap-2 sm:gap-3 bg-[#0c101c]/90 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-300 backdrop-blur-md">
+              <div className="hidden sm:flex absolute bottom-3 left-3 z-10 flex-wrap items-center gap-2 sm:gap-3 bg-card/90 px-3 py-1.5 rounded-xl border border-border text-xs text-muted-foreground backdrop-blur-md">
                 <div className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-amber-400 ring-2 ring-amber-400/20" />
+                  <span className="size-2.5 rounded-full bg-[var(--map-target)] border border-[var(--map-target-stroke)]" />
                   <span>Selected</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="size-2.5 rounded-full bg-sky-500 ring-2 ring-sky-500/20" />
+                  <span className="size-2.5 rounded-full bg-[var(--map-neighbor)] border border-[var(--map-neighbor-stroke)]" />
                   <span>Neighboring Nations</span>
                 </div>
+                {isFilterActive && (
+                  <div className="flex items-center gap-1.5">
+                    <span className="size-2.5 rounded-full bg-[var(--map-filter)] border border-[var(--map-filter-stroke)]" />
+                    <span>Filter Match</span>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Mobile Selection Callout on Map view */}
             {selectedCountry && (
-              <div className="lg:hidden shrink-0 p-2.5 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs shadow-xl">
+              <div className="lg:hidden shrink-0 p-2.5 rounded-2xl bg-card border border-border flex items-center justify-between text-xs shadow-xl">
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-base shrink-0">
                     {selectedCountry.flagEmoji}
                   </span>
                   <div className="truncate">
-                    <div className="font-bold text-white text-xs truncate">
+                    <div className="font-bold text-foreground text-xs truncate">
                       {selectedCountry.name}
                     </div>
-                    <span className="text-2xs text-slate-400 font-mono">
+                    <span className="text-2xs text-muted-foreground font-mono">
                       {selectedCountry.capital
                         ? `Capital: ${selectedCountry.capital} • `
                         : ""}
@@ -716,7 +792,7 @@ export default function WorldExplorePage() {
                 </div>
                 <button
                   onClick={() => setMobileTab("info")}
-                  className="px-2.5 py-1.5 rounded-xl bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 text-xs font-semibold text-sky-300 flex items-center gap-1 cursor-pointer shrink-0 ml-2 transition-colors"
+                  className="px-2.5 py-1.5 rounded-xl bg-accent/15 hover:bg-accent/25 border border-accent/30 text-xs font-semibold text-accent flex items-center gap-1 cursor-pointer shrink-0 ml-2 transition-colors"
                 >
                   <span>Details</span>
                   <ArrowRight className="size-3" />

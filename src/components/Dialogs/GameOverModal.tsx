@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import confetti from "canvas-confetti";
-import { useGameStore } from "@/lib/store";
-import { generateShareText } from "@/lib/engine";
+import { useGameStore, getTodayDateStr } from "@/lib/store";
+import { generateShareText, getDailyDistrict, getDailyCountry } from "@/lib/engine";
+import { BANGLADESH_DISTRICTS } from "@/data/bangladesh";
+import { COUNTRIES } from "@/data/world";
 import {
   Dialog,
   DialogContent,
@@ -29,6 +31,7 @@ import { TargetRevealCard } from "@/components/Game/TargetRevealCard";
 interface GameOverModalProps {
   onPlayAgain?: () => void;
   onChangeMode?: () => void;
+  scope?: "bangladesh" | "world";
 }
 
 function getTimeUntilMidnightUTC(): string {
@@ -51,12 +54,11 @@ function getTimeUntilMidnightUTC(): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
-export function GameOverModal({
-  onPlayAgain,
-  onChangeMode,
-}: GameOverModalProps = {}) {
+export function GameOverModal(props: GameOverModalProps = {}) {
+  const { onPlayAgain, onChangeMode } = props;
   const router = useRouter();
-  const scope = useGameStore((s) => s.scope);
+  const storeScope = useGameStore((s) => s.scope);
+  const scope = props.scope || storeScope;
   const gameStatus = useGameStore((s) => s.gameStatus);
   const targetCountry = useGameStore((s) => s.targetCountry);
   const targetDistrict = useGameStore((s) => s.targetDistrict);
@@ -71,25 +73,44 @@ export function GameOverModal({
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnightUTC());
 
-  const isWon = gameStatus === "won";
   const isBD = scope === "bangladesh";
-  const currentTarget = isBD ? targetDistrict : targetCountry;
+  const dailyHistory = useGameStore((s) => s.dailyHistory);
+  const today = getTodayDateStr();
+  const dailyRecord = dailyHistory?.[scope];
+  const isDailyScopeDone =
+    mode === "daily" &&
+    dailyRecord?.date === today &&
+    dailyRecord?.gameStatus !== "playing";
+
+  const activeGuesses = isDailyScopeDone ? dailyRecord.guesses : guesses;
+  const activeStatus = isDailyScopeDone ? dailyRecord.gameStatus : gameStatus;
+  const isWon = activeStatus === "won";
+
+  const resolvedTargetDistrict =
+    mode === "daily"
+      ? getDailyDistrict(BANGLADESH_DISTRICTS, today)
+      : targetDistrict;
+  const resolvedTargetCountry =
+    mode === "daily" ? getDailyCountry(COUNTRIES, today) : targetCountry;
+  const currentTarget = isBD ? resolvedTargetDistrict : resolvedTargetCountry;
+
+  const isOpen = isGameOverOpen && (mode !== "daily" || isDailyScopeDone);
 
   // Confetti when winning dialog opens
   useEffect(() => {
-    if (isGameOverOpen && isWon) {
+    if (isOpen && isWon) {
       try {
         confetti({
           particleCount: 100,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ["#10b981", "#38bdf8", "#f59e0b", "#ec4899"],
+          colors: ["#77b493", "#b07563", "#0f766e", "#ce7069", "#fb923c"],
         });
       } catch {
         // Confetti gracefully skipped if canvas not loaded
       }
     }
-  }, [isGameOverOpen, isWon]);
+  }, [isOpen, isWon]);
 
   useEffect(() => {
     if (mode !== "daily") return;
@@ -106,7 +127,7 @@ export function GameOverModal({
         : mode === "detective"
           ? "Shimana Detective"
           : "Blitz",
-      guesses,
+      activeGuesses,
       isWon,
       isBD ? "Bangladesh Shimana" : "Shimana",
     );
@@ -129,32 +150,32 @@ export function GameOverModal({
     }
   };
 
-  const handleClose = (isOpen: boolean) => {
-    setGameOverOpen(isOpen);
+  const handleClose = (openState: boolean) => {
+    setGameOverOpen(openState);
   };
 
-  if (!currentTarget || gameStatus === "playing") return null;
+  if (!currentTarget || activeStatus === "playing" || !isOpen) return null;
 
   return (
-    <Dialog open={isGameOverOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-surface-card border-white/10 text-white p-5 sm:p-6 rounded-2xl shadow-2xl max-h-[90dvh] overflow-y-auto">
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+      <DialogContent className="sm:max-w-md bg-card border-border text-foreground p-5 sm:p-6 rounded-2xl shadow-2xl max-h-[90dvh] overflow-y-auto">
         <DialogHeader className="text-center sm:text-center space-y-3">
-          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-black/40 border border-white/10">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-muted/60 border border-border">
             {isWon ? (
-              <Trophy className="size-8 text-amber-400 animate-bounce" />
+              <Trophy className="size-8 text-accent animate-bounce" />
             ) : (
-              <XCircle className="size-8 text-rose-500" />
+              <XCircle className="size-8 text-destructive" />
             )}
           </div>
 
-          <DialogTitle className="text-2xl font-black tracking-tight text-white">
+          <DialogTitle className="text-2xl font-black tracking-tight text-foreground">
             {isWon ? "You got it!" : "Game Over"}
           </DialogTitle>
 
-          <DialogDescription className="text-slate-400 text-xs">
+          <DialogDescription className="text-muted-foreground text-xs">
             {isWon
-              ? `You found the secret ${isBD ? "district" : "country"} in ${guesses.length} ${
-                  guesses.length === 1 ? "guess" : "guesses"
+              ? `You found the secret ${isBD ? "district" : "country"} in ${activeGuesses.length} ${
+                  activeGuesses.length === 1 ? "guess" : "guesses"
                 }!`
               : `The secret ${isBD ? "district" : "country"} was ${currentTarget.name}. Better luck next round!`}
           </DialogDescription>
@@ -163,22 +184,23 @@ export function GameOverModal({
         {/* Target Country or District Reveal Card */}
         <TargetRevealCard
           isBD={isBD}
-          targetCountry={targetCountry}
-          targetDistrict={targetDistrict}
+          scope={scope}
+          targetCountry={resolvedTargetCountry}
+          targetDistrict={resolvedTargetDistrict}
         />
 
         {mode === "daily" && (
-          <div className="rounded-xl border border-white/10 bg-white/5 p-3 space-y-2">
+          <div className="rounded-xl border border-border bg-muted/30 p-3 space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1.5 text-slate-300">
-                <Clock className="size-3.5 text-sky-400" />
+              <div className="flex items-center gap-1.5 text-foreground">
+                <Clock className="size-3.5 text-accent" />
                 <span className="font-semibold">Next Daily Puzzle</span>
               </div>
-              <span className="font-mono font-bold text-sky-400">
+              <span className="font-mono font-bold text-accent">
                 {timeLeft}
               </span>
             </div>
-            <p className="text-2xs text-slate-400 leading-relaxed">
+            <p className="text-2xs text-muted-foreground leading-relaxed">
               Daily puzzles can be played only once per day (win or loss). Play
               the other mode or practice in Detective mode!
             </p>
@@ -190,16 +212,16 @@ export function GameOverModal({
             <Button
               variant="outline"
               onClick={handleShare}
-              className="w-full sm:w-1/2 border-white/10 bg-white/5 hover:bg-white/10 text-slate-200 cursor-pointer"
+              className="w-full sm:w-1/2 border-border bg-muted/40 hover:bg-muted text-foreground cursor-pointer"
             >
               {copied ? (
                 <>
-                  <CheckCircle2 className="size-4 mr-2 text-emerald-400" />{" "}
+                  <CheckCircle2 className="size-4 mr-2 text-primary" />{" "}
                   Copied!
                 </>
               ) : (
                 <>
-                  <Share2 className="size-4 mr-2 text-sky-400" /> Share Result
+                  <Share2 className="size-4 mr-2 text-accent" /> Share Result
                 </>
               )}
             </Button>
@@ -209,24 +231,37 @@ export function GameOverModal({
                 variant="default"
                 onClick={() => {
                   handleClose(false);
+                  const targetScope = isBD ? "world" : "bangladesh";
+                  useGameStore.getState().initRouteScope(targetScope);
                   router.push(isBD ? "/world" : "/bangladesh");
                 }}
-                className="w-full sm:w-1/2 bg-sky-600 hover:bg-sky-500 text-white font-semibold shadow-lg shadow-sky-950/50 cursor-pointer"
+                className={`w-full sm:w-1/2 font-semibold shadow-lg cursor-pointer ${
+                  !isBD
+                    ? "bg-bd-primary hover:bg-bd-primary-hover text-bd-primary-foreground"
+                    : "bg-primary hover:bg-primary/90 text-primary-foreground"
+                }`}
               >
                 {isBD ? (
                   <span className="flex items-center justify-center gap-1.5">
                     <span>Play World Daily</span>
-                    <Globe className="size-4 text-sky-300" />
+                    <Globe className="size-4 text-primary-foreground" />
                   </span>
                 ) : (
-                  <span>Play BD Daily 🇧🇩</span>
+                  <span className="flex items-center justify-center gap-1.5">
+                    <span>Play BD Daily</span>
+                    <span className="flag-shadow">🇧🇩</span>
+                  </span>
                 )}
               </Button>
             ) : (
               <Button
                 variant="default"
                 onClick={handleNextAction}
-                className="w-full sm:w-1/2 bg-sky-600 hover:bg-sky-500 text-white font-semibold shadow-lg shadow-sky-950/50 cursor-pointer"
+                className={`w-full sm:w-1/2 font-semibold shadow-lg cursor-pointer ${
+                  isBD
+                    ? "bg-bd-primary hover:bg-bd-primary-hover text-bd-primary-foreground"
+                    : "bg-primary hover:bg-primary/90 text-primary-foreground"
+                }`}
               >
                 {mode === "detective" && isWon ? (
                   <>
@@ -246,9 +281,9 @@ export function GameOverModal({
                 handleClose(false);
                 forfeitAndSwitch({ mode: "detective", reset: true });
               }}
-              className="w-full h-8 text-2xs text-slate-400 hover:text-white hover:bg-white/5 cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full h-8 text-2xs text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer flex items-center justify-center gap-1.5"
             >
-              <Compass className="size-3.5 text-amber-400" />
+              <Compass className="size-3.5 text-accent" />
               <span>Practice in Detective Mode (Unlimited)</span>
             </Button>
           )}
@@ -261,7 +296,7 @@ export function GameOverModal({
                 handleClose(false);
                 onChangeMode();
               }}
-              className="text-2xs text-slate-400 hover:text-white underline underline-offset-4 cursor-pointer font-mono"
+              className="text-2xs text-muted-foreground hover:text-foreground underline underline-offset-4 cursor-pointer font-mono"
             >
               Change mode or difficulty ↗
             </button>

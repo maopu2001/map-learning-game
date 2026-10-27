@@ -25,15 +25,15 @@ export function MobileNavDrawer({
 
   return (
     <>
-      <div className="lg:hidden absolute top-14 left-2 right-2 z-50 pointer-events-auto mt-2 rounded-2xl border border-white/10 bg-[#070a12]/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3 animate-in fade-in zoom-in-95">
+      <div className="lg:hidden absolute top-14 left-2 right-2 z-50 pointer-events-auto mt-2 rounded-2xl border border-border bg-card/98 backdrop-blur-2xl p-3 shadow-2xl space-y-3 animate-in fade-in zoom-in-95">
         {/* Section 1: Home */}
         <Link
           href="/"
           onClick={onClose}
           className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-colors ${
             pathname === "/"
-              ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
-              : "bg-white/5 text-slate-200 hover:bg-white/10"
+              ? "bg-primary text-primary-foreground shadow-md"
+              : "bg-muted/50 text-foreground hover:bg-muted"
           }`}
         >
           <Home className="size-4 shrink-0" />
@@ -42,8 +42,8 @@ export function MobileNavDrawer({
 
         {/* Section 2: Play Games */}
         <div className="space-y-1.5 pt-1">
-          <span className="text-3xs font-mono uppercase tracking-wider text-slate-400 px-1 font-semibold flex items-center gap-1">
-            <Play className="size-3 fill-sky-400 text-sky-400" />
+          <span className="text-3xs font-mono uppercase tracking-wider text-muted-foreground px-1 font-semibold flex items-center gap-1">
+            <Play className="size-3 fill-accent text-accent" />
             <span>Play Games (Daily & Detective)</span>
           </span>
           <div className="grid grid-cols-2 gap-2">
@@ -52,11 +52,11 @@ export function MobileNavDrawer({
               onClick={onClose}
               className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isPlayBD
-                  ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/50"
-                  : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  ? "bg-bd-primary text-bd-primary-foreground shadow-md"
+                  : "bg-muted/50 text-foreground hover:bg-muted"
               }`}
             >
-              <span className="text-base shrink-0">🇧🇩</span>
+              <span className="text-base shrink-0 flag-shadow">🇧🇩</span>
               <span>Play Bangladesh</span>
             </Link>
             <Link
@@ -64,11 +64,11 @@ export function MobileNavDrawer({
               onClick={onClose}
               className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isPlayWorld
-                  ? "bg-sky-600 text-white shadow-md shadow-sky-950/50"
-                  : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  ? "bg-accent text-accent-foreground shadow-md"
+                  : "bg-muted/50 text-foreground hover:bg-muted"
               }`}
             >
-              <Globe2 className="size-4 text-sky-400 shrink-0" />
+              <Globe2 className="size-4 text-accent shrink-0" />
               <span>Play World</span>
             </Link>
           </div>
@@ -76,8 +76,8 @@ export function MobileNavDrawer({
 
         {/* Section 3: Reference Explorers */}
         <div className="space-y-1.5 pt-1">
-          <span className="text-3xs font-mono uppercase tracking-wider text-slate-400 px-1 font-semibold flex items-center gap-1">
-            <BookOpen className="size-3 text-purple-400" />
+          <span className="text-3xs font-mono uppercase tracking-wider text-muted-foreground px-1 font-semibold flex items-center gap-1">
+            <BookOpen className="size-3 text-accent" />
             <span>Map Explorers (No Timers)</span>
           </span>
           <div className="grid grid-cols-2 gap-2">
@@ -86,11 +86,11 @@ export function MobileNavDrawer({
               onClick={onClose}
               className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isExploreBD
-                  ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
-                  : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  ? "bg-bd-primary text-bd-primary-foreground shadow-md"
+                  : "bg-muted/50 text-foreground hover:bg-muted"
               }`}
             >
-              <span className="text-base shrink-0">🇧🇩</span>
+              <span className="text-base shrink-0 flag-shadow">🇧🇩</span>
               <span>Explore Bangladesh</span>
             </Link>
             <Link
@@ -98,26 +98,26 @@ export function MobileNavDrawer({
               onClick={onClose}
               className={`p-3 min-h-11 rounded-xl text-xs font-semibold flex items-center gap-2 transition-colors ${
                 isExploreWorld
-                  ? "bg-purple-600 text-white shadow-md shadow-purple-950/50"
-                  : "bg-white/5 text-slate-200 hover:bg-white/10"
+                  ? "bg-accent text-accent-foreground shadow-md"
+                  : "bg-muted/50 text-foreground hover:bg-muted"
               }`}
             >
-              <Globe2 className="size-4 text-purple-400 shrink-0" />
+              <Globe2 className="size-4 text-accent shrink-0" />
               <span>Explore World</span>
             </Link>
           </div>
         </div>
 
         {/* Section 4: Utilities */}
-        <div className="pt-2 border-t border-white/5 text-xs">
+        <div className="pt-2 border-t border-border text-xs">
           <button
             onClick={() => {
               onClose();
               onOpenHelp();
             }}
-            className="w-full p-2.5 min-h-11 rounded-xl bg-white/5 border border-white/5 text-slate-300 hover:text-white flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
+            className="w-full p-2.5 min-h-11 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground hover:bg-muted flex items-center justify-center gap-2 text-xs font-medium cursor-pointer"
           >
-            <HelpCircle className="size-3.5 text-sky-400" />
+            <HelpCircle className="size-3.5 text-accent" />
             <span>How to Play</span>
           </button>
         </div>

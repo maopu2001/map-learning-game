@@ -28,17 +28,17 @@ export function AbandonConfirmDialog({
 }: AbandonConfirmDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-[#0a0f1d] border border-amber-500/30 text-white rounded-3xl shadow-2xl backdrop-blur-xl max-h-[90dvh] overflow-y-auto">
+      <DialogContent className="sm:max-w-md bg-card border border-border text-foreground rounded-3xl shadow-2xl backdrop-blur-xl max-h-[90dvh] overflow-y-auto">
         <DialogHeader className="space-y-2">
           <div className="flex items-center gap-2">
-            <div className="size-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+            <div className="size-8 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
               <AlertTriangle className="size-4" />
             </div>
-            <DialogTitle className="text-base font-bold text-white">
+            <DialogTitle className="text-base font-bold text-foreground">
               Leave current game?
             </DialogTitle>
           </div>
-          <DialogDescription className="text-xs text-slate-400 leading-relaxed">
+          <DialogDescription className="text-xs text-muted-foreground leading-relaxed">
             You have a game in progress (
             {guessesCount > 0 && `${guessesCount} guesses`}
             {guessesCount > 0 && unlockedHints > 0 && " · "}
@@ -53,7 +53,7 @@ export function AbandonConfirmDialog({
             variant="outline"
             size="sm"
             onClick={() => onOpenChange(false)}
-            className="text-xs h-8 border-slate-700 hover:bg-slate-800 text-slate-200 rounded-xl"
+            className="text-xs h-8 border-border hover:bg-muted text-foreground rounded-xl"
           >
             Keep Playing
           </Button>
@@ -61,7 +61,7 @@ export function AbandonConfirmDialog({
             variant="destructive"
             size="sm"
             onClick={onConfirm}
-            className="text-xs h-8 bg-rose-600 hover:bg-rose-500 text-white font-medium shadow-md shadow-rose-950/40 rounded-xl"
+            className="text-xs h-8 rounded-xl"
           >
             Forfeit & Quit
           </Button>

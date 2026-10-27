@@ -24,7 +24,7 @@ export function DirectionIcon({
   className = "size-4",
 }: DirectionIconProps) {
   if (isCorrect) {
-    return <Target className={`${className} text-emerald-400`} />;
+    return <Target className={`${className} text-primary`} />;
   }
 
   switch (direction) {

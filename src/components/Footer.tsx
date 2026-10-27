@@ -5,13 +5,13 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-white/10 py-6 text-xs text-slate-400 bg-surface-base/80 mt-16 sm:mt-24">
+    <footer className="w-full border-t border-border py-6 text-xs text-muted-foreground bg-card/80 mt-16 sm:mt-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="space-y-0.5 text-center sm:text-left">
-          <p className="font-normal text-slate-300">
+          <p className="font-normal text-foreground">
             Shimana (সীমানা) © {year} · Interactive map guessing game for Bangladesh & the world
           </p>
-          <p className="text-[11px] text-slate-500">
+          <p className="text-[11px] text-muted-foreground">
             Built for geography enthusiasts, learners & educators.
           </p>
         </div>
@@ -21,19 +21,19 @@ export function Footer() {
             href="https://maopu.com.bd"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-medium text-slate-200 hover:text-sky-400 transition-colors cursor-pointer group"
+            className="inline-flex items-center gap-1.5 font-medium text-foreground hover:text-primary transition-colors cursor-pointer group"
           >
-            <Globe className="size-3.5 text-sky-400 group-hover:rotate-12 transition-transform" />
+            <Globe className="size-3.5 text-primary group-hover:rotate-12 transition-transform" />
             <span>M. Aktaruzzaman Opu</span>
           </a>
 
-          <span className="text-white/15 select-none">|</span>
+          <span className="text-border select-none">|</span>
 
           <a
             href="https://github.com/maopu2001"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-medium text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           >
             <svg
               className="size-3.5 fill-current"
@@ -49,15 +49,15 @@ export function Footer() {
             <span>GitHub</span>
           </a>
 
-          <span className="text-white/15 select-none">|</span>
+          <span className="text-border select-none">|</span>
 
           <a
             href="https://github.com/maopu2001/map-learning-game"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-medium text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           >
-            <CodeXml className="size-3.5 text-sky-400" />
+            <CodeXml className="size-3.5 text-primary" />
             <span>Source</span>
           </a>
         </div>

@@ -49,8 +49,8 @@ export function ContinentFilterBar({
     <div className="flex flex-col gap-1.5 shrink-0">
       {/* Tier 1: Continents */}
       <div className="flex items-center gap-1.5 min-w-0">
-        <span className="text-xs font-mono text-slate-400 font-medium shrink-0 flex items-center gap-1 mr-1 select-none">
-          <Globe className="size-3 text-amber-400" /> Continent:
+        <span className="text-xs font-mono text-muted-foreground font-medium shrink-0 flex items-center gap-1 mr-1 select-none">
+          <Globe className="size-3 text-accent" /> Continent:
         </span>
         <div className="flex-1 min-w-0 flex items-center gap-1.5 overflow-x-auto pb-0.5 text-xs scrollbar-none">
           {WORLD_CONTINENTS.map((cont) => (
@@ -60,8 +60,8 @@ export function ContinentFilterBar({
               onClick={() => onSelectContinent(cont)}
               className={`px-3 py-1.5 min-h-[32px] rounded-lg shrink-0 text-xs font-medium border transition-colors cursor-pointer ${
                 selectedContinent === cont
-                  ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
-                  : "bg-black/40 text-slate-400 border-white/5 hover:text-white"
+                  ? "bg-accent/20 text-accent border-accent/40 shadow-sm"
+                  : "bg-card text-muted-foreground border-border hover:text-foreground hover:bg-muted"
               }`}
             >
               {cont}
@@ -73,8 +73,8 @@ export function ContinentFilterBar({
       {/* Tier 2: Subregions (Shown when a continent has more than 1 subregion) */}
       {selectedContinent !== "All" && subregions.length > 1 && (
         <div className="flex items-center gap-1.5 min-w-0 animate-in fade-in duration-200">
-          <span className="text-xs font-mono text-slate-400 font-medium shrink-0 flex items-center gap-1 mr-1 select-none">
-            <Layers className="size-3 text-sky-400" /> Subregion:
+          <span className="text-xs font-mono text-muted-foreground font-medium shrink-0 flex items-center gap-1 mr-1 select-none">
+            <Layers className="size-3 text-primary" /> Subregion:
           </span>
           <div className="flex-1 min-w-0 flex items-center gap-1.5 overflow-x-auto pb-0.5 text-xs scrollbar-none">
             <button
@@ -82,8 +82,8 @@ export function ContinentFilterBar({
               onClick={() => onSelectSubregion("All")}
               className={`px-2.5 py-1 min-h-[28px] rounded-lg shrink-0 text-2xs font-medium border transition-colors cursor-pointer ${
                 selectedSubregion === "All"
-                  ? "bg-sky-500/20 text-sky-300 border-sky-500/40"
-                  : "bg-black/40 text-slate-400 border-white/5 hover:text-white"
+                  ? "bg-primary/20 text-primary border-primary/40 shadow-sm"
+                  : "bg-card text-muted-foreground border-border hover:text-foreground hover:bg-muted"
               }`}
             >
               All {selectedContinent}
@@ -95,8 +95,8 @@ export function ContinentFilterBar({
                 onClick={() => onSelectSubregion(sub)}
                 className={`px-2.5 py-1 min-h-[28px] rounded-lg shrink-0 text-2xs font-medium border transition-colors cursor-pointer ${
                   selectedSubregion === sub
-                    ? "bg-sky-500/20 text-sky-300 border-sky-500/40"
-                    : "bg-black/40 text-slate-400 border-white/5 hover:text-white"
+                    ? "bg-primary/20 text-primary border-primary/40 shadow-sm"
+                    : "bg-card text-muted-foreground border-border hover:text-foreground hover:bg-muted"
                 }`}
               >
                 {sub}

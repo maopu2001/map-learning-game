@@ -16,9 +16,9 @@ const BangladeshMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-full min-h-0 flex-1 rounded-2xl border border-white/10 bg-[#0c101c] flex items-center justify-center text-slate-500 animate-pulse">
+      <div className="w-full h-full min-h-0 flex-1 rounded-2xl border border-border bg-card flex items-center justify-center text-muted-foreground animate-pulse">
         <div className="flex flex-col items-center gap-2">
-          <div className="size-8 rounded-full border-2 border-emerald-500 border-t-transparent animate-spin" />
+          <div className="size-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
           <span className="text-xs font-mono">Loading Bangladesh map...</span>
         </div>
       </div>
@@ -46,8 +46,7 @@ export default function BangladeshPage() {
     initRouteScope("bangladesh");
     const state = useGameStore.getState();
     const isDailyDone = state.mode === "daily" && state.gameStatus !== "playing";
-    const isFresh = state.guesses.length === 0 && state.unlockedHints === 0;
-    if (isFresh || isDailyDone) {
+    if (isDailyDone) {
       setBriefingOpen(true);
     }
   }, [initRouteScope]);
@@ -62,7 +61,7 @@ export default function BangladeshPage() {
   }, [mode, gameStatus, tickBlitzTimer]);
 
   return (
-    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-[#070a12] text-slate-100 selection:bg-emerald-500 selection:text-white p-2 sm:p-2.5 gap-2">
+    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground p-2 sm:p-2.5 gap-2">
       {/* Fixed HUD (Never scrolls) */}
       <div className="shrink-0">
         <GameHUD
@@ -72,13 +71,13 @@ export default function BangladeshPage() {
       </div>
 
       {/* Mobile-only Segmented Control Bar (Map vs Intel) */}
-      <div className="lg:hidden shrink-0 flex items-center gap-1.5 p-1 rounded-2xl bg-black/40 border border-white/10 text-xs font-semibold">
+      <div className="lg:hidden shrink-0 flex items-center gap-1.5 p-1 rounded-2xl bg-card border border-border text-xs font-semibold">
         <button
           onClick={() => setMobileTab("map")}
           className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
             mobileTab === "map"
-              ? "bg-emerald-600 text-white shadow-md shadow-emerald-950/60"
-              : "text-slate-400 hover:text-white"
+              ? "bg-bd-primary text-bd-primary-foreground shadow-md"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Map className="size-3.5" />
@@ -88,8 +87,8 @@ export default function BangladeshPage() {
           onClick={() => setMobileTab("intel")}
           className={`flex-1 py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
             mobileTab === "intel"
-              ? "bg-sky-600 text-white shadow-md shadow-sky-950/60"
-              : "text-slate-400 hover:text-white"
+              ? "bg-accent text-accent-foreground shadow-md"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Crosshair className="size-3.5" />
@@ -97,7 +96,7 @@ export default function BangladeshPage() {
             Intel ({guesses.length}/{maxGuesses})
           </span>
           {unlockedHints > 0 && (
-            <span className="size-1.5 rounded-full bg-amber-400" />
+            <span className="size-1.5 rounded-full bg-accent" />
           )}
         </button>
       </div>
@@ -112,36 +111,36 @@ export default function BangladeshPage() {
         >
           {/* Mobile Search Input pinned above map */}
           <div className="shrink-0 z-30">
-            <GuessInput />
+            <GuessInput scope="bangladesh" />
           </div>
 
           {/* Interactive Map (Takes full remaining space) */}
           <div className="flex-1 min-h-0 w-full overflow-hidden flex flex-col">
-            <BangladeshMap className="relative w-full h-full min-h-0 flex-1 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none" />
+            <BangladeshMap className="relative w-full h-full min-h-0 flex-1 rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none" />
           </div>
 
           {/* Latest Guess Banner on Mobile Map view */}
           {lastGuess && (
-            <div className="shrink-0 p-2.5 rounded-2xl bg-[#0c101c] border border-white/10 flex items-center justify-between text-xs">
+            <div className="shrink-0 p-2.5 rounded-2xl bg-card border border-border flex items-center justify-between text-xs">
               <div>
-                <div className="font-bold text-white flex items-center gap-1.5">
+                <div className="font-bold text-foreground flex items-center gap-1.5">
                   <span>{lastGuess.country.name}</span>
-                  <span className="font-mono text-sky-300 flex items-center gap-1">
+                  <span className="font-mono text-primary flex items-center gap-1">
                     <span>{lastGuess.distanceKm} km</span>
                     <DirectionIcon
                       direction={lastGuess.direction}
                       isCorrect={lastGuess.isCorrect}
-                      className="size-3 text-sky-400 inline"
+                      className="size-3 text-primary inline"
                     />
                   </span>
                 </div>
-                <span className="text-2xs text-slate-400 font-mono">
+                <span className="text-2xs text-muted-foreground font-mono">
                   Match: {lastGuess.proximityScore}%
                 </span>
               </div>
               <button
                 onClick={() => setMobileTab("intel")}
-                className="px-2 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-sky-400 flex items-center gap-1 cursor-pointer shrink-0"
+                className="px-2 py-1 rounded-xl bg-muted/50 hover:bg-muted border border-border text-xs font-semibold text-primary flex items-center gap-1 cursor-pointer shrink-0"
               >
                 <span>Intel</span>
                 <ArrowRight className="size-3" />
@@ -156,19 +155,19 @@ export default function BangladeshPage() {
             mobileTab === "intel" ? "flex" : "hidden"
           }`}
         >
-          <GameIntelPanel defaultTab="both" />
+          <GameIntelPanel scope="bangladesh" defaultTab="both" />
         </div>
 
         {/* Desktop View: Dual column (Map on left, Intel on right) */}
         <div className="hidden lg:grid grid-cols-12 gap-3 h-full w-full min-h-0 overflow-hidden">
           {/* Left Column: Fixed Map Canvas */}
           <section className="col-span-7 xl:col-span-8 h-full min-h-0 flex flex-col overflow-hidden">
-            <BangladeshMap className="relative w-full h-full min-h-0 flex-1 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none" />
+            <BangladeshMap className="relative w-full h-full min-h-0 flex-1 rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none" />
           </section>
 
           {/* Right Column: Search + Scrollable Intel */}
           <aside className="col-span-5 xl:col-span-4 h-full min-h-0 flex flex-col overflow-hidden">
-            <GameIntelPanel defaultTab="both" />
+            <GameIntelPanel scope="bangladesh" defaultTab="both" />
           </aside>
         </div>
       </main>
@@ -181,7 +180,7 @@ export default function BangladeshPage() {
       />
 
       {/* End Game Modal */}
-      <GameOverModal onChangeMode={() => setBriefingOpen(true)} />
+      <GameOverModal scope="bangladesh" onChangeMode={() => setBriefingOpen(true)} />
     </div>
   );
 }

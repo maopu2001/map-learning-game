@@ -1,33 +1,41 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
-  --color-surface-base: #070a12;
-  --color-surface-card: #0c101c;
-  --color-surface-elevated: #121726;
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.16);
+  --color-surface-base: var(--background);
+  --color-surface-card: var(--card);
+  --color-surface-elevated: var(--muted);
+  --color-border-subtle: var(--border);
+  --color-border-hover: var(--ring);
 
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-bd-primary: var(--bd-primary);
+  --color-bd-primary-foreground: var(--bd-primary-foreground);
+  --color-bd-primary-hover: var(--bd-primary-hover);
+  --color-bd-subtle: var(--bd-subtle);
+  --color-bd-subtle-border: var(--bd-subtle-border);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -41,14 +49,22 @@
 @keyframes enter {
   from {
     opacity: var(--tw-enter-opacity, 1);
-    transform: scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1));
+    transform: scale3d(
+      var(--tw-enter-scale, 1),
+      var(--tw-enter-scale, 1),
+      var(--tw-enter-scale, 1)
+    );
   }
 }
 
 @keyframes exit {
   to {
     opacity: var(--tw-exit-opacity, 1);
-    transform: scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1));
+    transform: scale3d(
+      var(--tw-exit-scale, 1),
+      var(--tw-exit-scale, 1),
+      var(--tw-exit-scale, 1)
+    );
   }
 }
 
@@ -65,6 +81,10 @@
 
 @utility animate-guess-enter {
   animation: guess-enter 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility flag-shadow {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
 
 @utility animate-in {
@@ -98,7 +118,7 @@
 }
 
 @utility bg-tactical-grid {
-  background-image: radial-gradient(#1e293b 1px, transparent 1px);
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -108,47 +128,140 @@
 
 @layer base {
   :root {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 7%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 7%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-    --secondary: 217 33% 15%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 15%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 15%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 15%;
-    --input: 217 33% 15%;
-    --ring: 224 76% 48%;
+    --background: #fcf3f0;
+    --foreground: #000803;
+    --card: #ffffff;
+    --card-foreground: #000803;
+    --popover: #ffffff;
+    --popover-foreground: #000803;
+    --primary: #072014;
+    --primary-foreground: #fcf3f0;
+    --secondary: #916658;
+    --secondary-foreground: #ffffff;
+    --muted: #f1e0db;
+    --muted-foreground: #515753;
+    --accent: #916658;
+    --accent-foreground: #ffffff;
+    --destructive: #a86c7e;
+    --destructive-foreground: #eafdff;
+    --border: #e1d4d0;
+    --input: #e1d4d0;
+    --ring: #072014;
     --radius: 0.75rem;
 
-    /* Custom Map Tokens */
-    --map-sea: #070a12;
-    --map-land: #131b2e;
-    --map-land-border: #24324a;
-    --map-target: #f59e0b;
+    /* Custom Map Tokens (Light) */
+    --map-sea: #dcd0c9;
+    --map-land: #fcf6f2;
+    --map-land-border: #d4c4bc;
+    --map-land-hover: #f0e6e0;
+    --map-target: #9d65d8;
+    --map-target-stroke: #581c87;
     --map-neighbor: #38bdf8;
-    --map-wrong: #f43f5e;
-    --map-correct: #10b981;
+    --map-neighbor-stroke: #0284c7;
+    --map-hot: #fb923c;
+    --map-hot-stroke: #c2410c;
+    --map-warm: #fde047;
+    --map-warm-stroke: #b45309;
+    --map-wrong: #97a0af;
+    --map-wrong-stroke: #64748b;
+    --map-correct: #4ade80;
+    --map-correct-stroke: #15803d;
+    --map-inspect-stroke: #2563eb;
+    --map-inspect-fill: rgba(37, 99, 235, 0.16);
+    --map-inspect-stroke-bd: #059669;
+    --map-inspect-fill-bd: rgba(5, 150, 105, 0.16);
+    --map-filter: #e0f2fe;
+    --map-filter-stroke: #7dd3fc;
+    --map-filter-bd: #d1fae5;
+    --map-filter-stroke-bd: #6ee7b7;
+
+    /* Bangladesh Theme Tokens */
+    --bd-primary: #0f766e;
+    --bd-primary-foreground: #ffffff;
+    --bd-primary-hover: #115e59;
+    --bd-subtle: rgba(15, 118, 110, 0.12);
+    --bd-subtle-border: rgba(15, 118, 110, 0.25);
+  }
+
+  .dark {
+    --background: #03160b;
+    --foreground: #f8f0ed;
+    --card: #06100a;
+    --card-foreground: #f8f0ed;
+    --popover: #06100a;
+    --popover-foreground: #f8f0ed;
+    --primary: #77b493;
+    --primary-foreground: #030c07;
+    --secondary: #b07563;
+    --secondary-foreground: #030c07;
+    --muted: #121e17;
+    --muted-foreground: #aa9b95;
+    --accent: #b07563;
+    --accent-foreground: #030c07;
+    --destructive: #ce7069;
+    --destructive-foreground: #fff5f1;
+    --border: #202c25;
+    --input: #202c25;
+    --ring: #77b493;
+
+    /* Custom Map Tokens (Dark) */
+    --map-sea: #050e09;
+    --map-land: #112a1d;
+    --map-land-border: #234d36;
+    --map-land-hover: #1e3f2d;
+    --map-target: #7029b3;
+    --map-target-stroke: #d8b4fe;
+    --map-neighbor: #0369a1;
+    --map-neighbor-stroke: #38bdf8;
+    --map-hot: #c2410c;
+    --map-hot-stroke: #fb923c;
+    --map-warm: #a17d07;
+    --map-warm-stroke: #fbbf24;
+    --map-wrong: #97a0af;
+    --map-wrong-stroke: #64748b;
+    --map-correct: #15803d;
+    --map-correct-stroke: #4ade80;
+    --map-inspect-stroke: #38bdf8;
+    --map-inspect-fill: rgba(56, 189, 248, 0.20);
+    --map-inspect-stroke-bd: #34d399;
+    --map-inspect-fill-bd: rgba(52, 211, 153, 0.20);
+    --map-filter: #0c233c;
+    --map-filter-stroke: #38bdf8;
+    --map-filter-bd: #093322;
+    --map-filter-stroke-bd: #34d399;
+
+    /* Bangladesh Theme Tokens */
+    --bd-primary: #34d399;
+    --bd-primary-foreground: #022c22;
+    --bd-primary-hover: #10b981;
+    --bd-subtle: rgba(52, 211, 153, 0.16);
+    --bd-subtle-border: rgba(52, 211, 153, 0.30);
   }
 }
 
 body {
-  background-color: #070a12;
-  color: #f1f5f9;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-geist-sans),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   overflow-x: hidden;
   user-select: none;
 }
 
-/* Custom Tactical Scrollbars */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    #1e3328 50%,
+    var(--accent) 100%
+  );
+}
+
+/* Scrollbars */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -157,18 +270,23 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--border);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--muted-foreground);
 }
 
 /* Micro-interaction polish */
-button, [role="button"] {
-  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 160ms cubic-bezier(0.23, 1, 0.32, 1);
+button,
+[role="button"] {
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-button:active, [role="button"]:active {
+button:active,
+[role="button"]:active {
   transform: scale(0.98);
 }
 

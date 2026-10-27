@@ -20,10 +20,10 @@ export function isTargetHiddenOnMap(
   return mode === "detective" && gameStatus === "playing";
 }
 
-export const BD_DIST_MIN_KM = 45;
-export const BD_DIST_MAX_KM = 240;
-export const WORLD_DIST_MIN_KM = 800;
-export const WORLD_DIST_MAX_KM = 4200;
+export const BD_DIST_MIN_KM = 120;
+export const BD_DIST_MAX_KM = 350;
+export const WORLD_DIST_MIN_KM = 1500;
+export const WORLD_DIST_MAX_KM = 6000;
 
 export function pickNextInDistanceRange<
   T extends { id: string; coordinates: [number, number] },
@@ -224,7 +224,66 @@ export const useGameStore = create<GameState>()(
               extraNeighborsRevealed: 0,
               gameStatus: "playing",
             });
+          } else if (state.gameStatus !== "playing") {
+            // No record for this scope today, ensure fresh playing state
+            set({
+              guesses: [],
+              unlockedHints: 0,
+              extraNeighborsRevealed: 0,
+              gameStatus: "playing",
+              targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
+              targetCountry: getDailyCountry(COUNTRIES, today),
+            });
           }
+        } else {
+          // In non-daily modes (blitz, detective), target is not persisted.
+          // Force non-daily target if it fell back to the daily target on page load.
+          if (scope === "bangladesh") {
+            const daily = getDailyDistrict(BANGLADESH_DISTRICTS, today);
+            if (state.targetDistrict.id === daily.id) {
+              const nextTarget = pickNextInDistanceRange(
+                daily,
+                BANGLADESH_DISTRICTS,
+                BD_DIST_MIN_KM,
+                BD_DIST_MAX_KM,
+                state.recentTargetIds,
+              );
+              set({
+                targetDistrict: nextTarget,
+                recentTargetIds: [...state.recentTargetIds, nextTarget.id].slice(-15),
+              });
+            }
+          } else {
+            const daily = getDailyCountry(COUNTRIES, today);
+            if (state.targetCountry.id === daily.id) {
+              const eligible = COUNTRIES.filter((c) => c.area > 5000);
+              const nextTarget = pickNextInDistanceRange(
+                daily,
+                eligible,
+                WORLD_DIST_MIN_KM,
+                WORLD_DIST_MAX_KM,
+                state.recentTargetIds,
+              );
+              set({
+                targetCountry: nextTarget,
+                recentTargetIds: [...state.recentTargetIds, nextTarget.id].slice(-15),
+              });
+            }
+          }
+        }
+
+        // Clean up any mismatched guesses from the other scope
+        const currentGuesses = get().guesses;
+        const hasMismatchedGuesses = currentGuesses.some((g) =>
+          scope === "bangladesh" ? !("division" in g.country) : "division" in g.country
+        );
+        if (hasMismatchedGuesses) {
+          set({
+            guesses: [],
+            unlockedHints: 0,
+            extraNeighborsRevealed: 0,
+            gameStatus: "playing",
+          });
         }
       },
 
@@ -284,6 +343,7 @@ export const useGameStore = create<GameState>()(
               gameStatus: record.gameStatus,
               blitzTimeLeft: 90,
               lastDailyDate: today,
+              isGameOverOpen: false,
             });
             return;
           }
@@ -300,6 +360,7 @@ export const useGameStore = create<GameState>()(
           gameStatus: "playing",
           blitzTimeLeft: 90,
           lastDailyDate: today,
+          isGameOverOpen: false,
         });
       },
 
@@ -470,7 +531,8 @@ export const useGameStore = create<GameState>()(
         // Check duplicate
         if (state.guesses.some((g) => g.country.id === item.id)) return;
 
-        const isDistrictMode = state.scope === "bangladesh";
+        const isDistrictMode = "division" in item;
+        const targetScope: GameScope = isDistrictMode ? "bangladesh" : "world";
         const currentTarget = isDistrictMode
           ? state.targetDistrict
           : state.targetCountry;
@@ -486,7 +548,7 @@ export const useGameStore = create<GameState>()(
         if (state.mode === "daily") {
           nextDailyHistory = {
             ...state.dailyHistory,
-            [state.scope]: {
+            [targetScope]: {
               date: today,
               gameStatus: newStatus,
               guesses: newGuesses,
@@ -498,6 +560,7 @@ export const useGameStore = create<GameState>()(
         }
 
         set({
+          scope: targetScope,
           guesses: newGuesses,
           gameStatus: newStatus,
           dailyHistory: nextDailyHistory,
@@ -830,38 +893,10 @@ export const useGameStore = create<GameState>()(
       partialize: (state) => ({
         lastDailyDate: state.lastDailyDate,
         mode: state.mode,
-        scope: state.scope,
         difficulty: state.difficulty,
         recentTargetIds: state.recentTargetIds,
         dailyHistory: state.dailyHistory,
       }),
-      onRehydrateStorage: () => (state) => {
-        if (!state) return;
-        const today = getTodayDateStr();
-        if (state.mode === "daily") {
-          const record = state.dailyHistory?.[state.scope];
-          if (record && record.date === today) {
-            useGameStore.setState({
-              difficulty: record.difficulty ?? state.difficulty,
-              guesses: record.guesses,
-              gameStatus: record.gameStatus,
-              unlockedHints: record.unlockedHints,
-              extraNeighborsRevealed: record.extraNeighborsRevealed,
-              targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
-              targetCountry: getDailyCountry(COUNTRIES, today),
-            });
-          } else {
-            useGameStore.setState({
-              guesses: [],
-              gameStatus: "playing",
-              unlockedHints: 0,
-              extraNeighborsRevealed: 0,
-              targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
-              targetCountry: getDailyCountry(COUNTRIES, today),
-            });
-          }
-        }
-      },
     },
   ),
 );

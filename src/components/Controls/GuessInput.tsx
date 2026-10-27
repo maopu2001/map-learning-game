@@ -10,13 +10,18 @@ import {
 } from "@/components/ui/command";
 import { COUNTRIES, CountryData } from "@/data/world";
 import { BANGLADESH_DISTRICTS, DistrictData } from "@/data/bangladesh";
-import { useGameStore } from "@/lib/store";
+import { useGameStore, getTodayDateStr } from "@/lib/store";
 import { Globe, ArrowRight, CornerDownLeft, Trophy, XCircle, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCommandK } from "@/hooks/useCommandK";
 
-export function GuessInput() {
-  const scope = useGameStore((s) => s.scope);
+interface GuessInputProps {
+  scope?: "bangladesh" | "world";
+}
+
+export function GuessInput({ scope: propScope }: GuessInputProps = {}) {
+  const storeScope = useGameStore((s) => s.scope);
+  const scope = propScope || storeScope;
   const mode = useGameStore((s) => s.mode);
   const makeGuess = useGameStore((s) => s.makeGuess);
   const guesses = useGameStore((s) => s.guesses);
@@ -156,39 +161,47 @@ export function GuessInput() {
   };
 
   const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
+  const dailyHistory = useGameStore((s) => s.dailyHistory);
+  const today = getTodayDateStr();
+  const dailyRecord = dailyHistory?.[scope];
+  const isThisScopeDailyDone =
+    mode === "daily" &&
+    dailyRecord?.date === today &&
+    dailyRecord?.gameStatus !== "playing";
 
-  if (gameStatus !== "playing") {
-    if (mode === "daily") {
-      const isWon = gameStatus === "won";
-      return (
-        <div className="w-full p-2.5 sm:p-3 rounded-2xl bg-surface-card border border-white/10 flex items-center justify-between gap-2 shadow-lg">
-          <div className="flex items-center gap-2 min-w-0">
-            {isWon ? (
-              <Trophy className="size-4 sm:size-5 text-amber-400 shrink-0" />
-            ) : (
-              <XCircle className="size-4 sm:size-5 text-rose-500 shrink-0" />
-            )}
-            <div className="min-w-0">
-              <p className="text-xs font-bold text-white truncate">
-                {isWon ? "Daily Puzzle Solved!" : "Daily Puzzle Completed"}
-              </p>
-              <p className="text-2xs text-slate-400 font-mono">
-                1 play per day • {guesses.length} guesses
-              </p>
-            </div>
+  if (isThisScopeDailyDone) {
+    const isWon = dailyRecord.gameStatus === "won";
+    return (
+      <div className="w-full p-2.5 sm:p-3 rounded-2xl bg-card border border-border flex items-center justify-between gap-2 shadow-lg">
+        <div className="flex items-center gap-2 min-w-0">
+          {isWon ? (
+            <Trophy className="size-4 sm:size-5 text-accent shrink-0" />
+          ) : (
+            <XCircle className="size-4 sm:size-5 text-destructive shrink-0" />
+          )}
+          <div className="min-w-0">
+            <p className="text-xs font-bold text-foreground truncate">
+              {isWon ? "Daily Puzzle Solved!" : "Daily Puzzle Completed"}
+            </p>
+            <p className="text-2xs text-muted-foreground font-mono">
+              1 play per day • {dailyRecord.guesses.length} guesses
+            </p>
           </div>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => setGameOverOpen(true)}
-            className="h-7 text-xs px-2.5 border-white/10 bg-white/5 hover:bg-white/10 text-sky-400 hover:text-sky-300 rounded-xl flex items-center gap-1 cursor-pointer shrink-0"
-          >
-            <Eye className="size-3" />
-            <span>Result</span>
-          </Button>
         </div>
-      );
-    }
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => setGameOverOpen(true)}
+          className="h-7 text-xs px-2.5 border-border bg-muted/50 hover:bg-muted text-primary rounded-xl flex items-center gap-1 cursor-pointer shrink-0"
+        >
+          <Eye className="size-3" />
+          <span>Result</span>
+        </Button>
+      </div>
+    );
+  }
+
+  if (mode !== "daily" && gameStatus !== "playing") {
     return null;
   }
 
@@ -199,7 +212,7 @@ export function GuessInput() {
   return (
     <div className="relative w-full z-20">
       <Command
-        className="rounded-2xl border border-white/10 bg-surface-card shadow-2xl backdrop-blur-xl overflow-visible"
+        className="rounded-2xl border border-border bg-card shadow-2xl backdrop-blur-xl overflow-visible"
         shouldFilter={false}
       >
         <div className="relative">
@@ -226,7 +239,7 @@ export function GuessInput() {
             className="text-base sm:text-sm font-medium"
           />
           {!query && (
-            <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-slate-500 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded pointer-events-none select-none">
+            <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-muted-foreground bg-muted/50 border border-border px-1.5 py-0.5 rounded pointer-events-none select-none">
               <span>⌘</span>
               <span>K</span>
             </div>
@@ -235,17 +248,21 @@ export function GuessInput() {
             <button
               type="button"
               onClick={() => submitQuery(query)}
-              className="absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono text-slate-200 bg-sky-600/30 hover:bg-sky-600/50 border border-sky-500/40 px-2.5 py-1 rounded-lg cursor-pointer transition-colors"
+              className={`absolute right-2.5 top-2 flex items-center gap-1 text-xs font-mono ${
+                isBD
+                  ? "text-bd-primary bg-bd-subtle hover:bg-bd-primary/20 border border-bd-subtle-border"
+                  : "text-foreground bg-primary/20 hover:bg-primary/30 border border-primary/40"
+              } px-2.5 py-1 rounded-lg cursor-pointer transition-colors`}
             >
               <span>Submit</span>
-              <CornerDownLeft className="size-3 text-sky-400" />
+              <CornerDownLeft className={`size-3 ${isBD ? "text-bd-primary" : "text-primary"}`} />
             </button>
           )}
         </div>
 
         {open && query.trim().length > 0 && (
           <div className="absolute top-full left-0 right-0 mt-2 z-50">
-            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-white/10 bg-surface-card/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
+            <CommandList className="max-h-56 sm:max-h-64 rounded-xl border border-border bg-card/98 backdrop-blur-2xl shadow-2xl p-1.5 overflow-y-auto">
               {isBD ? (
                 <>
                   {filteredDistricts.slice(0, 8).map((d) => (
@@ -253,27 +270,27 @@ export function GuessInput() {
                       key={d.id}
                       value={d.name}
                       onSelect={() => handleSelectDistrict(d)}
-                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-10.5 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-10.5 rounded-lg text-foreground hover:bg-muted data-[selected=true]:bg-muted data-[selected=true]:text-foreground cursor-pointer transition-colors"
                     >
                       <div className="flex items-center gap-2.5">
-                        <span className="font-semibold text-xs sm:text-sm text-white">
+                        <span className="font-semibold text-xs sm:text-sm text-foreground">
                           {d.name}
                         </span>
                         {d.aliases && d.aliases.length > 0 && (
-                          <span className="text-2xs text-slate-400 font-mono">
+                          <span className="text-2xs text-muted-foreground font-mono">
                             (aka {d.aliases.join(", ")})
                           </span>
                         )}
-                        <span className="text-xs text-slate-400 font-mono">
+                        <span className="text-xs text-muted-foreground font-mono">
                           ({d.division} Div)
                         </span>
                       </div>
-                      <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                      <ArrowRight className="size-3.5 text-muted-foreground opacity-60" />
                     </CommandItem>
                   ))}
                   {filteredDistricts.length === 0 && (
-                    <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
-                      <Globe className="size-4 text-slate-500" />
+                    <CommandEmpty className="py-6 text-center text-xs text-muted-foreground flex items-center justify-center gap-2 font-mono">
+                      <Globe className="size-4 text-muted-foreground" />
                       <span>No districts found</span>
                     </CommandEmpty>
                   )}
@@ -285,26 +302,26 @@ export function GuessInput() {
                       key={c.id}
                       value={c.name}
                       onSelect={() => handleSelectCountry(c)}
-                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-10.5 rounded-lg text-slate-200 hover:bg-white/5 hover:text-white data-[selected=true]:bg-white/10 data-[selected=true]:text-white cursor-pointer transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 sm:py-2 min-h-10.5 rounded-lg text-foreground hover:bg-muted data-[selected=true]:bg-muted data-[selected=true]:text-foreground cursor-pointer transition-colors"
                     >
                       <div className="flex items-center gap-2.5">
                         <span className="text-lg">{c.flagEmoji}</span>
-                        <span className="font-semibold text-xs sm:text-sm text-white">
+                        <span className="font-semibold text-xs sm:text-sm text-foreground">
                           {c.name}
                         </span>
-                        <span className="text-xs text-slate-400 font-mono">
+                        <span className="text-xs text-muted-foreground font-mono">
                           ({c.id})
                         </span>
-                        <span className="text-xs text-slate-500 hidden sm:inline font-mono">
+                        <span className="text-xs text-muted-foreground hidden sm:inline font-mono">
                           {c.continent}
                         </span>
                       </div>
-                      <ArrowRight className="size-3.5 text-slate-500 opacity-60" />
+                      <ArrowRight className="size-3.5 text-muted-foreground opacity-60" />
                     </CommandItem>
                   ))}
                   {filteredCountries.length === 0 && (
-                    <CommandEmpty className="py-6 text-center text-xs text-slate-400 flex items-center justify-center gap-2 font-mono">
-                      <Globe className="size-4 text-slate-500" />
+                    <CommandEmpty className="py-6 text-center text-xs text-muted-foreground flex items-center justify-center gap-2 font-mono">
+                      <Globe className="size-4 text-muted-foreground" />
                       <span>No countries found</span>
                     </CommandEmpty>
                   )}

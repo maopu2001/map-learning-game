@@ -6,8 +6,13 @@ import { redactTrivia } from "@/lib/redact";
 import { Badge } from "@/components/ui/badge";
 import { FileText, ShieldAlert, MapPin, Eye } from "lucide-react";
 
-export function DetectiveDossier() {
-  const scope = useGameStore((s) => s.scope);
+interface DetectiveDossierProps {
+  scope?: "bangladesh" | "world";
+}
+
+export function DetectiveDossier({ scope: propScope }: DetectiveDossierProps = {}) {
+  const storeScope = useGameStore((s) => s.scope);
+  const scope = propScope || storeScope;
   const difficulty = useGameStore((s) => s.difficulty);
   const targetCountry = useGameStore((s) => s.targetCountry);
   const targetDistrict = useGameStore((s) => s.targetDistrict);
@@ -62,15 +67,15 @@ export function DetectiveDossier() {
   const isEasy = difficulty === "easy";
 
   return (
-    <div className="w-full rounded-2xl border border-amber-500/30 bg-[#0c101c] p-3.5 sm:p-4 shadow-xl space-y-2.5 backdrop-blur-md">
+    <div className="w-full rounded-2xl border border-border bg-card p-3.5 sm:p-4 shadow-xl space-y-2.5 backdrop-blur-md">
       {/* Dossier Header */}
-      <div className="flex items-center justify-between pb-2 border-b border-white/5">
+      <div className="flex items-center justify-between pb-2 border-b border-border">
         <div className="flex items-center gap-2">
-          <div className="size-6 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+          <div className="size-6 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
             <FileText className="size-3.5" />
           </div>
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
               Detective Clue
             </h3>
           </div>
@@ -80,7 +85,7 @@ export function DetectiveDossier() {
           {isHard && gameStatus === "playing" && (
             <Badge
               variant="outline"
-              className="text-3xs font-mono border-rose-500/30 text-rose-300 bg-rose-500/10 flex items-center gap-1 px-1.5 py-0.5"
+              className="text-3xs font-mono border-destructive/30 text-destructive bg-destructive/10 flex items-center gap-1 px-1.5 py-0.5"
             >
               <ShieldAlert className="size-3" />
               <span>Masked Names</span>
@@ -90,7 +95,7 @@ export function DetectiveDossier() {
           {isEasy && (
             <Badge
               variant="outline"
-              className="text-3xs font-mono border-emerald-500/30 text-emerald-300 bg-emerald-500/10 flex items-center gap-1 px-1.5 py-0.5"
+              className="text-3xs font-mono border-primary/30 text-primary bg-primary/10 flex items-center gap-1 px-1.5 py-0.5"
             >
               <MapPin className="size-3" />
               <span>
@@ -102,7 +107,7 @@ export function DetectiveDossier() {
       </div>
 
       {/* Description Body */}
-      <div className="p-3 rounded-xl bg-black/40 border border-white/5 text-xs text-slate-200 leading-relaxed font-sans select-text">
+      <div className="p-3 rounded-xl bg-muted/40 border border-border text-xs text-foreground leading-relaxed font-sans select-text">
         <p className="tracking-wide">
           {displayText.split(/(█+)/g).map((part, i) => {
             if (part.startsWith("█")) {
@@ -110,7 +115,7 @@ export function DetectiveDossier() {
                 <span
                   key={i}
                   title="Masked name (unlock hints to reveal)"
-                  className="inline-block bg-slate-800 text-amber-400/80 font-mono text-xs px-1 py-0.5 mx-0.5 rounded border border-white/10 select-none shadow-inner"
+                  className="inline-block bg-muted text-accent font-mono text-xs px-1 py-0.5 mx-0.5 rounded border border-border select-none shadow-inner"
                 >
                   {part}
                 </span>
@@ -122,9 +127,9 @@ export function DetectiveDossier() {
       </div>
 
       {/* Status Bar */}
-      <div className="flex items-center justify-between text-2xs text-slate-400 pt-0.5">
+      <div className="flex items-center justify-between text-2xs text-muted-foreground pt-0.5">
         {isHard && unlockedHints < 2 && gameStatus === "playing" && (
-          <span className="text-3xs text-rose-400 font-mono flex items-center gap-1">
+          <span className="text-3xs text-destructive font-mono flex items-center gap-1">
             <Eye className="size-2.5" />
             <span>
               {unlockedHints === 1

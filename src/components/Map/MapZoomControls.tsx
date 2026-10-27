@@ -21,7 +21,7 @@ export function MapZoomControls({
 }: MapZoomControlsProps) {
   return (
     <div
-      className={`flex flex-col gap-1.5 bg-[#0c101c]/90 p-1.5 rounded-xl border border-white/10 backdrop-blur-md shadow-lg ${className}`}
+      className={`flex flex-col gap-1.5 bg-card/90 p-1.5 rounded-xl border border-border backdrop-blur-md shadow-lg ${className}`}
     >
       <Button
         variant="ghost"
@@ -29,7 +29,7 @@ export function MapZoomControls({
         onClick={onZoomIn}
         title="Zoom In"
         aria-label="Zoom In"
-        className="size-8 rounded-lg hover:bg-white/10 text-slate-300 cursor-pointer"
+        className="size-8 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer"
       >
         <ZoomIn className="size-4" />
       </Button>
@@ -39,7 +39,7 @@ export function MapZoomControls({
         onClick={onZoomOut}
         title="Zoom Out"
         aria-label="Zoom Out"
-        className="size-8 rounded-lg hover:bg-white/10 text-slate-300 cursor-pointer"
+        className="size-8 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer"
       >
         <ZoomOut className="size-4" />
       </Button>
@@ -49,7 +49,7 @@ export function MapZoomControls({
         onClick={onResetZoom}
         title={resetTitle}
         aria-label={resetTitle}
-        className="size-8 rounded-lg hover:bg-white/10 text-slate-300 cursor-pointer"
+        className="size-8 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground cursor-pointer"
       >
         <RotateCcw className="size-4" />
       </Button>

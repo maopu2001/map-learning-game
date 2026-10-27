@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Play, SlidersHorizontal, AlertTriangle, Trophy } from "lucide-react";
 import { ModeSelector } from "@/components/Game/ModeSelector";
 import { DifficultySelector } from "@/components/Game/DifficultySelector";
+import { getDailyDistrict, getDailyCountry } from "@/lib/engine";
+import { BANGLADESH_DISTRICTS } from "@/data/bangladesh";
+import { COUNTRIES } from "@/data/world";
 
 interface MissionBriefingModalProps {
   open: boolean;
@@ -74,8 +77,23 @@ export function MissionBriefingModal({
 
   const handleStartGame = () => {
     if (selectedMode === "daily" && isDailyCompleted) {
+      if (dailyRecord && dailyRecord.date === today) {
+        useGameStore.setState({
+          scope,
+          mode: "daily",
+          difficulty: dailyRecord.difficulty ?? selectedDifficulty,
+          guesses: dailyRecord.guesses,
+          gameStatus: dailyRecord.gameStatus,
+          unlockedHints: dailyRecord.unlockedHints,
+          extraNeighborsRevealed: dailyRecord.extraNeighborsRevealed,
+          targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
+          targetCountry: getDailyCountry(COUNTRIES, today),
+          isGameOverOpen: true,
+        });
+      } else {
+        setGameOverOpen(true);
+      }
       onOpenChange(false);
-      setGameOverOpen(true);
       return;
     }
 
@@ -89,30 +107,30 @@ export function MissionBriefingModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[calc(100vw-2rem)] max-w-md bg-[#090d18] border border-white/10 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl backdrop-blur-2xl">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-md bg-card border border-border text-foreground rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl backdrop-blur-2xl">
         <DialogHeader className="space-y-0.5 text-left">
           <div className="flex items-center gap-2">
-            <span className="p-1 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400">
+            <span className="p-1 rounded-lg bg-accent/15 border border-accent/30 text-accent">
               <SlidersHorizontal className="size-3.5" />
             </span>
-            <DialogTitle className="text-base sm:text-lg font-bold tracking-tight text-white">
+            <DialogTitle className="text-base sm:text-lg font-bold tracking-tight text-foreground">
               Game Settings
             </DialogTitle>
           </div>
-          <DialogDescription className="text-2xs sm:text-xs text-slate-400">
+          <DialogDescription className="text-2xs sm:text-xs text-muted-foreground">
             {isBD ? "Bangladesh • 64 Districts" : "World • 195 Countries"}
           </DialogDescription>
         </DialogHeader>
 
         {isMidGame && (
-          <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs">
+          <div className="flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs">
             <div className="flex items-center gap-1.5 min-w-0">
-              <AlertTriangle className="size-3.5 shrink-0 text-amber-400" />
+              <AlertTriangle className="size-3.5 shrink-0 text-destructive" />
               <span className="truncate text-2xs sm:text-xs">
                 Forfeits current round
               </span>
             </div>
-            <div className="flex items-center gap-1.5 text-2xs text-amber-300/80 font-mono shrink-0">
+            <div className="flex items-center gap-1.5 text-2xs text-destructive/80 font-mono shrink-0">
               <span>
                 {guesses.length} {guesses.length === 1 ? "guess" : "guesses"}
               </span>
@@ -143,9 +161,9 @@ export function MissionBriefingModal({
           {selectedMode === "daily" && isDailyCompleted ? (
             <Button
               onClick={handleStartGame}
-              className="w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer bg-sky-600 hover:bg-sky-500 text-white shadow-sky-950/60"
+              className="w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer bg-accent hover:bg-accent/90 text-accent-foreground"
             >
-              <Trophy className="size-3.5 text-amber-400" />
+              <Trophy className="size-3.5 text-accent-foreground" />
               <span>VIEW TODAY&apos;S RESULT</span>
             </Button>
           ) : (
@@ -153,11 +171,11 @@ export function MissionBriefingModal({
               onClick={handleStartGame}
               className={`w-full h-10 rounded-xl font-bold text-xs sm:text-sm tracking-wide gap-1.5 shadow-lg cursor-pointer ${
                 isBD
-                  ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/60"
-                  : "bg-sky-600 hover:bg-sky-500 text-white shadow-sky-950/60"
+                  ? "bg-bd-primary hover:bg-bd-primary-hover text-bd-primary-foreground"
+                  : "bg-primary hover:bg-primary/90 text-primary-foreground"
               }`}
             >
-              <Play className="size-3.5 fill-white" />
+              <Play className="size-3.5 fill-current" />
               <span>{isMidGame ? "START NEW ROUND" : "PLAY NOW"}</span>
             </Button>
           )}

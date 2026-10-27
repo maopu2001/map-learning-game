@@ -12,7 +12,7 @@ interface TargetPulseMarkerProps {
 export function TargetPulseMarker({
   coordinates,
   zoom: fallbackZoom = 1,
-  fillColor = "#10b981",
+  fillColor = "var(--map-correct)",
 }: TargetPulseMarkerProps) {
   const zoomPan = useZoomPanContext?.() as { k?: number } | undefined;
   const zoom = Math.max(0.1, zoomPan?.k || fallbackZoom || 1);

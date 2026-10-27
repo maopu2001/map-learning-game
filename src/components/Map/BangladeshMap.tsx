@@ -76,7 +76,7 @@ const DistrictGeographyItem = React.memo(function DistrictGeographyItem({
           cursor: "pointer",
         },
         pressed: {
-          fill: "#0f172a",
+          fill: "var(--map-land-hover)",
           outline: "none",
         },
       }}
@@ -136,17 +136,18 @@ function BangladeshGeographiesContent({
   const neighborGeos = useMemo(
     () =>
       activeNeighbors
+        .filter((n) => !guessedDistrictsMap.has(n.toLowerCase()))
         .map((n) => geoIndex.byName.get(n.toLowerCase()))
         .filter((g): g is GeoFeature => Boolean(g)),
-    [activeNeighbors, geoIndex],
+    [activeNeighbors, geoIndex, guessedDistrictsMap],
   );
   const inspectedGeo = inspectedDistrict
     ? geoIndex.byName.get(inspectedDistrict.name.toLowerCase()) ?? null
     : null;
 
-  return (
-    <>
-      {geographies.map((geo) => {
+  const styledGeographies = useMemo(() => {
+    return geographies
+      .map((geo) => {
         const districtName = (geo.properties?.shapeName as string) || "";
         if (!districtName) return null;
         const districtData = geoIndex.districtByGeo.get(geo);
@@ -160,52 +161,108 @@ function BangladeshGeographiesContent({
         const guessResult = guessedDistrictsMap.get(districtName.toLowerCase());
         const isGuessed = Boolean(guessResult);
 
-        let fill = "#131b2e";
-        let stroke = "#24324a";
+        let priority = 0;
+        let fill = "var(--map-land)";
+        let stroke = "var(--map-land-border)";
+        let itemStrokeWidth = strokeWidth * 0.9;
 
         // Base fills and strokes
         if (isTarget) {
+          priority = 5;
           if (isGameOver) {
-            fill = gameStatus === "won" ? "#10b981" : "#f59e0b";
-            stroke = "#34d399";
+            fill =
+              gameStatus === "won"
+                ? "var(--map-correct)"
+                : gameStatus === "lost"
+                  ? "var(--map-wrong)"
+                  : "var(--map-target)";
+            stroke =
+              gameStatus === "won"
+                ? "var(--map-correct-stroke)"
+                : gameStatus === "lost"
+                  ? "var(--map-wrong-stroke)"
+                  : "var(--map-target-stroke)";
           } else {
             fill = isGuessed
               ? guessResult?.isCorrect
-                ? "#10b981"
+                ? "var(--map-correct)"
                 : fill
-              : "#1a253a";
-            stroke = "#f59e0b";
+              : "var(--map-land-hover)";
+            stroke = "var(--map-target-stroke)";
           }
+          itemStrokeWidth = strokeWidth * 1.6;
         } else if (isGuessed) {
           if (guessResult?.isCorrect) {
-            fill = "#10b981";
-            stroke = "#34d399";
+            priority = 5;
+            fill = "var(--map-correct)";
+            stroke = "var(--map-correct-stroke)";
+            itemStrokeWidth = strokeWidth * 1.6;
           } else {
             const dist = guessResult?.distanceKm ?? 999;
             if (dist < 60) {
-              fill = "#c2410c";
-              stroke = "#fb923c";
+              priority = 3;
+              fill = "var(--map-hot)";
+              stroke = "var(--map-hot-stroke)";
+              itemStrokeWidth = strokeWidth * 1.25;
             } else if (dist < 130) {
-              fill = "#6d28d9";
-              stroke = "#a78bfa";
+              priority = 2;
+              fill = "var(--map-warm)";
+              stroke = "var(--map-warm-stroke)";
+              itemStrokeWidth = strokeWidth * 1.1;
             } else {
-              fill = "#1e293b";
-              stroke = "#475569";
+              priority = 1;
+              fill = "var(--map-wrong)";
+              stroke = "var(--map-wrong-stroke)";
+              itemStrokeWidth = strokeWidth;
             }
           }
         } else if (isNeighbor) {
-          fill = "#0369a1";
-          stroke = "#38bdf8";
+          priority = 4;
+          fill = "var(--map-neighbor)";
+          stroke = "var(--map-neighbor-stroke)";
+          itemStrokeWidth = strokeWidth * 1.35;
         }
 
-        const hoverFill = isGuessed ? fill : "#1e2c45";
-        const hoverStroke = isTarget
-          ? "#fbbf24"
-          : isNeighbor
-            ? "#38bdf8"
-            : "#94a3b8";
+        const hoverFill = isGuessed ? fill : "var(--map-land-hover)";
+        const hoverStroke = "var(--map-inspect-stroke-bd)";
 
-        return (
+        return {
+          geo,
+          districtData,
+          priority,
+          fill,
+          stroke,
+          hoverFill,
+          hoverStroke,
+          itemStrokeWidth,
+        };
+      })
+      .filter((item): item is NonNullable<typeof item> => item !== null)
+      .sort((a, b) => a.priority - b.priority);
+  }, [
+    geographies,
+    geoIndex,
+    isTargetHidden,
+    isGameOver,
+    targetDistrict,
+    activeNeighbors,
+    guessedDistrictsMap,
+    gameStatus,
+    strokeWidth,
+  ]);
+
+  return (
+    <>
+      {styledGeographies.map(
+        ({
+          geo,
+          districtData,
+          fill,
+          stroke,
+          hoverFill,
+          hoverStroke,
+          itemStrokeWidth,
+        }) => (
           <DistrictGeographyItem
             key={geo.rsmKey}
             geo={geo}
@@ -214,11 +271,11 @@ function BangladeshGeographiesContent({
             stroke={stroke}
             hoverFill={hoverFill}
             hoverStroke={hoverStroke}
-            strokeWidth={strokeWidth}
+            strokeWidth={itemStrokeWidth}
             onSelect={onSelectDistrict}
           />
-        );
-      })}
+        ),
+      )}
 
       {/* OVERLAY 1: Neighbor hint districts - complete perimeter, opacity-controlled fill */}
       {neighborGeos.map((geo) => (
@@ -227,8 +284,9 @@ function BangladeshGeographiesContent({
           geography={geo}
           style={{
             default: {
-              fill: "rgba(3, 105, 161, 0.22)",
-              stroke: "#38bdf8",
+              fill: "var(--map-neighbor)",
+              fillOpacity: 0.22,
+              stroke: "var(--map-neighbor-stroke)",
               strokeWidth,
               strokeLinejoin: "round",
               strokeLinecap: "round",
@@ -236,8 +294,9 @@ function BangladeshGeographiesContent({
               pointerEvents: "none",
             },
             hover: {
-              fill: "rgba(3, 105, 161, 0.22)",
-              stroke: "#38bdf8",
+              fill: "var(--map-neighbor)",
+              fillOpacity: 0.22,
+              stroke: "var(--map-neighbor-stroke)",
               strokeWidth,
               vectorEffect: "non-scaling-stroke",
               pointerEvents: "none",
@@ -255,13 +314,23 @@ function BangladeshGeographiesContent({
             default: {
               fill:
                 isGameOver && gameStatus === "won"
-                  ? "rgba(16, 185, 129, 0.22)"
-                  : "rgba(245, 158, 11, 0.16)",
+                  ? "var(--map-correct)"
+                  : isGameOver && gameStatus === "lost"
+                    ? "var(--map-wrong)"
+                    : "var(--map-target)",
+              fillOpacity:
+                isGameOver && gameStatus === "won"
+                  ? 0.35
+                  : isGameOver && gameStatus === "lost"
+                    ? 0.35
+                    : 0.24,
               stroke:
                 isGameOver && gameStatus === "won"
-                  ? "#34d399"
-                  : "#f59e0b",
-              strokeWidth,
+                  ? "var(--map-correct-stroke)"
+                  : isGameOver && gameStatus === "lost"
+                    ? "var(--map-wrong-stroke)"
+                    : "var(--map-target-stroke)",
+              strokeWidth: strokeWidth * 1.6,
               strokeLinejoin: "round",
               strokeLinecap: "round",
               vectorEffect: "non-scaling-stroke",
@@ -270,13 +339,23 @@ function BangladeshGeographiesContent({
             hover: {
               fill:
                 isGameOver && gameStatus === "won"
-                  ? "rgba(16, 185, 129, 0.22)"
-                  : "rgba(245, 158, 11, 0.16)",
+                  ? "var(--map-correct)"
+                  : isGameOver && gameStatus === "lost"
+                    ? "var(--map-wrong)"
+                    : "var(--map-target)",
+              fillOpacity:
+                isGameOver && gameStatus === "won"
+                  ? 0.35
+                  : isGameOver && gameStatus === "lost"
+                    ? 0.35
+                    : 0.24,
               stroke:
                 isGameOver && gameStatus === "won"
-                  ? "#34d399"
-                  : "#f59e0b",
-              strokeWidth,
+                  ? "var(--map-correct-stroke)"
+                  : isGameOver && gameStatus === "lost"
+                    ? "var(--map-wrong-stroke)"
+                    : "var(--map-target-stroke)",
+              strokeWidth: strokeWidth * 1.6,
               vectorEffect: "non-scaling-stroke",
               pointerEvents: "none",
             },
@@ -288,28 +367,8 @@ function BangladeshGeographiesContent({
       {inspectedGeo &&
         inspectedGeo !== targetGeo &&
         (() => {
-          const name =
-            (inspectedGeo.properties.shapeName as string) || "";
-          const isNeighbor = activeNeighbors.includes(name);
-          const isGuessed = guessedDistrictsMap.has(
-            name.toLowerCase(),
-          );
-          const isInspectionAllowed =
-            isGameOver ||
-            (mode !== "detective" && difficulty === "easy") ||
-            isNeighbor ||
-            isGuessed;
-
-          const strokeColor = isNeighbor
-            ? "#38bdf8"
-            : isInspectionAllowed
-              ? "#60a5fa"
-              : "rgba(148, 163, 184, 0.7)";
-          const fillColor = isNeighbor
-            ? "rgba(3, 105, 161, 0.2)"
-            : isInspectionAllowed
-              ? "rgba(56, 189, 248, 0.16)"
-              : "rgba(255, 255, 255, 0.05)";
+          const strokeColor = "var(--map-inspect-stroke-bd)";
+          const fillColor = "var(--map-inspect-fill-bd)";
 
           return (
             <Geography
@@ -319,7 +378,7 @@ function BangladeshGeographiesContent({
                 default: {
                   fill: fillColor,
                   stroke: strokeColor,
-                  strokeWidth,
+                  strokeWidth: strokeWidth * 1.6,
                   strokeLinejoin: "round",
                   strokeLinecap: "round",
                   vectorEffect: "non-scaling-stroke",
@@ -328,7 +387,7 @@ function BangladeshGeographiesContent({
                 hover: {
                   fill: fillColor,
                   stroke: strokeColor,
-                  strokeWidth,
+                  strokeWidth: strokeWidth * 1.6,
                   vectorEffect: "non-scaling-stroke",
                   pointerEvents: "none",
                 },
@@ -495,7 +554,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
       onMouseLeave={() => setInspectedDistrict(null)}
       className={
         className ||
-        "relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-80px)] min-h-[360px] sm:min-h-120 rounded-2xl overflow-hidden border border-white/10 bg-[#090d16] shadow-2xl flex flex-col items-center justify-center select-none"
+        "relative w-full h-[55vh] sm:h-136 lg:h-[calc(100vh-80px)] min-h-[360px] sm:min-h-120 rounded-2xl overflow-hidden border border-border bg-card/60 shadow-xl flex flex-col items-center justify-center select-none"
       }
     >
       <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
@@ -533,7 +592,7 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
           center: [90.3563, 23.685],
         }}
         className="w-full h-full cursor-grab active:cursor-grabbing outline-none touch-none"
-        style={{ touchAction: "none", shapeRendering: "geometricPrecision" }}
+        style={{ touchAction: "none", shapeRendering: "geometricPrecision", backgroundColor: "var(--map-sea)" }}
       >
         <ZoomableGroup
           zoom={position.zoom}
@@ -562,14 +621,19 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
             )}
           </Geographies>
 
-          {/* Target marker when game is won */}
-          {gameStatus === "won" && targetDistrict && (
+          {/* Target marker when game is won or lost */}
+          {gameStatus !== "playing" && targetDistrict && (
             <TargetPulseMarker
               coordinates={[
                 targetDistrict.coordinates[1],
                 targetDistrict.coordinates[0],
               ]}
               zoom={position.zoom}
+              fillColor={
+                gameStatus === "won"
+                  ? "var(--map-correct)"
+                  : "var(--destructive)"
+              }
             />
           )}
         </ZoomableGroup>

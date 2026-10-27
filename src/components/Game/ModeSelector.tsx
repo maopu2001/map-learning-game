@@ -25,8 +25,8 @@ export function ModeSelector({
   const isDailyLost = isDailyCompleted && dailyRecord?.gameStatus === "lost";
 
   return (
-    <div className="space-y-2 bg-accent/50 px-4 py-2 rounded-2xl">
-      <label className="text-2xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+    <div className="space-y-2 bg-muted/40 border border-border px-4 py-2 rounded-2xl">
+      <label className="text-2xs font-mono font-semibold uppercase tracking-wider text-muted-foreground">
         Game Mode
       </label>
       <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-1">
@@ -36,26 +36,32 @@ export function ModeSelector({
           onClick={() => onSelectMode("daily")}
           className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
             selectedMode === "daily"
-              ? "bg-sky-500/15 border-sky-500 text-white shadow-sm ring-1 ring-sky-500/50"
-              : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
+              ? isBD
+                ? "bg-bd-subtle border-bd-primary text-foreground shadow-sm ring-1 ring-bd-primary/50"
+                : "bg-primary/15 border-primary text-foreground shadow-sm ring-1 ring-primary/50"
+              : "bg-card border-border text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
           <Calendar
             className={`size-3.5 sm:size-4 ${
-              selectedMode === "daily" ? "text-sky-400" : "text-slate-400"
+              selectedMode === "daily"
+                ? isBD
+                  ? "text-bd-primary"
+                  : "text-primary"
+                : "text-muted-foreground"
             }`}
           />
           <span className="font-semibold text-xs leading-none flex items-center gap-1">
             <span>Daily</span>
             {isDailyWon && (
               <Check
-                className="size-3 text-emerald-400 stroke-[3]"
+                className={`size-3 stroke-[3] ${isBD ? "text-bd-primary" : "text-primary"}`}
                 aria-label="Won today"
               />
             )}
             {isDailyLost && (
               <X
-                className="size-3 text-rose-500 stroke-[3]"
+                className="size-3 text-destructive stroke-[3]"
                 aria-label="Lost today"
               />
             )}
@@ -68,13 +74,13 @@ export function ModeSelector({
           onClick={() => onSelectMode("detective")}
           className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
             selectedMode === "detective"
-              ? "bg-amber-500/15 border-amber-500 text-white shadow-sm ring-1 ring-amber-500/50"
-              : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
+              ? "bg-accent/15 border-accent text-foreground shadow-sm ring-1 ring-accent/50"
+              : "bg-card border-border text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
           <FileText
             className={`size-3.5 sm:size-4 ${
-              selectedMode === "detective" ? "text-amber-400" : "text-slate-400"
+              selectedMode === "detective" ? "text-accent" : "text-muted-foreground"
             }`}
           />
           <span className="font-semibold text-xs leading-none">
@@ -88,19 +94,19 @@ export function ModeSelector({
           onClick={() => onSelectMode("blitz")}
           className={`py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all cursor-pointer min-h-13 ${
             selectedMode === "blitz"
-              ? "bg-rose-500/15 border-rose-500 text-white shadow-sm ring-1 ring-rose-500/50"
-              : "bg-white/3 border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-200"
+              ? "bg-destructive/15 border-destructive text-foreground shadow-sm ring-1 ring-destructive/50"
+              : "bg-card border-border text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
           <Timer
             className={`size-3.5 sm:size-4 ${
-              selectedMode === "blitz" ? "text-rose-400" : "text-slate-400"
+              selectedMode === "blitz" ? "text-destructive" : "text-muted-foreground"
             }`}
           />
           <span className="font-semibold text-xs leading-none">Blitz 90s</span>
         </button>
       </div>
-      <p className="text-xs text-slate-400 text-center leading-tight min-h-5">
+      <p className="text-xs text-muted-foreground text-center leading-tight min-h-5">
         {selectedMode === "daily" &&
           (isDailyWon
             ? "Today's daily puzzle won! Next puzzle resets at midnight UTC."
