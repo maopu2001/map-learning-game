@@ -5,11 +5,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-border py-6 text-xs text-muted-foreground bg-card/80 mt-16 sm:mt-24">
+    <footer className="w-full border-t border-border py-6 text-xs text-muted-foreground bg-card/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="space-y-0.5 text-center sm:text-left">
           <p className="font-normal text-foreground">
-            Shimana (সীমানা) © {year} · Interactive map guessing game for Bangladesh & the world
+            Shimana (সীমানা) © {year} · Interactive map guessing game for
+            Bangladesh & the world
           </p>
           <p className="text-[11px] text-muted-foreground">
             Built for geography enthusiasts, learners & educators.

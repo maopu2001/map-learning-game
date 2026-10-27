@@ -9,6 +9,8 @@ import { HowItWorksSection } from "@/components/Landing/HowItWorksSection";
 import { GameModesSection } from "@/components/Landing/GameModesSection";
 import { DifficultyMatrixSection } from "@/components/Landing/DifficultyMatrixSection";
 import { FAQSection } from "@/components/Landing/FAQSection";
+import Dataset from "@/components/Landing/Dataset";
+import { ScrollToTop } from "@/components/Landing/ScrollToTop";
 
 export default function HomePage() {
   useEffect(() => {
@@ -25,14 +27,19 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />
 
-      <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:py-16 space-y-16 sm:space-y-24">
-        <HeroSection />
-        <TaglineReveal />
-        <HowItWorksSection />
-        <GameModesSection />
-        <DifficultyMatrixSection />
-        <FAQSection />
-      </main>
+      <div className="relative">
+        <main className=" flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:py-16 space-y-16 sm:space-y-24">
+          <HeroSection />
+          <TaglineReveal />
+          <HowItWorksSection />
+          <GameModesSection />
+          <DifficultyMatrixSection />
+          <Dataset />
+          <FAQSection />
+        </main>
+
+        <ScrollToTop />
+      </div>
 
       <Footer />
     </div>

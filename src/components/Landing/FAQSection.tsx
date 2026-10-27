@@ -35,7 +35,7 @@ export function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section className="space-y-4 max-w-3xl mx-auto">
+    <section className="space-y-4 max-w-4xl mx-auto">
       <div className="text-center space-y-1">
         <span className="text-xs font-mono uppercase tracking-widest text-accent font-semibold">
           Got Questions?
