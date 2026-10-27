@@ -62,6 +62,13 @@ export function haversineDistanceKm(
   return 2 * EARTH_RADIUS_KM * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+export function haversineDistKm(
+  coord1: [number, number],
+  coord2: [number, number],
+): number {
+  return haversineDistanceKm(coord1[0], coord1[1], coord2[0], coord2[1]);
+}
+
 export function calculateBearing(
   lat1: number,
   lon1: number,
@@ -115,28 +122,6 @@ export function evaluateGuess(
     isCorrect: false,
     proximityScore,
   };
-}
-
-// Mask capital or name: reveals first char and spaces, masks remainder
-export function maskCapital(capital: string, revealTier: number): string {
-  if (!capital || capital.includes("No official")) return capital;
-
-  if (revealTier >= 2) return capital;
-
-  const words = capital.split(" ");
-  return words
-    .map((word) => {
-      if (word.length <= 2) return word;
-      return word
-        .split("")
-        .map((ch, idx) => {
-          if (idx === 0) return ch;
-          if (ch === "-" || ch === "/" || ch === "'" || ch === ".") return ch;
-          return "_";
-        })
-        .join(" ");
-    })
-    .join("   ");
 }
 
 // Seeded pseudo-random number generator for daily puzzle

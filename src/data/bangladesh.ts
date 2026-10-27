@@ -25,16 +25,3 @@ for (const d of BANGLADESH_DISTRICTS) {
     }
   }
 }
-
-export function findDistrict(query: string): DistrictData | undefined {
-  if (!query) return undefined;
-  const q = query.trim().toLowerCase();
-  const exact = DISTRICTS_BY_NAME.get(q);
-  if (exact) return exact;
-
-  return BANGLADESH_DISTRICTS.find(
-    (d) =>
-      d.name.toLowerCase().includes(q) ||
-      d.aliases?.some((a) => a.toLowerCase().includes(q)),
-  );
-}

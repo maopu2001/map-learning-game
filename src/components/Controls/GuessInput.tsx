@@ -11,7 +11,14 @@ import {
 import { COUNTRIES, CountryData } from "@/data/world";
 import { BANGLADESH_DISTRICTS, DistrictData } from "@/data/bangladesh";
 import { useGameStore, getTodayDateStr } from "@/lib/store";
-import { Globe, ArrowRight, CornerDownLeft, Trophy, XCircle, Eye } from "lucide-react";
+import {
+  Globe,
+  ArrowRight,
+  CornerDownLeft,
+  Trophy,
+  XCircle,
+  Eye,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCommandK } from "@/hooks/useCommandK";
 
@@ -145,8 +152,7 @@ export function GuessInput({ scope: propScope }: GuessInputProps = {}) {
         (c) =>
           c.name.toLowerCase() === q ||
           c.id.toLowerCase() === q ||
-          (allowCountryAliases &&
-            c.aliases.some((a) => a.toLowerCase() === q)),
+          (allowCountryAliases && c.aliases.some((a) => a.toLowerCase() === q)),
       );
       const first =
         exact ||
@@ -236,7 +242,7 @@ export function GuessInput({ scope: propScope }: GuessInputProps = {}) {
               }
             }}
             placeholder={placeholder}
-            className="text-base sm:text-sm font-medium"
+            className="text-sm font-medium"
           />
           {!query && (
             <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-muted-foreground bg-muted/50 border border-border px-1.5 py-0.5 rounded pointer-events-none select-none">
@@ -255,7 +261,9 @@ export function GuessInput({ scope: propScope }: GuessInputProps = {}) {
               } px-2.5 py-1 rounded-lg cursor-pointer transition-colors`}
             >
               <span>Submit</span>
-              <CornerDownLeft className={`size-3 ${isBD ? "text-bd-primary" : "text-primary"}`} />
+              <CornerDownLeft
+                className={`size-3 ${isBD ? "text-bd-primary" : "text-primary"}`}
+              />
             </button>
           )}
         </div>

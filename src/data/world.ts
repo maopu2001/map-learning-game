@@ -1,10 +1,6 @@
 import rawCountries from "../../public/data/world_countries.json";
-
-export interface MaritimeNeighbor {
-  id: string;
-  name: string;
-  distanceKm: number;
-}
+import { haversineDistKm } from "@/lib/engine";
+export { haversineDistKm };
 
 export interface RegionCenter {
   center: [number, number];
@@ -66,60 +62,6 @@ for (const c of COUNTRIES) {
     COUNTRIES_BY_NUMERIC.set(String(parseInt(c.numericId, 10)), c);
   }
   COUNTRIES_BY_NAME.set(c.name.toLowerCase(), c);
-}
-
-// Microstates list for magnifying callout
-export const MICROSTATES = new Set([
-  "SMR",
-  "VAT",
-  "MCO",
-  "LIE",
-  "AND",
-  "MLT",
-  "LSO",
-  "SWZ",
-  "LUX",
-  "SGP",
-  "BHR",
-  "BRN",
-]);
-
-// Helper to look up country by ISO3, name, or alias
-export function findCountry(query: string): CountryData | undefined {
-  if (!query) return undefined;
-  const q = query.trim().toLowerCase();
-
-  // Exact ISO
-  const byId = COUNTRIES_BY_ID.get(query.toUpperCase());
-  if (byId) return byId;
-
-  // Exact Name
-  const byName = COUNTRIES_BY_NAME.get(q);
-  if (byName) return byName;
-
-  // Partial or alias matching
-  return COUNTRIES.find((c) => {
-    if (c.name.toLowerCase() === q) return true;
-    if (c.officialName.toLowerCase() === q) return true;
-    return c.aliases.some((alias) => alias.toLowerCase() === q);
-  });
-}
-
-export function haversineDistKm(
-  coord1: [number, number],
-  coord2: [number, number],
-): number {
-  const R = 6371; // Earth radius in km
-  const dLat = ((coord2[0] - coord1[0]) * Math.PI) / 180;
-  const dLon = ((coord2[1] - coord1[1]) * Math.PI) / 180;
-  const lat1 = (coord1[0] * Math.PI) / 180;
-  const lat2 = (coord2[0] * Math.PI) / 180;
-
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
 }
 
 export function getNearestCountries(

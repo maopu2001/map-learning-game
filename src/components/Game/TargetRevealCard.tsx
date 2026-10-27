@@ -3,7 +3,7 @@
 import React from "react";
 import { useGameStore } from "@/lib/store";
 import { Badge } from "@/components/ui/badge";
-import { Users, Maximize2, Compass } from "lucide-react";
+import { Users, Maximize2, Compass, CircleQuestionMark } from "lucide-react";
 import { MapsLinkButton } from "@/components/Mix/maps";
 import { CountryData } from "@/data/world";
 import { DistrictData } from "@/data/bangladesh";
@@ -140,9 +140,15 @@ export function TargetRevealCard(props: TargetRevealCardProps) {
         ) : null}
       </div>
 
-      <div className="p-3 rounded-lg bg-muted/40 border border-border text-xs text-foreground/90 leading-relaxed max-h-40 sm:max-h-44 overflow-y-auto overscroll-contain">
-        <span className="font-semibold text-accent">Did you know? </span>
-        {currentTarget.triviaFact}
+      {/* Trivia Fact Row */}
+      <div className="p-3 rounded-lg bg-muted/40 border border-border text-xs text-foreground/90 leading-relaxed relative">
+        <div className="inline-flex items-center gap-1 font-semibold text-accent">
+          <CircleQuestionMark className="size-4" />
+          Did you know?
+        </div>
+        <div className="overflow-y-auto overscroll-contain max-h-52 sm:max-h-56 mask-[linear-gradient(to_bottom,transparent,black_10pt,black_calc(100%-10pt),transparent)] pt-1.5 pb-1 -mt-2 -mb-0.5">
+          {currentTarget.triviaFact}
+        </div>
       </div>
     </div>
   );

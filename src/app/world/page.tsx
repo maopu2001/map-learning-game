@@ -30,9 +30,7 @@ const WorldMap = dynamic(
 export default function WorldPage() {
   const [briefingOpen, setBriefingOpen] = useState(false);
 
-  useGameUrlSync("world", {
-    onDailyDoneNoQuery: () => setBriefingOpen(true),
-  });
+  useGameUrlSync("world");
 
   const mode = useGameStore((s) => s.mode);
   const tickBlitzTimer = useGameStore((s) => s.tickBlitzTimer);

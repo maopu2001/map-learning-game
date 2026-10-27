@@ -30,9 +30,7 @@ const BangladeshMap = dynamic(
 export default function BangladeshPage() {
   const [briefingOpen, setBriefingOpen] = useState(false);
 
-  useGameUrlSync("bangladesh", {
-    onDailyDoneNoQuery: () => setBriefingOpen(true),
-  });
+  useGameUrlSync("bangladesh");
 
   const mode = useGameStore((s) => s.mode);
   const tickBlitzTimer = useGameStore((s) => s.tickBlitzTimer);

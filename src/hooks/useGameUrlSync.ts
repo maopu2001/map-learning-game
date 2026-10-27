@@ -126,26 +126,16 @@ export function updateGameUrl(
  * Hook to synchronize URL query params (?mode=...&difficulty=...) with localStorage/store.
  * Follows priority: Valid URL > LocalStorage > Default.
  * Ensures URL query is normalized ("made properly") ONLY on /bangladesh and /world.
- * Triggers onDailyDoneNoQuery callback if opened with no query and today's daily is completed.
+ * In daily mode when today's daily puzzle is completed, automatically opens GameOverModal.
  */
-export function useGameUrlSync(
-  scope: GameScope,
-  options?: {
-    onDailyDoneNoQuery?: () => void;
-  }
-) {
+export function useGameUrlSync(scope: GameScope) {
   const isInitialMount = useRef(true);
-  const optionsRef = useRef(options);
-  optionsRef.current = options;
 
   const syncWithUrl = useCallback(
-    (isInitial = false) => {
+    (_isInitial = false) => {
       if (typeof window === "undefined") return;
       const pathname = window.location.pathname;
       if (pathname !== "/bangladesh" && pathname !== "/world") return;
-
-      const params = new URLSearchParams(window.location.search);
-      const hadNoQuery = !params.has("mode") && !params.has("difficulty");
 
       const { mode, difficulty, needsUrlUpdate } = resolveGameParams(scope);
       const state = useGameStore.getState();
@@ -162,15 +152,14 @@ export function useGameUrlSync(
         });
       }
 
-      // If initially loaded without query and daily is already done, show game settings modal
-      if (isInitial && hadNoQuery) {
-        const today = getTodayDateStr();
-        const dailyRecord = useGameStore.getState().dailyHistory?.[scope];
-        const isDailyDone =
-          dailyRecord?.date === today && dailyRecord?.gameStatus !== "playing";
-        if (isDailyDone && optionsRef.current?.onDailyDoneNoQuery) {
-          optionsRef.current.onDailyDoneNoQuery();
-        }
+      // If in daily mode and daily is already done, always show gameover modal
+      const today = getTodayDateStr();
+      const dailyRecord = useGameStore.getState().dailyHistory?.[scope];
+      const isDailyDone =
+        dailyRecord?.date === today && dailyRecord?.gameStatus !== "playing";
+
+      if (mode === "daily" && isDailyDone) {
+        useGameStore.setState({ isGameOverOpen: true });
       }
 
       const currentState = useGameStore.getState();
