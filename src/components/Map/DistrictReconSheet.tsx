@@ -78,9 +78,15 @@ export function DistrictReconSheet({
             <div>
               <h4 className="font-bold text-foreground text-sm leading-tight truncate">
                 {inspectedDistrict.name}
+                {inspectedDistrict.nameBn && (
+                  <span className="ml-1 text-muted-foreground font-medium text-xs">
+                    ({inspectedDistrict.nameBn})
+                  </span>
+                )}
               </h4>
               <p className="text-2xs text-bd-primary">
-                {inspectedDistrict.division} Division
+                {inspectedDistrict.division}
+                {inspectedDistrict.divisionBn ? ` (${inspectedDistrict.divisionBn})` : ""} Division
               </p>
             </div>
           )}
@@ -105,6 +111,7 @@ export function DistrictReconSheet({
               {difficulty === "easy" || unlockedHints >= 1 ? (
                 <span className="text-bd-primary">
                   Hint 1: Division: {targetDistrict.division}
+                  {targetDistrict.divisionBn ? ` (${targetDistrict.divisionBn})` : ""}
                 </span>
               ) : (
                 <span className="text-muted-foreground font-normal">
@@ -152,11 +159,11 @@ export function DistrictReconSheet({
         </div>
       ) : isNeighbor ? (
         <p className="text-xs text-bd-primary font-semibold">
-          Borders the secret target (Revealed Hint)
+          Borders the secret target
         </p>
       ) : (
         <p className="text-2xs text-muted-foreground">
-          Not guessed yet. Type in the search box to make a guess.
+          Not guessed yet
         </p>
       )}
     </div>

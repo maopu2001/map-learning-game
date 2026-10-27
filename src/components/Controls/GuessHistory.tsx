@@ -88,6 +88,11 @@ export function GuessHistory({ scope: propScope }: GuessHistoryProps = {}) {
                       <span className="font-bold text-xs sm:text-sm text-foreground truncate">
                         {g.country.name}
                       </span>
+                      {g.country.nameBn && (
+                        <span className="text-2xs text-muted-foreground font-medium">
+                          ({g.country.nameBn})
+                        </span>
+                      )}
                       {isWinner && (
                         <Badge
                           variant="success"
@@ -107,8 +112,8 @@ export function GuessHistory({ scope: propScope }: GuessHistoryProps = {}) {
                     </div>
                     <span className="text-2xs sm:text-xs text-muted-foreground block truncate">
                       {districtItem
-                        ? `${districtItem.division} Division`
-                        : `${countryItem?.capital} • ${countryItem?.continent}`}
+                        ? `${districtItem.division}${districtItem.divisionBn ? ` (${districtItem.divisionBn})` : ""} Division`
+                        : `${countryItem?.capital}${countryItem?.capitalBn ? ` (${countryItem.capitalBn})` : ""} • ${countryItem?.continent}${countryItem?.continentBn ? ` (${countryItem.continentBn})` : ""}`}
                     </span>
                   </div>
                 </div>

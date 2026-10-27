@@ -18,7 +18,12 @@
     "triviaFact": "In the 15th century, the saint Khan Jahan Ali built a historic mosque city here that is now a UNESCO World Heritage site. Its most famous landmark is the Sixty Dome Mosque, which actually has seventy-seven low domes over its prayer hall. This coastal area also borders the Sundarbans mangrove forest, hosts the busy Mongla seaport, and produces huge amounts of shrimp.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "বাগেরহাট"
+    ],
+    "nameBn": "বাগেরহাট",
+    "triviaFactBn": "১৫ শতকে পীর খান জাহান আলী এই অঞ্চলে এক ঐতিহাসিক মসজিদ-নগরী গড়ে তোলেন যা এখন UNESCO World Heritage site। এর সবচেয়ে বিখ্যাত নিদর্শন ষাট গম্বুজ মসজিদ, যার প্রার্থনা কক্ষে আসলে ৭৭টি গম্বুজ রয়েছে। সুন্দরবনের কোল ঘেঁষা এই উপকূলীয় জেলা মোংলা সমুদ্রবন্দর ও বাগদা চিংড়ি চাষের জন্য সুপরিচিত।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Bandarban",
@@ -37,7 +42,12 @@
     "triviaFact": "The highest mountain peaks in the country, including Saka Haphong and Keokradong, rise across this green southeastern hill region. More than a dozen indigenous groups live along the winding Sangu River and around high mountain lakes like Boga Lake. Travelers often visit to see the Golden Temple, the cloud-covered hills of Nilgiri, and the rushing waters of Nafakhum waterfall.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "বান্দরবান"
+    ],
+    "nameBn": "বান্দরবান",
+    "triviaFactBn": "দেশের সর্বোচ্চ পর্বতশৃঙ্গ সাকা হাফং ও কেওক্রাডং এই সবুজ পাহাড়ি জেলাতেই অবস্থিত। সাঙ্গু নদী আর বগা লেকের আশেপাশে এখানে এক ডজনেরও বেশি ক্ষুদ্র নৃগোষ্ঠীর বসবাস। পর্যটকরা প্রায়ই এখানে স্বর্ণমন্দির, মেঘে ঢাকা নীলগিরি এবং নাফাখুম জলপ্রপাত দেখতে ভিড় জমান।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Barguna",
@@ -58,7 +68,12 @@
     "triviaFact": "Three wide rivers, the Payra, Bishkhali, and Baleshwar, flow into the Bay of Bengal along this southern coast. It is known for the Haringhata mangrove forest, where spotted deer and monkeys live beside quiet sandy beaches. Historic Rakhine villages at Taltali and the small 17th-century Bibi Chini mosque are also well-known local sights.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "বরগুনা"
+    ],
+    "nameBn": "বরগুনা",
+    "triviaFactBn": "পায়রা, বিষখালী ও বলেশ্বর—এই তিনটি প্রশস্ত নদী এই দক্ষিণাঞ্চলীয় উপকূল দিয়ে বঙ্গোপসাগরে গিয়ে মিশেছে। হরিণঘাটা mangrove forest-এর জন্য এই জেলা বেশ পরিচিত, যেখানে শান্ত বালুকাময় সৈকতের পাশে চিত্রা হরিণ ও বানর ঘুরে বেড়ায়। এছাড়া তালতলীর ঐতিহাসিক রাখাইন পল্লী এবং ১৭ শতকের বিবি চিনি মসজিদ এখানকার অন্যতম দর্শনীয় স্থান।",
+    "divisionBn": "বরিশাল"
   },
   {
     "id": "Barishal",
@@ -85,8 +100,12 @@
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
     "aliases": [
-      "Barisal"
-    ]
+      "Barisal",
+      "বরিশাল"
+    ],
+    "nameBn": "বরিশাল",
+    "triviaFactBn": "অসংখ্য খাল ও নদী-নালার কারণে দক্ষিণের এই নদীমাতৃক অঞ্চলকে অনেকেই 'প্রাচ্যের ভেনিস' বা Venice of the East বলে থাকেন। শত বছরেরও বেশি সময় ধরে এখানকার কৃষকরা কাঠের নৌকায় করে বিখ্যাত floating market-এ তাজা পেয়ারা ও সবজি বিক্রি করে আসছেন। এখানকার প্রধান আকর্ষণগুলোর মধ্যে রয়েছে দৃষ্টিনন্দন গুঠিয়া মসজিদ, বিশাল দুর্গাসাগর দিঘি এবং লাল ইটের অক্সফোর্ড মিশন চার্চ।",
+    "divisionBn": "বরিশাল"
   },
   {
     "id": "Bhola",
@@ -106,7 +125,12 @@
     "triviaFact": "Sitting at the mouth of the Meghna River, this is the largest offshore island district in the country. It has huge underground natural gas reserves and the quiet mangrove wildlife forest of Char Kukri Mukri in the south. People across the nation also love this island for its thick, creamy curd made from water buffalo milk.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "ভোলা"
+    ],
+    "nameBn": "ভোলা",
+    "triviaFactBn": "মেঘনা নদীর মোহনায় অবস্থিত এই অঞ্চলটি দেশের বৃহত্তম offshore island জেলা। এর মাটির নিচে রয়েছে প্রাকৃতিক গ্যাসের বিশাল মজুদ এবং দক্ষিণে আছে চর কুকরি মুকরির শান্ত mangrove wildlife forest। এছাড়া মহিষের দুধের তৈরি ঘন ও সুস্বাদু টক দইয়ের জন্য এই দ্বীপ জেলা সারাদেশে দারুণ জনপ্রিয়।",
+    "divisionBn": "বরিশাল"
   },
   {
     "id": "Bogura",
@@ -129,8 +153,12 @@
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
     "aliases": [
-      "Bogra"
-    ]
+      "Bogra",
+      "বগুড়া"
+    ],
+    "nameBn": "বগুড়া",
+    "triviaFactBn": "করতোয়া নদীর তীরে অবস্থিত খ্রিস্টপূর্ব ৩য় শতাব্দীর প্রাচীন দুর্গনগরী মহাস্থানগড় এই জেলাতেই অবস্থিত। এক হাজার বছরেরও বেশি সময় ধরে এই প্রাচীন citadel-টি পুণ্ড্রবর্ধন রাজ্যের রাজধানী হিসেবে ব্যবহৃত হতো। বর্তমানে উত্তরবঙ্গের পথে ভ্রমণকারীরা এখানকার বিখ্যাত মিষ্টি দই এবং লাল মরিচ কেনার জন্য যাত্রাবিরতি দিয়ে থাকেন।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Brahmanbaria",
@@ -151,7 +179,12 @@
     "triviaFact": "The Titas River winds through this eastern region and inspired a famous Bengali novel about the lives of local fishermen. This area has a rich legacy in Indian classical music as the birthplace of maestro Ustad Alauddin Khan. Deep underground, the Titas gas field has supplied a huge share of the nation's natural gas for decades.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ব্রাহ্মণবাড়িয়া"
+    ],
+    "nameBn": "ব্রাহ্মণবাড়িয়া",
+    "triviaFactBn": "পূর্বাঞ্চলের এই জেলার বুক চিরে বয়ে গেছে তিতাস নদী, যা স্থানীয় জেলেদের জীবন নিয়ে লেখা একটি বিখ্যাত বাংলা উপন্যাসের মূল অনুপ্রেরণা। উপমহাদেশের শাস্ত্রীয় সংগীতের কিংবদন্তি ওস্তাদ আলাউদ্দিন খাঁর জন্মস্থান হিসেবে এই অঞ্চলের একটি সমৃদ্ধ সাংস্কৃতিক ঐতিহ্য রয়েছে। এছাড়া মাটির নিচে থাকা তিতাস gas field কয়েক দশক ধরে দেশের প্রাকৃতিক গ্যাসের একটি বিশাল অংশ সরবরাহ করে আসছে।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Chandpur",
@@ -173,7 +206,12 @@
     "triviaFact": "Three big rivers, the Padma, Meghna, and Dakatiya, crash together here in a wide and fast-moving current. This busy river port is known across the country as the main trading center for prized silver Hilsa fish. Visitors also come to see the grand Hajiganj Bara Mosque and the tall brick spires of Lohagarh Math.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "চাঁদপুর"
+    ],
+    "nameBn": "চাঁদপুর",
+    "triviaFactBn": "পদ্মা, মেঘনা ও ডাকাতিয়া—এই তিনটি বড় নদী প্রবল স্রোতে এই জেলায় এসে একসাথে মিলিত হয়েছে। ব্যস্ত এই নদীবন্দরটি রুপালি ইলিশ মাছের প্রধান trading center বা 'ইলিশের বাড়ি' হিসেবে সারাদেশে পরিচিত। এছাড়া ঐতিহাসিক হাজীগঞ্জ বড় মসজিদ এবং লোহাগড় মঠের সুউচ্চ চূড়া দেখতেও পর্যটকরা এখানে আসেন।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Chattogram",
@@ -196,8 +234,12 @@
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
     "aliases": [
-      "Chittagong"
-    ]
+      "Chittagong",
+      "চট্টগ্রাম"
+    ],
+    "nameBn": "চট্টগ্রাম",
+    "triviaFactBn": "সবুজ পাহাড় এবং বঙ্গোপসাগরের মাঝখানে অবস্থিত এই উপকূলীয় শহরটি দেশের প্রধান seaport এবং commercial hub হিসেবে পরিচিত। দেশের বেশিরভাগ আমদানি-রপ্তানি কার্যক্রম এখানকার কর্ণফুলী নদীর ব্যস্ত ডকগুলোর মাধ্যমেই সম্পন্ন হয়। মাস্টারদা সূর্য সেনের নেতৃত্বে ১৯৩০ সালের ব্রিটিশবিরোধী বিদ্রোহ, সীতাকুণ্ডের পাহাড়ি তীর্থস্থান এবং ঐতিহ্যবাহী ঝাল মেজবানি মাংসের জন্য এই অঞ্চল বিখ্যাত।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Chuadanga",
@@ -216,7 +258,12 @@
     "triviaFact": "In April 1971, leaders first picked this western border town as the wartime capital before moving the oath ceremony nearby for safety. The border town of Darshana houses Carew & Co., which operates the country's largest sugar mill and only licensed distillery. Farmers across the surrounding plains grow large amounts of betel leaf, corn, and mangoes.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "চুয়াডাঙ্গা"
+    ],
+    "nameBn": "চুয়াডাঙ্গা",
+    "triviaFactBn": "১৯৭১ সালের এপ্রিলে নিরাপত্তার খাতিরে শপথ অনুষ্ঠান সরিয়ে নেওয়ার আগে, দেশের এই পশ্চিম সীমান্তের শহরটিকেই সর্বপ্রথম যুদ্ধকালীন রাজধানী হিসেবে বেছে নেওয়া হয়েছিল। এখানকার সীমান্তবর্তী দর্শনায় রয়েছে Carew & Co., যা দেশের বৃহত্তম চিনিকল এবং একমাত্র অনুমোদিত distillery পরিচালনা করে। এছাড়া চারপাশের সমতল ভূমিতে প্রচুর পরিমাণে পান, ভুট্টা ও আমের চাষ হয়।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Cumilla",
@@ -239,8 +286,12 @@
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
     "aliases": [
-      "Comilla"
-    ]
+      "Comilla",
+      "কুমিল্লা"
+    ],
+    "nameBn": "কুমিল্লা",
+    "triviaFactBn": "ময়নামতি এবং শালবন বিহারের লালচে পাহাড়ের সারিতে ৮ম শতাব্দীর প্রাচীন বৌদ্ধ বিহারের ধ্বংসাবশেষ দেখা যায়। ১৯৬০-এর দশকে আখতার হামিদ খান এই জেলায় একটি বিখ্যাত গ্রামীণ সমবায় কৃষি মডেল শুরু করেছিলেন, যা পরে বিশ্বজুড়ে অনুসরণ করা হয়। হাতে কাটা খাদির কাপড় এবং আসল রসমালাই মিষ্টির জন্য এই অঞ্চল সবার কাছে সুপরিচিত।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Cox's Bazar",
@@ -258,7 +309,12 @@
     "triviaFact": "An unbroken sandy beach stretches for more than 120 kilometers along the Bay of Bengal here, making it the longest natural sea beach in the world. A scenic coastal road runs between the waves and green hills past Himchari waterfalls and the coral rocks of Inani. Offshore, boats take travelers to the hill temples of Maheshkhali Island and the country's only coral island, Saint Martin's.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "কক্সবাজার"
+    ],
+    "nameBn": "কক্সবাজার",
+    "triviaFactBn": "বঙ্গোপসাগরের কোল ঘেঁষে ১২০ কিলোমিটারেরও বেশি দীর্ঘ অবিচ্ছিন্ন বালুকাময় সৈকত থাকায় এটি বিশ্বের দীর্ঘতম প্রাকৃতিক sea beach হিসেবে পরিচিত। হিমছড়ি ঝর্ণা এবং ইনানীর প্রবাল পাথরের পাশ দিয়ে সমুদ্র ও সবুজ পাহাড়ের মাঝখান দিয়ে চলে গেছে একটি মনোমুগ্ধকর মেরিন ড্রাইভ রোড। এছাড়া সমুদ্রপথে নৌকায় করে পর্যটকরা মহেশখালী দ্বীপের পাহাড়ি মন্দির এবং দেশের একমাত্র coral island সেন্ট মার্টিনে ঘুরতে যান।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Dhaka",
@@ -280,7 +336,12 @@
     "triviaFact": "Standing on the northern bank of the Buriganga River, this crowded metropolis is the nation's capital and largest city. Four hundred years ago, it grew into a wealthy Mughal trading center known for ultra-fine muslin cloth and hundreds of mosques. Key landmarks include Lalbagh Fort, the pink palace of Ahsan Manzil, the National Parliament building, and the National Martyrs' Memorial at Savar.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ঢাকা"
+    ],
+    "nameBn": "ঢাকা",
+    "triviaFactBn": "বুড়িগঙ্গা নদীর উত্তর তীরে অবস্থিত এই জনবহুল মেট্রোপলিটন শহরটি দেশের রাজধানী এবং বৃহত্তম নগরী। চারশ বছর আগে এটি সূক্ষ্ম মসলিন কাপড় এবং শত শত মসজিদের জন্য পরিচিত এক সমৃদ্ধ মুঘল trading center হিসেবে গড়ে উঠেছিল। এখানকার প্রধান নিদর্শনগুলোর মধ্যে রয়েছে লালবাগ কেল্লা, গোলাপি রঙের আহসান মঞ্জিল, জাতীয় সংসদ ভবন এবং সাভারের জাতীয় স্মৃতিসৌধ।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Dinajpur",
@@ -302,7 +363,12 @@
     "triviaFact": "Farmers across this fertile northern plain grow the country's famous aromatic Kataribhog rice and sweet Bedana lychees. Its greatest architectural treasure is the 18th-century Kantajew Temple, which is covered from top to bottom in detailed terracotta panels telling stories from Hindu epics. Nearby lies Ramsagar, the largest historical man-made water tank in the country.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "দিনাজপুর"
+    ],
+    "nameBn": "দিনাজপুর",
+    "triviaFactBn": "উত্তরাঞ্চলের এই উর্বর সমভূমিতে দেশের বিখ্যাত সুগন্ধি কাটারিভোগ চাল এবং মিষ্টি বেদানা লিচুর চাষ হয়। এখানকার সবচেয়ে বড় স্থাপত্য নিদর্শন হলো ১৮ শতকের কান্তজিউ মন্দির, যার পুরো শরীর হিন্দু মহাকাব্যের কাহিনী সংবলিত নিখুঁত terracotta ফলকে ঢাকা। এর কাছেই রয়েছে দেশের বৃহত্তম ঐতিহাসিক মানবসৃষ্ট দিঘি রামসাগর।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Faridpur",
@@ -326,7 +392,12 @@
     "triviaFact": "Named after the 12th-century Sufi saint Shah Farid, this river plain stretches along the southern bank of the Padma River. It was the home of Jasimuddin, the beloved rural poet whose verses captured everyday village life in Bengal. The rich soil here produces some of the country's largest harvests of golden jute fiber and sweet date-palm jaggery.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ফরিদপুর"
+    ],
+    "nameBn": "ফরিদপুর",
+    "triviaFactBn": "১২ শতকের সুফি সাধক শাহ ফরিদের নামানুসারে নামকরণ করা এই অঞ্চলটি পদ্মা নদীর দক্ষিণ তীর জুড়ে বিস্তৃত। বাংলার গ্রামীণ জনজীবনের ছবি কবিতায় তুলে ধরা প্রিয় পল্লীকবি জসীমউদ্দীনের জন্মভূমি এই জেলা। এখানকার উর্বর মাটিতে দেশের অন্যতম সেরা সোনালি আঁশ পাট এবং সুস্বাদু খেজুরের গুড় উৎপাদিত হয়।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Feni",
@@ -345,7 +416,12 @@
     "triviaFact": "This narrow southeastern corridor connects the capital with the main seaport and borders India on three sides. One of the country's largest river irrigation projects and its first wind power plant operate where the Muhuri and Kuhuri rivers meet. Local historical sights include the huge man-made pond of Vijay Singh Dighi and the Mughal-era Chandgazi Bhuiyan Mosque.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "ফেনী"
+    ],
+    "nameBn": "ফেনী",
+    "triviaFactBn": "তিন দিকে ভারতের সীমান্ত ঘেরা দক্ষিণ-পূর্বাঞ্চলের এই সরু করিডোর জেলাটি রাজধানীর সাথে প্রধান সমুদ্রবন্দরের সংযোগ স্থাপন করেছে। মুহুরী ও কুহুরী নদীর মিলনস্থলে দেশের অন্যতম বৃহত্তম সেচ প্রকল্প এবং প্রথম wind power plant অবস্থিত। এখানকার ঐতিহাসিক স্থানগুলোর মধ্যে রয়েছে বিশাল বিজয় সিংহ দিঘি এবং মুঘল আমলের চাঁদগাজী ভূঁইয়া মসজিদ।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Gaibandha",
@@ -367,7 +443,12 @@
     "triviaFact": "The wide Jamuna, Teesta, and Ghaghat rivers flow along this northern farming region and create dozens of sandy river islands. Farmers on those islands grow huge harvests of corn and hot chilies every year. People across the country also know the town for its signature sweet, Rasmanjuri, made of tiny milk balls soaked in thick cream.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "গাইবান্ধা"
+    ],
+    "nameBn": "গাইবান্ধা",
+    "triviaFactBn": "প্রশস্ত যমুনা, তিস্তা ও ঘাঘট নদী উত্তরের এই কৃষিপ্রধান অঞ্চলের পাশ দিয়ে বয়ে গিয়ে অসংখ্য বালুময় চর তৈরি করেছে। এসব চরের কৃষকরা প্রতি বছর বিপুল পরিমাণ ভুট্টা ও মরিচ উৎপাদন করেন। ঘন ক্ষীরের ভেতর ছোট ছোট ছানার বল ডুবিয়ে তৈরি রসমঞ্জুরী মিষ্টির জন্য এই জেলা সারাদেশে বিখ্যাত।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Gazipur",
@@ -389,7 +470,12 @@
     "triviaFact": "Dense Sal tree forests cover large parts of this industrial region just north of the capital. It holds the country's largest cluster of garment factories alongside Bhawal National Park, a major wildlife safari park, and the grand Bhawal Rajbari palace. Every winter, millions of Muslim worshippers gather on the banks of the Turag River at Tongi for the Biswa Ijtema.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "গাজীপুর"
+    ],
+    "nameBn": "গাজীপুর",
+    "triviaFactBn": "রাজধানীর ঠিক উত্তরে অবস্থিত এই শিল্পাঞ্চলের বিশাল অংশ জুড়ে রয়েছে ঘন শালবন। এখানে দেশের বৃহত্তম গার্মেন্টস শিল্পের ক্লাস্টারের পাশাপাশি ভাওয়াল National Park, একটি বড় wildlife safari park এবং ঐতিহাসিক ভাওয়াল রাজবাড়ি অবস্থিত। প্রতি শীতে টঙ্গীর তুরাগ নদীর তীরে বিশ্ব ইজতেমায় লাখো ধর্মপ্রাণ মুসল্লি সমবেত হন।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Gopalganj",
@@ -411,7 +497,12 @@
     "triviaFact": "Massive ancient earthen walls at Kotalipara show that this low-lying river region was a major kingdom center back in the 6th century. The Madhumati River and large wetlands like Chanda Beel fill with pink water lilies and fish during the monsoon months. The riverside town of Tungipara here is also the birthplace and final resting place of the country's founding president, Sheikh Mujibur Rahman.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "গোপালগঞ্জ"
+    ],
+    "nameBn": "গোপালগঞ্জ",
+    "triviaFactBn": "কোটালীপাড়ার বিশাল প্রাচীন মাটির দুর্গ প্রমাণ করে যে এই নিম্নভূমি অঞ্চলটি ৬ষ্ঠ শতাব্দীতে একটি গুরুত্বপূর্ণ রাজ্যের কেন্দ্র ছিল। বর্ষাকালে মধুমতি নদী এবং চান্দা বিলের মতো বিশাল জলাভূমিগুলো শাপলা ফুল ও মাছে ভরে ওঠে। এই জেলার টুঙ্গিপাড়াতেই রয়েছে বাংলাদেশের প্রতিষ্ঠাতা রাষ্ট্রপতি শেখ মুজিবুর রহমানের জন্মস্থান এবং সমাধিসৌধ।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Habiganj",
@@ -432,7 +523,12 @@
     "triviaFact": "More than twenty green tea estates and the protected natural forests of Rema-Kalenga and Satchari cover the southern hills of this region. Deep underground lies the Bibiyana gas field, which supplies a large share of the nation's natural gas. Visitors also come to see the red-brick 16th-century Shankarpasha Shahi Mosque and the vast wetlands around Baniachong, one of the world's largest villages.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "হবিগঞ্জ"
+    ],
+    "nameBn": "হবিগঞ্জ",
+    "triviaFactBn": "বিশটিরও বেশি সবুজ চা বাগান এবং রেমা-কালেঙ্গা ও সাতছড়ির সংরক্ষিত প্রাকৃতিক বন এই অঞ্চলের দক্ষিণের পাহাড়গুলোকে ঢেকে রেখেছে। এর মাটির গভীরে রয়েছে বিবিয়ানা gas field, যা দেশের প্রাকৃতিক গ্যাসের এক বিশাল অংশ জোগান দেয়। এছাড়া পর্যটকরা এখানে ১৬ শতকের লাল ইটের শংকরপাশা শাহী মসজিদ এবং বিশ্বের অন্যতম বৃহত্তম গ্রাম বানিয়াচংয়ের বিশাল হাওর দেখতে আসেন।",
+    "divisionBn": "সিলেট"
   },
   {
     "id": "Jamalpur",
@@ -455,7 +551,12 @@
     "triviaFact": "Sitting between the Jamuna and Old Brahmaputra rivers, this region is famous for its hand-stitched Nakshi Kantha embroidered quilts. Thousands of rural women craft these colorful quilts and sell them across the country and abroad. In the north, green hills rise near the Indian border at Lauchapra, while the town center is built around the shrine of Shah Jamal.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "জামালপুর"
+    ],
+    "nameBn": "জামালপুর",
+    "triviaFactBn": "যমুনা এবং পুরাতন ব্রহ্মপুত্র নদের মাঝখানে অবস্থিত এই জেলা হাতে সেলাই করা নকশিকাঁথার জন্য ভীষণ বিখ্যাত। হাজার হাজার গ্রামীণ নারী এই রঙিন কাঁথা তৈরি করেন, যা দেশ-বিদেশে বিক্রি হয়। উত্তরে ভারতের সীমান্তের কাছে লাউচাপড়ায় রয়েছে সবুজ পাহাড়, আর শহরের কেন্দ্রস্থলটি গড়ে উঠেছে হযরত শাহ জামালের মাজারকে ঘিরে।",
+    "divisionBn": "ময়মনসিংহ"
   },
   {
     "id": "Jashore",
@@ -477,8 +578,12 @@
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
     "aliases": [
-      "Jessore"
-    ]
+      "Jessore",
+      "যশোর"
+    ],
+    "nameBn": "যশোর",
+    "triviaFactBn": "১৭৮১ সালে প্রতিষ্ঠিত এই অঞ্চলটি ছিল ব্রিটিশ শাসনামলে বাংলায় গঠিত সর্বপ্রথম আধুনিক প্রশাসনিক জেলা। এখানকার গদখালীর কৃষকরা দেশের সিংহভাগ গোলাপ, রজনীগন্ধা ও গাঁদা ফুল উৎপাদন করেন বলে একে দেশের 'ফুলের রাজধানী' বলা হয়। এছাড়া ভারতের সাথে সবচেয়ে ব্যস্ত স্থলবন্দর বেনাপোল এবং মহাকবি মাইকেল মধুসূদন দত্তের পৈতৃক নিবাস এই জেলাতেই অবস্থিত।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Jhalakathi",
@@ -497,7 +602,12 @@
     "triviaFact": "Three rivers, the Sugandha, Bishkhali, and Gabkhan, cut through this small southern region. During British rule, workers dug the Gabkhan Channel here like a mini Suez Canal to create a direct waterway shortcut between major southern river ports. Today, farmers sell fresh guavas directly from wooden boats at Bhimruli, and local weavers craft cool sleeping mats called Shitalpati from cane reeds.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ঝালকাঠি"
+    ],
+    "nameBn": "ঝালকাঠি",
+    "triviaFactBn": "সুগন্ধা, বিষখালী ও গাবখান—এই তিনটি নদী দক্ষিণের এই ছোট জেলাটির বুক চিরে বয়ে গেছে। ব্রিটিশ আমলে দক্ষিণাঞ্চলের প্রধান নদীবন্দরগুলোর মধ্যে সরাসরি waterway shortcut তৈরির জন্য এখানে মিনি সুয়েজ খালের মতো গাবখান চ্যানেল খনন করা হয়েছিল। বর্তমানে ভিমরুলীর ভাসমান হাটে কৃষকরা নৌকা থেকে তাজা পেয়ারা বিক্রি করেন এবং স্থানীয় কারিগররা বেত দিয়ে শীতলপাটি তৈরি করেন।",
+    "divisionBn": "বরিশাল"
   },
   {
     "id": "Jhenaidah",
@@ -518,7 +628,12 @@
     "triviaFact": "Archaeologists digging at Barobazar uncovered a cluster of 15th-century brick mosques from a medieval Sultanate city. In the village of Mallikpur, one of Asia's widest banyan trees spreads its hanging roots across more than two acres of ground. This region was also the birthplace of the mystic folk poet Pagla Kanai and the anti-colonial revolutionary Bagha Jatin.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ঝিনাইদহ"
+    ],
+    "nameBn": "ঝিনাইদহ",
+    "triviaFactBn": "প্রত্নতাত্ত্বিকরা এখানকার বারোবাজারে খননকাজ চালিয়ে মধ্যযুগীয় সুলতানি আমলের একটি শহরের ১৫ শতকের বেশ কিছু ইটের মসজিদ আবিষ্কার করেছেন। মল্লিকপুর গ্রামে এশিয়ার অন্যতম বৃহত্তম একটি বটগাছ দুই একরেরও বেশি জায়গা জুড়ে তার ঝুরি ও ডালপালা ছড়িয়ে দাঁড়িয়ে আছে। এছাড়া মরমী লোককবি পাগলা কানাই এবং ব্রিটিশবিরোধী বিপ্লবী বাঘা যতীনের জন্মস্থান এই জেলা।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Joypurhat",
@@ -538,7 +653,12 @@
     "triviaFact": "Built on the fertile red clay soil of the Barind tract, this small northern region produces huge harvests of potatoes and rice. It houses the largest sugar mill in the country as well as thousands of poultry farms. Deep underground at Jamalganj, geologists have discovered some of the nation's largest coal and limestone deposits.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "জয়পুরহাট"
+    ],
+    "nameBn": "জয়পুরহাট",
+    "triviaFactBn": "বরেন্দ্রভূমির উর্বর লাল মাটির ওপর গড়ে ওঠা উত্তরের এই ছোট জেলাটিতে প্রচুর পরিমাণে আলু ও ধান উৎপাদিত হয়। এখানে দেশের বৃহত্তম চিনিকলের পাশাপাশি হাজার হাজার পোল্ট্রি খামার রয়েছে। এছাড়া জামালগঞ্জের মাটির গভীরে ভূতাত্ত্বিকরা দেশের অন্যতম বৃহত্তম কয়লা ও চুনাপাথরের খনি আবিষ্কার করেছেন।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Khagrachhari",
@@ -556,7 +676,12 @@
     "triviaFact": "Green mountain ridges and the Chengi River valley shape this quiet southeastern hill region. Travelers pass through its winding mountain roads to reach the high clouds of Sajek Valley in the neighboring hills. Closer to town, visitors walk with bamboo torches through the dark underground stream of Alutila Cave and hike to Richhang Waterfall.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "খাগড়াছড়ি"
+    ],
+    "nameBn": "খাগড়াছড়ি",
+    "triviaFactBn": "সবুজ পাহাড়ের সারি এবং চেঙ্গী নদীর উপত্যকা দক্ষিণ-পূর্বাঞ্চলের এই শান্ত পাহাড়ি জেলাটিকে ঘিরে রেখেছে। ভ্রমণকারীরা এখানকার আঁকাবাঁকা পাহাড়ি রাস্তা পেরিয়েই পাশের জেলার মেঘের রাজ্য সাজেক ভ্যালিতে যান। শহরের কাছেই পর্যটকরা বাঁশের মশাল হাতে আলুটিলা গুহার অন্ধকার সুড়ঙ্গ পার হন এবং রিসাং ঝর্ণায় ট্রেকিং করতে যান।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Khulna",
@@ -576,7 +701,12 @@
     "triviaFact": "Located where the Rupsha and Bhairab rivers meet, this southern port city is the third-largest urban center in the country. It serves as the main starting point for boat trips into the Sundarbans mangrove forest to spot Royal Bengal Tigers. The surrounding coastal wetlands also drive the nation's billion-dollar shrimp and prawn export industry.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "খুলনা"
+    ],
+    "nameBn": "খুলনা",
+    "triviaFactBn": "রূপসা ও ভৈরব নদীর মিলনস্থলে অবস্থিত দক্ষিণের এই বন্দর নগরীটি দেশের তৃতীয় বৃহত্তম শহর। সুন্দরবনের mangrove forest-এ রয়েল বেঙ্গল টাইগার দেখার নৌ-ভ্রমণ মূলত এখান থেকেই শুরু হয়। চারপাশের উপকূলীয় জলাভূমিগুলো দেশের বিলিয়ন ডলারের চিংড়ি ও গলদা চিংড়ি export industry-র মূল চালিকাশক্তি।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Kishoreganj",
@@ -599,7 +729,12 @@
     "triviaFact": "During the rainy season, half of this region turns into a giant inland sea of wetlands called haors, crossed by a scenic all-weather road between Mithamain and Nikli. In the 16th century, the rebel chieftain Isa Khan ruled from forts here at Jangalbari and Egarosindur. It is also home to the huge Solakia Eidgah prayer ground, the temple of Bengal's first female poet Chandrabati, and traditional white Paneer cheese from Austagram.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "কিশোরগঞ্জ"
+    ],
+    "nameBn": "কিশোরগঞ্জ",
+    "triviaFactBn": "বর্ষাকালে এই জেলার অর্ধেক অংশই বিশাল হাওরে পরিণত হয়, যার বুক চিরে চলে গেছে মিঠামইন ও নিকলীর দৃষ্টিনন্দন all-weather রোড। ১৬ শতকে বারো ভূঁইয়াদের নেতা ঈশা খাঁ এখানকার জঙ্গলবাড়ি ও এগারোসিন্দুর দুর্গ থেকে শাসনকার্য পরিচালনা করতেন। বিশাল শোলাকিয়া ঈদগাহ ময়দান, বাংলার প্রথম মহিলা কবি চন্দ্রাবতীর মন্দির এবং অষ্টগ্রামের ঐতিহ্যবাহী সাদা পনিরের জন্য এই অঞ্চল বিখ্যাত।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Kurigram",
@@ -619,7 +754,12 @@
     "triviaFact": "Four major rivers, the Brahmaputra, Dharla, Teesta, and Dudhkumar, flow down from the Himalayas and split this northern borderland into more than 400 sandy islands. Its old river port at Chilmari was made famous across Bengal in traditional Bhawaiya folk songs about bullock-cart drivers and boatmen. In 1783, a local peasant leader named Nuruddin led a famous uprising here against colonial tax collectors.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "কুড়িগ্রাম"
+    ],
+    "nameBn": "কুড়িগ্রাম",
+    "triviaFactBn": "হিমালয় থেকে নেমে আসা ব্রহ্মপুত্র, ধরলা, তিস্তা ও দুধকুমার—এই চারটি প্রধান নদী উত্তরের এই সীমান্ত জেলাকে ৪০০টিরও বেশি বালুময় চরে বিভক্ত করেছে। এখানকার প্রাচীন চিলমারী নদীবন্দরটি গাড়িয়াল ও মাঝিদের নিয়ে গাওয়া ঐতিহ্যবাহী ভাওয়াইয়া গানের মাধ্যমে পুরো বাংলায় পরিচিতি পেয়েছে। ১৭৮৩ সালে স্থানীয় কৃষক নেতা নূরউদ্দীন এখানে ব্রিটিশ কর আদায়কারীদের বিরুদ্ধে এক বিখ্যাত বিদ্রোহের নেতৃত্ব দিয়েছিলেন।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Kushtia",
@@ -642,7 +782,12 @@
     "triviaFact": "Many people consider this western region the cultural heart of Bengali folk music and literature. Every year, thousands gather at Cheuriya to sing philosophical songs at the shrine of the mystic Baul saint Lalon Shah. Just a few miles away on the Padma River sits Shilaidaha Kuthibari, the country estate where Nobel laureate Rabindranath Tagore wrote many of his famous poems.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "কুষ্টিয়া"
+    ],
+    "nameBn": "কুষ্টিয়া",
+    "triviaFactBn": "পশ্চিমাঞ্চলের এই জেলাকে অনেকেই বাংলা লোকসংগীত ও সাহিত্যের সাংস্কৃতিক রাজধানী হিসেবে বিবেচনা করেন। প্রতি বছর হাজার হাজার মানুষ ছেঁউড়িয়ায় বাউল সম্রাট লালন শাহের আখড়ায় আধ্যাত্মিক গান গাইতে সমবেত হন। সেখান থেকে মাত্র কয়েক মাইল দূরেই পদ্মা নদীর তীরে রয়েছে শিলাইদহ কুঠিবাড়ি, যেখানে বসে নোবেলজয়ী রবীন্দ্রনাথ ঠাকুর তাঁর অসংখ্য বিখ্যাত কবিতা রচনা করেছিলেন।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Lakshmipur",
@@ -662,7 +807,12 @@
     "triviaFact": "Sitting along the wide lower Meghna River, this coastal plain grows more than two-thirds of the country's soybeans. Tall betel nut and coconut groves cover the countryside and provide a living for thousands of local families. The river waters here are also a major breeding ground for Hilsa fish, and old landlord estates like Dalal Bazar Zamindar Bari still stand near town.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "লক্ষ্মীপুর"
+    ],
+    "nameBn": "লক্ষ্মীপুর",
+    "triviaFactBn": "প্রশস্ত লোয়ার মেঘনা নদীর তীরে অবস্থিত এই উপকূলীয় সমভূমিতে দেশের দুই-তৃতীয়াংশেরও বেশি সয়াবিন উৎপাদিত হয়। উঁচু সুপারি ও নারকেল বাগানে ঘেরা এখানকার গ্রামাঞ্চল হাজার হাজার স্থানীয় পরিবারের জীবিকার উৎস। এখানকার নদীর পানি ইলিশ মাছের প্রধান প্রজনন ক্ষেত্র, আর শহরের কাছেই দাঁড়িয়ে আছে ঐতিহাসিক দালাল বাজার জমিদার বাড়ি।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Lalmonirhat",
@@ -681,7 +831,12 @@
     "triviaFact": "Hugging the Teesta and Dharla rivers along the northern border, this long strip of land was once known for dozens of tiny border enclaves like Dahagram-Angarpota. During World War II, Allied forces built one of South Asia's largest military airbases here to supply troops fighting in Burma. It remains an important northern railway hub and preserves old estates like the Kakina and Tushbhandar palaces.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "লালমনিরহাট"
+    ],
+    "nameBn": "লালমনিরহাট",
+    "triviaFactBn": "উত্তর সীমান্তে তিস্তা ও ধরলা নদী ঘেঁষা এই দীর্ঘ ভূখণ্ডটি একসময় দহগ্রাম-আঙ্গরপোতার মতো অসংখ্য ছোট সীমান্ত ছিটমহলের জন্য পরিচিত ছিল। দ্বিতীয় বিশ্বযুদ্ধের সময় বার্মায় যুদ্ধরত সৈন্যদের রসদ জোগাতে মিত্রবাহিনী এখানে দক্ষিণ এশিয়ার অন্যতম বৃহত্তম military airbase তৈরি করেছিল। এটি এখনও উত্তরাঞ্চলের একটি গুরুত্বপূর্ণ railway hub এবং এখানে কাকিনা ও তুষভাণ্ডার রাজবাড়ির মতো প্রাচীন নিদর্শন রয়েছে।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Madaripur",
@@ -702,7 +857,12 @@
     "triviaFact": "Named after the 15th-century Sufi saint Shah Madar, this region sits along the fast-flowing Padma and Arial Khan rivers. In the 19th century, Haji Shariatullah started the anti-colonial Faraizi reform movement from these villages. Today, a tree-lined lake called Shakuni sits right in the middle of town, and local winter date-palm jaggery is prized across the country.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "মাদারীপুর"
+    ],
+    "nameBn": "মাদারীপুর",
+    "triviaFactBn": "১৫ শতকের সুফি সাধক শাহ মাদারের নামানুসারে নামকরণ করা এই অঞ্চলটি খরস্রোতা পদ্মা ও আড়িয়াল খাঁ নদীর তীরে অবস্থিত। ১৯ শতকে হাজী শরীয়তউল্লাহ এখানকার গ্রামগুলো থেকেই ব্রিটিশবিরোধী ফরায়েজি আন্দোলনের সূচনা করেছিলেন। বর্তমানে শহরের ঠিক মাঝখানে রয়েছে গাছপালায় ঘেরা শকুনী লেক, আর এখানকার শীতকালীন খেজুরের গুড় সারাদেশে সমাদৃত।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Magura",
@@ -723,7 +883,12 @@
     "triviaFact": "Four rivers, the Madhumati, Nabaganga, Kumar, and Chitra, flow through this flat farming region in the southwest. In the late 17th century, a local ruler named King Sitaram Ray built a fortified palace, temples, and large water tanks at Mohammadpur that still draw visitors today. The region is also widely known as the hometown of international cricket star Shakib Al Hasan.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "মাগুরা"
+    ],
+    "nameBn": "মাগুরা",
+    "triviaFactBn": "দক্ষিণ-পশ্চিমাঞ্চলের এই সমতল কৃষিপ্রধান জেলার মধ্য দিয়ে মধুমতি, নবগঙ্গা, কুমার ও চিত্রা—এই চারটি নদী প্রবাহিত হয়েছে। ১৭ শতকের শেষের দিকে স্থানীয় শাসক রাজা সীতারাম রায় মহম্মদপুরে একটি সুরক্ষিত প্রাসাদ, মন্দির এবং বিশাল দিঘি নির্মাণ করেছিলেন যা আজও পর্যটকদের আকর্ষণ করে। এছাড়া আন্তর্জাতিক ক্রিকেট তারকা সাকিব আল হাসানের নিজ জেলা হিসেবেও এই অঞ্চল ব্যাপকভাবে পরিচিত।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Manikganj",
@@ -745,7 +910,12 @@
     "triviaFact": "Two of South Asia's biggest rivers, the Padma and the Jamuna, join together along the western edge of this region. For decades, the busy ferry ports at Paturia and Aricha have carried buses and trucks between the capital and the western half of the country. Sightseers often visit the grand 19th-century columns of Baliati Palace and buy Hazari Gur, a rare and fragrant white date-palm jaggery.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "মানিকগঞ্জ"
+    ],
+    "nameBn": "মানিকগঞ্জ",
+    "triviaFactBn": "দক্ষিণ এশিয়ার অন্যতম বৃহৎ দুটি নদী পদ্মা ও যমুনা এই জেলার পশ্চিম প্রান্তে এসে একসাথে মিলিত হয়েছে। কয়েক দশক ধরে পাটুরিয়া ও আরিচার ব্যস্ত ফেরিঘাটগুলো রাজধানীর সাথে দেশের পশ্চিমাঞ্চলের বাস ও ট্রাক যোগাযোগের প্রধান মাধ্যম হিসেবে কাজ করছে। ভ্রমণকারীরা প্রায়ই এখানকার ১৯ শতকের বালিয়াটি জমিদারির বিশাল প্রাসাদ দেখতে আসেন এবং বিরল ও সুগন্ধি সাদা হাজারী গুড় কিনে নিয়ে যান।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Moulvibazar",
@@ -763,7 +933,12 @@
     "triviaFact": "More than ninety green tea gardens carpet the rolling hills of this northeastern region, earning the town of Srimangal the title of the nation's tea capital. Its protected rainforest at Lawachara shelters rare Hoolock gibbons, while winter brings thousands of migratory birds to the wetlands of Hail Haor. Visitors also hike to the tall waterfalls of Madhabkunda and Hum Hum, while families in Barlekha distil precious agarwood perfume.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "মৌলভীবাজার"
+    ],
+    "nameBn": "মৌলভীবাজার",
+    "triviaFactBn": "উত্তর-পূর্বাঞ্চলের এই জেলার ঢেউখেলানো পাহাড়ে নব্বইটিরও বেশি সবুজ চা বাগান থাকায় এখানকার শ্রীমঙ্গল শহরকে দেশের 'চায়ের রাজধানী' বলা হয়। লাউয়াছড়ার সংরক্ষিত rainforest-এ বিরল উল্লুক বসবাস করে, আর শীতকালে হাইল হাওরের জলাভূমিতে হাজার হাজার অতিথি পাখির মেলা বসে। এছাড়া পর্যটকরা মাধবকুণ্ড ও হামহাম জলপ্রপাতে হাইকিং করতে যান এবং বড়লেখার পরিবারগুলো মূল্যবান আগর-আতর তৈরি করে।",
+    "divisionBn": "সিলেট"
   },
   {
     "id": "Meherpur",
@@ -781,7 +956,12 @@
     "triviaFact": "By land area, this western border region is the smallest administrative district in the entire country. It holds a central place in national history because the country's first provisional government took its oath in a mango grove here on April 17, 1971. Visitors can also tour the preserved British colonial indigo plantation house at Amjhupi and taste a century-old milk sweet called Savitri.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "মেহেরপুর"
+    ],
+    "nameBn": "মেহেরপুর",
+    "triviaFactBn": "আয়তনের দিক থেকে পশ্চিম সীমান্তের এই অঞ্চলটি দেশের সবচেয়ে ছোট প্রশাসনিক জেলা। ১৯৭১ সালের ১৭ এপ্রিল এখানকার বৈদ্যনাথতলার এক আমবাগানে দেশের প্রথম অস্থায়ী সরকার শপথ গ্রহণ করায় জাতীয় ইতিহাসে এর একটি বিশেষ স্থান রয়েছে। পর্যটকরা এখানে সংরক্ষিত ব্রিটিশ আমলের আমঝুপি নীলকুঠি ঘুরে দেখতে পারেন এবং শতবর্ষী ঐতিহ্যবাহী 'সাবিত্রী' মিষ্টির স্বাদ নিতে পারেন।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Munshiganj",
@@ -804,7 +984,12 @@
     "triviaFact": "In ancient times, this river plain was known as Bikrampur and served as the royal capital of the Buddhist Chandra and Hindu Sena kings. It was the birthplace of both the 10th-century Buddhist scholar Atisha Dipankara and modern pioneer scientist Sir Jagadish Chandra Bose. Today, it sits at the northern end of the Padma Bridge, features the round Mughal river fort of Idrakpur, and grows more potatoes than almost anywhere else in the country.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "মুন্সীগঞ্জ"
+    ],
+    "nameBn": "মুন্সীগঞ্জ",
+    "triviaFactBn": "প্রাচীনকালে এই নদীমাতৃক সমভূমিটি বিক্রমপুর নামে পরিচিত ছিল এবং বৌদ্ধ চন্দ্র ও হিন্দু সেন রাজাদের রাজধানী হিসেবে ব্যবহৃত হতো। ১০ম শতাব্দীর বৌদ্ধ পণ্ডিত অতীশ দীপঙ্কর এবং আধুনিক বিজ্ঞানের পথিকৃৎ স্যার জগদীশ চন্দ্র বসু উভয়েরই জন্মস্থান এই অঞ্চলে। বর্তমানে এটি পদ্মা সেতুর উত্তর প্রান্তে অবস্থিত, যেখানে মুঘল আমলের গোলাকার ইদ্রাকপুর দুর্গ রয়েছে এবং দেশের প্রায় যেকোনো স্থানের চেয়ে বেশি আলু উৎপাদিত হয়।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Mymensingh",
@@ -826,7 +1011,12 @@
     "triviaFact": "Stretching along the Old Brahmaputra River, this historic city is a major center for education and arts. It houses the country's premier agricultural university, a riverside museum of paintings by Zainul Abedin, and the pink-domed palace of Shashi Lodge. Centuries ago, rural poets here composed famous folk ballads about local heroines, and the nearby town of Muktagachha is famous for its flat, creamy Monda sweets.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ময়মনসিংহ"
+    ],
+    "nameBn": "ময়মনসিংহ",
+    "triviaFactBn": "পুরাতন ব্রহ্মপুত্র নদের তীর জুড়ে বিস্তৃত এই ঐতিহাসিক শহরটি শিক্ষা ও শিল্পকলার একটি প্রধান কেন্দ্র। এখানে দেশের প্রধান কৃষি বিশ্ববিদ্যালয়, নদীর তীরে শিল্পাচার্য জয়নুল আবেদিন সংগ্রহশালা এবং গোলাপি গম্বুজের শশী লজ অবস্থিত। শতাব্দী আগে এখানকার গ্রামীণ কবিরা স্থানীয় নায়িকাদের নিয়ে বিখ্যাত লোকগাঁথা রচনা করেছিলেন, আর পাশের মুক্তাগাছা শহর তার চ্যাপ্টা ও সুস্বাদু মণ্ডা মিষ্টির জন্য বিখ্যাত।",
+    "divisionBn": "ময়মনসিংহ"
   },
   {
     "id": "Naogaon",
@@ -847,7 +1037,12 @@
     "triviaFact": "The 8th-century red-brick ruins of Somapura Mahavihara at Paharpur stand here as a UNESCO World Heritage site and one of the largest ancient Buddhist monasteries south of the Himalayas. Another famous landmark is the black-stone Kusumba Mosque, whose image appears on the five-taka banknote. Farmers across these plains harvest more rice than almost any other region and now rival the west in growing sweet mangoes.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নওগাঁ"
+    ],
+    "nameBn": "নওগাঁ",
+    "triviaFactBn": "পাহাড়পুরে অবস্থিত ৮ম শতাব্দীর লাল ইটের সোমপুর মহাবিহারের ধ্বংসাবশেষ একটি UNESCO World Heritage site এবং হিমালয়ের দক্ষিণে অবস্থিত প্রাচীনতম বৃহৎ বৌদ্ধ বিহারগুলোর একটি। এখানকার আরেকটি বিখ্যাত নিদর্শন হলো কালো পাথরের কুসুম্বা মসজিদ, যার ছবি পাঁচ টাকার নোটে দেখা যায়। এই সমভূমির কৃষকরা দেশের প্রায় যেকোনো অঞ্চলের চেয়ে বেশি ধান উৎপাদন করেন এবং মিষ্টি আম চাষেও এখন পশ্চিমাঞ্চলের সাথে পাল্লা দিচ্ছেন।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Narail",
@@ -869,7 +1064,12 @@
     "triviaFact": "Along the quiet banks of the Chitra River, a few local fishing families still practice the rare tradition of training tame otters to drive fish into their nets. This region was the lifelong home of world-famous modernist painter SM Sultan, who built a large boat as a floating art school for village children. It is also the hometown of former national cricket captain Mashrafe Mortaza.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নড়াইল"
+    ],
+    "nameBn": "নড়াইল",
+    "triviaFactBn": "চিত্রা নদীর শান্ত তীরে এখানকার কিছু জেলে পরিবার আজও পোষা ভোঁদড় বা otter দিয়ে জালে মাছ তাড়িয়ে ধরার বিরল ঐতিহ্য ধরে রেখেছে। বিশ্বখ্যাত আধুনিক চিত্রশিল্পী এস এম সুলতানের আজীবন নিবাস ছিল এই জেলায়, যিনি গ্রামের শিশুদের জন্য একটি বড় নৌকাকে ভাসমান আর্ট স্কুলে রূপান্তর করেছিলেন। এছাড়া এটি জাতীয় ক্রিকেট দলের সাবেক অধিনায়ক মাশরাফি বিন মর্তুজারও নিজ জেলা।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Narayanganj",
@@ -891,7 +1091,12 @@
     "triviaFact": "Sitting on the Shitalakshya River just southeast of the capital, this busy river port was once called the Dundee of the East for its giant jute mills. Just to the east lies Sonargaon, which served as the medieval capital of Bengal under Isa Khan, alongside the preserved colonial merchant street of Panam Nagar. Local weavers along the river still hand-weave intricate Jamdani sarees, a traditional craft recognized by UNESCO.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নারায়ণগঞ্জ"
+    ],
+    "nameBn": "নারায়ণগঞ্জ",
+    "triviaFactBn": "রাজধানীর ঠিক দক্ষিণ-পূর্বে শীতলক্ষ্যা নদীর তীরে অবস্থিত এই ব্যস্ত নদীবন্দরটিকে বিশাল পাটকলগুলোর কারণে একসময় 'প্রাচ্যের ডান্ডি' বা Dundee of the East বলা হতো। এর ঠিক পূর্বেই রয়েছে ঈশা খাঁর আমলের বাংলার মধ্যযুগীয় রাজধানী সোনারগাঁও এবং উপনিবেশিক আমলের বণিকদের সংরক্ষিত সড়ক পানাম নগর। নদীর তীরের স্থানীয় তাঁতিরা আজও হাতে নিখুঁত জামদানি শাড়ি বোনেন, যা UNESCO কর্তৃক স্বীকৃত একটি ঐতিহ্যবাহী শিল্প।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Narsingdi",
@@ -911,7 +1116,12 @@
     "triviaFact": "Archaeologists digging at Wari-Bateshwar found a 2,500-year-old walled city with silver punch-marked coins and Roman-style glass beads. Today, this riverside hub hosts Baburhat, one of the largest wholesale textile markets in South Asia, where millions of yards of cloth are sold every week. Its red upland orchards are also famous for sweet Amritsagar bananas and tangy yellow Lotkon fruits.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নরসিংদী"
+    ],
+    "nameBn": "নরসিংদী",
+    "triviaFactBn": "প্রত্নতাত্ত্বিকরা এখানকার উয়ারী-বটেশ্বরে খনন করে রৌপ্যমুদ্রা ও রোমান ধাঁচের কাঁচের পুঁতিসহ ২,৫০০ বছরের পুরনো একটি দুর্গনগরী খুঁজে পেয়েছেন। বর্তমানে এই নদীতীরবর্তী জেলায় রয়েছে দক্ষিণ এশিয়ার অন্যতম বৃহত্তম পাইকারি কাপড়ের বাজার বাবুরহাট, যেখানে প্রতি সপ্তাহে লক্ষ লক্ষ গজ কাপড় বিক্রি হয়। এখানকার লাল মাটির বাগানগুলো সুস্বাদু অমৃতসাগর কলা এবং টক-মিষ্টি লটকন ফলের জন্যও বিখ্যাত।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Natore",
@@ -933,7 +1143,12 @@
     "triviaFact": "Two grand royal estates, Uttara Ganabhaban and Rani Bhabani's palace, stand surrounded by deep moats and gardens in this northern town. To the south lies Chalan Beel, the largest wetland depression in North Bengal, which floods into a vast lake every monsoon. The town was made famous in modern Bengali poetry by Jibanananda Das's poem 'Banalata Sen' and is loved for its soft cottage-cheese sweet, Kanchagolla.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নাটোর"
+    ],
+    "nameBn": "নাটোর",
+    "triviaFactBn": "গভীর পরিখা ও বাগানে ঘেরা উত্তরা গণভবন এবং রানী ভবানীর রাজবাড়ি—এই দুটি বিশাল রাজকীয় স্টেট উত্তরের এই শহরে অবস্থিত। এর দক্ষিণেই রয়েছে উত্তরবঙ্গের বৃহত্তম জলাভূমি চলনবিল, যা প্রতি বর্ষায় এক বিশাল হ্রদে পরিণত হয়। জীবনানন্দ দাশের 'বনলতা সেন' কবিতার মাধ্যমে আধুনিক বাংলা সাহিত্যে অমর হয়ে থাকা এই শহরটি তার নরম ছানার মিষ্টি 'কাঁচাগোল্লা'র জন্য সবার প্রিয়।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Chapainawabganj",
@@ -952,8 +1167,12 @@
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
     "aliases": [
-      "Nawabganj"
-    ]
+      "Nawabganj",
+      "চাঁপাইনবাবগঞ্জ"
+    ],
+    "nameBn": "চাঁপাইনবাবগঞ্জ",
+    "triviaFactBn": "পদ্মা ও মহানন্দা নদীর তীরে দেশের একেবারে পশ্চিম প্রান্তে অবস্থিত এই অঞ্চলটি সবার কাছে 'আমের রাজধানী' বা Mango Capital হিসেবে পরিচিত। প্রতি গ্রীষ্মে এখানকার শত শত বাগানে ক্ষীরশাপাত, ল্যাংড়া ও ফজলির মতো সেরা জাতের আম ফলে। ১৫ শতকে মধ্যযুগীয় সুলতানি রাজধানী গৌড়ের একটি অংশ এখানে অবস্থিত ছিল, যার নিদর্শন হিসেবে এখনও পাথরের তৈরি ছোট সোনা মসজিদ এবং প্রাণবন্ত গম্ভীরা গান টিকে আছে।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Netrokona",
@@ -972,7 +1191,12 @@
     "triviaFact": "Where the green Garo Hills meet the plains at Birishiri, the Someshwari River flows past striking hills of white, pink, and blue ceramic clay. To the south and east, deep seasonal wetlands like Dingapota Haor support rich fishing and duck farming. This region was the birthplace of beloved modern novelist and filmmaker Humayun Ahmed and is famous for a giant pillow-shaped sweet called Balish Mishti.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নেত্রকোনা"
+    ],
+    "nameBn": "নেত্রকোনা",
+    "triviaFactBn": "বিরিশিরিতে যেখানে সবুজ গারো পাহাড় সমভূমির সাথে মিশেছে, সেখানে সোমেশ্বরী নদী সাদা, গোলাপি ও নীল চীনামাটির দৃষ্টিনন্দন পাহাড়ের পাশ দিয়ে বয়ে গেছে। এর দক্ষিণ ও পূর্বে ডিঙ্গাপোতা হাওরের মতো গভীর মৌসুমি জলাভূমিগুলো মাছ ধরা ও হাঁস পালনের জন্য দারুণ সমৃদ্ধ। জনপ্রিয় আধুনিক কথাসাহিত্যিক ও চলচ্চিত্র নির্মাতা হুমায়ূন আহমেদের জন্মস্থান এই জেলাটি তার বিশাল আকৃতির 'বালিশ মিষ্টি'র জন্য বিখ্যাত।",
+    "divisionBn": "ময়মনসিংহ"
   },
   {
     "id": "Nilphamari",
@@ -992,7 +1216,12 @@
     "triviaFact": "British planters grew indigo across this northern plain in the 19th century, giving the area its name from the blue dye farms. Today, the massive Teesta Barrage at Dalia channels river water to irrigate hundreds of thousands of acres of northern farmland. The busy railway town of Saidpur here hosts the country's oldest train repair workshop, built in 1870, along with a regional airport.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "নীলফামারী"
+    ],
+    "nameBn": "নীলফামারী",
+    "triviaFactBn": "১৯ শতকে ব্রিটিশ নীলকররা উত্তরের এই সমভূমিতে প্রচুর নীলের চাষ করত, আর সেই নীল খামারগুলো থেকেই এই অঞ্চলের নামকরণ হয়েছে। বর্তমানে ডালিয়ার বিশাল তিস্তা ব্যারাজ নদীর পানি প্রবাহিত করে উত্তরাঞ্চলের লক্ষ লক্ষ একর কৃষিজমিতে সেচ সুবিধা দেয়। এখানকার ব্যস্ত রেলওয়ে শহর সৈয়দপুরে রয়েছে ১৮৭০ সালে নির্মিত দেশের প্রাচীনতম রেলওয়ে কারখানা এবং একটি আঞ্চলিক বিমানবন্দর।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Noakhali",
@@ -1014,7 +1243,12 @@
     "triviaFact": "Every year, silt washed down by the Meghna River builds new islands along this shifting southern coast. Off the mainland lies Nijhum Dwip, a quiet mangrove island where thousands of spotted deer roam free and migratory birds gather in winter. On the mainland, visitors can see the Mughal-style Bajra Shahi Mosque and the historic Gandhi Ashram at Jayag, founded during Mahatma Gandhi's 1946 peace visit.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "নোয়াখালী"
+    ],
+    "nameBn": "নোয়াখালী",
+    "triviaFactBn": "প্রতি বছর মেঘনা নদীর বয়ে আনা পলি জমে দক্ষিণের এই পরিবর্তনশীল উপকূলে নতুন নতুন চর ও দ্বীপ গড়ে ওঠে। মূল ভূখণ্ড থেকে দূরে সমুদ্রের বুকে রয়েছে নিঝুম দ্বীপ নামের এক শান্ত mangrove island, যেখানে হাজার হাজার চিত্রা হরিণ মুক্তভাবে ঘুরে বেড়ায় এবং শীতে অতিথি পাখিরা ভিড় করে। মূল ভূখণ্ডে পর্যটকরা মুঘল ধাঁচের বজরা শাহী মসজিদ এবং ১৯৪৬ সালে মহাত্মা গান্ধীর শান্তি মিশনের সময় প্রতিষ্ঠিত জয়াগের ঐতিহাসিক গান্ধী আশ্রম দেখতে পান।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Pabna",
@@ -1035,7 +1269,12 @@
     "triviaFact": "The historic red-steel Hardinge Bridge has carried trains across the Padma River here since 1915, right beside the site of the country's first nuclear power plant at Rooppur. It is home to the 17th-century terracotta Jor Bangla Temple, the country's main mental health hospital, and a thriving dairy and handloom industry. Film fans also remember the town as the birthplace of legendary Bengali cinema actress Suchitra Sen.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "পাবনা"
+    ],
+    "nameBn": "পাবনা",
+    "triviaFactBn": "১৯১৫ সাল থেকে ঐতিহাসিক লাল রঙের স্টিলের হার্ডিঞ্জ ব্রিজ এখানে পদ্মা নদীর ওপর দিয়ে ট্রেন পারাপার করছে, যার ঠিক পাশেই রূপপুরে গড়ে উঠেছে দেশের প্রথম nuclear power plant। এখানে রয়েছে ১৭ শতকের টেরাকোটা খচিত জোড় বাংলা মন্দির, দেশের প্রধান মানসিক হাসপাতাল এবং একটি সমৃদ্ধ দুগ্ধ ও তাঁত শিল্প। চলচ্চিত্রের ভক্তরা এই শহরটিকে বাংলা সিনেমার কিংবদন্তি অভিনেত্রী সুচিত্রা সেনের জন্মস্থান হিসেবেও মনে রাখেন।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Panchagarh",
@@ -1054,7 +1293,12 @@
     "triviaFact": "Tucked into the far northern corner of the country, this region borders India on three sides and reaches Banglabandha Zero Point near the Himalayan foothills. On clear autumn and winter mornings, people in Tetulia can see the snow-covered peaks of Mount Kanchenjunga without even using binoculars. Unlike the traditional hill estates of the northeast, farmers here have turned flat plains into thriving green organic tea gardens.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "পঞ্চগড়"
+    ],
+    "nameBn": "পঞ্চগড়",
+    "triviaFactBn": "দেশের একেবারে উত্তর কোণে অবস্থিত এই জেলাটি তিন দিকে ভারত দ্বারা বেষ্টিত এবং হিমালয়ের পাদদেশের কাছে বাংলাবান্ধা জিরো পয়েন্ট পর্যন্ত বিস্তৃত। শরৎ ও শীতের পরিষ্কার সকালে তেঁতুলিয়া থেকে কোনো দূরবীন ছাড়াই খালি চোখে বরফে ঢাকা কাঞ্চনজঙ্ঘা পর্বতশৃঙ্গ দেখা যায়। উত্তর-পূর্বাঞ্চলের ঐতিহ্যবাহী পাহাড়ি বাগানের মতো না হয়েও, এখানকার কৃষকরা সমতল ভূমিকেই চমৎকার সবুজ organic tea garden-এ রূপান্তর করেছেন।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Patuakhali",
@@ -1073,7 +1317,12 @@
     "triviaFact": "At the southern tip of this coastal region lies Kuakata, one of the few beaches in South Asia where you can watch both the sunrise and sunset over the sea. The new deep-sea Payra Port and a major power hub operate along its wide river channels. Nearby villages are home to historic Rakhine Buddhist communities and a huge ancient seated Buddha statue at Misripara.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "পটুয়াখালী"
+    ],
+    "nameBn": "পটুয়াখালী",
+    "triviaFactBn": "এই উপকূলীয় অঞ্চলের দক্ষিণ প্রান্তে রয়েছে কুয়াকাটা, যা দক্ষিণ এশিয়ার অল্প কয়েকটি সমুদ্র সৈকতের একটি যেখান থেকে সমুদ্রের বুকে সূর্যোদয় এবং সূর্যাস্ত দুটোই দেখা যায়। এখানকার প্রশস্ত নদী চ্যানেল ঘিরে নতুন গভীর সমুদ্রবন্দর পায়রা পোর্ট এবং একটি বড় power hub পরিচালিত হচ্ছে। পাশের গ্রামগুলোতে ঐতিহাসিক রাখাইন বৌদ্ধ সম্প্রদায়ের বসবাস এবং মিশ্রিপাড়ায় রয়েছে একটি বিশাল প্রাচীন বুদ্ধমূর্তি।",
+    "divisionBn": "বরিশাল"
   },
   {
     "id": "Pirojpur",
@@ -1094,7 +1343,12 @@
     "triviaFact": "Wide rivers like the Baleshwar, Kacha, and Sandhya divide this green southern region into fertile islands. In the canals of Swarupkathi, hundreds of small wooden boats gather to trade fresh guavas, hog-plums, and timber right on the water. Local workshops also turn coconut husks into coir rope and mats, while the wooden Momin Mosque in Mathbaria stands out for being built entirely without iron nails.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "পিরোজপুর"
+    ],
+    "nameBn": "পিরোজপুর",
+    "triviaFactBn": "বলেশ্বর, কচা ও সন্ধ্যার মতো প্রশস্ত নদীগুলো দক্ষিণের এই সবুজ অঞ্চলটিকে অনেকগুলো উর্বর দ্বীপে বিভক্ত করেছে। স্বরূপকাঠির খালগুলোতে শত শত ছোট কাঠের নৌকা একত্রিত হয়ে পানির ওপরেই তাজা পেয়ারা, আমড়া ও কাঠের ভাসমান হাট বসায়। স্থানীয় কারখানাগুলোতে নারকেলের ছোবড়া দিয়ে দড়ি ও পাপোশ তৈরি হয়, আর মঠবাড়িয়ার কাঠের তৈরি মমিন মসজিদটি লোহার পেরেক ছাড়াই নির্মিত হওয়ার কারণে বেশ অনন্য।",
+    "divisionBn": "বরিশাল"
   },
   {
     "id": "Rajbari",
@@ -1116,7 +1370,12 @@
     "triviaFact": "Stretching along the southern bank of the Padma River, this region serves as a major ferry and rail gateway between the capital and the southwest. Its river port at Goalanda has been famous for over a century in literature and travel accounts for fresh Padma Hilsa fish and steaming boatman curries. The village of Padamdi here holds the memorial of 19th-century novelist Mir Mosharraf Hossain, author of 'Bishad Sindhu'.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "রাজবাড়ী"
+    ],
+    "nameBn": "রাজবাড়ী",
+    "triviaFactBn": "পদ্মা নদীর দক্ষিণ তীর জুড়ে বিস্তৃত এই অঞ্চলটি রাজধানীর সাথে দক্ষিণ-পশ্চিমাঞ্চলের ফেরি ও রেল যোগাযোগের একটি প্রধান প্রবেশদ্বার বা gateway হিসেবে কাজ করে। এখানকার গোয়ালন্দ নদীবন্দরটি পদ্মার তাজা ইলিশ এবং মাঝিদের গরম গরম সুস্বাদু তরকারির জন্য এক শতাব্দীরও বেশি সময় ধরে সাহিত্য ও ভ্রমণকাহিনীতে বিখ্যাত হয়ে আছে। এই জেলার পদমদী গ্রামে রয়েছে 'বিষাদ সিন্ধু'র রচয়িতা ১৯ শতকের ঔপন্যাসিক মীর মশাররফ হোসেনের স্মৃতিসৌধ।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Rajshahi",
@@ -1136,7 +1395,12 @@
     "triviaFact": "Known across the country as the Silk City and Education City, this clean riverside metropolis sits along a lush promenade on the northern bank of the Padma. Founded in 1910, its Varendra Research Museum is the oldest museum in the country and holds rare stone sculptures from the Pala and Sena empires. Nearby Puthia features a cluster of ornate terracotta Hindu temples around a palace pond, while summer brings massive harvests of sweet mangoes and lychees.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "রাজশাহী"
+    ],
+    "nameBn": "রাজশাহী",
+    "triviaFactBn": "সারাদেশে Silk City এবং Education City হিসেবে পরিচিত এই পরিচ্ছন্ন মেট্রোপলিটন শহরটি পদ্মা নদীর উত্তর তীরে মনোরম পরিবেশে অবস্থিত। ১৯১০ সালে প্রতিষ্ঠিত এখানকার বরেন্দ্র গবেষণা জাদুঘর দেশের প্রাচীনতম জাদুঘর, যেখানে পাল ও সেন আমলের বিরল পাথরের মূর্তি সংরক্ষিত আছে। শহরের কাছেই পুঠিয়ায় রাজবাড়ির দিঘির চারপাশে রয়েছে দারুণ সব টেরাকোটা হিন্দু মন্দির, আর গ্রীষ্মকালে এখানে বিপুল পরিমাণ মিষ্টি আম ও লিচুর ফলন হয়।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Rangamati",
@@ -1155,7 +1419,12 @@
     "triviaFact": "Covering more land than any other district in the country, this forested hill region wraps around the bright blue waters of Kaptai Lake. The lake was created in the 1960s by damming the Karnaphuli River for the nation's only hydroelectric power plant, submerging the old Chakma royal palace beneath the water. Visitors ride wooden boats across the lake to Shuvolong Waterfalls, walk across the famous hanging bridge, and travel north to the misty ridges of Sajek Valley.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "রাঙ্গামাটি"
+    ],
+    "nameBn": "রাঙ্গামাটি",
+    "triviaFactBn": "দেশের যেকোনো জেলার চেয়ে আয়তনে বড় এই বনাঞ্চল ঘেরা পাহাড়ি অঞ্চলটি কাপ্তাই লেকের স্বচ্ছ নীল পানিকে ঘিরে রয়েছে। ১৯৬০-এর দশকে দেশের একমাত্র hydroelectric power plant-এর জন্য কর্ণফুলী নদীতে বাঁধ দিয়ে এই লেক তৈরি করা হয়, যার পানির নিচে তলিয়ে যায় পুরনো চাকমা রাজবাড়ি। পর্যটকরা কাঠের নৌকায় লেক পেরিয়ে শুভলং ঝর্ণায় যান, বিখ্যাত ঝুলন্ত ব্রিজে হাঁটেন এবং উত্তরে মেঘে ঢাকা সাজেক ভ্যালিতে ভ্রমণ করেন।",
+    "divisionBn": "চট্টগ্রাম"
   },
   {
     "id": "Rangpur",
@@ -1176,7 +1445,12 @@
     "triviaFact": "The grand white marble staircase and domes of Tajhat Palace rise on the edge of this major northern city. Just a few miles away in the village of Pairaband lies the birthplace of Begum Rokeya, the early 20th-century writer who pioneered girls' education in Bengal. Local weavers craft colorful cotton floor rugs called Shatranji without using modern machines, and summer orchards produce the prized fiberless Haribhanga mango.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "রংপুর"
+    ],
+    "nameBn": "রংপুর",
+    "triviaFactBn": "উত্তরাঞ্চলের এই প্রধান শহরের এক প্রান্তে সাদা মার্বেলের সিঁড়ি ও গম্বুজ নিয়ে সগর্বে দাঁড়িয়ে আছে ঐতিহাসিক তাজহাট জমিদার বাড়ি। সেখান থেকে মাত্র কয়েক মাইল দূরে পায়রাবন্দ গ্রামে রয়েছে বাংলায় নারী শিক্ষার পথিকৃৎ বেগম রোকেয়ার জন্মস্থান। স্থানীয় তাঁতিরা কোনো আধুনিক যন্ত্র ছাড়াই হাতে বুনে তৈরি করেন রঙিন শতরঞ্জি, আর গ্রীষ্মকালে এখানকার বাগানগুলোতে ফলে বিখ্যাত আঁশহীন হাঁড়িভাঙ্গা আম।",
+    "divisionBn": "রংপুর"
   },
   {
     "id": "Satkhira",
@@ -1194,7 +1468,12 @@
     "triviaFact": "More than a third of this southwestern coastal region is covered by the dense mangrove forests of the Sundarbans. Thousands of coastal ponds here raise Tiger shrimp for export, while local orchards produce the famous sweet Himsagar mango in May. Important landmarks include the busy Bhomra land port on the Indian border and the huge gathering shrine of Khan Bahadur Ahsanullah at Nalta Sharif.",
     "flagEmoji": "🇧🇩",
     "isCoastal": true,
-    "aliases": []
+    "aliases": [
+      "সাতক্ষীরা"
+    ],
+    "nameBn": "সাতক্ষীরা",
+    "triviaFactBn": "দক্ষিণ-পশ্চিম উপকূলের এই জেলার এক-তৃতীয়াংশেরও বেশি এলাকা সুন্দরবনের ঘন mangrove forest দ্বারা আবৃত। এখানকার হাজার হাজার উপকূলীয় ঘেরে রপ্তানির জন্য বাগদা চিংড়ি চাষ হয়, আর মে মাসে স্থানীয় বাগানগুলোতে পাকে বিখ্যাত মিষ্টি হিমসাগর আম। এখানকার গুরুত্বপূর্ণ স্থানগুলোর মধ্যে রয়েছে ভারতীয় সীমান্তের ব্যস্ত ভোমরা স্থলবন্দর এবং নলতা শরীফে খান বাহাদুর আহছানউল্লাহর বিশাল রওজা শরীফ।",
+    "divisionBn": "খুলনা"
   },
   {
     "id": "Shariatpur",
@@ -1214,7 +1493,12 @@
     "triviaFact": "The mighty Padma and Meghna rivers border this fertile region, which now connects directly to the capital via the southern end of the Padma Bridge at Zajira. It takes its name from a 19th-century reform leader who fought against colonial indigo planters on behalf of peasant farmers. Visitors can still see the 600-year-old courtyards of Dhanuka Manasa Bari and the tall spire of Rudrakar Math.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "শরীয়তপুর"
+    ],
+    "nameBn": "শরীয়তপুর",
+    "triviaFactBn": "প্রমত্তা পদ্মা ও মেঘনা নদী ঘেরা এই উর্বর অঞ্চলটি এখন জাজিরায় পদ্মা সেতুর দক্ষিণ প্রান্তের মাধ্যমে সরাসরি রাজধানীর সাথে যুক্ত। কৃষকদের হয়ে ব্রিটিশ নীলকরদের বিরুদ্ধে লড়াই করা ১৯ শতকের এক সংস্কারক নেতার নামানুসারে এই জেলার নামকরণ করা হয়েছে। পর্যটকরা এখনও এখানে ৬০০ বছরের পুরনো ধানুকা মনসা বাড়ির উঠান এবং রুদ্রকর মঠের সুউচ্চ চূড়া দেখতে পান।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Sherpur",
@@ -1232,7 +1516,12 @@
     "triviaFact": "Tucked against the southern edge of the Garo Hills on the Indian border, this quiet northern region blends green hillocks with flat rice plains. People visit the wooded hills and watchtowers of Ghazni and Madhutila to look out across the border mountains. Farmers here grow a small, fragrant grain called Tulshimala rice, which is used across the country to cook festive pilaf and sweet rice pudding.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "শেরপুর"
+    ],
+    "nameBn": "শেরপুর",
+    "triviaFactBn": "ভারতীয় সীমান্তে গারো পাহাড়ের দক্ষিণ প্রান্ত ঘেঁষে থাকা উত্তরের এই শান্ত জেলাটিতে সবুজ টিলা এবং সমতল ধানের ক্ষেতের এক দারুণ মেলবন্ধন রয়েছে। সীমান্তের ওপারের পাহাড়ের দৃশ্য দেখার জন্য মানুষজন এখানকার গজনী ও মধুটিলার বনাঞ্চল ঘেরা টিলা এবং watchtower-গুলোতে ভিড় করেন। এখানকার কৃষকরা তুলশীমালা নামের এক প্রকার ছোট ও সুগন্ধি ধান চাষ করেন, যা সারাদেশে উৎসবের পোলাও এবং পায়েস রান্নায় ব্যবহৃত হয়।",
+    "divisionBn": "ময়মনসিংহ"
   },
   {
     "id": "Sirajganj",
@@ -1254,7 +1543,12 @@
     "triviaFact": "Anchored by the western end of the Jamuna Bridge, this riverfront region connects the capital to all of North Bengal. In the town of Shahjadpur sits the preserved country estate where Rabindranath Tagore managed his family lands and wrote some of his best short stories. Hundreds of thousands of handlooms and powerlooms clatter across its villages to weave colorful lungis and cotton sarees, while Baghabari serves as a major milk-producing hub.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "সিরাজগঞ্জ"
+    ],
+    "nameBn": "সিরাজগঞ্জ",
+    "triviaFactBn": "যমুনা সেতুর পশ্চিম প্রান্তে অবস্থিত এই নদীতীরবর্তী জেলাটি পুরো উত্তরবঙ্গের সাথে রাজধানীর সংযোগ স্থাপন করেছে। এখানকার শাহজাদপুর শহরে রয়েছে সংরক্ষিত রবীন্দ্র কাছারিবাড়ি, যেখানে বসে রবীন্দ্রনাথ ঠাকুর তাঁর পারিবারিক জমিদারি দেখাশোনা করতেন এবং বেশ কিছু সেরা ছোটগল্প লিখেছিলেন। এখানকার গ্রামগুলোতে লক্ষ লক্ষ handloom ও powerloom-এ রঙিন লুঙ্গি ও সুতি শাড়ি বোনা হয়, আর বাঘাবাড়ি দেশের একটি প্রধান দুগ্ধ উৎপাদন কেন্দ্র হিসেবে পরিচিত।",
+    "divisionBn": "রাজশাহী"
   },
   {
     "id": "Sunamganj",
@@ -1274,7 +1568,12 @@
     "triviaFact": "Vast bowl-shaped wetlands called haors cover this northeastern border region, turning into an endless inland sea below the Meghalaya hills every monsoon. Houseboats glide across the protected waters of Tanguar Haor, which shelters millions of wild ducks and fish, and stop beside the bright blue limestone quarry lake at Tekerghat. This watery landscape also inspired some of Bengal's greatest mystic folk songwriters, including Hason Raja and Baul Shah Abdul Karim.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "সুনামগঞ্জ"
+    ],
+    "nameBn": "সুনামগঞ্জ",
+    "triviaFactBn": "উত্তর-পূর্বাঞ্চলের এই সীমান্ত জেলাটি অসংখ্য বিশাল হাওরে ঘেরা, যা প্রতি বর্ষায় মেঘালয় পাহাড়ের নিচে এক অন্তহীন অভ্যন্তরীণ সমুদ্রে পরিণত হয়। লাখো বুনো হাঁস ও মাছের অভয়াশ্রম টাঙ্গুয়ার হাওরের সংরক্ষিত পানিতে houseboat-গুলো ভেসে বেড়ায় এবং টেকেরঘাটের স্বচ্ছ নীল চুনাপাথরের লেকের পাশে গিয়ে থামে। এই জলের রাজ্যই হাসন রাজা এবং বাউল শাহ আবদুল করিমের মতো বাংলার অন্যতম শ্রেষ্ঠ মরমী গীতিকবিদের গান লেখার অনুপ্রেরণা জুগিয়েছে।",
+    "divisionBn": "সিলেট"
   },
   {
     "id": "Sylhet",
@@ -1293,7 +1592,12 @@
     "triviaFact": "Rolling green tea estates, including the subcontinent's oldest commercial tea garden at Malnicherra, surround this northeastern city on the Surma River. Clear mountain streams tumble down from the border hills over white stones at Jaflong, Bichnakandi, and Sada Pathor, while Ratargul preserves one of the country's few freshwater swamp forests. Millions of pilgrims also visit the 14th-century hilltop shrine of Sufi saint Hazrat Shah Jalal, and a large diaspora connects the city closely with the United Kingdom.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "সিলেট"
+    ],
+    "nameBn": "সিলেট",
+    "triviaFactBn": "উপমহাদেশের প্রাচীনতম বাণিজ্যিক চা বাগান মালনীছড়াসহ অসংখ্য ঢেউখেলানো সবুজ চা বাগান সুরমা নদীর তীরের এই উত্তর-পূর্বাঞ্চলীয় শহরটিকে ঘিরে রেখেছে। জাফলং, বিছনাকান্দি ও সাদা পাথরে সীমান্তের পাহাড় থেকে স্বচ্ছ ঝর্ণার পানি সাদা পাথরের ওপর দিয়ে গড়িয়ে পড়ে, আর রাতারগুলে রয়েছে দেশের অন্যতম বিরল freshwater swamp forest। এছাড়া লাখো ভক্ত এখানে ১৪ শতকের সুফি সাধক হযরত শাহজালাল (রহ.)-এর মাজার জিয়ারত করতে আসেন এবং প্রবাসী অধ্যুষিত হওয়ায় যুক্তরাজ্যের সাথে এই শহরের গভীর যোগাযোগ রয়েছে।",
+    "divisionBn": "সিলেট"
   },
   {
     "id": "Tangail",
@@ -1315,7 +1619,12 @@
     "triviaFact": "Weavers along the Jamuna and Louhajang rivers here hand-craft some of South Asia's most famous cotton and silk sarees. The region is equally famous for Porabari Chomchom, an oval-shaped sweet boiled in sugar syrup and coated in dried milk crumbs. Sightseers come to admire the carved brick terracotta of the 17th-century Atia Mosque, the grand Victorian columns of Mohera Zamindar Bari, and the Sal forests and pineapple farms of Madhupur.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "টাঙ্গাইল"
+    ],
+    "nameBn": "টাঙ্গাইল",
+    "triviaFactBn": "যমুনা ও লৌহজং নদীর তীরের তাঁতিরা এখানে বসেই দক্ষিণ এশিয়ার অন্যতম বিখ্যাত সুতি ও সিল্কের শাড়ি হাতে বুনে তৈরি করেন। শিরায় ডোবানো এবং মাওয়ায় গড়ানো পোড়াবাড়ির চমচম মিষ্টির জন্যও এই অঞ্চল সমানভাবে বিখ্যাত। পর্যটকরা এখানে ১৭ শতকের আতিয়া মসজিদের পোড়ামাটির কারুকাজ, মহেরা জমিদার বাড়ির ভিক্টোরিয়ান কলাম এবং মধুপুরের শালবন ও আনারস বাগান দেখতে আসেন।",
+    "divisionBn": "ঢাকা"
   },
   {
     "id": "Thakurgaon",
@@ -1333,6 +1642,11 @@
     "triviaFact": "In the northern village of Baliadangi grows a 200-year-old Suryapuri mango tree whose thick, wavy branches bend down to the ground and cover nearly two acres like a small forest. Three quiet rivers, the Tangon, Nagor, and Kulik, water the flat fields of wheat, corn, and sugarcane across this region. Historical sites include the carved 18th-century Jamalpur Jami Mosque and the old Haripur royal palace near the border.",
     "flagEmoji": "🇧🇩",
     "isCoastal": false,
-    "aliases": []
+    "aliases": [
+      "ঠাকুরগাঁও"
+    ],
+    "nameBn": "ঠাকুরগাঁও",
+    "triviaFactBn": "উত্তরের বালিয়াডাঙ্গী গ্রামে ২০০ বছরের পুরনো একটি সূর্যপুরী আমগাছ রয়েছে, যার মোটা ও আঁকাবাঁকা ডালপালা মাটির দিকে নুয়ে পড়ে প্রায় দুই একর জায়গা জুড়ে একটি ছোট বনের মতো তৈরি করেছে। টাঙ্গন, নাগর ও কুলিক—এই তিনটি শান্ত নদী এই অঞ্চলের গম, ভুট্টা ও আখের সমতল ক্ষেতগুলোতে পানি জোগায়। এখানকার ঐতিহাসিক স্থানগুলোর মধ্যে রয়েছে ১৮ শতকের কারুকাজ করা জামালপুর জামে মসজিদ এবং সীমান্তের কাছে অবস্থিত পুরনো হরিপুর রাজবাড়ি।",
+    "divisionBn": "রংপুর"
   }
 ]

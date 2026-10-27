@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Map, Info, ArrowRight } from "lucide-react";
 import {
@@ -26,9 +27,25 @@ const BD_GEO_URL = "/data/bangladesh-districts-topo.json";
 const DEFAULT_DISTRICT =
   DISTRICTS_BY_NAME.get("dhaka") || BANGLADESH_DISTRICTS[0];
 
-export default function BangladeshExplorePage() {
+function BangladeshExploreContent() {
+  const searchParams = useSearchParams();
+  const selectParam = searchParams.get("select");
+  const initialDistrict = React.useMemo(() => {
+    if (selectParam) {
+      const match =
+        DISTRICTS_BY_NAME.get(selectParam.toLowerCase()) ||
+        BANGLADESH_DISTRICTS.find(
+          (d) =>
+            d.id.toLowerCase() === selectParam.toLowerCase() ||
+            d.name.toLowerCase() === selectParam.toLowerCase(),
+        );
+      if (match) return match;
+    }
+    return DEFAULT_DISTRICT;
+  }, [selectParam]);
+
   const [selectedDistrict, setSelectedDistrict] =
-    useState<DistrictData>(DEFAULT_DISTRICT);
+    useState<DistrictData>(initialDistrict);
   const [hoveredDistrict, setHoveredDistrict] = useState<DistrictData | null>(
     null,
   );
@@ -41,10 +58,10 @@ export default function BangladeshExplorePage() {
     zoom: number;
   }>({
     coordinates: [
-      DEFAULT_DISTRICT.coordinates[1],
-      DEFAULT_DISTRICT.coordinates[0],
+      initialDistrict.coordinates[1],
+      initialDistrict.coordinates[0],
     ],
-    zoom: 2.5,
+    zoom: selectParam ? 3.5 : 2.5,
   });
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -157,7 +174,39 @@ export default function BangladeshExplorePage() {
       const targetZoom = Math.max(positionRef.current.zoom, 3.5);
       flyTo([dist.coordinates[1], dist.coordinates[0]], targetZoom);
     }
+
+    // Synchronize ?select= query param in URL without full page reload
+    if (typeof window !== "undefined") {
+      try {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get("select") !== dist.id) {
+          url.searchParams.set("select", dist.id);
+          window.history.replaceState(window.history.state, "", url.toString());
+        }
+      } catch {
+        // Safe fallback in non-standard environments
+      }
+    }
   };
+
+  // When ?select= changes (e.g. browser navigation or external link), sync selection & focus
+  const prevSelectRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (selectParam && selectParam !== prevSelectRef.current) {
+      prevSelectRef.current = selectParam;
+      const target =
+        DISTRICTS_BY_NAME.get(selectParam.toLowerCase()) ||
+        BANGLADESH_DISTRICTS.find(
+          (d) =>
+            d.id.toLowerCase() === selectParam.toLowerCase() ||
+            d.name.toLowerCase() === selectParam.toLowerCase(),
+        );
+      if (target) {
+        selectDistrict(target, true);
+      }
+    }
+  }, [selectParam]);
 
   const handleSelectDivision = (division: string) => {
     setDivisionFilter(division);
@@ -184,17 +233,17 @@ export default function BangladeshExplorePage() {
   );
   const isHoverInDivision = Boolean(
     hoveredDistrict &&
-      divisionFilter !== "All" &&
-      hoveredDistrict.division === divisionFilter &&
-      hoveredDistrict.name !== selectedDistrict.name,
+    divisionFilter !== "All" &&
+    hoveredDistrict.division === divisionFilter &&
+    hoveredDistrict.name !== selectedDistrict.name,
   );
 
   return (
-    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground lg:h-auto lg:max-h-none lg:min-h-screen lg:overflow-visible">
+    <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />
 
-      <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-4 flex flex-col gap-2 sm:space-y-4 overflow-hidden lg:overflow-visible">
-        {/* Top Context Subheader (Desktop only to prevent mobile vertical overflow) */}
+      <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-3 flex flex-col gap-2 overflow-hidden">
+        {/* Top Context Subheader (Desktop only to prevent vertical overflow) */}
         <div className="hidden lg:block shrink-0">
           <ExploreHeader
             title="Bangladesh Districts Explorer"
@@ -239,10 +288,10 @@ export default function BangladeshExplorePage() {
         </div>
 
         {/* 2-Column Responsive Layout: Map + Profile Panel */}
-        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-4 items-stretch lg:items-start overflow-hidden lg:overflow-visible">
+        <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-3 items-stretch overflow-hidden">
           {/* Left Column: Interactive Map Canvas (7 cols on lg, full on mobile when map tab) */}
           <div
-            className={`lg:col-span-7 flex flex-col gap-2 h-full min-h-0 ${
+            className={`lg:col-span-7 xl:col-span-8 flex flex-col gap-2 h-full min-h-0 overflow-hidden ${
               mobileTab === "map" ? "flex flex-1" : "hidden lg:flex"
             }`}
           >
@@ -254,11 +303,19 @@ export default function BangladeshExplorePage() {
               />
             </div>
 
+            {/* Mobile Search Input pinned directly above map in mobile view */}
+            <div className="lg:hidden shrink-0 z-30">
+              <DistrictSearch
+                onSelectDistrict={selectDistrict}
+                divisionFilter={divisionFilter}
+              />
+            </div>
+
             {/* Map Container */}
             <div
               ref={mapContainerRef}
               onMouseLeave={() => setHoveredDistrict(null)}
-              className="relative w-full flex-1 min-h-0 lg:h-[calc(100vh-250px)] lg:min-h-[460px] rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -271,7 +328,7 @@ export default function BangladeshExplorePage() {
               />
 
               {/* Top-Left Unified Callout (Selection + Hover in same overlay) */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 pointer-events-none select-none">
+              <div className="hidden lg:block absolute top-3 left-3 sm:top-4 sm:left-4 z-10 pointer-events-none select-none">
                 <div
                   className={`flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-xs transition-all duration-150 ${
                     isHovering
@@ -286,10 +343,17 @@ export default function BangladeshExplorePage() {
                   />
                   <span className="font-bold text-foreground text-2xs sm:text-xs">
                     {activeDistrict.name}
+                    {activeDistrict.nameBn && (
+                      <span className="ml-1 text-muted-foreground font-medium">
+                        ({activeDistrict.nameBn})
+                      </span>
+                    )}
                   </span>
                   {isHovering && (isNeighbor || isHoverInDivision) && (
                     <span className="text-3xs font-mono uppercase px-1.5 py-0.5 rounded-md bg-bd-subtle text-bd-primary border border-bd-subtle-border">
-                      {isNeighbor ? "Neighbor" : `${hoveredDistrict?.division} Division`}
+                      {isNeighbor
+                        ? "Neighbor"
+                        : `${hoveredDistrict?.division}${hoveredDistrict?.divisionBn ? ` (${hoveredDistrict.divisionBn})` : ""} Div`}
                     </span>
                   )}
                 </div>
@@ -344,12 +408,11 @@ export default function BangladeshExplorePage() {
 
                       // Neighbors of the selected district
                       const neighborGeos = geographies.filter((g) => {
-                        const sName =
-                          (g.properties?.shapeName as string) || "";
+                        const sName = (g.properties?.shapeName as string) || "";
                         return Boolean(
                           sName &&
-                            sName !== selectedDistrict?.name &&
-                            selectedDistrict?.borders.includes(sName),
+                          sName !== selectedDistrict?.name &&
+                          selectedDistrict?.borders.includes(sName),
                         );
                       });
 
@@ -384,7 +447,7 @@ export default function BangladeshExplorePage() {
                             selectedDistrict?.name === districtName;
                           const isNeighbor = Boolean(
                             selectedDistrict?.name &&
-                              selectedDistrict.borders.includes(districtName),
+                            selectedDistrict.borders.includes(districtName),
                           );
                           const isInDivision =
                             isDivisionActive &&
@@ -426,13 +489,22 @@ export default function BangladeshExplorePage() {
                             itemStrokeWidth,
                           };
                         })
-                        .filter((item): item is NonNullable<typeof item> => item !== null)
+                        .filter(
+                          (item): item is NonNullable<typeof item> =>
+                            item !== null,
+                        )
                         .sort((a, b) => a.priority - b.priority);
 
                       return (
                         <>
                           {styledGeographies.map(
-                            ({ geo, district, fill, stroke, itemStrokeWidth }) => (
+                            ({
+                              geo,
+                              district,
+                              fill,
+                              stroke,
+                              itemStrokeWidth,
+                            }) => (
                               <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
@@ -484,7 +556,7 @@ export default function BangladeshExplorePage() {
                               style={{
                                 default: {
                                   fill: "var(--map-filter-bd)",
-                                  fillOpacity: 0.20,
+                                  fillOpacity: 0.2,
                                   stroke: "var(--map-filter-stroke-bd)",
                                   strokeWidth: strokeWidth * 1.1,
                                   strokeLinejoin: "round",
@@ -494,7 +566,7 @@ export default function BangladeshExplorePage() {
                                 },
                                 hover: {
                                   fill: "var(--map-filter-bd)",
-                                  fillOpacity: 0.20,
+                                  fillOpacity: 0.2,
                                   stroke: "var(--map-filter-stroke-bd)",
                                   strokeWidth: strokeWidth * 1.1,
                                   vectorEffect: "non-scaling-stroke",
@@ -643,10 +715,18 @@ export default function BangladeshExplorePage() {
                 <div className="truncate">
                   <div className="font-bold text-foreground text-xs truncate">
                     {selectedDistrict.name}
+                    {selectedDistrict.nameBn && (
+                      <span className="ml-1 text-muted-foreground font-medium">
+                        ({selectedDistrict.nameBn})
+                      </span>
+                    )}
                   </div>
                   <span className="text-2xs text-muted-foreground font-mono">
-                    {selectedDistrict.division} Division •{" "}
-                    {selectedDistrict.borders.length} neighbors
+                    {selectedDistrict.division}
+                    {selectedDistrict.divisionBn
+                      ? ` (${selectedDistrict.divisionBn})`
+                      : ""}{" "}
+                    Division • {selectedDistrict.borders.length} neighbors
                   </span>
                 </div>
               </div>
@@ -662,26 +742,37 @@ export default function BangladeshExplorePage() {
 
           {/* Right Column: Search Box & District Profile (5 cols on lg, full on mobile when info tab) */}
           <div
-            className={`lg:col-span-5 space-y-3 h-full min-h-0 ${
-              mobileTab === "info"
-                ? "flex flex-col flex-1 overflow-y-auto overscroll-contain pb-3"
-                : "hidden lg:block"
+            className={`lg:col-span-5 xl:col-span-4 h-full min-h-0 flex flex-col gap-2 overflow-hidden ${
+              mobileTab === "info" ? "flex flex-1" : "hidden lg:flex"
             }`}
           >
+            {/* Pinned Search Box (never scrolls) */}
             <div className="shrink-0 z-30">
               <DistrictSearch
                 onSelectDistrict={selectDistrict}
                 divisionFilter={divisionFilter}
               />
             </div>
-            <DistrictProfileCard
-              district={selectedDistrict}
-              onSelectDistrict={selectDistrict}
-              onHoverDistrict={setHoveredDistrict}
-            />
+
+            {/* ONLY this container scrolls like in game mode */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1">
+              <DistrictProfileCard
+                district={selectedDistrict}
+                onSelectDistrict={selectDistrict}
+                onHoverDistrict={setHoveredDistrict}
+              />
+            </div>
           </div>
         </div>
       </main>
     </div>
+  );
+}
+
+export default function BangladeshExplorePage() {
+  return (
+    <Suspense>
+      <BangladeshExploreContent />
+    </Suspense>
   );
 }

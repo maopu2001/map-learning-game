@@ -5,9 +5,12 @@ export interface DistrictData {
   shapeId: string;
   name: string;
   division: string;
+  divisionBn?: string;
   coordinates: [number, number]; // [lat, lng]
   borders: string[]; // Neighbor district names
   triviaFact: string;
+  nameBn?: string;
+  triviaFactBn?: string;
   flagEmoji: string;
   isCoastal: boolean;
   aliases?: string[];

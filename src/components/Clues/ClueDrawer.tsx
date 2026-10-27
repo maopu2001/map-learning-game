@@ -60,9 +60,15 @@ export function ClueDrawer({ scope: propScope }: ClueDrawerProps = {}) {
   );
   let hint1Title = `Hint 1: ${isBD ? "Division" : "Continent"}`;
   let hint1Content: React.ReactNode = isBD ? (
-    <span className="text-primary font-semibold">Division: {targetDistrict.division}</span>
+    <span className="text-primary font-semibold">
+      Division: {targetDistrict.division}
+      {targetDistrict.divisionBn ? ` (${targetDistrict.divisionBn})` : ""}
+    </span>
   ) : (
-    <span className="text-primary font-semibold">Continent: {targetCountry.continent}</span>
+    <span className="text-primary font-semibold">
+      Continent: {targetCountry.continent}
+      {targetCountry.continentBn ? ` (${targetCountry.continentBn})` : ""}
+    </span>
   );
 
   if (isDetective) {
@@ -161,6 +167,7 @@ export function ClueDrawer({ scope: propScope }: ClueDrawerProps = {}) {
         hint2Content = (
           <span className="text-accent font-bold">
             Capital: {targetCountry.capital || "N/A"}
+            {targetCountry.capitalBn ? ` (${targetCountry.capitalBn})` : ""}
           </span>
         );
       }

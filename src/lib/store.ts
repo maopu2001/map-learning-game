@@ -84,8 +84,11 @@ export interface GameState {
   recentTargetIds: string[];
   dailyHistory: Partial<Record<GameScope, DailyRecord>>;
   isGameOverOpen: boolean;
+  triviaLang: "en" | "bn";
 
   // Actions
+  setTriviaLang: (lang: "en" | "bn") => void;
+  toggleTriviaLang: () => void;
   setScope: (scope: GameScope) => void;
   initRouteScope: (scope: GameScope) => void;
   makeGuess: (item: CountryData | DistrictData) => void;
@@ -169,6 +172,13 @@ export const useGameStore = create<GameState>()(
       recentTargetIds: [],
       dailyHistory: {},
       isGameOverOpen: false,
+      triviaLang: "en",
+
+      setTriviaLang: (lang: "en" | "bn") => set({ triviaLang: lang }),
+      toggleTriviaLang: () =>
+        set((state) => ({
+          triviaLang: state.triviaLang === "en" ? "bn" : "en",
+        })),
 
       setGameOverOpen: (open: boolean) => set({ isGameOverOpen: open }),
 
@@ -704,6 +714,7 @@ export const useGameStore = create<GameState>()(
         lastDailyDate: state.lastDailyDate,
         recentTargetIds: state.recentTargetIds,
         dailyHistory: state.dailyHistory,
+        triviaLang: state.triviaLang,
       }),
     },
   ),

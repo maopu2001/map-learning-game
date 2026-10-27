@@ -17,7 +17,7 @@ interface DistrictReconWindowProps {
   gameStatus: GameStatus;
   targetDistrict: DistrictData | null;
   unlockedHints: number;
-  guesses: GuessResult[];
+  guesses?: GuessResult[];
 }
 
 export function DistrictReconWindow({
@@ -31,7 +31,6 @@ export function DistrictReconWindow({
   gameStatus,
   targetDistrict,
   unlockedHints,
-  guesses,
 }: DistrictReconWindowProps) {
   const isPlaying = gameStatus === "playing";
   const nameKey = inspectedDistrict?.name.toLowerCase() || "";
@@ -49,7 +48,7 @@ export function DistrictReconWindow({
     (mode !== "detective" && difficulty === "easy");
 
   return (
-    <div className="hidden md:block absolute top-4 left-4 z-20 w-64 max-w-xs rounded-xl border border-border bg-card/95 p-3 shadow-2xl backdrop-blur-md text-xs text-foreground space-y-2">
+    <div className="hidden md:block absolute top-4 left-4 z-20 max-w-sm w-100 rounded-xl border border-border bg-card/95 p-3 shadow-2xl backdrop-blur-md text-xs text-foreground space-y-2">
       {difficulty === "hard" &&
       (!inspectedDistrict || (!isNeighbor && !isGuessed)) ? (
         <div className="space-y-1.5">
@@ -92,7 +91,7 @@ export function DistrictReconWindow({
               {targetDistrict && (
                 <div className="text-2xs text-bd-primary font-semibold pt-1 border-t border-border">
                   {difficulty === "easy" || unlockedHints >= 1 ? (
-                    `Hint 1: Division: ${targetDistrict.division}`
+                    `Hint 1: Division: ${targetDistrict.division}${targetDistrict.divisionBn ? ` (${targetDistrict.divisionBn})` : ""}`
                   ) : (
                     <span className="text-muted-foreground font-normal">
                       Hint 1: 🔒 Locked (Unlock in Hints drawer)
@@ -109,7 +108,9 @@ export function DistrictReconWindow({
                   Unrevealed District
                 </span>
                 <span className="text-2xs text-muted-foreground font-mono">
-                  {mode === "detective" ? "Detective" : `${difficulty.toUpperCase()}`}
+                  {mode === "detective"
+                    ? "Detective"
+                    : `${difficulty.toUpperCase()}`}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -124,11 +125,20 @@ export function DistrictReconWindow({
           ) : (
             <div>
               <div className="flex items-center justify-between pb-1 border-b border-border">
-                <span className="font-bold text-foreground text-sm flex items-center gap-1.5">
-                  {inspectedDistrict.name}
+                <span className="font-bold text-foreground text-sm flex items-center gap-1.5 flex-wrap">
+                  <span>{inspectedDistrict.name}</span>
+                  {inspectedDistrict.nameBn && (
+                    <span className="text-xs text-muted-foreground font-medium">
+                      ({inspectedDistrict.nameBn})
+                    </span>
+                  )}
                 </span>
                 <span className="text-2xs text-muted-foreground">
-                  {inspectedDistrict.division} Division
+                  {inspectedDistrict.division}
+                  {inspectedDistrict.divisionBn
+                    ? ` (${inspectedDistrict.divisionBn})`
+                    : ""}{" "}
+                  Division
                 </span>
               </div>
 
@@ -148,23 +158,28 @@ export function DistrictReconWindow({
                       </span>
                       <span className="font-mono text-xs text-accent flex items-center gap-1">
                         <DirectionIcon
-                          direction={guessedDistrictsMap.get(nameKey)?.direction}
-                          isCorrect={guessedDistrictsMap.get(nameKey)?.isCorrect}
+                          direction={
+                            guessedDistrictsMap.get(nameKey)?.direction
+                          }
+                          isCorrect={
+                            guessedDistrictsMap.get(nameKey)?.isCorrect
+                          }
                           className="size-3.5 inline text-accent"
                         />
-                        <span>{guessedDistrictsMap.get(nameKey)?.direction}</span>
+                        <span>
+                          {guessedDistrictsMap.get(nameKey)?.direction}
+                        </span>
                       </span>
                     </div>
                   )}
                 </div>
               ) : isNeighbor ? (
                 <div className="text-xs text-bd-primary font-semibold pt-1">
-                  Borders the secret target (Revealed Hint)
+                  Borders the secret target
                 </div>
               ) : (
-                <div className="text-2xs text-muted-foreground pt-1 flex items-center justify-between">
+                <div className="text-2xs text-muted-foreground pt-1">
                   <span>Not guessed yet</span>
-                  <span className="text-muted-foreground">Type or click to guess</span>
                 </div>
               )}
             </div>
@@ -181,56 +196,9 @@ export function DistrictReconWindow({
             </span>
           </div>
 
-          {lastGuess ? (
-            <div className="text-xs flex items-center justify-between">
-              <span className="text-muted-foreground">Last:</span>
-              <span className="font-semibold text-foreground flex items-center gap-1">
-                <span>{lastGuess.country.name}</span>
-                <span className="text-muted-foreground">({lastGuess.distanceKm}km</span>
-                <DirectionIcon
-                  direction={lastGuess.direction}
-                  isCorrect={lastGuess.isCorrect}
-                  className="size-3 inline text-accent"
-                />
-                <span className="text-muted-foreground">)</span>
-              </span>
-            </div>
-          ) : (
-            <div className="text-xs text-muted-foreground">
-              Click or hover any district to inspect or guess
-            </div>
-          )}
-
-          <div className="text-2xs text-muted-foreground pt-1 border-t border-border flex items-center justify-between">
-            <span>Map Mode:</span>
-            <span className="text-muted-foreground">
-              {mode === "detective" ? "Detective Mode" : "Clean Map"}
-            </span>
+          <div className="text-xs text-muted-foreground">
+            Click or hover any district to inspect
           </div>
-        </div>
-      )}
-
-      {/* Guessed dots row */}
-      {guesses.length > 0 && (
-        <div className="pt-1 border-t border-border flex items-center gap-1 overflow-x-auto">
-          {guesses.map((g, i) => (
-            <span
-              key={i}
-              title={`${g.country.name}: ${g.distanceKm}km`}
-              className={`size-2.5 rounded-full shrink-0 ${
-                g.isCorrect
-                  ? "bg-bd-primary"
-                  : g.distanceKm < 60
-                    ? "bg-accent"
-                    : g.distanceKm < 130
-                      ? "bg-bd-primary/50"
-                      : "bg-muted"
-              }`}
-            />
-          ))}
-          <span className="text-2xs text-muted-foreground ml-auto">
-            {guesses.length}/6
-          </span>
         </div>
       )}
     </div>

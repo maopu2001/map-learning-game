@@ -70,7 +70,9 @@ export function CountryReconSheet({
                 </h4>
               </div>
               <p className="text-2xs text-muted-foreground font-mono">
-                {mode === "detective" ? "Detective" : `${difficulty.toUpperCase()}`}
+                {mode === "detective"
+                  ? "Detective"
+                  : `${difficulty.toUpperCase()}`}
               </p>
             </div>
           ) : (
@@ -81,10 +83,20 @@ export function CountryReconSheet({
               <div className="min-w-0">
                 <h4 className="font-bold text-foreground text-sm leading-tight truncate">
                   {inspectedCountry.name}
+                  {inspectedCountry.nameBn && (
+                    <span className="ml-1 text-muted-foreground font-medium text-xs">
+                      ({inspectedCountry.nameBn})
+                    </span>
+                  )}
                 </h4>
                 <p className="text-2xs text-accent">
                   {inspectedCountry.continent}
-                  {inspectedCountry.subregion ? ` • ${inspectedCountry.subregion}` : ""}
+                  {inspectedCountry.continentBn
+                    ? ` (${inspectedCountry.continentBn})`
+                    : ""}
+                  {inspectedCountry.subregion
+                    ? ` • ${inspectedCountry.subregion}${inspectedCountry.subregionBn ? ` (${inspectedCountry.subregionBn})` : ""}`
+                    : ""}
                 </p>
               </div>
             </div>
@@ -103,13 +115,17 @@ export function CountryReconSheet({
       {isTargetInspected && isPlaying ? (
         <div className="space-y-1">
           <p className="text-xs text-accent leading-snug">
-            Accent outline. Follow distance & compass clues to guess this mystery country!
+            Accent outline. Follow distance & compass clues to guess this
+            mystery country!
           </p>
           {targetCountry && (
             <div className="text-2xs font-semibold pt-1 border-t border-border">
               {difficulty === "easy" || unlockedHints >= 1 ? (
                 <span className="text-accent">
                   Hint 1: Continent: {targetCountry.continent}
+                  {targetCountry.continentBn
+                    ? ` (${targetCountry.continentBn})`
+                    : ""}
                 </span>
               ) : (
                 <span className="text-muted-foreground font-normal">
@@ -158,13 +174,11 @@ export function CountryReconSheet({
       ) : isNeighbor ? (
         <p className="text-xs text-primary font-semibold">
           {targetCountry && targetCountry.borders.length === 0
-            ? "Closest neighbor to secret target (Revealed Hint)"
-            : "Borders the secret target (Revealed Hint)"}
+            ? "Closest neighbor to secret target"
+            : "Borders the secret target"}
         </p>
       ) : (
-        <p className="text-2xs text-muted-foreground">
-          Not guessed yet. Type in the search box to make a guess.
-        </p>
+        <p className="text-2xs text-muted-foreground">Not guessed yet</p>
       )}
     </div>
   );

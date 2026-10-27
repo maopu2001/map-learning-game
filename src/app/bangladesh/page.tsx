@@ -13,7 +13,8 @@ import { Map, Crosshair, ArrowRight } from "lucide-react";
 import { DirectionIcon } from "@/components/ui/direction-icon";
 
 const BangladeshMap = dynamic(
-  () => import("@/components/Map/BangladeshMap").then((mod) => mod.BangladeshMap),
+  () =>
+    import("@/components/Map/BangladeshMap").then((mod) => mod.BangladeshMap),
   {
     ssr: false,
     loading: () => (
@@ -24,7 +25,7 @@ const BangladeshMap = dynamic(
         </div>
       </div>
     ),
-  }
+  },
 );
 
 export default function BangladeshPage() {
@@ -116,28 +117,27 @@ export default function BangladeshPage() {
           {/* Latest Guess Banner on Mobile Map view */}
           {lastGuess && (
             <div className="shrink-0 p-2.5 rounded-2xl bg-card border border-border flex items-center justify-between text-xs">
-              <div>
-                <div className="font-bold text-foreground flex items-center gap-1.5">
+              <div className="w-full flex items-center gap-2.5">
+                <div className="w-3/5 font-bold text-foreground flex flex-col items-start justify-center gap-1.5 pl-2">
                   <span>{lastGuess.country.name}</span>
-                  <span className="font-mono text-primary flex items-center gap-1">
-                    <span>{lastGuess.distanceKm} km</span>
-                    <DirectionIcon
-                      direction={lastGuess.direction}
-                      isCorrect={lastGuess.isCorrect}
-                      className="size-3 text-primary inline"
-                    />
+                  <span className="text-2xs text-muted-foreground font-mono">
+                    Match: {lastGuess.proximityScore}%
                   </span>
                 </div>
-                <span className="text-2xs text-muted-foreground font-mono">
-                  Match: {lastGuess.proximityScore}%
+                <span className="font-mono text-primary flex items-center gap-1">
+                  <span>{lastGuess.distanceKm} km</span>
+                  <DirectionIcon
+                    direction={lastGuess.direction}
+                    isCorrect={lastGuess.isCorrect}
+                    className="size-3 text-primary inline"
+                  />
                 </span>
               </div>
               <button
                 onClick={() => setMobileTab("intel")}
-                className="px-2 py-1 rounded-xl bg-muted/50 hover:bg-muted border border-border text-xs font-semibold text-primary flex items-center gap-1 cursor-pointer shrink-0"
+                className="aspect-square p-2 rounded-xl bg-accent/30 hover:bg-accent/60 border border-border text-xs font-semibold text-accent flex items-center gap-1 cursor-pointer shrink-0"
               >
-                <span>Intel</span>
-                <ArrowRight className="size-3" />
+                <Crosshair className="size-3" />
               </button>
             </div>
           )}
@@ -174,7 +174,10 @@ export default function BangladeshPage() {
       />
 
       {/* End Game Modal */}
-      <GameOverModal scope="bangladesh" onChangeMode={() => setBriefingOpen(true)} />
+      <GameOverModal
+        scope="bangladesh"
+        onChangeMode={() => setBriefingOpen(true)}
+      />
     </div>
   );
 }

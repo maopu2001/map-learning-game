@@ -14,14 +14,19 @@ export interface CountryData {
   officialName: string;
   aliases: string[];
   capital: string;
+  capitalBn?: string;
   coordinates: [number, number]; // [lat, lng]
   borders: string[]; // ["ARG", "BRA", "CHL", "PRY", "PER"]
   continent: string;
+  continentBn?: string;
   region: string;
   subregion: string;
+  subregionBn?: string;
   maritimeNeighbors?: string[];
   flagEmoji: string;
   triviaFact: string;
+  nameBn?: string;
+  triviaFactBn?: string;
   area: number;
   population: number;
   isIsland: boolean;

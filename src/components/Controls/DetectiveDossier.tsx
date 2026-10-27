@@ -18,17 +18,31 @@ export function DetectiveDossier({ scope: propScope }: DetectiveDossierProps = {
   const targetDistrict = useGameStore((s) => s.targetDistrict);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
   const gameStatus = useGameStore((s) => s.gameStatus);
+  const triviaLang = useGameStore((s) => s.triviaLang);
+  const setTriviaLang = useGameStore((s) => s.setTriviaLang);
 
   const isBD = scope === "bangladesh";
   const target = isBD ? targetDistrict : targetCountry;
+  const isHard = difficulty === "hard";
+  const isEasy = difficulty === "easy";
+
+  // In Hard mode during active play, always use English because proper noun
+  // redaction / capitalization masking is designed for English grammar.
+  const activeLang = isHard && gameStatus === "playing" ? "en" : triviaLang;
+
+  // Active fact based on selected language
+  const rawFact =
+    activeLang === "bn" && target?.triviaFactBn
+      ? target.triviaFactBn
+      : target?.triviaFact || "";
 
   // Compute redacted trivia based on difficulty and unlocked hints
   const displayText = useMemo(() => {
-    if (!target?.triviaFact) return "";
+    if (!rawFact) return "";
 
-    // In Easy & Normal mode, show trivia fact unredacted
-    if (difficulty !== "hard" || gameStatus !== "playing") {
-      return target.triviaFact;
+    // In Easy & Normal mode (or when game ended), show trivia fact unredacted
+    if (!isHard || gameStatus !== "playing") {
+      return rawFact;
     }
 
     // In Hard mode:
@@ -50,10 +64,10 @@ export function DetectiveDossier({ scope: propScope }: DetectiveDossierProps = {
           ...(targetCountry?.aliases || []),
         ];
 
-    return redactTrivia(target.triviaFact, targetWords, ratio);
+    return redactTrivia(rawFact, targetWords, ratio);
   }, [
-    target,
-    difficulty,
+    rawFact,
+    isHard,
     unlockedHints,
     gameStatus,
     isBD,
@@ -62,9 +76,6 @@ export function DetectiveDossier({ scope: propScope }: DetectiveDossierProps = {
   ]);
 
   if (!target) return null;
-
-  const isHard = difficulty === "hard";
-  const isEasy = difficulty === "easy";
 
   return (
     <div className="w-full rounded-2xl border border-border bg-card p-3.5 sm:p-4 shadow-xl space-y-2.5 backdrop-blur-md">
@@ -82,6 +93,34 @@ export function DetectiveDossier({ scope: propScope }: DetectiveDossierProps = {
         </div>
 
         <div className="flex items-center gap-1.5">
+          {/* Language Segmented Toggle (Disabled in Hard mode during gameplay) */}
+          {(!isHard || gameStatus !== "playing") && (
+            <div className="flex items-center bg-muted/70 p-0.5 rounded-lg border border-border text-3xs font-medium">
+              <button
+                type="button"
+                onClick={() => setTriviaLang("en")}
+                className={`px-1.5 py-0.5 rounded-lg transition-all ${
+                  triviaLang === "en"
+                    ? "bg-background text-foreground font-semibold shadow-xs"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setTriviaLang("bn")}
+                className={`px-1.5 py-0.5 rounded-lg transition-all ${
+                  triviaLang === "bn"
+                    ? "bg-background text-foreground font-semibold shadow-xs"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                বাং
+              </button>
+            </div>
+          )}
+
           {isHard && gameStatus === "playing" && (
             <Badge
               variant="outline"
@@ -99,7 +138,13 @@ export function DetectiveDossier({ scope: propScope }: DetectiveDossierProps = {
             >
               <MapPin className="size-3" />
               <span>
-                {isBD ? targetDistrict.division : targetCountry.continent}
+                {isBD
+                  ? triviaLang === "bn" && targetDistrict.divisionBn
+                    ? targetDistrict.divisionBn
+                    : targetDistrict.division
+                  : triviaLang === "bn" && targetCountry.continentBn
+                    ? targetCountry.continentBn
+                    : targetCountry.continent}
               </span>
             </Badge>
           )}

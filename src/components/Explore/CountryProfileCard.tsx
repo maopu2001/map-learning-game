@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   CountryData,
   COUNTRIES_BY_ID,
@@ -27,6 +27,8 @@ export function CountryProfileCard({
   onSelectCountry,
   onHoverCountry,
 }: CountryProfileCardProps) {
+  const [lang, setLang] = useState<"en" | "bn">("en");
+
   if (!country) {
     return (
       <div className="rounded-2xl border border-border bg-card p-6 shadow-2xl flex flex-col items-center justify-center text-center space-y-3 min-h-[280px]">
@@ -54,17 +56,32 @@ export function CountryProfileCard({
         <div className="flex items-center gap-3">
           <span className="text-3xl">{country.flagEmoji}</span>
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-foreground">
-              {country.name}
-            </h2>
+            <div className="flex items-baseline gap-2 flex-wrap">
+              <h2 className="text-xl sm:text-2xl font-black text-foreground">
+                {country.name}
+              </h2>
+              {country.nameBn && (
+                <span className="text-base sm:text-lg font-bold text-muted-foreground">
+                  ({country.nameBn})
+                </span>
+              )}
+            </div>
             {country.officialName && country.officialName !== country.name && (
               <p className="text-2xs text-muted-foreground italic truncate max-w-[220px]">
                 {country.officialName}
               </p>
             )}
             <p className="text-xs text-accent font-medium">
-              {country.continent}
-              {country.subregion ? ` • ${country.subregion}` : ""}
+              {lang === "bn" && country.continentBn
+                ? country.continentBn
+                : country.continent}
+              {country.subregion
+                ? ` • ${
+                    lang === "bn" && country.subregionBn
+                      ? country.subregionBn
+                      : country.subregion
+                  }`
+                : ""}
             </p>
           </div>
         </div>
@@ -93,7 +110,9 @@ export function CountryProfileCard({
             <MapPin className="size-3 text-primary" /> Capital City
           </span>
           <span className="font-semibold text-foreground">
-            {country.capital || "N/A"}
+            {country.capital
+              ? `${country.capital}${country.capitalBn ? ` (${country.capitalBn})` : ""}`
+              : "N/A"}
           </span>
         </div>
         <div className="p-3 rounded-xl bg-muted/40 border border-border space-y-1">
@@ -132,11 +151,43 @@ export function CountryProfileCard({
       </div>
 
       {/* Trivia */}
-      <div className="p-3.5 rounded-xl bg-muted/40 border border-border space-y-1 text-xs leading-relaxed">
-        <span className="text-accent font-semibold flex items-center gap-1.5">
-          <CircleQuestionMark className="size-3.5" /> Did you know?
-        </span>
-        <p className="text-foreground/90">{country.triviaFact}</p>
+      <div className="p-3.5 rounded-xl bg-muted/40 border border-border space-y-1.5 text-xs leading-relaxed">
+        <div className="flex items-center justify-between">
+          <span className="text-accent font-semibold flex items-center gap-1.5">
+            <CircleQuestionMark className="size-3.5" /> Did you know?
+          </span>
+          {country.triviaFactBn && (
+            <div className="flex items-center bg-background p-0.5 rounded-md border border-border text-3xs font-medium">
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={`px-1.5 py-0.5 rounded-sm transition-all ${
+                  lang === "en"
+                    ? "bg-accent/20 text-accent font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("bn")}
+                className={`px-1.5 py-0.5 rounded-sm transition-all ${
+                  lang === "bn"
+                    ? "bg-accent/20 text-accent font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                বাং
+              </button>
+            </div>
+          )}
+        </div>
+        <p className="text-foreground/90">
+          {lang === "bn" && country.triviaFactBn
+            ? country.triviaFactBn
+            : country.triviaFact}
+        </p>
       </div>
 
       {/* Neighbors */}

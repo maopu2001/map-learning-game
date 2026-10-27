@@ -17,7 +17,7 @@ interface CountryReconWindowProps {
   gameStatus: GameStatus;
   targetCountry: CountryData | null;
   unlockedHints: number;
-  guesses: GuessResult[];
+  guesses?: GuessResult[];
 }
 
 export function CountryReconWindow({
@@ -31,7 +31,6 @@ export function CountryReconWindow({
   gameStatus,
   targetCountry,
   unlockedHints,
-  guesses,
 }: CountryReconWindowProps) {
   const isPlaying = gameStatus === "playing";
   const isGuessed = Boolean(
@@ -50,7 +49,7 @@ export function CountryReconWindow({
     (mode !== "detective" && difficulty === "easy");
 
   return (
-    <div className="hidden md:block absolute top-4 left-4 z-20 w-64 max-w-xs rounded-xl border border-border bg-card/95 p-3 shadow-2xl backdrop-blur-md text-xs text-foreground space-y-2">
+    <div className="hidden md:block absolute top-4 left-4 z-20 max-w-sm w-100 rounded-xl border border-border bg-card/95 p-3 shadow-2xl backdrop-blur-md text-xs text-foreground space-y-2">
       {difficulty === "hard" &&
       (!inspectedCountry || (!isNeighbor && !isGuessed)) ? (
         <div className="space-y-1.5">
@@ -94,7 +93,7 @@ export function CountryReconWindow({
               {targetCountry && (
                 <div className="text-2xs text-accent font-semibold pt-1 border-t border-border">
                   {difficulty === "easy" || unlockedHints >= 1 ? (
-                    `Hint 1: Continent: ${targetCountry.continent}`
+                    `Hint 1: Continent: ${targetCountry.continent}${targetCountry.continentBn ? ` (${targetCountry.continentBn})` : ""}`
                   ) : (
                     <span className="text-muted-foreground font-normal">
                       Hint 1: 🔒 Locked (Unlock in Hints drawer)
@@ -111,7 +110,9 @@ export function CountryReconWindow({
                   Unrevealed Country
                 </span>
                 <span className="text-2xs text-muted-foreground font-mono">
-                  {mode === "detective" ? "Detective" : `${difficulty.toUpperCase()}`}
+                  {mode === "detective"
+                    ? "Detective"
+                    : `${difficulty.toUpperCase()}`}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -125,14 +126,24 @@ export function CountryReconWindow({
             </div>
           ) : (
             <div>
-              <div className="flex items-center justify-between pb-1 border-b border-border">
-                <span className="font-bold text-foreground text-sm flex items-center gap-1.5">
+              <div className="flex flex-col items-start justify-center gap-1 pb-1 border-b border-border">
+                <span className="font-bold text-foreground text-sm flex items-center gap-1.5 flex-wrap">
                   <span>{inspectedCountry.flagEmoji}</span>
                   <span>{inspectedCountry.name}</span>
+                  {inspectedCountry.nameBn && (
+                    <span className="text-xs text-muted-foreground font-medium">
+                      ({inspectedCountry.nameBn})
+                    </span>
+                  )}
                 </span>
                 <span className="text-2xs text-muted-foreground">
                   {inspectedCountry.continent}
-                  {inspectedCountry.subregion ? ` • ${inspectedCountry.subregion}` : ""}
+                  {inspectedCountry.continentBn
+                    ? ` (${inspectedCountry.continentBn})`
+                    : ""}
+                  {inspectedCountry.subregion
+                    ? ` • ${inspectedCountry.subregion}${inspectedCountry.subregionBn ? ` (${inspectedCountry.subregionBn})` : ""}`
+                    : ""}
                 </span>
               </div>
 
@@ -155,8 +166,14 @@ export function CountryReconWindow({
                       </span>
                       <span className="font-mono text-xs flex items-center gap-1 text-accent">
                         <DirectionIcon
-                          direction={guessedCountriesMap.get(inspectedCountry.id)?.direction}
-                          isCorrect={guessedCountriesMap.get(inspectedCountry.id)?.isCorrect}
+                          direction={
+                            guessedCountriesMap.get(inspectedCountry.id)
+                              ?.direction
+                          }
+                          isCorrect={
+                            guessedCountriesMap.get(inspectedCountry.id)
+                              ?.isCorrect
+                          }
                           className="size-3.5 inline text-accent"
                         />
                         <span>
@@ -176,9 +193,8 @@ export function CountryReconWindow({
                     : "Borders the secret target"}
                 </div>
               ) : (
-                <div className="text-2xs text-muted-foreground pt-1 flex items-center justify-between">
+                <div className="text-2xs text-muted-foreground pt-1">
                   <span>Not guessed yet</span>
-                  <span className="text-muted-foreground">Type or click to guess</span>
                 </div>
               )}
             </div>
@@ -195,58 +211,9 @@ export function CountryReconWindow({
             </span>
           </div>
 
-          {lastGuess ? (
-            <div className="text-xs flex items-center justify-between">
-              <span className="text-muted-foreground">Last:</span>
-              <span className="font-semibold text-foreground flex items-center gap-1">
-                <span>{lastGuess.country.name}</span>
-                <span className="text-muted-foreground">
-                  ({lastGuess.distanceKm.toLocaleString()}km
-                </span>
-                <DirectionIcon
-                  direction={lastGuess.direction}
-                  isCorrect={lastGuess.isCorrect}
-                  className="size-3 inline text-accent"
-                />
-                <span className="text-muted-foreground">)</span>
-              </span>
-            </div>
-          ) : (
-            <div className="text-xs text-muted-foreground">
-              Click or hover any country to inspect or guess
-            </div>
-          )}
-
-          <div className="text-2xs text-muted-foreground pt-1 border-t border-border flex items-center justify-between">
-            <span>Map Mode:</span>
-            <span className="text-muted-foreground">
-              {mode === "detective" ? "Detective Mode" : "Clean Map"}
-            </span>
+          <div className="text-xs text-muted-foreground">
+            Click or hover any country to inspect
           </div>
-        </div>
-      )}
-
-      {/* Guessed dots row */}
-      {guesses.length > 0 && (
-        <div className="pt-1 border-t border-border flex items-center gap-1 overflow-x-auto">
-          {guesses.map((g, i) => (
-            <span
-              key={i}
-              title={`${g.country.name}: ${g.distanceKm}km`}
-              className={`size-2.5 rounded-full shrink-0 ${
-                g.isCorrect
-                  ? "bg-primary"
-                  : g.distanceKm < 1500
-                    ? "bg-accent"
-                    : g.distanceKm < 4000
-                      ? "bg-primary/50"
-                      : "bg-muted"
-              }`}
-            />
-          ))}
-          <span className="text-2xs text-muted-foreground ml-auto">
-            {guesses.length}/6
-          </span>
         </div>
       )}
     </div>

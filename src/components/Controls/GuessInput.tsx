@@ -284,9 +284,9 @@ export function GuessInput({ scope: propScope }: GuessInputProps = {}) {
                         <span className="font-semibold text-xs sm:text-sm text-foreground">
                           {d.name}
                         </span>
-                        {d.aliases && d.aliases.length > 0 && (
-                          <span className="text-2xs text-muted-foreground font-mono">
-                            (aka {d.aliases.join(", ")})
+                        {d.nameBn && (
+                          <span className="text-xs text-accent font-medium">
+                            ({d.nameBn})
                           </span>
                         )}
                         <span className="text-xs text-muted-foreground font-mono">
@@ -317,6 +317,11 @@ export function GuessInput({ scope: propScope }: GuessInputProps = {}) {
                         <span className="font-semibold text-xs sm:text-sm text-foreground">
                           {c.name}
                         </span>
+                        {c.nameBn && (
+                          <span className="text-xs text-accent font-medium">
+                            ({c.nameBn})
+                          </span>
+                        )}
                         <span className="text-xs text-muted-foreground font-mono">
                           ({c.id})
                         </span>

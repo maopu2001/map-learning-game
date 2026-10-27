@@ -24,7 +24,7 @@ const WorldMap = dynamic(
         </div>
       </div>
     ),
-  }
+  },
 );
 
 export default function WorldPage() {
@@ -58,10 +58,7 @@ export default function WorldPage() {
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground p-2 sm:p-2.5 gap-2">
       {/* Fixed HUD (Never scrolls) */}
       <div className="shrink-0">
-        <GameHUD
-          scope="world"
-          onOpenBriefing={() => setBriefingOpen(true)}
-        />
+        <GameHUD scope="world" onOpenBriefing={() => setBriefingOpen(true)} />
       </div>
 
       {/* Mobile-only Segmented Control Bar (Map vs Intel) */}
@@ -116,31 +113,32 @@ export default function WorldPage() {
           {/* Latest Guess Banner on Mobile Map view */}
           {lastGuess && (
             <div className="shrink-0 p-2.5 rounded-2xl bg-card border border-border flex items-center justify-between text-xs">
-              <div className="flex items-center gap-2.5">
-                <span className="text-xl shrink-0">{lastGuess.country.flagEmoji}</span>
-                <div>
-                  <div className="font-bold text-foreground flex items-center gap-1.5">
-                    <span>{lastGuess.country.name}</span>
-                    <span className="font-mono text-primary flex items-center gap-1">
-                      <span>{lastGuess.distanceKm.toLocaleString()} km</span>
-                      <DirectionIcon
-                        direction={lastGuess.direction}
-                        isCorrect={lastGuess.isCorrect}
-                        className="size-3 text-primary inline"
-                      />
-                    </span>
-                  </div>
+              <div className="w-full flex items-center gap-2.5">
+                <span className="text-xl shrink-0">
+                  {lastGuess.country.flagEmoji}
+                </span>
+                <div className="w-3/5 flex flex-col gap-0.5 text-foreground">
+                  <span className="font-bold">
+                    {lastGuess.country.name}
+                  </span>
                   <span className="text-2xs text-muted-foreground font-mono">
                     Match: {lastGuess.proximityScore}%
                   </span>
                 </div>
+                <span className="font-mono text-primary flex items-center gap-1">
+                  <span>{lastGuess.distanceKm.toLocaleString()} km</span>
+                  <DirectionIcon
+                    direction={lastGuess.direction}
+                    isCorrect={lastGuess.isCorrect}
+                    className="size-3 text-primary inline"
+                  />
+                </span>
               </div>
               <button
                 onClick={() => setMobileTab("intel")}
-                className="px-2 py-1 rounded-xl bg-muted/50 hover:bg-muted border border-border text-xs font-semibold text-primary flex items-center gap-1 cursor-pointer shrink-0"
+                className="aspect-square p-2 rounded-xl bg-accent/30 hover:bg-accent/60 border border-border text-xs font-semibold text-accent flex items-center gap-1 cursor-pointer shrink-0"
               >
-                <span>Intel</span>
-                <ArrowRight className="size-3" />
+                <Crosshair className="size-3" />
               </button>
             </div>
           )}

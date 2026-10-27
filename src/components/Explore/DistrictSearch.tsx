@@ -94,7 +94,7 @@ export function DistrictSearch({
               }
             }}
             placeholder="Type district name (Dhaka, Sylhet)..."
-            className="text-base sm:text-sm font-medium"
+            className="text-sm font-medium"
           />
           {!searchQuery && (
             <div className="absolute right-3 top-2.5 hidden sm:flex items-center gap-0.5 text-3xs font-mono text-muted-foreground bg-muted/50 border border-border px-1.5 py-0.5 rounded pointer-events-none select-none">
@@ -132,9 +132,9 @@ export function DistrictSearch({
                     <span className="font-semibold text-xs sm:text-sm text-foreground">
                       {d.name}
                     </span>
-                    {d.aliases && d.aliases.length > 0 && (
-                      <span className="text-2xs text-muted-foreground font-mono">
-                        (aka {d.aliases.join(", ")})
+                    {d.nameBn && (
+                      <span className="text-xs text-accent font-medium">
+                        ({d.nameBn})
                       </span>
                     )}
                     <span className="text-xs text-muted-foreground font-mono">

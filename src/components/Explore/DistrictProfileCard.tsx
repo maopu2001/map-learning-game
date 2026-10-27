@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { DistrictData, DISTRICTS_BY_NAME } from "@/data/bangladesh";
 import { Badge } from "@/components/ui/badge";
 import { CircleQuestionMark, Compass, Layers } from "lucide-react";
@@ -17,15 +17,26 @@ export function DistrictProfileCard({
   onSelectDistrict,
   onHoverDistrict,
 }: DistrictProfileCardProps) {
+  const [lang, setLang] = useState<"en" | "bn">("en");
+
   return (
     <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-2xl space-y-4">
       <div className="flex items-center justify-between pb-3 border-b border-border">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-foreground">
-            {district.name}
-          </h2>
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <h2 className="text-xl sm:text-2xl font-black text-foreground">
+              {district.name}
+            </h2>
+            {district.nameBn && (
+              <span className="text-base sm:text-lg font-bold text-muted-foreground">
+                ({district.nameBn})
+              </span>
+            )}
+          </div>
           <p className="text-xs text-bd-primary font-medium">
-            {district.division} Division • Bangladesh
+            {lang === "bn" && district.divisionBn
+              ? `${district.divisionBn} বিভাগ • বাংলাদেশ`
+              : `${district.division} Division • Bangladesh`}
           </p>
         </div>
         <Badge
@@ -61,11 +72,43 @@ export function DistrictProfileCard({
       </div>
 
       {/* Trivia Fact */}
-      <div className="p-3.5 rounded-xl bg-muted/40 border border-border space-y-1 text-xs leading-relaxed">
-        <span className="text-accent font-semibold flex items-center gap-1.5">
-          <CircleQuestionMark className="size-3.5" /> Did you know?
-        </span>
-        <p className="text-foreground/90">{district.triviaFact}</p>
+      <div className="p-3.5 rounded-xl bg-muted/40 border border-border space-y-1.5 text-xs leading-relaxed">
+        <div className="flex items-center justify-between">
+          <span className="text-accent font-semibold flex items-center gap-1.5">
+            <CircleQuestionMark className="size-3.5" /> Did you know?
+          </span>
+          {district.triviaFactBn && (
+            <div className="flex items-center bg-background p-0.5 rounded-md border border-border text-3xs font-medium">
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={`px-1.5 py-0.5 rounded-sm transition-all ${
+                  lang === "en"
+                    ? "bg-accent/20 text-accent font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("bn")}
+                className={`px-1.5 py-0.5 rounded-sm transition-all ${
+                  lang === "bn"
+                    ? "bg-accent/20 text-accent font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                বাং
+              </button>
+            </div>
+          )}
+        </div>
+        <p className="text-foreground/90">
+          {lang === "bn" && district.triviaFactBn
+            ? district.triviaFactBn
+            : district.triviaFact}
+        </p>
       </div>
 
       {/* Bordering Districts Interactive List */}

@@ -29,11 +29,29 @@ export function redactTrivia(
 
   // Mask exact identity words (always masked in redacted mode)
   if (escapedBlacklist.length > 0) {
-    const idRegex = new RegExp(
-      "\\b(?:" + escapedBlacklist.join("|") + ")\\b",
-      "gi",
-    );
-    result = result.replace(idRegex, (m) => "█".repeat(Math.min(m.length, 6)));
+    // For non-ASCII / Bangla characters, word boundary \b does not always match,
+    // so we handle ASCII words with \b and non-ASCII directly.
+    const isAscii = (str: string) => {
+      for (let i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 127) return false;
+      }
+      return true;
+    };
+    const asciiWords = escapedBlacklist.filter(isAscii);
+    const unicodeWords = escapedBlacklist.filter((w) => !isAscii(w));
+
+    if (asciiWords.length > 0) {
+      const idRegex = new RegExp(
+        "\\b(?:" + asciiWords.join("|") + ")\\b",
+        "gi",
+      );
+      result = result.replace(idRegex, (m) => "█".repeat(Math.min(m.length, 6)));
+    }
+
+    if (unicodeWords.length > 0) {
+      const uniRegex = new RegExp("(?:" + unicodeWords.join("|") + ")", "gu");
+      result = result.replace(uniRegex, (m) => "█".repeat(Math.min(m.length, 6)));
+    }
   }
 
   // 2. Mask proper nouns (Unicode-aware capitalized words not preceded by sentence endings)
