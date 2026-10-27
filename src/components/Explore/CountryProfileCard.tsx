@@ -14,6 +14,7 @@ import {
   Compass,
   CircleQuestionMark,
 } from "lucide-react";
+import { MapsLinkButton } from "@/components/Mix/maps";
 
 interface CountryProfileCardProps {
   country: CountryData | null;
@@ -112,10 +113,16 @@ export function CountryProfileCard({
           </span>
         </div>
         <div className="p-3 rounded-xl bg-muted/40 border border-border space-y-1">
-          <span className="text-muted-foreground text-xs flex items-center gap-1">
-            <Compass className="size-3 text-primary" /> Coordinates
-          </span>
-          <span className="font-semibold font-mono text-foreground">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-xs flex items-center gap-1">
+              <Compass className="size-3 text-primary" /> Coordinates
+            </span>
+            <MapsLinkButton
+              name={country.name}
+              className="hover:bg-primary/15 hover:text-primary"
+            />
+          </div>
+          <span className="font-semibold font-mono text-foreground block">
             {Math.abs(country.coordinates[0]).toFixed(1)}°
             {country.coordinates[0] >= 0 ? "N" : "S"},{" "}
             {Math.abs(country.coordinates[1]).toFixed(1)}°

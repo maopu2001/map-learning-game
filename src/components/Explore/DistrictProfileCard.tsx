@@ -4,6 +4,7 @@ import React from "react";
 import { DistrictData, DISTRICTS_BY_NAME } from "@/data/bangladesh";
 import { Badge } from "@/components/ui/badge";
 import { CircleQuestionMark, Compass, Layers } from "lucide-react";
+import { MapsLinkButton } from "@/components/Mix/maps";
 
 interface DistrictProfileCardProps {
   district: DistrictData;
@@ -38,10 +39,13 @@ export function DistrictProfileCard({
       {/* Spatial Specs */}
       <div className="grid grid-cols-2 gap-2 text-xs">
         <div className="p-3 rounded-xl bg-muted/40 border border-border space-y-1">
-          <span className="text-muted-foreground text-xs flex items-center gap-1">
-            <Compass className="size-3 text-accent" /> Coordinates
-          </span>
-          <span className="font-mono text-foreground font-semibold">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground text-xs flex items-center gap-1">
+              <Compass className="size-3 text-accent" /> Coordinates
+            </span>
+            <MapsLinkButton name={district.name} isDistrict />
+          </div>
+          <span className="font-mono text-foreground font-semibold block">
             {district.coordinates[0].toFixed(2)}°N,{" "}
             {district.coordinates[1].toFixed(2)}°E
           </span>

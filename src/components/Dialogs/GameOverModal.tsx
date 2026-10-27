@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import confetti from "canvas-confetti";
 import { useGameStore, getTodayDateStr } from "@/lib/store";
-import { generateShareText, getDailyDistrict, getDailyCountry } from "@/lib/engine";
+import {
+  generateShareText,
+  getDailyDistrict,
+  getDailyCountry,
+} from "@/lib/engine";
 import { BANGLADESH_DISTRICTS } from "@/data/bangladesh";
 import { COUNTRIES } from "@/data/world";
 import {
@@ -16,6 +20,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Trophy,
   Share2,
@@ -23,7 +28,7 @@ import {
   XCircle,
   ArrowRight,
   Clock,
-  Compass,
+  SlidersHorizontal,
   Globe,
 } from "lucide-react";
 import { TargetRevealCard } from "@/components/Game/TargetRevealCard";
@@ -68,7 +73,6 @@ export function GameOverModal(props: GameOverModalProps = {}) {
   const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
   const nextDetectiveRound = useGameStore((s) => s.nextDetectiveRound);
   const resetGame = useGameStore((s) => s.resetGame);
-  const forfeitAndSwitch = useGameStore((s) => s.forfeitAndSwitch);
 
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnightUTC());
@@ -158,27 +162,49 @@ export function GameOverModal(props: GameOverModalProps = {}) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-card border-border text-foreground p-5 sm:p-6 rounded-2xl shadow-2xl max-h-[90dvh] overflow-y-auto">
-        <DialogHeader className="text-center sm:text-center space-y-3">
-          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-muted/60 border border-border">
+      <DialogContent className="sm:max-w-md bg-card border-border text-foreground p-3.5 sm:p-4 rounded-2xl shadow-2xl max-h-[90dvh] overflow-hidden flex flex-col gap-2.5">
+        <DialogHeader className="flex flex-row items-center gap-2.5 text-left space-y-0 shrink-0 pr-6">
+          <div
+            className={`flex size-9 items-center justify-center rounded-xl border shrink-0 ${
+              isWon
+                ? "bg-accent/15 border-accent/30 text-accent"
+                : "bg-destructive/15 border-destructive/30 text-destructive"
+            }`}
+          >
             {isWon ? (
-              <Trophy className="size-8 text-accent animate-bounce" />
+              <Trophy className="size-4.5" />
             ) : (
-              <XCircle className="size-8 text-destructive" />
+              <XCircle className="size-4.5" />
             )}
           </div>
 
-          <DialogTitle className="text-2xl font-black tracking-tight text-foreground">
-            {isWon ? "You got it!" : "Game Over"}
-          </DialogTitle>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <DialogTitle className="text-base font-bold tracking-tight text-foreground">
+                {isWon ? "You got it!" : "Game Over"}
+              </DialogTitle>
+              <Badge
+                variant="outline"
+                className={`text-2xs font-mono font-semibold py-0 px-1.5 h-4.5 border ${
+                  isWon
+                    ? "bg-accent/10 border-accent/30 text-accent"
+                    : "bg-destructive/10 border-destructive/30 text-destructive"
+                }`}
+              >
+                {isWon
+                  ? `${activeGuesses.length} ${
+                      activeGuesses.length === 1 ? "guess" : "guesses"
+                    }`
+                  : "Unsolved"}
+              </Badge>
+            </div>
 
-          <DialogDescription className="text-muted-foreground text-xs">
-            {isWon
-              ? `You found the secret ${isBD ? "district" : "country"} in ${activeGuesses.length} ${
-                  activeGuesses.length === 1 ? "guess" : "guesses"
-                }!`
-              : `The secret ${isBD ? "district" : "country"} was ${currentTarget.name}. Better luck next round!`}
-          </DialogDescription>
+            <DialogDescription className="text-muted-foreground text-xs truncate">
+              {isWon
+                ? `Congratulations! You found secret ${isBD ? "district" : "country"}.`
+                : `Secret was ${currentTarget.name}`}
+            </DialogDescription>
+          </div>
         </DialogHeader>
 
         {/* Target Country or District Reveal Card */}
@@ -190,38 +216,40 @@ export function GameOverModal(props: GameOverModalProps = {}) {
         />
 
         {mode === "daily" && (
-          <div className="rounded-xl border border-border bg-muted/30 p-3 space-y-2">
+          <div className="rounded-xl border border-border/80 bg-muted/30 px-3 py-2 space-y-0.5 shrink-0">
             <div className="flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1.5 text-foreground">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <Clock className="size-3.5 text-accent" />
-                <span className="font-semibold">Next Daily Puzzle</span>
+                <span className="font-semibold text-foreground">
+                  Next Daily Puzzle
+                </span>
               </div>
               <span className="font-mono font-bold text-accent">
                 {timeLeft}
               </span>
             </div>
-            <p className="text-2xs text-muted-foreground leading-relaxed">
-              Daily puzzles can be played only once per day (win or loss). Play
-              the other mode or practice in Detective mode!
+            <p className="text-2xs text-muted-foreground leading-tight">
+              1 attempt daily. Try the other map or practice in Detective mode!
             </p>
           </div>
         )}
 
-        <DialogFooter className="flex flex-col gap-2 mt-2 sm:flex-col">
+        <DialogFooter className="flex flex-col gap-1.5 mt-1 sm:flex-col shrink-0">
           <div className="flex flex-col sm:flex-row gap-2 w-full">
             <Button
               variant="outline"
               onClick={handleShare}
-              className="w-full sm:w-1/2 border-border bg-muted/40 hover:bg-muted text-foreground cursor-pointer"
+              className="w-full sm:w-1/2 h-9 text-xs border-border bg-muted/40 hover:bg-muted text-foreground cursor-pointer"
             >
               {copied ? (
                 <>
-                  <CheckCircle2 className="size-4 mr-2 text-primary" />{" "}
+                  <CheckCircle2 className="size-3.5 mr-1.5 text-primary" />{" "}
                   Copied!
                 </>
               ) : (
                 <>
-                  <Share2 className="size-4 mr-2 text-accent" /> Share Result
+                  <Share2 className="size-3.5 mr-1.5 text-accent" /> Share
+                  Result
                 </>
               )}
             </Button>
@@ -235,7 +263,7 @@ export function GameOverModal(props: GameOverModalProps = {}) {
                   useGameStore.getState().initRouteScope(targetScope);
                   router.push(isBD ? "/world" : "/bangladesh");
                 }}
-                className={`w-full sm:w-1/2 font-semibold shadow-lg cursor-pointer ${
+                className={`w-full sm:w-1/2 h-9 text-xs font-semibold shadow-lg cursor-pointer ${
                   !isBD
                     ? "bg-bd-primary hover:bg-bd-primary-hover text-bd-primary-foreground"
                     : "bg-primary hover:bg-primary/90 text-primary-foreground"
@@ -244,7 +272,7 @@ export function GameOverModal(props: GameOverModalProps = {}) {
                 {isBD ? (
                   <span className="flex items-center justify-center gap-1.5">
                     <span>Play World Daily</span>
-                    <Globe className="size-4 text-primary-foreground" />
+                    <Globe className="size-3.5 text-primary-foreground" />
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-1.5">
@@ -257,7 +285,7 @@ export function GameOverModal(props: GameOverModalProps = {}) {
               <Button
                 variant="default"
                 onClick={handleNextAction}
-                className={`w-full sm:w-1/2 font-semibold shadow-lg cursor-pointer ${
+                className={`w-full sm:w-1/2 h-9 text-xs font-semibold shadow-lg cursor-pointer ${
                   isBD
                     ? "bg-bd-primary hover:bg-bd-primary-hover text-bd-primary-foreground"
                     : "bg-primary hover:bg-primary/90 text-primary-foreground"
@@ -265,7 +293,7 @@ export function GameOverModal(props: GameOverModalProps = {}) {
               >
                 {mode === "detective" && isWon ? (
                   <>
-                    Next Round <ArrowRight className="size-4 ml-1" />
+                    Next Round <ArrowRight className="size-3.5 ml-1" />
                   </>
                 ) : (
                   "Play Again"
@@ -274,34 +302,20 @@ export function GameOverModal(props: GameOverModalProps = {}) {
             )}
           </div>
 
-          {mode === "daily" && (
+          {onChangeMode && (
             <Button
-              variant="ghost"
-              onClick={() => {
-                handleClose(false);
-                forfeitAndSwitch({ mode: "detective", reset: true });
-              }}
-              className="w-full h-8 text-2xs text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <Compass className="size-3.5 text-accent" />
-              <span>Practice in Detective Mode (Unlimited)</span>
-            </Button>
-          )}
-        </DialogFooter>
-
-        {onChangeMode && mode !== "daily" && (
-          <div className="pt-2 text-center">
-            <button
+              variant="outline"
               onClick={() => {
                 handleClose(false);
                 onChangeMode();
               }}
-              className="text-2xs text-muted-foreground hover:text-foreground underline underline-offset-4 cursor-pointer font-mono"
+              className="w-full h-8 text-xs font-semibold bg-accent/10 hover:bg-accent/20 border-accent/30 hover:border-accent/50 text-accent cursor-pointer flex items-center justify-center gap-2 transition-all shadow-xs"
             >
-              Change mode or difficulty ↗
-            </button>
-          </div>
-        )}
+              <SlidersHorizontal className="size-3.5" />
+              <span>Change Game Mode or Difficulty</span>
+            </Button>
+          )}
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
