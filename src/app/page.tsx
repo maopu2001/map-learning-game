@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/Landing/HeroSection";
@@ -11,6 +11,16 @@ import { DifficultyMatrixSection } from "@/components/Landing/DifficultyMatrixSe
 import { FAQSection } from "@/components/Landing/FAQSection";
 
 export default function HomePage() {
+  useEffect(() => {
+    const cleanSearch = () => {
+      if (typeof window !== "undefined" && window.location.search) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+    };
+    cleanSearch();
+    window.addEventListener("popstate", cleanSearch);
+    return () => window.removeEventListener("popstate", cleanSearch);
+  }, []);
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />

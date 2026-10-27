@@ -3,7 +3,7 @@
 import React from "react";
 import { useGameStore } from "@/lib/store";
 import { Badge } from "@/components/ui/badge";
-import { Users, Maximize2, Compass, Layers } from "lucide-react";
+import { Users, Maximize2, Compass } from "lucide-react";
 import { MapsLinkButton } from "@/components/Mix/maps";
 import { CountryData } from "@/data/world";
 import { DistrictData } from "@/data/bangladesh";

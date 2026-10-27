@@ -2,17 +2,13 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGameStore, getMaxGuesses, getTodayDateStr } from "@/lib/store";
-import { getDailyDistrict, getDailyCountry } from "@/lib/engine";
-import { BANGLADESH_DISTRICTS } from "@/data/bangladesh";
-import { COUNTRIES } from "@/data/world";
+import { useGameStore, getMaxGuesses } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
   SlidersHorizontal,
   HelpCircle,
   RotateCcw,
-  Trophy,
   Globe,
 } from "lucide-react";
 import { HelpDialog } from "@/components/Dialogs/HelpDialog";
@@ -35,7 +31,6 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
   const resetGame = useGameStore((s) => s.resetGame);
   const forfeitAndSwitch = useGameStore((s) => s.forfeitAndSwitch);
   const unlockedHints = useGameStore((s) => s.unlockedHints);
-  const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
 
   const [helpOpen, setHelpOpen] = useState(false);
   const [abandonPending, setAbandonPending] = useState<"exit" | "reset" | null>(
@@ -50,33 +45,6 @@ export function GameHUD({ scope, onOpenBriefing }: GameHUDProps) {
     (guesses.length > 0 ||
       unlockedHints > 0 ||
       (mode === "blitz" && blitzTimeLeft < 90));
-
-  const dailyHistory = useGameStore((s) => s.dailyHistory);
-  const today = getTodayDateStr();
-  const dailyRecord = dailyHistory?.[scope];
-  const isThisScopeDailyDone =
-    isDaily &&
-    dailyRecord?.date === today &&
-    dailyRecord?.gameStatus !== "playing";
-
-  const handleOpenResult = () => {
-    if (dailyRecord && dailyRecord.date === today) {
-      useGameStore.setState({
-        scope,
-        mode: "daily",
-        difficulty: dailyRecord.difficulty ?? difficulty,
-        guesses: dailyRecord.guesses,
-        gameStatus: dailyRecord.gameStatus,
-        unlockedHints: dailyRecord.unlockedHints,
-        extraNeighborsRevealed: dailyRecord.extraNeighborsRevealed,
-        targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
-        targetCountry: getDailyCountry(COUNTRIES, today),
-        isGameOverOpen: true,
-      });
-    } else {
-      setGameOverOpen(true);
-    }
-  };
 
   const handleExitClick = () => {
     if (isMissionActive) {

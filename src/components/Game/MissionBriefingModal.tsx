@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useGameStore, GameMode, GameDifficulty, getTodayDateStr } from "@/lib/store";
+import { useRouter } from "next/navigation";
+import {
+  useGameStore,
+  GameScope,
+  GameMode,
+  GameDifficulty,
+  getTodayDateStr,
+} from "@/lib/store";
 import {
   Dialog,
   DialogContent,
@@ -10,12 +17,20 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Play, SlidersHorizontal, AlertTriangle, Trophy } from "lucide-react";
+import {
+  Play,
+  SlidersHorizontal,
+  AlertTriangle,
+  Trophy,
+  Globe,
+} from "lucide-react";
 import { ModeSelector } from "@/components/Game/ModeSelector";
 import { DifficultySelector } from "@/components/Game/DifficultySelector";
 import { getDailyDistrict, getDailyCountry } from "@/lib/engine";
 import { BANGLADESH_DISTRICTS } from "@/data/bangladesh";
 import { COUNTRIES } from "@/data/world";
+import { updateGameUrl } from "@/hooks/useGameUrlSync";
+import { cn } from "@/lib/utils";
 
 interface MissionBriefingModalProps {
   open: boolean;
@@ -28,6 +43,7 @@ export function MissionBriefingModal({
   onOpenChange,
   scope,
 }: MissionBriefingModalProps) {
+  const router = useRouter();
   const currentMode = useGameStore((s) => s.mode);
   const currentDifficulty = useGameStore((s) => s.difficulty);
   const forfeitAndSwitch = useGameStore((s) => s.forfeitAndSwitch);
@@ -37,13 +53,22 @@ export function MissionBriefingModal({
   const dailyHistory = useGameStore((s) => s.dailyHistory);
   const setGameOverOpen = useGameStore((s) => s.setGameOverOpen);
 
+  const [selectedScope, setSelectedScope] = useState<GameScope>(scope);
   const [selectedMode, setSelectedMode] = useState<GameMode>(currentMode);
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<GameDifficulty>(currentDifficulty);
+  const [isSwitchingModal, setIsSwitchingModal] = useState(false);
+  const switchTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (switchTimeoutRef.current) clearTimeout(switchTimeoutRef.current);
+    };
+  }, []);
 
   const today = getTodayDateStr();
-  const isBD = scope === "bangladesh";
-  const dailyRecord = dailyHistory?.[scope];
+  const isBD = selectedScope === "bangladesh";
+  const dailyRecord = dailyHistory?.[selectedScope];
   const isDailyCompleted =
     dailyRecord?.date === today && dailyRecord?.gameStatus !== "playing";
   const isMidGame =
@@ -51,18 +76,32 @@ export function MissionBriefingModal({
 
   useEffect(() => {
     if (open) {
+      setSelectedScope(scope);
       setSelectedMode(currentMode);
+      const rec = dailyHistory?.[scope];
       if (
         currentMode === "daily" &&
-        dailyRecord?.date === today &&
-        dailyRecord?.difficulty
+        rec?.date === today &&
+        rec?.difficulty
       ) {
-        setSelectedDifficulty(dailyRecord.difficulty);
+        setSelectedDifficulty(rec.difficulty);
       } else {
         setSelectedDifficulty(currentDifficulty);
       }
     }
-  }, [open, currentMode, currentDifficulty, dailyRecord, today]);
+  }, [open, scope, currentMode, currentDifficulty, dailyHistory, today]);
+
+  const handleSelectScope = (newScope: GameScope) => {
+    setSelectedScope(newScope);
+    const rec = dailyHistory?.[newScope];
+    if (
+      selectedMode === "daily" &&
+      rec?.date === today &&
+      rec?.difficulty
+    ) {
+      setSelectedDifficulty(rec.difficulty);
+    }
+  };
 
   const handleSelectMode = (mode: GameMode) => {
     setSelectedMode(mode);
@@ -76,6 +115,17 @@ export function MissionBriefingModal({
   };
 
   const handleStartGame = () => {
+    if (selectedScope !== scope) {
+      if (isMidGame) {
+        forfeitAndSwitch({ reset: true });
+      }
+      onOpenChange(false);
+      router.push(
+        `/${selectedScope}?mode=${selectedMode}&difficulty=${selectedDifficulty}`
+      );
+      return;
+    }
+
     if (selectedMode === "daily" && isDailyCompleted) {
       if (dailyRecord && dailyRecord.date === today) {
         useGameStore.setState({
@@ -93,7 +143,12 @@ export function MissionBriefingModal({
       } else {
         setGameOverOpen(true);
       }
-      onOpenChange(false);
+      updateGameUrl("daily", dailyRecord?.difficulty ?? selectedDifficulty, true);
+      setIsSwitchingModal(true);
+      switchTimeoutRef.current = setTimeout(() => {
+        onOpenChange(false);
+        setIsSwitchingModal(false);
+      }, 250);
       return;
     }
 
@@ -102,12 +157,18 @@ export function MissionBriefingModal({
       difficulty: selectedDifficulty,
       reset: true,
     });
+    updateGameUrl(selectedMode, selectedDifficulty, true);
     onOpenChange(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[calc(100vw-2rem)] max-w-md bg-card border border-border text-foreground rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl backdrop-blur-2xl">
+      <DialogContent
+        className={cn(
+          "w-[calc(100vw-2rem)] max-w-md bg-card border border-border text-foreground rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl backdrop-blur-2xl transition-all duration-150",
+          isSwitchingModal && "opacity-0 pointer-events-none scale-95"
+        )}
+      >
         <DialogHeader className="space-y-0.5 text-left">
           <div className="flex items-center gap-2">
             <span className="p-1 rounded-lg bg-accent/15 border border-accent/30 text-accent">
@@ -143,6 +204,47 @@ export function MissionBriefingModal({
         )}
 
         <div className="space-y-3">
+          {/* Map / Scope Tab Options */}
+          <div className="space-y-1.5 bg-muted/40 border border-border px-4 py-2 rounded-2xl">
+            <label className="text-2xs font-mono font-semibold uppercase tracking-wider text-muted-foreground">
+              Region / Map
+            </label>
+            <div
+              role="tablist"
+              aria-label="Select Game Region"
+              className="grid grid-cols-2 gap-1.5 sm:gap-2 mt-1 p-1 bg-card/60 border border-border/80 rounded-xl"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedScope === "bangladesh"}
+                onClick={() => handleSelectScope("bangladesh")}
+                className={`py-2 px-2.5 rounded-lg font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 ${
+                  selectedScope === "bangladesh"
+                    ? "bg-bd-primary text-bd-primary-foreground shadow-sm ring-1 ring-bd-primary/50"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <span className="text-sm leading-none">🇧🇩</span>
+                <span>Bangladesh</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedScope === "world"}
+                onClick={() => handleSelectScope("world")}
+                className={`py-2 px-2.5 rounded-lg font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 ${
+                  selectedScope === "world"
+                    ? "bg-primary text-primary-foreground shadow-sm ring-1 ring-primary/50"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <Globe className="size-3.5 text-current shrink-0" />
+                <span>World</span>
+              </button>
+            </div>
+          </div>
+
           <ModeSelector
             selectedMode={selectedMode}
             onSelectMode={handleSelectMode}

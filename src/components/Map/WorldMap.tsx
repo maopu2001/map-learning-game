@@ -115,8 +115,8 @@ function WorldGeographiesContent({
   activeNeighbors,
   guessedCountriesMap,
   gameStatus,
-  mode,
-  difficulty,
+  mode: _mode,
+  difficulty: _difficulty,
   inspectedCountry,
   onSelectCountry,
 }: WorldGeographiesContentProps) {

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import confetti from "canvas-confetti";
 import { useGameStore, getTodayDateStr } from "@/lib/store";
+import { cn } from "@/lib/utils";
 import {
   generateShareText,
   getDailyDistrict,
@@ -76,6 +77,14 @@ export function GameOverModal(props: GameOverModalProps = {}) {
 
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnightUTC());
+  const [isSwitchingModal, setIsSwitchingModal] = useState(false);
+  const switchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (switchTimeoutRef.current) clearTimeout(switchTimeoutRef.current);
+    };
+  }, []);
 
   const isBD = scope === "bangladesh";
   const dailyHistory = useGameStore((s) => s.dailyHistory);
@@ -162,7 +171,12 @@ export function GameOverModal(props: GameOverModalProps = {}) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-card border-border text-foreground p-3.5 sm:p-4 rounded-2xl shadow-2xl max-h-[90dvh] overflow-hidden flex flex-col gap-2.5">
+      <DialogContent
+        className={cn(
+          "sm:max-w-md bg-card border-border text-foreground p-3.5 sm:p-4 rounded-2xl shadow-2xl max-h-[90dvh] overflow-hidden flex flex-col gap-2.5 transition-all duration-150",
+          isSwitchingModal && "opacity-0 pointer-events-none scale-95"
+        )}
+      >
         <DialogHeader className="flex flex-row items-center gap-2.5 text-left space-y-0 shrink-0 pr-6">
           <div
             className={`flex size-9 items-center justify-center rounded-xl border shrink-0 ${
@@ -261,7 +275,7 @@ export function GameOverModal(props: GameOverModalProps = {}) {
                   handleClose(false);
                   const targetScope = isBD ? "world" : "bangladesh";
                   useGameStore.getState().initRouteScope(targetScope);
-                  router.push(isBD ? "/world" : "/bangladesh");
+                  router.push(isBD ? "/world?mode=daily" : "/bangladesh?mode=daily");
                 }}
                 className={`w-full sm:w-1/2 h-9 text-xs font-semibold shadow-lg cursor-pointer ${
                   !isBD
@@ -306,8 +320,12 @@ export function GameOverModal(props: GameOverModalProps = {}) {
             <Button
               variant="outline"
               onClick={() => {
-                handleClose(false);
+                setIsSwitchingModal(true);
                 onChangeMode();
+                switchTimeoutRef.current = setTimeout(() => {
+                  handleClose(false);
+                  setIsSwitchingModal(false);
+                }, 250);
               }}
               className="w-full h-8 text-xs font-semibold bg-accent/10 hover:bg-accent/20 border-accent/30 hover:border-accent/50 text-accent cursor-pointer flex items-center justify-center gap-2 transition-all shadow-xs"
             >

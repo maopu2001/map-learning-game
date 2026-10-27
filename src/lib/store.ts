@@ -892,8 +892,6 @@ export const useGameStore = create<GameState>()(
       },
       partialize: (state) => ({
         lastDailyDate: state.lastDailyDate,
-        mode: state.mode,
-        difficulty: state.difficulty,
         recentTargetIds: state.recentTargetIds,
         dailyHistory: state.dailyHistory,
       }),

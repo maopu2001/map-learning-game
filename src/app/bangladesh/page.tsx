@@ -8,6 +8,7 @@ import { GuessInput } from "@/components/Controls/GuessInput";
 import { GameIntelPanel } from "@/components/Controls/GameIntelPanel";
 import { GameOverModal } from "@/components/Dialogs/GameOverModal";
 import { useGameStore, getMaxGuesses } from "@/lib/store";
+import { useGameUrlSync } from "@/hooks/useGameUrlSync";
 import { Map, Crosshair, ArrowRight } from "lucide-react";
 import { DirectionIcon } from "@/components/ui/direction-icon";
 
@@ -27,7 +28,12 @@ const BangladeshMap = dynamic(
 );
 
 export default function BangladeshPage() {
-  const initRouteScope = useGameStore((s) => s.initRouteScope);
+  const [briefingOpen, setBriefingOpen] = useState(false);
+
+  useGameUrlSync("bangladesh", {
+    onDailyDoneNoQuery: () => setBriefingOpen(true),
+  });
+
   const mode = useGameStore((s) => s.mode);
   const tickBlitzTimer = useGameStore((s) => s.tickBlitzTimer);
   const gameStatus = useGameStore((s) => s.gameStatus);
@@ -37,19 +43,9 @@ export default function BangladeshPage() {
   const difficulty = useGameStore((s) => s.difficulty);
   const maxGuesses = getMaxGuesses(difficulty);
 
-  const [briefingOpen, setBriefingOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<"map" | "intel">("map");
 
   const lastGuess = guesses.length > 0 ? guesses[guesses.length - 1] : null;
-
-  useEffect(() => {
-    initRouteScope("bangladesh");
-    const state = useGameStore.getState();
-    const isDailyDone = state.mode === "daily" && state.gameStatus !== "playing";
-    if (isDailyDone) {
-      setBriefingOpen(true);
-    }
-  }, [initRouteScope]);
 
   // Blitz timer ticker
   useEffect(() => {

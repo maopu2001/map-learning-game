@@ -108,8 +108,8 @@ function BangladeshGeographiesContent({
   activeNeighbors,
   guessedDistrictsMap,
   gameStatus,
-  mode,
-  difficulty,
+  mode: _mode,
+  difficulty: _difficulty,
   inspectedDistrict,
   onSelectDistrict,
 }: BangladeshGeographiesContentProps) {
