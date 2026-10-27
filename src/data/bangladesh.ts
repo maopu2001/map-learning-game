@@ -1,4 +1,4 @@
-import rawDistricts from "../../public/data/bangladesh-districts.json";
+import rawDistricts from "./bangladesh-districts.json";
 
 export interface DistrictData {
   id: string; // District name as ID (e.g., "Dhaka", "Chattogram")

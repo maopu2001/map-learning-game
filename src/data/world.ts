@@ -1,4 +1,4 @@
-import rawCountries from "../../public/data/world_countries.json";
+import rawCountries from "./world_countries.json";
 import { haversineDistKm } from "@/lib/engine";
 export { haversineDistKm };
 
