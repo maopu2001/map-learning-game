@@ -3,8 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), var(--font-noto-serif-bengali), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --font-bengali: var(--font-noto-serif-bengali), serif;
   --color-surface-base: var(--background);
   --color-surface-card: var(--card);
   --color-surface-elevated: var(--muted);
@@ -244,6 +245,7 @@ body {
   color: var(--foreground);
   font-family:
     var(--font-geist-sans),
+    var(--font-noto-serif-bengali),
     system-ui,
     -apple-system,
     BlinkMacSystemFont,

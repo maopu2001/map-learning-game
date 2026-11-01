@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Serif_Bengali } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
@@ -13,6 +13,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const notoSerifBengali = Noto_Serif_Bengali({
+  variable: "--font-noto-serif-bengali",
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const baseUrl =
@@ -140,7 +147,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifBengali.variable} min-h-screen bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground`}
       >
         <script
           type="application/ld+json"
