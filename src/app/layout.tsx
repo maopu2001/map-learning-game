@@ -31,11 +31,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Shimana (সীমানা) - Daily Map & Geography Guessing Game",
+    default: "Shimana (সীমানা) - Map Guessing Game",
     template: "%s | Shimana",
   },
   description:
-    "Guess the secret country or Bangladesh district in 6 tries. Use distance, compass directions, and neighbor hints to zero in. Free daily map puzzles, Blitz speedruns, and Detective mode.",
+    "Guess the secret Bangladesh district or world country in 6 tries. Use distance, compass directions, and neighbor clues to zero in. Daily challenges, Blitz speedruns, and Detective mode.",
   keywords: [
     "Shimana",
     "সীমানা",
@@ -96,9 +96,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     siteName: "Shimana",
-    title: "Shimana (সীমানা) - Daily Map & Geography Guessing Game",
+    title: "Shimana (সীমানা) - Map Guessing Game",
     description:
-      "Find the mystery place on the map! Guess the secret country or Bangladesh district in 6 tries with distance & compass direction hints.",
+      "Guess the secret Bangladesh district or world country in 6 tries with distance, compass directions, and neighbor clues.",
     images: [
       {
         url: "/icon.svg",
@@ -110,9 +110,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shimana (সীমানা) - Daily Map & Geography Guessing Game",
+    title: "Shimana (সীমানা) - Map Guessing Game",
     description:
-      "Find the mystery place on the map! Guess the secret country or Bangladesh district in 6 tries with distance & compass direction hints.",
+      "Guess the secret Bangladesh district or world country in 6 tries with distance, compass directions, and neighbor clues.",
     images: ["/icon.svg"],
   },
   category: "game",
@@ -152,14 +152,14 @@ export default function RootLayout({
                   "@type": "WebApplication",
                   "@id": `${baseUrl}/#app`,
                   name: "Shimana",
-                  alternateName: ["সীমানা", "Shimana Map Game"],
+                  alternateName: ["সীমানা", "Shimana Map Guessing Game"],
                   url: baseUrl,
                   applicationCategory: "GameApplication",
                   genre: ["Geography", "Trivia", "Puzzle", "Educational"],
                   operatingSystem: "All",
                   browserRequirements: "Requires JavaScript. Requires HTML5.",
                   description:
-                    "Daily interactive map and geography guessing game featuring 64 Bangladesh districts and 195 world countries.",
+                    "Interactive map guessing game featuring 64 Bangladesh districts and 195 world countries.",
                   offers: {
                     "@type": "Offer",
                     price: "0",
@@ -176,7 +176,7 @@ export default function RootLayout({
                   "@id": `${baseUrl}/#website`,
                   url: baseUrl,
                   name: "Shimana",
-                  description: "Daily Map & Geography Guessing Game",
+                  description: "Map Guessing Game",
                   inLanguage: ["en", "bn"],
                 },
               ],

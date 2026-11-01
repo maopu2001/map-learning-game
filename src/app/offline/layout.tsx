@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Offline Mode | Shimana",
+  title: "Offline Mode",
   description: "You are currently offline, but you can continue playing Shimana maps from local cache.",
   robots: {
     index: false,

@@ -34,7 +34,7 @@ export function HeroSection() {
           <span className="text-muted-foreground/60">•</span>
           <span className="text-accent font-sans font-medium">সীমানা</span>
           <span className="text-muted-foreground/60">•</span>
-          <span className="text-muted-foreground">Daily Map Game</span>
+          <span className="text-muted-foreground">Map Guessing Game</span>
         </div>
       </div>
 

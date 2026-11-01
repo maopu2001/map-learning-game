@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Compass, Home } from "lucide-react";
 
 export const metadata = {
-  title: "404 — Lost in Uncharted Territory | Shimana",
+  title: "404 — Lost in Uncharted Territory",
   description:
     "The requested coordinate or map route does not exist. Navigate back to charted territory.",
 };

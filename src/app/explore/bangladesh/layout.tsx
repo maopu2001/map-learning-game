@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Explore Bangladesh Map & Districts",
+  title: "Explore Bangladesh Map & 64 Districts",
   description:
-    "Interactive map of Bangladesh: inspect all 64 districts across Dhaka, Chattogram, Rajshahi, Khulna, Barishal, Sylhet, Rangpur, and Mymensingh divisions.",
+    "Interactive map of Bangladesh: inspect all 64 districts with division, area, headquarters, and neighboring borders.",
   alternates: {
     canonical: "/explore/bangladesh",
   },

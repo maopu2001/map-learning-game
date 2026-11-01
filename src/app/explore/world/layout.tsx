@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Explore World Map & Countries",
+  title: "Explore World Map & 195 Countries",
   description:
     "Interactive world map explorer: search and inspect 195 countries with capitals, flags, population, continent subregions, and territorial neighbors.",
   alternates: {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Explore World Map & 195 Countries | Shimana",
     description:
-      "Interactive world map explorer: search and inspect 195 countries with capitals, flags, population, and territorial neighbors.",
+      "Interactive world map explorer: search and inspect 195 countries with capitals, flags, population, continent subregions, and territorial neighbors.",
     url: "/explore/world",
     images: ["/icon.svg"],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Explore World Map & 195 Countries | Shimana",
     description:
-      "Interactive world map explorer: search and inspect 195 countries with capitals, flags, population, and territorial neighbors.",
+      "Interactive world map explorer: search and inspect 195 countries with capitals, flags, population, continent subregions, and territorial neighbors.",
     images: ["/icon.svg"],
   },
 };

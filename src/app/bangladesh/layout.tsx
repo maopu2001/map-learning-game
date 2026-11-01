@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bangladesh Districts - Daily Map Challenge",
+  title: "Bangladesh Districts - Map Guessing Game",
   description:
-    "Can you guess today's secret Bangladesh district in 6 tries? Test your knowledge of all 64 districts across 8 divisions with distance and compass direction clues.",
+    "Can you guess today's secret Bangladesh district in 6 tries? Explore all 64 districts with distance, compass directions, and neighboring district clues.",
   alternates: {
     canonical: "/bangladesh",
   },
   openGraph: {
-    title: "Bangladesh Districts - Daily Map Challenge | Shimana",
+    title: "Bangladesh Districts - Map Guessing Game | Shimana",
     description:
-      "Guess today's mystery Bangladesh district in 6 tries. Explore 64 districts with distance in km, compass directions, and neighboring district clues.",
+      "Can you guess today's secret Bangladesh district in 6 tries? Explore all 64 districts with distance, compass directions, and neighboring district clues.",
     url: "/bangladesh",
     images: ["/icon.svg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bangladesh Districts - Daily Map Challenge | Shimana",
+    title: "Bangladesh Districts - Map Guessing Game | Shimana",
     description:
-      "Can you guess today's secret Bangladesh district in 6 tries? 64 districts, distance in km, and compass clues.",
+      "Can you guess today's secret Bangladesh district in 6 tries? Explore all 64 districts with distance, compass directions, and neighboring district clues.",
     images: ["/icon.svg"],
   },
 };

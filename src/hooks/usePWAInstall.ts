@@ -7,12 +7,6 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
 
-interface RelatedApp {
-  platform: string;
-  id?: string;
-  url?: string;
-}
-
 let deferredPrompt: BeforeInstallPromptEvent | null = null;
 let installedFlag = false;
 const listeners = new Set<() => void>();
@@ -27,12 +21,6 @@ if (typeof window !== "undefined") {
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e as BeforeInstallPromptEvent;
-    if (!("getInstalledRelatedApps" in navigator)) {
-      installedFlag = false;
-      try {
-        localStorage.removeItem("shimana_app_installed");
-      } catch {}
-    }
     listeners.forEach((l) => l());
   });
 
@@ -67,16 +55,16 @@ export function usePWAInstall() {
       hasStoredInstall = localStorage.getItem("shimana_app_installed") === "1";
     } catch {}
 
-    if (standalone || installedFlag || (hasStoredInstall && !deferredPrompt)) {
+    if (standalone || installedFlag || hasStoredInstall) {
       installedFlag = true;
       setIsInstalled(true);
     }
 
-    // Query browser for currently installed apps (checks if user removed it)
+    // Check Chrome / Android getInstalledRelatedApps API if available
     if ("getInstalledRelatedApps" in navigator) {
       (
         navigator as unknown as {
-          getInstalledRelatedApps: () => Promise<RelatedApp[]>;
+          getInstalledRelatedApps: () => Promise<unknown[]>;
         }
       )
         .getInstalledRelatedApps()
@@ -88,12 +76,20 @@ export function usePWAInstall() {
               localStorage.setItem("shimana_app_installed", "1");
             } catch {}
           } else if (!standalone) {
-            // App was removed from device
-            installedFlag = false;
-            setIsInstalled(false);
-            try {
-              localStorage.removeItem("shimana_app_installed");
-            } catch {}
+            // On production HTTPS, empty array means app was uninstalled
+            const isLocal =
+              window.location.hostname === "localhost" ||
+              window.location.hostname.startsWith("192.168.") ||
+              window.location.hostname.startsWith("10.") ||
+              window.location.hostname.startsWith("172.");
+
+            if (!isLocal) {
+              installedFlag = false;
+              setIsInstalled(false);
+              try {
+                localStorage.removeItem("shimana_app_installed");
+              } catch {}
+            }
           }
           listeners.forEach((l) => l());
         })
@@ -102,7 +98,13 @@ export function usePWAInstall() {
 
     const update = () => {
       setCanPrompt(Boolean(deferredPrompt));
-      setIsInstalled(installedFlag);
+      let stored = false;
+      try {
+        stored = localStorage.getItem("shimana_app_installed") === "1";
+      } catch {}
+      if (installedFlag || stored) {
+        setIsInstalled(true);
+      }
     };
 
     listeners.add(update);

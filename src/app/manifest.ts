@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Shimana (সীমানা) - Map & Geography Game",
+    name: "Shimana (সীমানা) - Map Guessing Game",
     short_name: "Shimana",
     description:
-      "Guess the secret country or Bangladesh district in 6 tries with distance and compass direction clues.",
+      "Guess the secret Bangladesh district or world country in 6 tries with distance, compass directions, and neighbor clues.",
     start_url: "/",
     scope: "/",
     id: "/",
@@ -18,6 +18,12 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         protocol: "web+shimana",
         url: "/?open=%s",
+      },
+    ],
+    related_applications: [
+      {
+        platform: "webapp",
+        url: "/manifest.webmanifest",
       },
     ],
     orientation: "any",

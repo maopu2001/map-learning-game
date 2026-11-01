@@ -346,7 +346,7 @@ function WorldExploreContent() {
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       <Header />
 
-      <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-3 flex flex-col gap-2 overflow-hidden">
+      <main className="flex-1 min-h-0 w-full mx-auto p-2 sm:px-4 sm:py-3 flex flex-col gap-2 overflow-hidden">
         {/* Mobile Tab Switcher */}
         <div className="lg:hidden grid grid-cols-2 items-center gap-1.5 p-1 rounded-2xl bg-card border border-border shrink-0 text-xs font-semibold">
           <button
