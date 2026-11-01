@@ -31,6 +31,9 @@ export function HeroSection() {
           <span className="font-semibold text-foreground tracking-wide">
             SHIMANA
           </span>
+          <span className="text-2xs font-semibold px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+            v2.0
+          </span>
           <span className="text-muted-foreground/60">•</span>
           <span className="text-accent font-sans font-medium">সীমানা</span>
           <span className="text-muted-foreground/60">•</span>

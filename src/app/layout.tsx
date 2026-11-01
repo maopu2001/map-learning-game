@@ -155,6 +155,7 @@ export default function RootLayout({
                   alternateName: ["সীমানা", "Shimana Map Guessing Game"],
                   url: baseUrl,
                   applicationCategory: "GameApplication",
+                  softwareVersion: "2.0.0",
                   genre: ["Geography", "Trivia", "Puzzle", "Educational"],
                   operatingSystem: "All",
                   browserRequirements: "Requires JavaScript. Requires HTML5.",
