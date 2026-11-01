@@ -174,7 +174,7 @@ function WorldGeographiesContent({
         let priority = 0;
         let fill = "var(--map-land)";
         let stroke = "var(--map-land-border)";
-        let itemStrokeWidth = strokeWidth * 0.9;
+        let itemStrokeWidth = strokeWidth * 1.1;
 
         if (isTarget) {
           priority = 5;
@@ -555,12 +555,28 @@ export function WorldMap({ className }: WorldMapProps = {}) {
     return [];
   }, [targetCountry, activeNeighbors]);
 
+  const targetCenter = useMemo<[number, number] | null>(() => {
+    if ((mode === "daily" || mode === "blitz") && targetCountry?.coordinates) {
+      return [targetCountry.coordinates[1], targetCountry.coordinates[0]];
+    }
+    return null;
+  }, [mode, targetCountry]);
+
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 30) }));
+    setPosition((pos) => ({
+      coordinates: targetCenter || pos.coordinates,
+      zoom: Math.min(pos.zoom * 1.6, 30),
+    }));
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 1) }));
+    setPosition((pos) => {
+      const nextZoom = Math.max(pos.zoom / 1.6, 1);
+      return {
+        coordinates: nextZoom === 1 ? [0, 20] : targetCenter || pos.coordinates,
+        zoom: nextZoom,
+      };
+    });
   };
 
   const handleResetZoom = () => {

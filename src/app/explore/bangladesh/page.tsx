@@ -153,11 +153,31 @@ function BangladeshExploreContent() {
   };
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 50) }));
+    setPosition((pos) => {
+      const targetCoords: [number, number] = selectedDistrict?.coordinates
+        ? [selectedDistrict.coordinates[1], selectedDistrict.coordinates[0]]
+        : pos.coordinates;
+      return {
+        coordinates: targetCoords,
+        zoom: Math.min(pos.zoom * 1.6, 50),
+      };
+    });
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 0.8) }));
+    setPosition((pos) => {
+      const nextZoom = Math.max(pos.zoom / 1.6, 0.8);
+      const targetCoords: [number, number] =
+        nextZoom <= 1
+          ? [90.3563, 23.685]
+          : selectedDistrict?.coordinates
+            ? [selectedDistrict.coordinates[1], selectedDistrict.coordinates[0]]
+            : pos.coordinates;
+      return {
+        coordinates: targetCoords,
+        zoom: nextZoom,
+      };
+    });
   };
 
   const handleResetZoom = () => {
@@ -298,7 +318,7 @@ function BangladeshExploreContent() {
             <div
               ref={mapContainerRef}
               onMouseLeave={() => setHoveredDistrict(null)}
-              className="relative w-full flex-1 min-h-0 rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 rounded-2xl overflow-hidden border border-border bg-card/60 shadow-xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -355,6 +375,7 @@ function BangladeshExploreContent() {
                 style={{
                   touchAction: "none",
                   shapeRendering: "geometricPrecision",
+                  backgroundColor: "var(--map-sea)",
                 }}
               >
                 <ZoomableGroup
@@ -439,7 +460,7 @@ function BangladeshExploreContent() {
                           let priority = 0;
                           let fill = "var(--map-land)";
                           let stroke = "var(--map-land-border)";
-                          let itemStrokeWidth = strokeWidth * 0.9;
+                          let itemStrokeWidth = strokeWidth * 1.1;
 
                           if (isSelected) {
                             priority = 3;

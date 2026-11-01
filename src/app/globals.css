@@ -153,7 +153,7 @@
     /* Custom Map Tokens (Light) */
     --map-sea: #dcd0c9;
     --map-land: #fcf6f2;
-    --map-land-border: #d4c4bc;
+    --map-land-border: #a8968d;
     --map-land-hover: #f0e6e0;
     --map-target: #9d65d8;
     --map-target-stroke: #581c87;
@@ -208,7 +208,7 @@
     /* Custom Map Tokens (Dark) */
     --map-sea: #050e09;
     --map-land: #112a1d;
-    --map-land-border: #234d36;
+    --map-land-border: #3d7857;
     --map-land-hover: #1e3f2d;
     --map-target: #7029b3;
     --map-target-stroke: #d8b4fe;

@@ -177,11 +177,31 @@ function WorldExploreContent() {
   };
 
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 60) }));
+    setPosition((pos) => {
+      const targetCoords: [number, number] = selectedCountry?.coordinates
+        ? [selectedCountry.coordinates[1], selectedCountry.coordinates[0]]
+        : pos.coordinates;
+      return {
+        coordinates: targetCoords,
+        zoom: Math.min(pos.zoom * 1.6, 60),
+      };
+    });
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 0.8) }));
+    setPosition((pos) => {
+      const nextZoom = Math.max(pos.zoom / 1.6, 0.8);
+      const targetCoords: [number, number] =
+        nextZoom <= 1
+          ? [0, 20]
+          : selectedCountry?.coordinates
+            ? [selectedCountry.coordinates[1], selectedCountry.coordinates[0]]
+            : pos.coordinates;
+      return {
+        coordinates: targetCoords,
+        zoom: nextZoom,
+      };
+    });
   };
 
   const handleResetZoom = () => {
@@ -406,7 +426,7 @@ function WorldExploreContent() {
             <div
               ref={mapContainerRef}
               onMouseLeave={() => setHoveredCountry(null)}
-              className="relative w-full flex-1 min-h-0 rounded-2xl overflow-hidden border border-border bg-card shadow-xl flex flex-col items-center justify-center select-none"
+              className="relative w-full flex-1 min-h-0 rounded-2xl overflow-hidden border border-border bg-card/60 shadow-xl flex flex-col items-center justify-center select-none"
             >
               <div className="absolute inset-0 bg-tactical-grid opacity-40 pointer-events-none" />
 
@@ -490,6 +510,7 @@ function WorldExploreContent() {
                 style={{
                   touchAction: "none",
                   shapeRendering: "geometricPrecision",
+                  backgroundColor: "var(--map-sea)",
                 }}
               >
                 <ZoomableGroup
@@ -508,10 +529,7 @@ function WorldExploreContent() {
                 >
                   <Geographies geography={WORLD_GEO_URL}>
                     {({ geographies }) => {
-                      const strokeWidth = Math.max(
-                        0.3,
-                        Math.min(0.85, 0.55 / Math.sqrt(position.zoom)),
-                      );
+                      const strokeWidth = 0.55;
 
                       const getCountryFromGeo = (
                         g: (typeof geographies)[0],
@@ -584,7 +602,7 @@ function WorldExploreContent() {
                           let priority = 0;
                           let fill = "var(--map-land)";
                           let stroke = "var(--map-land-border)";
-                          let itemStrokeWidth = strokeWidth * 0.9;
+                          let itemStrokeWidth = strokeWidth * 1.1;
 
                           if (isSelected) {
                             priority = 3;

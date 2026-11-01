@@ -164,7 +164,7 @@ function BangladeshGeographiesContent({
         let priority = 0;
         let fill = "var(--map-land)";
         let stroke = "var(--map-land-border)";
-        let itemStrokeWidth = strokeWidth * 0.9;
+        let itemStrokeWidth = strokeWidth * 1.1;
 
         // Base fills and strokes
         if (isTarget) {
@@ -515,12 +515,28 @@ export function BangladeshMap({ className }: BangladeshMapProps = {}) {
     setInspectedDistrict(null);
   }, [targetDistrict]);
 
+  const targetCenter = useMemo<[number, number] | null>(() => {
+    if ((mode === "daily" || mode === "blitz") && targetDistrict?.coordinates) {
+      return [targetDistrict.coordinates[1], targetDistrict.coordinates[0]];
+    }
+    return null;
+  }, [mode, targetDistrict]);
+
   const handleZoomIn = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.min(pos.zoom * 1.6, 50) }));
+    setPosition((pos) => ({
+      coordinates: targetCenter || pos.coordinates,
+      zoom: Math.min(pos.zoom * 1.6, 50),
+    }));
   };
 
   const handleZoomOut = () => {
-    setPosition((pos) => ({ ...pos, zoom: Math.max(pos.zoom / 1.6, 0.8) }));
+    setPosition((pos) => {
+      const nextZoom = Math.max(pos.zoom / 1.6, 0.8);
+      return {
+        coordinates: nextZoom <= 1 ? [90.3563, 23.685] : targetCenter || pos.coordinates,
+        zoom: nextZoom,
+      };
+    });
   };
 
   const handleResetZoom = () => {
