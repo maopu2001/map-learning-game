@@ -17,7 +17,6 @@ import {
 } from "react-simple-maps";
 import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 import { MapZoomControls } from "@/components/Map/MapZoomControls";
-import { ExploreHeader } from "@/components/Explore/ExploreHeader";
 import { DivisionFilterBar } from "@/components/Explore/DivisionFilterBar";
 import { DistrictSearch } from "@/components/Explore/DistrictSearch";
 import { DistrictProfileCard } from "@/components/Explore/DistrictProfileCard";
@@ -243,22 +242,6 @@ function BangladeshExploreContent() {
       <Header />
 
       <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-3 flex flex-col gap-2 overflow-hidden">
-        {/* Top Context Subheader (Desktop only to prevent vertical overflow) */}
-        <div className="hidden lg:block shrink-0">
-          <ExploreHeader
-            title="Bangladesh Districts Explorer"
-            badgeText="64 Districts • 8 Divisions"
-            description="Browse districts, administrative divisions, and neighboring borders at your own pace."
-            playHref="/bangladesh"
-            playLabel="Play Bangladesh"
-            switchHref="/explore/world"
-            switchLabel="World Explorer"
-            switchShortLabel="World"
-            switchEmoji="🌍"
-            accentColor="bd"
-          />
-        </div>
-
         {/* Mobile Tab Switcher */}
         <div className="lg:hidden flex items-center gap-1.5 p-1 rounded-2xl bg-card border border-border shrink-0 text-xs font-semibold">
           <button

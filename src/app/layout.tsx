@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { OfflineIndicator } from "@/components/OfflineIndicator";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,7 +31,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Shimana (সীমানা) — Daily Map & Geography Guessing Game",
+    default: "Shimana (সীমানা) - Daily Map & Geography Guessing Game",
     template: "%s | Shimana",
   },
   description:
@@ -51,6 +53,11 @@ export const metadata: Metadata = {
     "interactive world map",
   ],
   applicationName: "Shimana",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Shimana",
+  },
   authors: [{ name: "M. Aktaruzzaman Opu", url: "https://maopu.com.bd" }],
   creator: "M. Aktaruzzaman Opu",
   publisher: "Shimana",
@@ -65,9 +72,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-icon.svg", type: "image/svg+xml" },
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
     shortcut: ["/icon.svg"],
   },
@@ -87,7 +96,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     siteName: "Shimana",
-    title: "Shimana (সীমানা) — Daily Map & Geography Guessing Game",
+    title: "Shimana (সীমানা) - Daily Map & Geography Guessing Game",
     description:
       "Find the mystery place on the map! Guess the secret country or Bangladesh district in 6 tries with distance & compass direction hints.",
     images: [
@@ -101,7 +110,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shimana (সীমানা) — Daily Map & Geography Guessing Game",
+    title: "Shimana (সীমানা) - Daily Map & Geography Guessing Game",
     description:
       "Find the mystery place on the map! Guess the secret country or Bangladesh district in 6 tries with distance & compass direction hints.",
     images: ["/icon.svg"],
@@ -181,6 +190,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ServiceWorkerRegister />
+          <OfflineIndicator />
         </ThemeProvider>
       </body>
     </html>

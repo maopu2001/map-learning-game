@@ -9,7 +9,7 @@ import { GameIntelPanel } from "@/components/Controls/GameIntelPanel";
 import { GameOverModal } from "@/components/Dialogs/GameOverModal";
 import { useGameStore, getMaxGuesses } from "@/lib/store";
 import { useGameUrlSync } from "@/hooks/useGameUrlSync";
-import { Map, Crosshair, ArrowRight } from "lucide-react";
+import { Map, Crosshair } from "lucide-react";
 import { DirectionIcon } from "@/components/ui/direction-icon";
 
 const BangladeshMap = dynamic(

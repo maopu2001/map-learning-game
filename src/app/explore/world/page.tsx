@@ -21,7 +21,6 @@ import {
 } from "react-simple-maps";
 import { TargetPulseMarker } from "@/components/Map/TargetPulseMarker";
 import { MapZoomControls } from "@/components/Map/MapZoomControls";
-import { ExploreHeader } from "@/components/Explore/ExploreHeader";
 import { CountrySearch } from "@/components/Explore/CountrySearch";
 import { CountryProfileCard } from "@/components/Explore/CountryProfileCard";
 import {
@@ -348,22 +347,6 @@ function WorldExploreContent() {
       <Header />
 
       <main className="flex-1 min-h-0 w-full max-w-7xl mx-auto p-2 sm:px-4 sm:py-3 flex flex-col gap-2 overflow-hidden">
-        {/* Top Context Subheader (Desktop only to prevent vertical overflow) */}
-        <div className="hidden lg:block shrink-0">
-          <ExploreHeader
-            title="World Countries Explorer"
-            badgeText="195 Countries"
-            description="Browse world nations, capitals, populations, and neighboring borders at your own pace."
-            playHref="/world"
-            playLabel="Play World"
-            switchHref="/explore/bangladesh"
-            switchLabel="Bangladesh Explorer"
-            switchShortLabel="BD"
-            switchEmoji="🇧🇩"
-            accentColor="world"
-          />
-        </div>
-
         {/* Mobile Tab Switcher */}
         <div className="lg:hidden grid grid-cols-2 items-center gap-1.5 p-1 rounded-2xl bg-card border border-border shrink-0 text-xs font-semibold">
           <button

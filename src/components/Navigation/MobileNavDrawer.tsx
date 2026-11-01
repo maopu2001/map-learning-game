@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Home, Play, Globe2, BookOpen, HelpCircle } from "lucide-react";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 interface MobileNavDrawerProps {
   open: boolean;
@@ -102,14 +103,17 @@ export function MobileNavDrawer({
                   : "bg-muted/50 text-foreground hover:bg-muted"
               }`}
             >
-              <Globe2 className="size-4 text-accent shrink-0" />
+              <Globe2
+                className={`size-4 shrink-0 ${isExploreWorld ? "text-accent-foreground" : "text-accent"}`}
+              />
               <span>Explore World</span>
             </Link>
           </div>
         </div>
 
         {/* Section 4: Utilities */}
-        <div className="pt-2 border-t border-border text-xs">
+        <div className="pt-2 border-t border-border space-y-2 text-xs">
+          <InstallAppButton variant="drawer" />
           <button
             onClick={() => {
               onClose();

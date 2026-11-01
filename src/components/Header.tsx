@@ -4,18 +4,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  HelpCircle,
-  Globe2,
-  BookOpen,
-  Home,
-  Menu,
-  X,
-  Play,
-} from "lucide-react";
+import { HelpCircle, Globe2, Home, Menu, X } from "lucide-react";
 import { HelpDialog } from "@/components/Dialogs/HelpDialog";
 import { MobileNavDrawer } from "@/components/Navigation/MobileNavDrawer";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 export function Header() {
   const pathname = usePathname();
@@ -23,7 +16,6 @@ export function Header() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isExplore = pathname.startsWith("/explore");
   const isPlayBD = pathname === "/bangladesh";
   const isPlayWorld = pathname === "/world";
   const isExploreBD = pathname === "/explore/bangladesh";
@@ -60,8 +52,9 @@ export function Header() {
               </div>
             </Link>
 
-            {/* Mobile Actions: Theme, Help, Menu */}
+            {/* Mobile Actions: Install, Theme, Help, Menu */}
             <div className="flex items-center gap-1.5 lg:hidden">
+              <InstallAppButton variant="mobile" />
               <ThemeToggle className="size-9" />
               <button
                 onClick={() => setHelpOpen(true)}
@@ -85,16 +78,61 @@ export function Header() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          {isExplore ? (
-            <nav className="hidden lg:flex items-center gap-1.5 bg-muted/50 border border-border p-1 rounded-xl">
-              <span className="text-2xs font-mono uppercase tracking-wider text-muted-foreground px-2 flex items-center gap-1">
-                <BookOpen className="size-3 text-accent" />
-                <span>Explorer:</span>
+          {/* Desktop Navigation - unified across all pages */}
+          <nav className="hidden lg:flex items-center gap-2 bg-muted/50 border border-border px-2 py-1 rounded-xl text-xs">
+            <Link
+              href="/"
+              className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                pathname === "/"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground hover:bg-card"
+              }`}
+            >
+              <Home className="size-3" />
+              <span>Home</span>
+            </Link>
+
+            <div className="h-3.5 w-px bg-border" />
+
+            {/* Play Games Segment */}
+            <div className="flex items-center gap-1">
+              <span className="text-3xs font-mono uppercase tracking-wider text-muted-foreground px-1">
+                Play:
+              </span>
+              <Link
+                href="/bangladesh"
+                className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                  isPlayBD
+                    ? "bg-bd-primary text-bd-primary-foreground shadow-sm"
+                    : "text-foreground hover:bg-card"
+                }`}
+              >
+                <span className="flag-shadow">🇧🇩</span>
+                <span>Bangladesh</span>
+              </Link>
+              <Link
+                href="/world"
+                className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
+                  isPlayWorld
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "text-foreground hover:bg-card"
+                }`}
+              >
+                <Globe2 className="size-3 text-accent" />
+                <span>World</span>
+              </Link>
+            </div>
+
+            <div className="h-3.5 w-px bg-border" />
+
+            {/* Explore Reference Segment */}
+            <div className="flex items-center gap-1">
+              <span className="text-3xs font-mono uppercase tracking-wider text-muted-foreground px-1">
+                Explore:
               </span>
               <Link
                 href="/explore/bangladesh"
-                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
                   isExploreBD
                     ? "bg-bd-primary text-bd-primary-foreground shadow-sm"
                     : "text-muted-foreground hover:text-foreground hover:bg-card"
@@ -105,109 +143,23 @@ export function Header() {
               </Link>
               <Link
                 href="/explore/world"
-                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
                   isExploreWorld
                     ? "bg-accent text-accent-foreground shadow-sm"
                     : "text-muted-foreground hover:text-foreground hover:bg-card"
                 }`}
               >
                 <Globe2
-                  className={`size-3.5 ${isExploreWorld ? "text-accent-foreground" : "text-accent"}`}
+                  className={`size-3 ${isExploreWorld ? "text-accent-foreground" : "text-accent"}`}
                 />
                 <span>World</span>
               </Link>
-
-              <div className="h-3.5 w-px bg-border mx-1" />
-
-              <Link
-                href={isExploreBD ? "/bangladesh" : "/world"}
-                className="px-2.5 py-1 rounded-lg text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-card flex items-center gap-1 transition-colors"
-                title="Play the guessing game"
-              >
-                <Play className="size-3 fill-current" />
-                <span>Play Game</span>
-              </Link>
-            </nav>
-          ) : (
-            <nav className="hidden lg:flex items-center gap-2 bg-muted/50 border border-border px-2 py-1 rounded-xl text-xs">
-              <Link
-                href="/"
-                className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
-                  pathname === "/"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-card"
-                }`}
-              >
-                <Home className="size-3" />
-                <span>Home</span>
-              </Link>
-
-              <div className="h-3.5 w-px bg-border" />
-
-              {/* Play Games Segment */}
-              <div className="flex items-center gap-1">
-                <span className="text-3xs font-mono uppercase tracking-wider text-muted-foreground px-1">
-                  Play:
-                </span>
-                <Link
-                  href="/bangladesh"
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
-                    isPlayBD
-                      ? "bg-bd-primary text-bd-primary-foreground shadow-sm"
-                      : "text-foreground hover:bg-card"
-                  }`}
-                >
-                  <span className="flag-shadow">🇧🇩</span>
-                  <span>Bangladesh</span>
-                </Link>
-                <Link
-                  href="/world"
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
-                    isPlayWorld
-                      ? "bg-accent text-accent-foreground shadow-sm"
-                      : "text-foreground hover:bg-card"
-                  }`}
-                >
-                  <Globe2 className="size-3 text-accent" />
-                  <span>World</span>
-                </Link>
-              </div>
-
-              <div className="h-3.5 w-px bg-border" />
-
-              {/* Explore Reference Segment */}
-              <div className="flex items-center gap-1">
-                <span className="text-3xs font-mono uppercase tracking-wider text-muted-foreground px-1">
-                  Explore:
-                </span>
-                <Link
-                  href="/explore/bangladesh"
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
-                    isExploreBD
-                      ? "bg-bd-primary text-bd-primary-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground hover:bg-card"
-                  }`}
-                >
-                  <span className="flag-shadow">🇧🇩</span>
-                  <span>Bangladesh</span>
-                </Link>
-                <Link
-                  href="/explore/world"
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-all duration-150 flex items-center gap-1 ${
-                    isExploreWorld
-                      ? "bg-accent text-accent-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground hover:bg-card"
-                  }`}
-                >
-                  <Globe2 className="size-3 text-accent" />
-                  <span>World</span>
-                </Link>
-              </div>
-            </nav>
-          )}
+            </div>
+          </nav>
 
           {/* Right Action Icons */}
           <div className="hidden lg:flex items-center gap-1.5">
+            <InstallAppButton variant="desktop" />
             <ThemeToggle />
             <Button
               variant="ghost"
