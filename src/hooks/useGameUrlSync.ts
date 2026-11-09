@@ -122,6 +122,19 @@ export function updateGameUrl(
   }
 }
 
+export function updateSelectUrl(id: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("select") !== id) {
+      url.searchParams.set("select", id);
+      window.history.replaceState(window.history.state, "", url.toString());
+    }
+  } catch {
+    // Safe fallback in non-standard environments
+  }
+}
+
 /**
  * Hook to synchronize URL query params (?mode=...&difficulty=...) with localStorage/store.
  * Follows priority: Valid URL > LocalStorage > Default.

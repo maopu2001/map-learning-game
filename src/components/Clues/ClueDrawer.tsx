@@ -2,7 +2,8 @@
 
 import React from "react";
 import { useGameStore } from "@/lib/store";
-import { COUNTRIES_BY_ID, getEffectiveBorders } from "@/data/world";
+import { COUNTRIES_BY_ID, getEffectiveBorders, CountryData } from "@/data/world";
+import { DistrictData } from "@/data/bangladesh";
 import { Badge } from "@/components/ui/badge";
 import {
   Lightbulb,
@@ -20,6 +21,114 @@ interface ClueDrawerProps {
   scope?: "bangladesh" | "world";
 }
 
+interface HintConfig {
+  icon: React.ReactNode;
+  title: string;
+  content: React.ReactNode;
+  accentColor: "primary" | "accent";
+}
+
+const hintBuilders = {
+  unmask: (step: 1 | 2): HintConfig => {
+    const isP = step === 1;
+    return {
+      icon: <Eye className={`size-3.5 ${isP ? "text-primary" : "text-accent"}`} />,
+      title: `Hint ${step}: Unmask Clue (Part ${step})`,
+      content: (
+        <span className={`${isP ? "text-primary" : "text-accent"} font-medium`}>
+          {isP ? "Reveals 50% of masked names in clue" : "Reveals all masked names in clue"}
+        </span>
+      ),
+      accentColor: isP ? "primary" : "accent",
+    };
+  },
+  startingLetter: (num: 1 | 2 | 3, name: string, accentColor: "primary" | "accent"): HintConfig => {
+    const isP = accentColor === "primary";
+    return {
+      icon: <KeyRound className={`size-3.5 ${isP ? "text-primary" : "text-accent"}`} />,
+      title: `Hint ${num}: Starting Letter`,
+      content: (
+        <span className={`${isP ? "text-primary" : "text-accent"} font-bold font-mono`}>
+          Starts with: {name.charAt(0).toUpperCase()}
+        </span>
+      ),
+      accentColor,
+    };
+  },
+  flag: (num: 1 | 2, flagEmoji: string, accentColor: "primary" | "accent"): HintConfig => {
+    const isP = accentColor === "primary";
+    return {
+      icon: <Flag className={`size-3.5 ${isP ? "text-primary" : "text-accent"}`} />,
+      title: `Hint ${num}: National Flag`,
+      content: (
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">{flagEmoji}</span>
+          <span className="text-xs text-muted-foreground">National Flag</span>
+        </div>
+      ),
+      accentColor,
+    };
+  },
+  letterCount: (num: 2 | 3, name: string, accentColor: "primary" | "accent"): HintConfig => {
+    const isP = accentColor === "primary";
+    return {
+      icon: <Hash className={`size-3.5 ${isP ? "text-primary" : "text-accent"}`} />,
+      title: `Hint ${num}: Letter Count`,
+      content: (
+        <span className={`${isP ? "text-primary" : "text-accent"} font-bold font-mono`}>
+          Length: {name.replace(/\s+/g, "").length} letters
+        </span>
+      ),
+      accentColor,
+    };
+  },
+  capital: (capital: string, capitalBn?: string): HintConfig => ({
+    icon: <Building className="size-3.5 text-accent" />,
+    title: "Hint 2: Capital City",
+    content: (
+      <span className="text-accent font-bold">
+        Capital: {capital || "N/A"}{capitalBn ? ` (${capitalBn})` : ""}
+      </span>
+    ),
+    accentColor: "accent",
+  }),
+  region: (isBD: boolean, target: CountryData | DistrictData): HintConfig => ({
+    icon: isBD ? <Building className="size-3.5 text-primary" /> : <Globe2 className="size-3.5 text-primary" />,
+    title: `Hint 1: ${isBD ? "Division" : "Continent"}`,
+    content: (
+      <span className="text-primary font-semibold">
+        {isBD
+          ? `Division: ${(target as DistrictData).division}${(target as DistrictData).divisionBn ? ` (${(target as DistrictData).divisionBn})` : ""}`
+          : `Continent: ${(target as CountryData).continent}${(target as CountryData).continentBn ? ` (${(target as CountryData).continentBn})` : ""}`}
+      </span>
+    ),
+    accentColor: "primary",
+  }),
+  neighbor: (
+    num: 2 | 3,
+    title: string,
+    label: string,
+    emoji?: string,
+    accentColor: "primary" | "accent" = "primary",
+  ): HintConfig => {
+    const isP = accentColor === "primary";
+    return {
+      icon: <Layers className={`size-3.5 ${isP ? "text-primary" : "text-accent"}`} />,
+      title: `Hint ${num}: ${title}`,
+      content: (
+        <div>
+          <span className={`${isP ? "text-primary" : "text-accent"} font-bold flex items-center gap-1`}>
+            {emoji && `${emoji} `}
+            {label}
+          </span>
+          <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
+        </div>
+      ),
+      accentColor,
+    };
+  },
+};
+
 export function ClueDrawer({ scope: propScope }: ClueDrawerProps = {}) {
   const storeScope = useGameStore((s) => s.scope);
   const scope = propScope || storeScope;
@@ -35,230 +144,70 @@ export function ClueDrawer({ scope: propScope }: ClueDrawerProps = {}) {
   if (isBD && !targetDistrict) return null;
   if (!isBD && !targetCountry) return null;
 
-  // Prepare World Mode Neighbor names (falls back to nearest countries if island)
-  const effectiveWorldBorders = !isBD ? getEffectiveBorders(targetCountry) : [];
-  const hasLandBorders = !isBD && targetCountry.borders.length > 0;
-  const neighbor1Country =
-    !isBD && effectiveWorldBorders[0]
-      ? COUNTRIES_BY_ID.get(effectiveWorldBorders[0])
-      : null;
-  const neighbor2Country =
-    !isBD && effectiveWorldBorders[1]
-      ? COUNTRIES_BY_ID.get(effectiveWorldBorders[1])
-      : null;
-
   const isPlaying = gameStatus === "playing";
   const isDetective = mode === "detective";
   const isEasy = difficulty === "easy";
   const isHard = difficulty === "hard";
 
-  // --- HINT 1 ---
-  let hint1Icon = isBD ? (
-    <Building className="size-3.5 text-primary" />
-  ) : (
-    <Globe2 className="size-3.5 text-primary" />
-  );
-  let hint1Title = `Hint 1: ${isBD ? "Division" : "Continent"}`;
-  let hint1Content: React.ReactNode = isBD ? (
-    <span className="text-primary font-semibold">
-      Division: {targetDistrict.division}
-      {targetDistrict.divisionBn ? ` (${targetDistrict.divisionBn})` : ""}
-    </span>
-  ) : (
-    <span className="text-primary font-semibold">
-      Continent: {targetCountry.continent}
-      {targetCountry.continentBn ? ` (${targetCountry.continentBn})` : ""}
-    </span>
-  );
+  const effectiveWorldBorders = !isBD ? getEffectiveBorders(targetCountry) : [];
+  const hasLandBorders = !isBD && targetCountry.borders.length > 0;
+  const neighbor1Country =
+    !isBD && effectiveWorldBorders[0] ? COUNTRIES_BY_ID.get(effectiveWorldBorders[0]) : null;
+  const neighbor2Country =
+    !isBD && effectiveWorldBorders[1] ? COUNTRIES_BY_ID.get(effectiveWorldBorders[1]) : null;
 
-  if (isDetective) {
-    if (isEasy) {
-      if (isBD) {
-        hint1Icon = <KeyRound className="size-3.5 text-primary" />;
-        hint1Title = "Hint 1: Starting Letter";
-        hint1Content = (
-          <span className="text-primary font-bold font-mono">
-            Starts with: {targetDistrict.name.charAt(0).toUpperCase()}
-          </span>
-        );
-      } else {
-        hint1Icon = <Flag className="size-3.5 text-primary" />;
-        hint1Title = "Hint 1: National Flag";
-        hint1Content = (
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{targetCountry.flagEmoji}</span>
-            <span className="text-xs text-muted-foreground">National Flag</span>
-          </div>
-        );
-      }
-    } else if (isHard) {
-      hint1Icon = <Eye className="size-3.5 text-primary" />;
-      hint1Title = "Hint 1: Unmask Clue (Part 1)";
-      hint1Content = (
-        <span className="text-primary font-medium">
-          Reveals 50% of masked names in clue
-        </span>
-      );
-    }
-  }
+  const n1Title = isBD
+    ? "1st Neighboring District"
+    : hasLandBorders
+      ? "1st Neighboring Country"
+      : "Nearest Country";
+  const n1Label = isBD
+    ? `Neighbor${isDetective ? "" : " 1"}: ${targetDistrict.borders[0] || "None"}`
+    : `${hasLandBorders ? `Neighbor${isDetective ? "" : " 1"}` : "Nearest Country"}: ${neighbor1Country?.name || "None"}`;
 
-  // --- HINT 2 ---
-  let hint2Icon =
-    !isDetective && isHard ? (
-      <Layers className="size-3.5 text-accent" />
-    ) : isBD ? (
-      <KeyRound className="size-3.5 text-accent" />
-    ) : (
-      <Flag className="size-3.5 text-accent" />
-    );
-  let hint2Title =
-    !isDetective && isHard
-      ? `Hint 2: ${
-          isBD
-            ? "1st Neighboring District"
-            : hasLandBorders
-              ? "1st Neighboring Country"
-              : "Nearest Country"
-        }`
-      : `Hint 2: ${isBD ? "Starting Letter" : "National Flag"}`;
-  let hint2Content: React.ReactNode =
-    !isDetective && isHard ? (
-      isBD ? (
-        <div>
-          <span className="text-accent font-bold">
-            Neighbor 1: {targetDistrict.borders[0] || "None"}
-          </span>
-          <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
-        </div>
-      ) : (
-        <div>
-          <span className="text-accent font-bold flex items-center gap-1">
-            {neighbor1Country?.flagEmoji}{" "}
-            {hasLandBorders ? "Neighbor 1" : "Nearest Country"}:{" "}
-            {neighbor1Country?.name || "None"}
-          </span>
-          <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
-        </div>
-      )
-    ) : isBD ? (
-      <span className="text-accent font-bold font-mono">
-        Starts with: {targetDistrict.name.charAt(0).toUpperCase()}
-      </span>
-    ) : (
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">{targetCountry.flagEmoji}</span>
-        <span className="text-xs text-muted-foreground">National Flag</span>
-      </div>
-    );
+  const hint1 =
+    isDetective && isHard
+      ? hintBuilders.unmask(1)
+      : isDetective && isEasy
+        ? isBD
+          ? hintBuilders.startingLetter(1, targetDistrict.name, "primary")
+          : hintBuilders.flag(1, targetCountry.flagEmoji, "primary")
+        : hintBuilders.region(isBD, isBD ? targetDistrict : targetCountry);
 
-  if (isDetective) {
-    if (isEasy) {
-      if (isBD) {
-        hint2Icon = <Hash className="size-3.5 text-accent" />;
-        hint2Title = "Hint 2: Letter Count";
-        hint2Content = (
-          <span className="text-accent font-bold font-mono">
-            Length: {targetDistrict.name.replace(/\s+/g, "").length} letters
-          </span>
-        );
-      } else {
-        hint2Icon = <Building className="size-3.5 text-accent" />;
-        hint2Title = "Hint 2: Capital City";
-        hint2Content = (
-          <span className="text-accent font-bold">
-            Capital: {targetCountry.capital || "N/A"}
-            {targetCountry.capitalBn ? ` (${targetCountry.capitalBn})` : ""}
-          </span>
-        );
-      }
-    } else if (isHard) {
-      hint2Icon = <Eye className="size-3.5 text-accent" />;
-      hint2Title = "Hint 2: Unmask Clue (Part 2)";
-      hint2Content = (
-        <span className="text-accent font-medium">
-          Reveals all masked names in clue
-        </span>
-      );
-    }
-  }
+  const hint2 =
+    isDetective && isHard
+      ? hintBuilders.unmask(2)
+      : isDetective && isEasy
+        ? isBD
+          ? hintBuilders.letterCount(2, targetDistrict.name, "accent")
+          : hintBuilders.capital(targetCountry.capital, targetCountry.capitalBn)
+        : !isDetective && isHard
+          ? hintBuilders.neighbor(2, n1Title, n1Label, !isBD ? neighbor1Country?.flagEmoji : undefined, "accent")
+          : isBD
+            ? hintBuilders.startingLetter(2, targetDistrict.name, "accent")
+            : hintBuilders.flag(2, targetCountry.flagEmoji, "accent");
 
-  // --- HINT 3 ---
-  let hint3Icon =
-    isDetective || isHard ? (
-      <Layers className="size-3.5 text-primary" />
-    ) : isBD ? (
-      <Hash className="size-3.5 text-primary" />
-    ) : (
-      <KeyRound className="size-3.5 text-primary" />
-    );
+  const n2Title = isBD
+    ? "2nd Neighboring District"
+    : hasLandBorders
+      ? "2nd Neighboring Country"
+      : "2nd Nearest Country";
+  const n2Label = isBD
+    ? `Neighbor 2: ${targetDistrict.borders[1] || targetDistrict.borders[0] || "None"}`
+    : `${hasLandBorders ? "Neighbor 2" : "2nd Nearest Country"}: ${neighbor2Country?.name || "None"}`;
 
-  let hint3Title = isDetective
-    ? `Hint 3: ${
-        isBD
-          ? "1st Neighboring District"
-          : hasLandBorders
-            ? "1st Neighboring Country"
-            : "Nearest Country"
-      }`
+  const hint3 = isDetective
+    ? hintBuilders.neighbor(3, n1Title, n1Label, !isBD ? neighbor1Country?.flagEmoji : undefined, "primary")
     : isHard
-      ? `Hint 3: ${
-          isBD
-            ? "2nd Neighboring District"
-            : hasLandBorders
-              ? "2nd Neighboring Country"
-              : "2nd Nearest Country"
-        }`
-      : `Hint 3: ${isBD ? "Letter Count" : "Starting Letter"}`;
+      ? hintBuilders.neighbor(3, n2Title, n2Label, !isBD ? neighbor2Country?.flagEmoji : undefined, "primary")
+      : isBD
+        ? hintBuilders.letterCount(3, targetDistrict.name, "primary")
+        : hintBuilders.startingLetter(3, targetCountry.name, "primary");
 
-  let hint3Content: React.ReactNode = isDetective ? (
-    isBD ? (
-      <div>
-        <span className="text-primary font-bold">
-          Neighbor: {targetDistrict.borders[0] || "None"}
-        </span>
-        <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
-      </div>
-    ) : (
-      <div>
-        <span className="text-primary font-bold flex items-center gap-1">
-          {neighbor1Country?.flagEmoji}{" "}
-          {hasLandBorders ? "Neighbor" : "Nearest"}: {neighbor1Country?.name || "None"}
-        </span>
-        <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
-      </div>
-    )
-  ) : isHard ? (
-    isBD ? (
-      <div>
-        <span className="text-primary font-bold">
-          Neighbor 2:{" "}
-          {targetDistrict.borders[1] || targetDistrict.borders[0] || "None"}
-        </span>
-        <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
-      </div>
-    ) : (
-      <div>
-        <span className="text-primary font-bold flex items-center gap-1">
-          {neighbor2Country?.flagEmoji}{" "}
-          {hasLandBorders ? "Neighbor 2" : "2nd Nearest Country"}:{" "}
-          {neighbor2Country?.name || "None"}
-        </span>
-        <p className="text-2xs text-muted-foreground font-normal">Highlighted on map</p>
-      </div>
-    )
-  ) : isBD ? (
-    <span className="text-primary font-bold font-mono">
-      Length: {targetDistrict.name.replace(/\s+/g, "").length} letters
-    </span>
-  ) : (
-    <span className="text-primary font-bold font-mono">
-      Starts with: {targetCountry.name.charAt(0).toUpperCase()}
-    </span>
-  );
+  const hints: HintConfig[] = [hint1, hint2, hint3];
 
   return (
     <div className="w-full rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-xl space-y-3.5">
-      {/* Header */}
       <div className="flex flex-wrap items-center justify-between border-b border-border pb-2.5 gap-2">
         <div className="flex items-center gap-2">
           <Lightbulb className="size-4 text-accent shrink-0" />
@@ -268,57 +217,31 @@ export function ClueDrawer({ scope: propScope }: ClueDrawerProps = {}) {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <Badge
-            variant="outline"
-            className="text-xs text-muted-foreground border-border font-mono"
-          >
+          <Badge variant="outline" className="text-xs text-muted-foreground border-border font-mono">
             Hints: {unlockedHints} of 3
           </Badge>
         </div>
       </div>
 
-      {/* 3 Hint Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {/* Hint 1 */}
-        <HintCard
-          icon={hint1Icon}
-          title={hint1Title}
-          isUnlocked={unlockedHints >= 1}
-          canUnlock={unlockedHints < 1}
-          isLocked={false}
-          accentColor="primary"
-          disabled={!isPlaying}
-          onReveal={unlockNextHint}
-          content={hint1Content}
-        />
-
-        {/* Hint 2 */}
-        <HintCard
-          icon={hint2Icon}
-          title={hint2Title}
-          isUnlocked={unlockedHints >= 2}
-          canUnlock={unlockedHints === 1}
-          isLocked={unlockedHints < 1}
-          lockMessage="Locked (Unlock Hint 1)"
-          accentColor="accent"
-          disabled={!isPlaying}
-          onReveal={unlockNextHint}
-          content={hint2Content}
-        />
-
-        {/* Hint 3 */}
-        <HintCard
-          icon={hint3Icon}
-          title={hint3Title}
-          isUnlocked={unlockedHints >= 3}
-          canUnlock={unlockedHints === 2}
-          isLocked={unlockedHints < 2}
-          lockMessage="Locked (Unlock Hint 2)"
-          accentColor="primary"
-          disabled={!isPlaying}
-          onReveal={unlockNextHint}
-          content={hint3Content}
-        />
+        {hints.map((hint, idx) => {
+          const hintNum = idx + 1;
+          return (
+            <HintCard
+              key={hintNum}
+              icon={hint.icon}
+              title={hint.title}
+              isUnlocked={unlockedHints >= hintNum}
+              canUnlock={unlockedHints === idx}
+              isLocked={unlockedHints < idx}
+              lockMessage={idx > 0 ? `Locked (Unlock Hint ${idx})` : undefined}
+              accentColor={hint.accentColor}
+              disabled={!isPlaying}
+              onReveal={unlockNextHint}
+              content={hint.content}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ export interface DistrictData {
   triviaFact: string;
   nameBn?: string;
   triviaFactBn?: string;
-  flagEmoji: string;
   isCoastal: boolean;
   aliases?: string[];
 }

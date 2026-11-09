@@ -70,14 +70,14 @@ export interface DailyRecord {
 }
 
 export interface GameState {
-  scope: GameScope; // "world" or "bangladesh"
+  scope: GameScope;
   mode: GameMode;
   difficulty: GameDifficulty;
   targetCountry: CountryData;
   targetDistrict: DistrictData;
   guesses: GuessResult[];
-  unlockedHints: number; // 0, 1, 2, 3
-  extraNeighborsRevealed: number; // For super-bordered nations
+  unlockedHints: number;
+  extraNeighborsRevealed: number;
   gameStatus: GameStatus;
   lastDailyDate: string;
   blitzTimeLeft: number;
@@ -107,53 +107,131 @@ export interface GameState {
 
 export const getTodayDateStr = () => new Date().toISOString().slice(0, 10);
 
-const defaultTargetCountry = COUNTRIES[0] || {
-  id: "BOL",
-  numericId: "068",
-  name: "Bolivia",
-  officialName: "Plurinational State of Bolivia",
-  aliases: ["Bolivia"],
-  capital: "Sucre / La Paz",
-  coordinates: [-17, -65],
-  borders: ["ARG", "BRA", "CHL", "PRY", "PER"],
-  continent: "South America",
-  region: "Americas",
-  subregion: "South America",
-  flagEmoji: "🇧🇴",
-  triviaFact: "Has two capitals: Sucre and La Paz.",
-  area: 1098581,
-  population: 11673021,
-  isIsland: false,
+const defaultTargetCountry = COUNTRIES[0];
+const defaultTargetDistrict = BANGLADESH_DISTRICTS[0];
+
+const getSafeDailyCountry = (today: string = getTodayDateStr()) => {
+  try {
+    return getDailyCountry(COUNTRIES, today) || defaultTargetCountry;
+  } catch {
+    return defaultTargetCountry;
+  }
 };
 
-const defaultTargetDistrict = BANGLADESH_DISTRICTS[0] || {
-  id: "Dhaka",
-  shapeId: "0",
-  name: "Dhaka",
-  division: "Dhaka",
-  coordinates: [23.8103, 90.4125],
-  borders: ["Gazipur", "Narayanganj", "Manikganj"],
-  triviaFact: "Capital city of Bangladesh.",
-  flagEmoji: "🇧🇩",
-  isCoastal: false,
+const getSafeDailyDistrict = (today: string = getTodayDateStr()) => {
+  try {
+    return getDailyDistrict(BANGLADESH_DISTRICTS, today) || defaultTargetDistrict;
+  } catch {
+    return defaultTargetDistrict;
+  }
 };
 
-let initialTargetCountry = defaultTargetCountry;
-try {
-  initialTargetCountry =
-    getDailyCountry(COUNTRIES, getTodayDateStr()) || defaultTargetCountry;
-} catch {
-  initialTargetCountry = defaultTargetCountry;
+const FRESH_ROUND_STATE = {
+  guesses: [],
+  unlockedHints: 0,
+  extraNeighborsRevealed: 0,
+  gameStatus: "playing" as const,
+  blitzTimeLeft: 90,
+  isGameOverOpen: false,
+};
+
+function unpackDailyRecord(
+  record: DailyRecord,
+  fallbackDifficulty: GameDifficulty = "normal",
+) {
+  return {
+    difficulty: record.difficulty ?? fallbackDifficulty,
+    guesses: record.guesses,
+    unlockedHints: record.unlockedHints,
+    extraNeighborsRevealed: record.extraNeighborsRevealed,
+    gameStatus: record.gameStatus,
+    blitzTimeLeft: 90,
+    isGameOverOpen: false,
+  };
 }
 
-let initialTargetDistrict = defaultTargetDistrict;
-try {
-  initialTargetDistrict =
-    getDailyDistrict(BANGLADESH_DISTRICTS, getTodayDateStr()) ||
-    defaultTargetDistrict;
-} catch {
-  initialTargetDistrict = defaultTargetDistrict;
+function updateDailyHistory(
+  state: GameState,
+  scope: GameScope,
+  overrides?: Partial<DailyRecord>,
+): Partial<Record<GameScope, DailyRecord>> {
+  const today = getTodayDateStr();
+  return {
+    ...state.dailyHistory,
+    [scope]: {
+      date: today,
+      gameStatus: overrides?.gameStatus ?? state.gameStatus,
+      guesses: overrides?.guesses ?? state.guesses,
+      unlockedHints: overrides?.unlockedHints ?? state.unlockedHints,
+      extraNeighborsRevealed:
+        overrides?.extraNeighborsRevealed ?? state.extraNeighborsRevealed,
+      difficulty: overrides?.difficulty ?? state.difficulty,
+    },
+  };
 }
+
+export function pickScopeTarget(
+  scope: GameScope,
+  mode: GameMode,
+  current: { country: CountryData; district: DistrictData; recentIds: string[] },
+  today: string = getTodayDateStr(),
+): {
+  targetCountry: CountryData;
+  targetDistrict: DistrictData;
+  recentTargetIds: string[];
+} {
+  if (scope === "bangladesh") {
+    const nextDistrict =
+      mode === "daily"
+        ? getSafeDailyDistrict(today)
+        : pickNextInDistanceRange(
+            current.district,
+            BANGLADESH_DISTRICTS,
+            BD_DIST_MIN_KM,
+            BD_DIST_MAX_KM,
+            current.recentIds,
+          );
+    return {
+      targetCountry: current.country,
+      targetDistrict: nextDistrict,
+      recentTargetIds: [...current.recentIds, nextDistrict.id].slice(-15),
+    };
+  }
+
+  const eligible = COUNTRIES.filter((c) => c.area > 5000);
+  const nextCountry =
+    mode === "daily"
+      ? getSafeDailyCountry(today)
+      : pickNextInDistanceRange(
+          current.country,
+          eligible,
+          WORLD_DIST_MIN_KM,
+          WORLD_DIST_MAX_KM,
+          current.recentIds,
+        );
+  return {
+    targetCountry: nextCountry,
+    targetDistrict: current.district,
+    recentTargetIds: [...current.recentIds, nextCountry.id].slice(-15),
+  };
+}
+
+const pickTargetForState = (
+  state: GameState,
+  scope: GameScope,
+  mode: GameMode,
+  today = getTodayDateStr(),
+) =>
+  pickScopeTarget(
+    scope,
+    mode,
+    {
+      country: state.targetCountry,
+      district: state.targetDistrict,
+      recentIds: state.recentTargetIds,
+    },
+    today,
+  );
 
 export const useGameStore = create<GameState>()(
   persist(
@@ -161,8 +239,8 @@ export const useGameStore = create<GameState>()(
       scope: "bangladesh",
       mode: "daily",
       difficulty: "normal",
-      targetCountry: initialTargetCountry,
-      targetDistrict: initialTargetDistrict,
+      targetCountry: getSafeDailyCountry(),
+      targetDistrict: getSafeDailyDistrict(),
       guesses: [],
       unlockedHints: 0,
       extraNeighborsRevealed: 0,
@@ -213,77 +291,43 @@ export const useGameStore = create<GameState>()(
             if (Object.keys(updates).length > 0) {
               set(updates);
             }
-          } else if (state.guesses.length > 0 && state.lastDailyDate !== today) {
-            // Day rolled over
+          } else if (
+            (state.guesses.length > 0 && state.lastDailyDate !== today) ||
+            state.gameStatus !== "playing"
+          ) {
+            // Day rolled over or stale state
             set({
+              ...FRESH_ROUND_STATE,
               lastDailyDate: today,
-              targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
-              targetCountry: getDailyCountry(COUNTRIES, today),
-              guesses: [],
-              unlockedHints: 0,
-              extraNeighborsRevealed: 0,
-              gameStatus: "playing",
-            });
-          } else if (state.gameStatus !== "playing") {
-            // No record for this scope today, ensure fresh playing state
-            set({
-              guesses: [],
-              unlockedHints: 0,
-              extraNeighborsRevealed: 0,
-              gameStatus: "playing",
-              targetDistrict: getDailyDistrict(BANGLADESH_DISTRICTS, today),
-              targetCountry: getDailyCountry(COUNTRIES, today),
+              targetDistrict: getSafeDailyDistrict(today),
+              targetCountry: getSafeDailyCountry(today),
             });
           }
         } else {
-          // In non-daily modes (blitz, detective), target is not persisted.
-          // Force non-daily target if it fell back to the daily target on page load.
-          if (scope === "bangladesh") {
-            const daily = getDailyDistrict(BANGLADESH_DISTRICTS, today);
-            if (state.targetDistrict.id === daily.id) {
-              const nextTarget = pickNextInDistanceRange(
-                daily,
-                BANGLADESH_DISTRICTS,
-                BD_DIST_MIN_KM,
-                BD_DIST_MAX_KM,
-                state.recentTargetIds,
-              );
-              set({
-                targetDistrict: nextTarget,
-                recentTargetIds: [...state.recentTargetIds, nextTarget.id].slice(-15),
-              });
-            }
-          } else {
-            const daily = getDailyCountry(COUNTRIES, today);
-            if (state.targetCountry.id === daily.id) {
-              const eligible = COUNTRIES.filter((c) => c.area > 5000);
-              const nextTarget = pickNextInDistanceRange(
-                daily,
-                eligible,
-                WORLD_DIST_MIN_KM,
-                WORLD_DIST_MAX_KM,
-                state.recentTargetIds,
-              );
-              set({
-                targetCountry: nextTarget,
-                recentTargetIds: [...state.recentTargetIds, nextTarget.id].slice(-15),
-              });
-            }
+          // In non-daily modes, force non-daily target if it fell back to daily target on load
+          const dailyTargetId =
+            scope === "bangladesh"
+              ? getSafeDailyDistrict(today).id
+              : getSafeDailyCountry(today).id;
+          const currentTargetId =
+            scope === "bangladesh"
+              ? state.targetDistrict.id
+              : state.targetCountry.id;
+
+          if (currentTargetId === dailyTargetId) {
+            set(pickTargetForState(state, scope, state.mode, today));
           }
         }
 
         // Clean up any mismatched guesses from the other scope
         const currentGuesses = get().guesses;
         const hasMismatchedGuesses = currentGuesses.some((g) =>
-          scope === "bangladesh" ? !("division" in g.country) : "division" in g.country
+          scope === "bangladesh"
+            ? !("division" in g.country)
+            : "division" in g.country,
         );
         if (hasMismatchedGuesses) {
-          set({
-            guesses: [],
-            unlockedHints: 0,
-            extraNeighborsRevealed: 0,
-            gameStatus: "playing",
-          });
+          set(FRESH_ROUND_STATE);
         }
       },
 
@@ -292,75 +336,27 @@ export const useGameStore = create<GameState>()(
         if (state.scope === scope) return;
 
         const today = getTodayDateStr();
-        let nextTargetCountry = state.targetCountry;
-        let nextTargetDistrict = state.targetDistrict;
-        let nextRecent = state.recentTargetIds;
-
-        if (scope === "bangladesh") {
-          nextTargetDistrict =
-            state.mode === "daily"
-              ? getDailyDistrict(BANGLADESH_DISTRICTS, today)
-              : pickNextInDistanceRange(
-                  state.targetDistrict,
-                  BANGLADESH_DISTRICTS,
-                  BD_DIST_MIN_KM,
-                  BD_DIST_MAX_KM,
-                  state.recentTargetIds,
-                );
-          nextRecent = [...state.recentTargetIds, nextTargetDistrict.id].slice(
-            -15,
-          );
-        } else {
-          const eligible = COUNTRIES.filter((c) => c.area > 5000);
-          nextTargetCountry =
-            state.mode === "daily"
-              ? getDailyCountry(COUNTRIES, today)
-              : pickNextInDistanceRange(
-                  state.targetCountry,
-                  eligible,
-                  WORLD_DIST_MIN_KM,
-                  WORLD_DIST_MAX_KM,
-                  state.recentTargetIds,
-                );
-          nextRecent = [...state.recentTargetIds, nextTargetCountry.id].slice(
-            -15,
-          );
-        }
+        const next = pickTargetForState(state, scope, state.mode, today);
 
         // Check if daily record already exists for the target scope today
         if (state.mode === "daily") {
           const record = state.dailyHistory?.[scope];
           if (record && record.date === today) {
             set({
+              ...next,
               scope,
-              difficulty: record.difficulty ?? state.difficulty,
-              targetCountry: nextTargetCountry,
-              targetDistrict: nextTargetDistrict,
-              recentTargetIds: nextRecent,
-              guesses: record.guesses,
-              unlockedHints: record.unlockedHints,
-              extraNeighborsRevealed: record.extraNeighborsRevealed,
-              gameStatus: record.gameStatus,
-              blitzTimeLeft: 90,
               lastDailyDate: today,
-              isGameOverOpen: false,
+              ...unpackDailyRecord(record, state.difficulty),
             });
             return;
           }
         }
 
         set({
+          ...next,
+          ...FRESH_ROUND_STATE,
           scope,
-          targetCountry: nextTargetCountry,
-          targetDistrict: nextTargetDistrict,
-          recentTargetIds: nextRecent,
-          guesses: [],
-          unlockedHints: 0,
-          extraNeighborsRevealed: 0,
-          gameStatus: "playing",
-          blitzTimeLeft: 90,
           lastDailyDate: today,
-          isGameOverOpen: false,
         });
       },
 
@@ -373,7 +369,11 @@ export const useGameStore = create<GameState>()(
         // In daily mode, verify game isn't already finished today
         if (state.mode === "daily") {
           const record = state.dailyHistory?.[state.scope];
-          if (record && record.date === today && record.gameStatus !== "playing") {
+          if (
+            record &&
+            record.date === today &&
+            record.gameStatus !== "playing"
+          ) {
             return;
           }
         }
@@ -394,20 +394,13 @@ export const useGameStore = create<GameState>()(
         const isLost = !isWon && newGuesses.length >= maxGuesses;
         const newStatus = isWon ? "won" : isLost ? "lost" : "playing";
 
-        let nextDailyHistory = state.dailyHistory;
-        if (state.mode === "daily") {
-          nextDailyHistory = {
-            ...state.dailyHistory,
-            [targetScope]: {
-              date: today,
-              gameStatus: newStatus,
-              guesses: newGuesses,
-              unlockedHints: state.unlockedHints,
-              extraNeighborsRevealed: state.extraNeighborsRevealed,
-              difficulty: state.difficulty,
-            },
-          };
-        }
+        const nextDailyHistory =
+          state.mode === "daily"
+            ? updateDailyHistory(state, targetScope, {
+                gameStatus: newStatus,
+                guesses: newGuesses,
+              })
+            : state.dailyHistory;
 
         set({
           scope: targetScope,
@@ -422,21 +415,13 @@ export const useGameStore = create<GameState>()(
         const state = get();
         if (state.gameStatus !== "playing") return;
         const nextHints = Math.min(3, state.unlockedHints + 1);
-        let nextDailyHistory = state.dailyHistory;
-        if (state.mode === "daily") {
-          const today = getTodayDateStr();
-          nextDailyHistory = {
-            ...state.dailyHistory,
-            [state.scope]: {
-              date: today,
-              gameStatus: state.gameStatus,
-              guesses: state.guesses,
-              unlockedHints: nextHints,
-              extraNeighborsRevealed: state.extraNeighborsRevealed,
-              difficulty: state.difficulty,
-            },
-          };
-        }
+        const nextDailyHistory =
+          state.mode === "daily"
+            ? updateDailyHistory(state, state.scope, {
+                unlockedHints: nextHints,
+              })
+            : state.dailyHistory;
+
         set({
           unlockedHints: nextHints,
           dailyHistory: nextDailyHistory,
@@ -447,21 +432,13 @@ export const useGameStore = create<GameState>()(
         const state = get();
         if (state.gameStatus !== "playing") return;
         const nextNeighbors = state.extraNeighborsRevealed + 1;
-        let nextDailyHistory = state.dailyHistory;
-        if (state.mode === "daily") {
-          const today = getTodayDateStr();
-          nextDailyHistory = {
-            ...state.dailyHistory,
-            [state.scope]: {
-              date: today,
-              gameStatus: state.gameStatus,
-              guesses: state.guesses,
-              unlockedHints: state.unlockedHints,
-              extraNeighborsRevealed: nextNeighbors,
-              difficulty: state.difficulty,
-            },
-          };
-        }
+        const nextDailyHistory =
+          state.mode === "daily"
+            ? updateDailyHistory(state, state.scope, {
+                extraNeighborsRevealed: nextNeighbors,
+              })
+            : state.dailyHistory;
+
         set({
           extraNeighborsRevealed: nextNeighbors,
           dailyHistory: nextDailyHistory,
@@ -470,95 +447,19 @@ export const useGameStore = create<GameState>()(
 
       nextDetectiveRound: () => {
         const state = get();
-        if (state.scope === "bangladesh") {
-          const nextDistrict = pickNextInDistanceRange(
-            state.targetDistrict,
-            BANGLADESH_DISTRICTS,
-            BD_DIST_MIN_KM,
-            BD_DIST_MAX_KM,
-            state.recentTargetIds,
-          );
-          set({
-            targetDistrict: nextDistrict,
-            recentTargetIds: [...state.recentTargetIds, nextDistrict.id].slice(
-              -15,
-            ),
-            guesses: [],
-            unlockedHints: 0,
-            extraNeighborsRevealed: 0,
-            gameStatus: "playing",
-            isGameOverOpen: false,
-          });
-        } else {
-          const eligible = COUNTRIES.filter((c) => c.area > 5000);
-          const nextCountry = pickNextInDistanceRange(
-            state.targetCountry,
-            eligible,
-            WORLD_DIST_MIN_KM,
-            WORLD_DIST_MAX_KM,
-            state.recentTargetIds,
-          );
-          set({
-            targetCountry: nextCountry,
-            recentTargetIds: [...state.recentTargetIds, nextCountry.id].slice(
-              -15,
-            ),
-            guesses: [],
-            unlockedHints: 0,
-            extraNeighborsRevealed: 0,
-            gameStatus: "playing",
-            isGameOverOpen: false,
-          });
-        }
+        set({
+          ...pickTargetForState(state, state.scope, "detective"),
+          ...FRESH_ROUND_STATE,
+        });
       },
 
       resetGame: () => {
         const state = get();
-        // Daily puzzle can ONLY be played once per day. Resetting is blocked.
-        if (state.mode === "daily") {
-          return;
-        }
-
-        if (state.scope === "bangladesh") {
-          const nextTarget = pickNextInDistanceRange(
-            state.targetDistrict,
-            BANGLADESH_DISTRICTS,
-            BD_DIST_MIN_KM,
-            BD_DIST_MAX_KM,
-            state.recentTargetIds,
-          );
-          const nextRecent = [...state.recentTargetIds, nextTarget.id].slice(-15);
-          set({
-            targetDistrict: nextTarget,
-            recentTargetIds: nextRecent,
-            guesses: [],
-            unlockedHints: 0,
-            extraNeighborsRevealed: 0,
-            gameStatus: "playing",
-            blitzTimeLeft: 90,
-            isGameOverOpen: false,
-          });
-        } else {
-          const eligible = COUNTRIES.filter((c) => c.area > 5000);
-          const nextTarget = pickNextInDistanceRange(
-            state.targetCountry,
-            eligible,
-            WORLD_DIST_MIN_KM,
-            WORLD_DIST_MAX_KM,
-            state.recentTargetIds,
-          );
-          const nextRecent = [...state.recentTargetIds, nextTarget.id].slice(-15);
-          set({
-            targetCountry: nextTarget,
-            recentTargetIds: nextRecent,
-            guesses: [],
-            unlockedHints: 0,
-            extraNeighborsRevealed: 0,
-            gameStatus: "playing",
-            blitzTimeLeft: 90,
-            isGameOverOpen: false,
-          });
-        }
+        if (state.mode === "daily") return;
+        set({
+          ...pickTargetForState(state, state.scope, state.mode),
+          ...FRESH_ROUND_STATE,
+        });
       },
 
       forfeitAndSwitch: (target: {
@@ -579,17 +480,9 @@ export const useGameStore = create<GameState>()(
           state.gameStatus === "playing" &&
           (state.guesses.length > 0 || state.unlockedHints > 0)
         ) {
-          nextDailyHistory = {
-            ...state.dailyHistory,
-            [state.scope]: {
-              date: today,
-              gameStatus: "lost",
-              guesses: state.guesses,
-              unlockedHints: state.unlockedHints,
-              extraNeighborsRevealed: state.extraNeighborsRevealed,
-              difficulty: state.difficulty,
-            },
-          };
+          nextDailyHistory = updateDailyHistory(state, state.scope, {
+            gameStatus: "lost",
+          });
         }
 
         // If staying in daily mode and reset is requested: blocked
@@ -604,77 +497,28 @@ export const useGameStore = create<GameState>()(
           return;
         }
 
-        let nextTargetCountry = state.targetCountry;
-        let nextTargetDistrict = state.targetDistrict;
-        let nextRecent = state.recentTargetIds;
-
-        if (state.scope === "bangladesh") {
-          if (nextMode === "daily") {
-            nextTargetDistrict = getDailyDistrict(
-              BANGLADESH_DISTRICTS,
-              today,
-            );
-          } else {
-            nextTargetDistrict = pickNextInDistanceRange(
-              state.targetDistrict,
-              BANGLADESH_DISTRICTS,
-              BD_DIST_MIN_KM,
-              BD_DIST_MAX_KM,
-              state.recentTargetIds,
-            );
-          }
-          nextRecent = [...state.recentTargetIds, nextTargetDistrict.id].slice(-15);
-        } else {
-          if (nextMode === "daily") {
-            nextTargetCountry = getDailyCountry(COUNTRIES, today);
-          } else {
-            const eligible = COUNTRIES.filter((c) => c.area > 5000);
-            nextTargetCountry = pickNextInDistanceRange(
-              state.targetCountry,
-              eligible,
-              WORLD_DIST_MIN_KM,
-              WORLD_DIST_MAX_KM,
-              state.recentTargetIds,
-            );
-          }
-          nextRecent = [...state.recentTargetIds, nextTargetCountry.id].slice(-15);
-        }
+        const next = pickTargetForState(state, state.scope, nextMode, today);
 
         // If next mode is daily, restore today's record if it exists
         if (nextMode === "daily") {
           const record = nextDailyHistory?.[state.scope];
           if (record && record.date === today) {
             set({
-              difficulty: record.difficulty ?? nextDifficulty,
+              ...next,
               mode: nextMode,
-              targetCountry: nextTargetCountry,
-              targetDistrict: nextTargetDistrict,
-              recentTargetIds: nextRecent,
-              guesses: record.guesses,
-              unlockedHints: record.unlockedHints,
-              extraNeighborsRevealed: record.extraNeighborsRevealed,
-              gameStatus: record.gameStatus,
-              blitzTimeLeft: 90,
               dailyHistory: nextDailyHistory,
-              isGameOverOpen: false,
+              ...unpackDailyRecord(record, nextDifficulty),
             });
             return;
           }
         }
 
         set({
+          ...next,
+          ...FRESH_ROUND_STATE,
           difficulty: nextDifficulty,
           mode: nextMode,
-          targetCountry: nextTargetCountry,
-          targetDistrict: nextTargetDistrict,
-          recentTargetIds: nextRecent,
-          guesses: [],
-          unlockedHints: 0,
-          extraNeighborsRevealed: 0,
-          gameStatus: "playing",
-          blitzTimeLeft: 90,
           dailyHistory: nextDailyHistory,
-          isGameOverOpen: false,
         });
       },
 
@@ -701,7 +545,7 @@ export const useGameStore = create<GameState>()(
               getItem: () => null,
               setItem: () => {},
               removeItem: () => {},
-            }
+            },
       ),
       version: 7,
       migrate: (persistedState: unknown) => {
