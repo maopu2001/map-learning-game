@@ -264,8 +264,8 @@ function WorldExploreContent() {
         itemStrokeWidth = strokeWidth * 1.1;
       } else if (isFilterActive && !isFilterMatch) {
         priority = -1;
-        fill = "var(--map-sea)";
-        stroke = "var(--border)";
+        fill = "var(--map-land)";
+        stroke = "var(--map-land-border)";
         itemStrokeWidth = strokeWidth * 0.8;
       }
 
